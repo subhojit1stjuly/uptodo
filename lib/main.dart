@@ -39,16 +39,25 @@ class UpTodo extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      builder: (context, widget) {
-        Widget error = const Text('...rendering error...');
-        if (widget is Scaffold || widget is Navigator) {
-          error = Scaffold(body: Center(child: error));
-        }
-        ErrorWidget.builder = (errorDetails) => error;
-        if (widget != null) return widget;
-        throw StateError('widget is null');
-      },
+      builder: _builder,
+      theme: ThemeData(
+        useMaterial3: false,
+      ),
+      darkTheme: ThemeData(
+        useMaterial3: false,
+      ),
     );
   }
+
+  Widget _builder(BuildContext context,Widget? widget){
+    Widget error = const Text('...rendering error...');
+    if (widget is Scaffold || widget is Navigator) {
+      error = Scaffold(body: Center(child: error));
+    }
+    ErrorWidget.builder = (errorDetails) => error;
+    if (widget != null) return widget;
+    throw StateError('widget is null');
+  }
+
 }
 
