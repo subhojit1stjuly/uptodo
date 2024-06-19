@@ -1,0 +1,9 @@
+{
+  "app_name": "UpTodo",
+  "onboarding_headline_1" : "Manage your tasks",
+  "onboarding_message_1" : "You can easily manage all of your daily tasks in DoMe for free",
+  "onboarding_headline_2" : "Create daily routine",
+  "onboarding_message_2" : "In UpTodo  you can create your personalized routine to stay productive",
+  "onboarding_headline_3" : "Organize your tasks",
+  "onboarding_message_3" : "You can organize your daily tasks by adding your tasks into separate categories"
+}
