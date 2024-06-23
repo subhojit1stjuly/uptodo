@@ -1,0 +1,319 @@
+{
+  "@@locale": "bn",
+  "app_name": "আপটুডো",
+  "@app_name": {
+    "description": "অ্যাপ নাম"
+  },
+  "onboarding_title_1": "আপনার কাজ পরিচালনা করুন",
+  "@onboarding_title_1": {
+    "description": "প্রথম অনবোর্ডিং স্ক্রীনের শিরোনাম"
+  },
+  "onboarding_desc_1": "আপটুডোতে বিনামূল্যে আপনার প্রতিদিনের কাজগুলি সহজেই পরিচালনা করতে পারবেন",
+  "@onboarding_desc_1": {
+    "description": "প্রথম অনবোর্ডিং স্ক্রীনের বর্ণনা"
+  },
+  "onboarding_title_2": "দৈনন্দিন রুটিন তৈরি করুন",
+  "@onboarding_title_2": {
+    "description": "দ্বিতীয় অনবোর্ডিং স্ক্রীনের শিরোনাম"
+  },
+  "onboarding_desc_2": "আপটুডোতে আপনি আপনার ব্যক্তিগত রুটিন তৈরি করতে পারবেন যাতে প্রফেশনাল থাকতে পারেন",
+  "@onboarding_desc_2": {
+    "description": "দ্বিতীয় অনবোর্ডিং স্ক্রীনের বর্ণনা"
+  },
+  "onboarding_title_3": "আপনার কাজগুলি সংগঠন করুন",
+  "@onboarding_title_3": {
+    "description": "তৃতীয় অনবোর্ডিং স্ক্রীনের শিরোনাম"
+  },
+  "onboarding_desc_3": "আপনি আপনার দৈনিক কার্যগুলি আলাদা ক্যাটাগরিতে যোগ করে সংগঠিত করতে পারবেন",
+  "@onboarding_desc_3": {
+    "description": "তৃতীয় অনবোর্ডিং স্ক্রীনের বর্ণনা"
+  },
+  "welcome_title": "আপটুডোতে আপনাকে স্বাগতম",
+  "@welcome_title": {
+    "description": "লগইন এবং সাইনআপ অপশনসহ স্বাগতম স্ক্রীনের শিরোনাম"
+  },
+  "welcome_desc": "অনুগ্রহ করে আপনার অ্যাকাউন্টে লগইন করুন বা চালিয়ে যান নতুন অ্যাকাউন্ট তৈরি করতে",
+  "@welcome_desc": {
+    "description": "লগইন এবং সাইনআপ অপশনসহ স্বাগতম স্ক্রীনের বর্ণনা"
+  },
+  "button_skip": "পার্থক্য",
+  "@button_skip": {
+    "description": "অনবোর্ডিং স্ক্রীনের পার্থক্য বোতামের পাঠ্য"
+  },
+  "button_back": "পিছনে",
+  "@button_back": {
+    "description": "অনবোর্ডিং স্ক্রীনের পিছনে বোতামের পাঠ্য"
+  },
+  "button_next": "পরবর্তী",
+  "@button_next": {
+    "description": "অনবোর্ডিং স্ক্রীনের পরবর্তী বোতামের পাঠ্য"
+  },
+  "button_get_started": "শুরু করুন",
+  "@button_get_started": {
+    "description": "অনবোর্ডিং স্ক্রীনের শুরু করুন বোতামের পাঠ্য"
+  },
+  "button_login": "লগইন",
+  "@button_login": {
+    "description": "লগইন বোতামের পাঠ্য"
+  },
+  "button_create_account": "অ্যাকাউন্ট তৈরি করুন",
+  "@button_create_account": {
+    "description": "অ্যাকাউন্ট তৈরি করুন বোতামের পাঠ্য"
+  },
+  "username": "ব্যবহারকারীর নাম",
+  "@username": {
+    "description": "ব্যবহারকারীর নাম ক্ষেত্রের লেবেল"
+  },
+  "password": "পাসওয়ার্ড",
+  "@password": {
+    "description": "পাসওয়ার্ড ক্ষেত্রের লেবেল"
+  },
+  "or": "বা",
+  "@or": {
+    "description": "লগইন অপশনে 'বা' এর জন্য পাঠ্য"
+  },
+  "login_with_google": "Google দিয়ে লগইন করুন",
+  "@login_with_google": {
+    "description": "Google দিয়ে লগইন অপশনের পাঠ্য"
+  },
+  "login_with_apple": "Apple দিয়ে লগইন করুন",
+  "@login_with_apple": {
+    "description": "Apple দিয়ে লগইন অপশনের পাঠ্য"
+  },
+  "dont_have_account": "অ্যাকাউন্ট নেই?",
+  "@dont_have_account": {
+    "description": "'অ্যাকাউন্ট নেই?' জন্য পাঠ্য"
+  },
+  "register": "নিবন্ধন করুন",
+  "@register": {
+    "description": "নিবন্ধনের বিকল্পের জন্য পাঠ্য"
+  },
+  "confirm_password": "পাসওয়ার্ড নিশ্চিত করুন",
+  "@confirm_password": {
+    "description": "পাসওয়ার্ড নিশ্চিত করার ক্ষেত্রের লেবেল"
+  },
+  "register_with_google": "Google দিয়ে নিবন্ধন করুন",
+  "@register_with_google": {
+    "description": "Google দিয়ে নিবন্ধন করার বিকল্পের পাঠ্য"
+  },
+  "register_with_apple": "Apple দিয়ে নিবন্ধন করুন",
+  "@register_with_apple": {
+    "description": "Apple দিয়ে নিবন্ধন করার বিকল্পের পাঠ্য"
+  },
+  "fingerprint_description": "দয়া করে আপনার আঙুল আঙুলিকা স্ক্যানারে রেখে আপনার পরিচয় যাচাই করুন",
+  "@fingerprint_description": {
+    "description": "আঙুল প্রমাণীকরণের বর্ণনা"
+  },
+  "cancel": "বাতিল করুন",
+  "@cancel": {
+    "description": "বাতিল বোতামের জন্য পাঠ্য"
+  },
+  "use_password": "পাসওয়ার্ড ব্যবহার করুন",
+  "@use_password": {
+    "description": "পাসওয়ার্ড ব্যবহার করার বোতামের পাঠ্য"
+  },
+  "fingerprint_not_matched": "আপনার আঙুল মিলেনি। অনুগ্রহ করে পরে আবার চেষ্টা করুন!!!",
+  "@fingerprint_not_matched": {
+    "description": "আঙুল মিলানো সমস্যার জন্য ত্রুটি বার্তা"
+  },
+  "index": "সূচী",
+  "@index": {
+    "description": "সূচী স্ক্রীনের জন্য পাঠ্য"
+  },
+  "calendar": "ক্যালেন্ডার",
+  "@calendar": {
+    "description": "ক্যালেন্ডারের জন্য পাঠ্য"
+  },
+  "focus": "ফোকাস",
+  "@focus": {
+    "description": "ফোকাসের জন্য পাঠ্য"
+  },
+  "profile": "প্রোফাইল",
+  "@profile": {
+    "description": "প্রোফাইলের জন্য পাঠ্য"
+  },
+  "what_do_you_want_to_do_today": "আজ আপনি কী করতে চান?",
+  "@what_do_you_want_to_do_today": {
+    "description": "আজ কী করতে চান তা জন্য উদ্বোধনকারী প্রম্পট"
+  },
+  "tap_to_add_tasks": "আপনার কাজ যোগ করতে + টিপুন",
+  "@tap_to_add_tasks": {
+    "description": "+ বোতামে কাজ যোগ করার নির্দেশনা"
+  },
+  "add_task": "কাজ যোগ করুন",
+  "@add_task": {
+    "description": "কাজ যোগ করার বোতামের পাঠ্য"
+  },
+  "description": "বিবরণ",
+  "@description": {
+    "description": "বিবরণ ক্ষেত্রের লেবেল"
+  },
+  "choose_category": "বিভাগ চয়ন করুন",
+  "@choose_category": {
+    "description": "বিভাগ চয়নের জন্য প্রম্পট"
+  },
+  "add_category": "বিভাগ যোগ করুন",
+  "@add_category": {
+    "description": "বিভাগ যোগ করার বোতামের পাঠ্য"
+  },
+  "create_new": "নতুন তৈরি করুন",
+  "@create_new": {
+    "description": "কিছু নতুন তৈরি করার জন্য প্রম্পট"
+  },
+  "create_new_category": "নতুন বিভাগ তৈরি করুন",
+  "@create_new_category": {
+    "description": "নতুন বিভাগ তৈরি করার জন্য প্রম্পট"
+  },
+  "category_name": "বিভাগের নাম:",
+  "@category_name": {
+    "description": "বিভাগের নাম ক্ষেত্রের লেবেল"
+  },
+  "category_icon": "বিভাগ আইকন:",
+  "@category_icon": {
+    "description": "বিভাগ আইকন ক্ষেত্রের লেবেল"
+  },
+  "choose_icon_from_library": "লাইব্রেরি থেকে আইকন চয়ন করুন",
+  "@choose_icon_from_library": {
+    "description": "লাইব্রেরি থেকে আইকন চয়নের নির্দেশনা"
+  },
+  "category_color": "বিভাগের রঙ:",
+  "@category_color": {
+    "description": "বিভাগের রঙ ক্ষেত্রের লেবেল"
+  },
+  "create_category": "বিভাগ তৈরি করুন",
+  "@create_category": {
+    "description": "বিভাগ তৈরি করার বোতামের পাঠ্য"
+  },
+  "task_time": "কাজের সময়:",
+  "@task_time": {
+    "description": "কাজের সময় ক্ষেত্রের লেবেল"
+  },
+  "task_category": "কাজের বিভাগ:",
+  "@task_category": {
+    "description": "কাজের বিভাগ ক্ষেত্রের লেবেল"
+  },
+  "task_priority": "কাজের প্রাথমিকতা:",
+  "@task_priority": {
+    "description": "কাজের প্রাথমিকতা ক্ষেত্রের লেবেল"
+  },
+  "sub_task": "সাব-টাস্ক",
+  "@sub_task": {
+    "description": "সাব-টাস্কের জন্য পাঠ্য"
+  },
+  "delete_task": "কাজ মুছে ফেলুন",
+  "@delete_task": {
+    "description": "কাজ মুছে ফেলার বোতামের পাঠ্য"
+  },
+  "edit_task_title": "কাজের শিরোনাম সম্পাদনা করুন",
+  "@edit_task_title": {
+    "description": "সম্পাদনার জন্য কাজের শিরোনাম"
+  },
+  "edit": "সম্পাদনা",
+  "@edit": {
+    "description": "সম্পাদনার জন্য পাঠ্য"
+  },
+  "edit_task_priority": "কাজের প্রাথমিকতা সম্পাদনা করুন",
+  "@edit_task_priority": {
+    "description": "সম্পাদনার জন্য কাজের প্রাথমিকতা"
+  },
+  "confirm_delete_task": "আপনি কি নিশ্চিত যে আপনি এই কাজটি মুছে ফেলতে চান?",
+  "@confirm_delete_task": {
+    "description": "কাজ মুছে ফেলার নিশ্চিতকরণ প্রম্পট"
+  },
+  "task_title": "কাজের শিরোনাম: {শিরোনাম}",
+  "@task_title": {
+    "description": "প্লেসহোল্ডার সহ কাজের শিরোনামের লেবেল"
+  },
+  "today": "আজ",
+  "@today": {
+    "description": "আজকের জন্য পাঠ্য"
+  },
+  "completed": "সম্পন্ন",
+  "@completed": {
+    "description": "সম্পন্ন করার জন্য পাঠ্য"
+  },
+  "focus_mode": "ফোকাস মোড",
+  "@focus_mode": {
+    "description": "ফোকাস মোডের জন্য পাঠ্য"
+  },
+  "focus_mode_description": "আপনার ফোকাস মোড চালু থাকলে সমস্ত আপনার বিজ্ঞপ্তি বন্ধ থাকবে",
+  "@focus_mode_description": {
+    "description": "ফোকাস মোডের জন্য বিবরণ"
+  },
+  "start_focusing": "ফোকাস শুরু করুন",
+  "@start_focusing": {
+    "description": "ফোকাস শুরু করার বাটনের জন্য পাঠ্য"
+  },
+  "applications": "অ্যাপ্লিকেশনস",
+  "@applications": {
+    "description": "অ্যাপ্লিকেশনসের জন্য পাঠ্য"
+  },
+  "overview": "সংক্ষিপ্ত বিবরণ",
+  "@overview": {
+    "description": "সংক্ষিপ্ত বিবরণের জন্য পাঠ্য"
+  },
+  "app_settings": "অ্যাপ সেটিংস",
+  "@app_settings": {
+    "description": "অ্যাপ সেটিংসের জন্য পাঠ্য"
+  },
+  "change_account_name": "অ্যাকাউন্টের নাম পরিবর্তন করুন",
+  "@change_account_name": {
+    "description": "অ্যাকাউন্টের নাম পরিবর্তনের জন্য পাঠ্য"
+  },
+  "change_account_password": "অ্যাকাউন্টের পাসওয়ার্ড পরিবর্তন করুন",
+  "@change_account_password": {
+    "description": "অ্যাকাউন্টের পাসওয়ার্ড পরিবর্তনের জন্য পাঠ্য"
+  },
+  "change_account_image": "অ্যাকাউন্ট চিত্র পরিবর্তন করুন",
+  "@change_account_image": {
+    "description": "অ্যাকাউন্ট চিত্র পরিবর্তনের জন্য পাঠ্য"
+  },
+  "about_us": "আমাদের সম্পর্কে",
+  "@about_us": {
+    "description": "আমাদের সম্পর্কের জন্য পাঠ্য"
+  },
+  "faq": "প্রায়শই জিজ্ঞাসিত প্রশ্ন",
+  "@faq": {
+    "description": "প্রায়শই জিজ্ঞাসিত প্রশ্নের জন্য পাঠ্য"
+  },
+  "help_feedback": "সাহায্য এবং প্রতিক্রিয়া",
+  "@help_feedback": {
+    "description": "সাহায্য এবং প্রতিক্রিয়ার জন্য পাঠ্য"
+  },
+  "support_us": "আমাদের সমর্থন করুন",
+  "@support_us": {
+    "description": "আমাদের সমর্থন করার জন্য পাঠ্য"
+  },
+  "log_out": "প্রস্থান করুন",
+  "@log_out": {
+    "description": "প্রস্থানের জন্য পাঠ্য"
+  },
+  "take_picture": "ছবি তুলুন",
+  "@take_picture": {
+    "description": "ছবি তুলার জন্য পাঠ্য"
+  },
+  "import_from_gallery": "গ্যালারি থেকে আমদানি করুন",
+  "@import_from_gallery": {
+    "description": "গ্যালারি থেকে আমদানি করার জন্য পাঠ্য"
+  },
+  "import_from_google_drive": "গুগল ড্রাইভ থেকে আমদানি করুন",
+  "@import_from_google_drive": {
+    "description": "গুগল ড্রাইভ থেকে আমদানি করার জন্য পাঠ্য"
+  },
+  "change_app_color": "অ্যাপ রঙ পরিবর্তন করুন",
+  "@change_app_color": {
+    "description": "অ্যাপ রঙ পরিবর্তনের জন্য পাঠ্য"
+  },
+  "change_app_typography": "অ্যাপ টাইপোগ্রাফি পরিবর্তন করুন",
+  "@change_app_typography": {
+    "description": "অ্যাপ টাইপোগ্রাফি পরিবর্তনের জন্য পাঠ্য"
+  },
+  "change_app_language": "অ্যাপ ভাষা পরিবর্তন করুন",
+  "@change_app_language": {
+    "description": "অ্যাপ ভাষা পরিবর্তনের জন্য পাঠ্য"
+  },
+  "import_from_google_calendar": "গুগল ক্যালেন্ডার থেকে আমদানি করুন",
+  "@import_from_google_calendar": {
+    "description": "গুগল ক্যালেন্ডার থেকে আমদানি করার জন্য পাঠ্য"
+  }
+}

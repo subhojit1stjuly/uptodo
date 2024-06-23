@@ -1,0 +1,319 @@
+{
+  "@@locale": "kn",
+  "app_name": "ಅಪ್‌ಟೋಡೊ",
+  "@app_name": {
+    "description": "ಅಪ್‌ಪ್‌ನ ಹೆಸರು"
+  },
+  "onboarding_title_1": "ನಿಮ್ಮ ಕಾರ್ಯಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
+  "@onboarding_title_1": {
+    "description": "ಮೊದಲ ಪರಿಚಯ ಪುಟದ ಶೀರ್ಷಿಕೆ"
+  },
+  "onboarding_desc_1": "ಉಚಿತವಾಗಿ ನಿಮ್ಮ ದೈನಂದಿನ ಕಾರ್ಯಗಳನ್ನು ಅಪ್‌ಟೋಡೊದಲ್ಲಿ ನಿರ್ವಹಿಸಬಹುದು",
+  "@onboarding_desc_1": {
+    "description": "ಮೊದಲ ಪರಿಚಯ ಪುಟದ ವಿವರಣೆ"
+  },
+  "onboarding_title_2": "ದೈನಂದಿನ ಕ್ರಮ ರಚಿಸಿ",
+  "@onboarding_title_2": {
+    "description": "ಎರಡನೇ ಪರಿಚಯ ಪುಟದ ಶೀರ್ಷಿಕೆ"
+  },
+  "onboarding_desc_2": "ಉತ್‌ಟೋಡೊದಲ್ಲಿ ನೀವು ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ದಿನಚರಿಯನ್ನು ರಚಿಸಿ ಪರಿಪೂರ್ಣತೆಯನ್ನು ಮಾಡಲು ಸಾಧ್ಯ",
+  "@onboarding_desc_2": {
+    "description": "ಎರಡನೇ ಪರಿಚಯ ಪುಟದ ವಿವರಣೆ"
+  },
+  "onboarding_title_3": "ನಿಮ್ಮ ಕಾರ್ಯಗಳನ್ನು ಸಂಗ್ರಹಿಸಿ",
+  "@onboarding_title_3": {
+    "description": "ಮೂರನೇ ಪರಿಚಯ ಪುಟದ ಶೀರ್ಷಿಕೆ"
+  },
+  "onboarding_desc_3": "ನಿಮ್ಮ ದೈನಂದಿನ ಕಾರ್ಯಗಳನ್ನು ಬೇರೆ ಬೇರೆ ವರ್ಗಗಳಲ್ಲಿ ಸೇರಿಸಿ ಸಂಗ್ರಹಿಸಲು ಸಾಧ್ಯ",
+  "@onboarding_desc_3": {
+    "description": "ಮೂರನೇ ಪರಿಚಯ ಪುಟದ ವಿವರಣೆ"
+  },
+  "welcome_title": "ಅಪ್‌ಟೋಡೊಗೆ ಸ್ವಾಗತ",
+  "@welcome_title": {
+    "description": "ಲಾಗಿನ್ ಮತ್ತು ಸೈನ್‌ಅಪ್ ಆಯ್ಕೆಗಳೊಂದಿಗೆ ಸ್ವಾಗತ ಪುಟದ ಶೀರ್ಷಿಕೆ"
+  },
+  "welcome_desc": "ಮುಂದುವರಿಯಲು ದಯವಿಟ್ಟು ನಿಮ್ಮ ಖಾತೆಗೆ ಲಾಗಿನ್ ಮಾಡಿ ಅಥವಾ ಹೊಸ ಖಾತೆಯನ್ನು ರಚಿಸಿ",
+  "@welcome_desc": {
+    "description": "ಲಾಗಿನ್ ಮತ್ತು ಸೈನ್‌ಅಪ್ ಆಯ್ಕೆಗಳೊಂದಿಗೆ ಸ್ವಾಗತ ಪುಟದ ವಿವರಣೆ"
+  },
+  "button_skip": "ವಿರಾಮಿಸಿ",
+  "@button_skip": {
+    "description": "ಪ್ರಥಮ ಪರಿಚಯ ಪುಟಗಳಲ್ಲಿ ವಿರಾಮಿಸಿ ಬಟನ್‌ನ ಪಠ್ಯ"
+  },
+  "button_back": "ಹಿಂದಕ್ಕೆ",
+  "@button_back": {
+    "description": "ಪರಿಚಯ ಪುಟಗಳಲ್ಲಿ ಹಿಂದಕ್ಕೆ ಬಟನ್‌ನ ಪಠ್ಯ"
+  },
+  "button_next": "ಮುಂದಕ್ಕೆ",
+  "@button_next": {
+    "description": "ಪರಿಚಯ ಪುಟಗಳಲ್ಲಿ ಮುಂದಕ್ಕೆ ಬಟನ್‌ನ ಪಠ್ಯ"
+  },
+  "button_get_started": "ಪ್ರಾರಂಭಿಸಿ",
+  "@button_get_started": {
+    "description": "ಪರಿಚಯ ಪುಟಗಳಲ್ಲಿ ಪ್ರಾರಂಭಿಸಿ ಬಟನ್‌ನ ಪಠ್ಯ"
+  },
+  "button_login": "ಲಾಗಿನ್",
+  "@button_login": {
+    "description": "ಲಾಗಿನ್ ಬಟನ್‌ನ ಪಠ್ಯ"
+  },
+  "button_create_account": "ಖಾತೆ ರಚಿಸಿ",
+  "@button_create_account": {
+    "description": "ಖಾತೆ ರಚಿಸಿ ಬಟನ್‌ನ ಪಠ್ಯ"
+  },
+  "username": "ಬಳಕೆದಾರ ಹೆಸರು",
+  "@username": {
+    "description": "ಬಳಕೆದಾರ ಹೆಸರಿನ ಲೇಬಲ್"
+  },
+  "password": "ಪಾಸ್‌ವರ್ಡ್",
+  "@password": {
+    "description": "ಪಾಸ್‌ವರ್ಡ್ ಕ್ಷೇತ್ರದ ಲೇಬಲ್"
+  },
+  "or": "ಅಥವಾ",
+  "@or": {
+    "description": "ಲಾಗಿನ್ ಆಯ್ಕೆಗಳಲ್ಲಿ 'ಅಥವಾ' ಪಠ್ಯ"
+  },
+  "login_with_google": "ಗೂಗಲ್ ನೊಂದಿಗೆ ಲಾಗಿನ್",
+  "@login_with_google": {
+    "description": "ಗೂಗಲ್ ನೊಂದಿಗೆ ಲಾಗಿನ್ ಆಯ್ಕೆ ಪಠ್ಯ"
+  },
+  "login_with_apple": "ಆಪಲ್ ನೊಂದಿಗೆ ಲಾಗಿನ್",
+  "@login_with_apple": {
+    "description": "ಆಪಲ್ ನೊಂದಿಗೆ ಲಾಗಿನ್ ಆಯ್ಕೆ ಪಠ್ಯ"
+  },
+  "dont_have_account": "ನಿಮ್ಮಲ್ಲಿ ಖಾತೆ ಇಲ್ಲವೇ?",
+  "@dont_have_account": {
+    "description": "'ನಿಮ್ಮಲ್ಲಿ ಖಾತೆ ಇಲ್ಲವೇ?' ಪ್ರಮ್ಪ್ಟ್ ಪಠ್ಯ"
+  },
+  "register": "ನೋಂದಾಯಿಸು",
+  "@register": {
+    "description": "ನೋಂದಾಯಿಸು ಆಯ್ಕೆ ಪಠ್ಯ"
+  },
+  "confirm_password": "ಪಾಸ್‌ವರ್ಡ್ ದೃಢೀಕರಿಸಿ",
+  "@confirm_password": {
+    "description": "ಪಾಸ್‌ವರ್ಡ್ ದೃಢೀಕರಿಸು ಕ್ಷೇತ್ರದ ಲೇಬಲ್"
+  },
+  "register_with_google": "ಗೂಗಲ್ ನೊಂದಿಗೆ ನೋಂದಾಯಿಸಿ",
+  "@register_with_google": {
+    "description": "ಗೂಗಲ್ ನೊಂದಿಗೆ ನೋಂದಾಯಿಸಿ ಆಯ್ಕೆ ಪಠ್ಯ"
+  },
+  "register_with_apple": "ಆಪಲ್ ನೊಂದಿಗೆ ನೋಂದಾಯಿಸಿ",
+  "@register_with_apple": {
+    "description": "ಆಪಲ್ ನೊಂದಿಗೆ ನೋಂದಾಯಿಸಿ ಆಯ್ಕೆ ಪಠ್ಯ"
+  },
+  "fingerprint_description": "ನಿಮ್ಮ ಗುರುತಿನಿಂದ ನಿಮ್ಮ ಗುರುತಿನ ಪರಿಶೀಲನೆಯನ್ನು ದೃಢೀಕರಿಸಲು ಬೆರಳಿನಿಂದ ಅನುಮೋದನೆ ಮಾಡಿ",
+  "@fingerprint_description": {
+    "description": "ಗುರುತಿನ ಪರಿಶೀಲನೆಯ ವಿವರಣೆ"
+  },
+  "cancel": "ರದ್ದುಮಾಡಿ",
+  "@cancel": {
+    "description": "ರದ್ದು ಬಟನ್‌ಗಾಗಿ ಪಠ್ಯ"
+  },
+  "use_password": "ಪಾಸ್‌ವರ್ಡ್ ಬಳಸಿ",
+  "@use_password": {
+    "description": "ಪಾಸ್‌ವರ್ಡ್ ಬಳಸಿ ಬಟನ್‌ಗಾಗಿ ಪಠ್ಯ"
+  },
+  "fingerprint_not_matched": "ನಿಮ್ಮ ಗುರುತು ಹೊಂದಿಸಲಾಗಿಲ್ಲ. ದಯವಿಟ್ಟು ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ!!!",
+  "@fingerprint_not_matched": {
+    "description": "ಗುರುತು ಹೊಂದಲು ದೋಷ ಸಂದೇಶ"
+  },
+  "index": "ಸೂಚಿಸು",
+  "@index": {
+    "description": "ಸೂಚಿ ವಿನ್ಯಾಸದ ಪಠ್ಯ"
+  },
+  "calendar": "ಕ್ಯಾಲೆಂಡರ್",
+  "@calendar": {
+    "description": "ಕ್ಯಾಲೆಂಡರ್ ಪಠ್ಯ"
+  },
+  "focus": "ಮಕ್ಕಳು",
+  "@focus": {
+    "description": "ಫೋಕಸ್ ಪಠ್ಯ"
+  },
+  "profile": "ಪ್ರೊಫೈಲ್",
+  "@profile": {
+    "description": "ಪ್ರೊಫೈಲ್ ಪಠ್ಯ"
+  },
+  "what_do_you_want_to_do_today": "ನೀವು ಇಂದು ಏನು ಮಾಡಲು ಬಯಸುತ್ತೀರಿ?",
+  "@what_do_you_want_to_do_today": {
+    "description": "ಇಂದು ಏನು ಮಾಡಲು ಬಯಸುತ್ತೀರಿ ಎಂದು ಪ್ರಶ್ನಿಸುವ ಪ್ರಮ್ಪ್ಟ್ ಪಠ್ಯ"
+  },
+  "tap_to_add_tasks": "ನಿಮ್ಮ ಕಾರ್ಯಗಳನ್ನು ಸೇರಿಸಲು + ಬಟನ್‌ಗೆ ಟ್ಯಾಪ್ ಮಾಡಿ",
+  "@tap_to_add_tasks": {
+    "description": "+ ಬಟನ್‌ಗೆ ಟ್ಯಾಪ್ ಮಾಡಲು ನಿರ್ದೇಶನೆ ಪಠ್ಯ"
+  },
+  "add_task": "ಕಾರ್ಯವನ್ನು ಸೇರಿಸಿ",
+  "@add_task": {
+    "description": "ಕಾರ್ಯವನ್ನು ಸೇರಿಸಲು ಬಟನ್ ಪಠ್ಯ"
+  },
+  "description": "ವಿವರಣೆ",
+  "@description": {
+    "description": "ವಿವರಣೆ ಕ್ಷೇತ್ರದ ಲೇಬಲ್"
+  },
+  "choose_category": "ವರ್ಗ ಆಯ್ಕೆಮಾಡಿ",
+  "@choose_category": {
+    "description": "ವರ್ಗ ಆಯ್ಕೆಮಾಡಲು ಪ್ರಾಂತದ ಪಠ್ಯ"
+  },
+  "add_category": "ವರ್ಗವನ್ನು ಸೇರಿಸಿ",
+  "@add_category": {
+    "description": "ವರ್ಗವನ್ನು ಸೇರಿಸಲು ಬಟನ್ ಪಠ್ಯ"
+  },
+  "create_new": "ಹೊಸದನ್ನು ರಚಿಸಿ",
+  "@create_new": {
+    "description": "ಹೊಸದನ್ನು ರಚಿಸಲು ಪ್ರಾಂತ"
+  },
+  "create_new_category": "ಹೊಸ ವರ್ಗವನ್ನು ರಚಿಸಿ",
+  "@create_new_category": {
+    "description": "ಹೊಸ ವರ್ಗವನ್ನು ರಚಿಸಲು ಪ್ರಾಂತ"
+  },
+  "category_name": "ವರ್ಗ ಹೆಸರು:",
+  "@category_name": {
+    "description": "ವರ್ಗ ಹೆಸರಿನ ಲೇಬಲ್"
+  },
+  "category_icon": "ವರ್ಗ ಪಲ್ಲಟ:",
+  "@category_icon": {
+    "description": "ವರ್ಗ ಪಲ್ಲಟ ಲೇಬಲ್"
+  },
+  "choose_icon_from_library": "ಲೈಬ್ರರಿ ನಿಂದ ಪಲ್ಲಟ ಆರಿಸಿ",
+  "@choose_icon_from_library": {
+    "description": "ಲೈಬ್ರರಿ ನಿಂದ ಪಲ್ಲಟ ಆರಿಸಲು ನಿರ್ದೇಶನೆ"
+  },
+  "category_color": "ವರ್ಗ ಬಣ್ಣ:",
+  "@category_color": {
+    "description": "ವರ್ಗ ಬಣ್ಣ ಲೇಬಲ್"
+  },
+  "create_category": "ವರ್ಗ ರಚಿಸಿ",
+  "@create_category": {
+    "description": "ವರ್ಗ ರಚಿಸಲು ಬಟನ್ ಪಠ್ಯ"
+  },
+  "task_time": "ಕಾರ್ಯ ಸಮಯ:",
+  "@task_time": {
+    "description": "ಕಾರ್ಯ ಸಮಯ ಲೇಬಲ್"
+  },
+  "task_category": "ಕಾರ್ಯ ವರ್ಗ:",
+  "@task_category": {
+    "description": "ಕಾರ್ಯ ವರ್ಗ ಲೇಬಲ್"
+  },
+  "task_priority": "ಕಾರ್ಯ ಪ್ರಾಧಾನ್ಯತೆ:",
+  "@task_priority": {
+    "description": "ಕಾರ್ಯ ಪ್ರಾಧಾನ್ಯತೆ ಲೇಬಲ್"
+  },
+  "sub_task": "ಉಪ-ಕಾರ್ಯ",
+  "@sub_task": {
+    "description": "ಉಪ-ಕಾರ್ಯಗಳ ಪಠ್ಯ"
+  },
+  "delete_task": "ಕಾರ್ಯವನ್ನು ಅಳಿಸಿ",
+  "@delete_task": {
+    "description": "ಕಾರ್ಯವನ್ನು ಅಳಿಸಲು ಬಟನ್ ಪಠ್ಯ"
+  },
+  "edit_task_title": "ಕಾರ್ಯ ಶೀರ್ಷಿಕೆಯನ್ನು ಸಂಪಾದಿಸಿ",
+  "@edit_task_title": {
+    "description": "ಕಾರ್ಯ ಸಂಪಾದಿಸಲು ಶೀರ್ಷಿಕೆ ಪಠ್ಯ"
+  },
+  "edit": "ಸಂಪಾದಿಸಿ",
+  "@edit": {
+    "description": "ಸಂಪಾದಿಸಲು ಪಠ್ಯ"
+  },
+  "edit_task_priority": "ಕಾರ್ಯ ಪ್ರಾಧಾನ್ಯತೆಯನ್ನು ಸಂಪಾದಿಸಿ",
+  "@edit_task_priority": {
+    "description": "ಕಾರ್ಯ ಪ್ರಾಧಾನ್ಯತೆ ಸಂಪಾದಿಸಲು ಪಠ್ಯ"
+  },
+  "confirm_delete_task": "ಈ ಕಾರ್ಯವನ್ನು ಅಳಿಸಲು ನಿಮ್ಮಿಂದ ಖಚಿತವಾಗಿದೆಯೇ?",
+  "@confirm_delete_task": {
+    "description": "ಕಾರ್ಯವನ್ನು ಅಳಿಸಲು ಖಚಿತತೆ ಪ್ರಶ್ನೆಯ ಪಠ್ಯ"
+  },
+  "task_title": "ಕಾರ್ಯ ಶೀರ್ಷಿಕೆ: {Title}",
+  "@task_title": {
+    "description": "ಪ್ಲೇಸ್ಹೋಲ್ಡರ್ ಜೊತೆಗೆ ಕಾರ್ಯ ಶೀರ್ಷಿಕೆ ಲೇಬಲ್"
+  },
+  "today": "ಇಂದು",
+  "@today": {
+    "description": "ಇಂದುಕ್ಕಾಗಿ ಪಠ್ಯ"
+  },
+  "completed": "ಪೂರ್ಣಗೊಂಡಿದೆ",
+  "@completed": {
+    "description": "ಪೂರ್ಣಗೊಂಡಿದೆ ಪಠ್ಯ"
+  },
+  "focus_mode": "ಫೋಕಸ್ ಮೋಡ್",
+  "@focus_mode": {
+    "description": "ಫೋಕಸ್ ಮೋಡ್ ಪಠ್ಯ"
+  },
+  "focus_mode_description": "ನಿಮ್ಮ ಫೋಕಸ್ ಮೋಡ್ ಸ್ಥಿತಿಯಲ್ಲಿರುವಾಗ, ನಿಮ್ಮ ಎಲ್ಲಾ ಅಧಿಸೂಚನೆಗಳೂ ಆಫ್ ಆಗುತ್ತವೆ",
+  "@focus_mode_description": {
+    "description": "ಫೋಕಸ್ ಮೋಡ್ ಪರಿಚಯಕ್ಕಾಗಿ ವಿವರಣೆ ಪಠ್ಯ"
+  },
+  "start_focusing": "ಫೋಕಸ್ ಪ್ರಾರಂಭಿಸಿ",
+  "@start_focusing": {
+    "description": "ಫೋಕಸ್ ಪ್ರಾರಂಭಿಸಲು ಬಟನ್ ಪಠ್ಯ"
+  },
+  "applications": "ಅಪ್ಲಿಕೇಶನ್ಗಳು",
+  "@applications": {
+    "description": "ಅಪ್ಲಿಕೇಶನ್ಗಳ ಪಠ್ಯ"
+  },
+  "overview": "ಅವಲೋಕನ",
+  "@overview": {
+    "description": "ಅವಲೋಕನದ ಪಠ್ಯ"
+  },
+  "app_settings": "ಅಪ್ಲಿಕೇಶನ್ ಸೆಟ್ಟಿಂಗ್ಗಳು",
+  "@app_settings": {
+    "description": "ಅಪ್ಲಿಕೇಶನ್ ಸೆಟ್ಟಿಂಗ್ಗಳ ಪಠ್ಯ"
+  },
+  "change_account_name": "ಖಾತೆ ಹೆಸರನ್ನು ಬದಲಾಯಿಸಿ",
+  "@change_account_name": {
+    "description": "ಖಾತೆ ಹೆಸರನ್ನು ಬದಲಾಯಿಸಲು ಪಠ್ಯ"
+  },
+  "change_account_password": "ಖಾತೆ ಪಾಸ್‌ವರ್ಡ್ ಬದಲಾಯಿಸಿ",
+  "@change_account_password": {
+    "description": "ಖಾತೆ ಪಾಸ್‌ವರ್ಡ್ ಬದಲಾಯಿಸಲು ಪಠ್ಯ"
+  },
+  "change_account_image": "ಖಾತೆ ಚಿತ್ರವನ್ನು ಬದಲಾಯಿಸಿ",
+  "@change_account_image": {
+    "description": "ಖಾತೆ ಚಿತ್ರವನ್ನು ಬದಲಾಯಿಸಲು ಪಠ್ಯ"
+  },
+  "about_us": "ನಮ್ಮ ಬಗ್ಗೆ",
+  "@about_us": {
+    "description": "ನಮ್ಮ ಬಗ್ಗೆ ಪಠ್ಯ"
+  },
+  "faq": "ಪ್ರಶ್ನೆಗಳ ಸಾಮಾನ್ಯ ಉತ್ತರಗಳು",
+  "@faq": {
+    "description": "ಪ್ರಶ್ನೆಗಳ ಸಾಮಾನ್ಯ ಉತ್ತರಗಳ ಪಠ್ಯ"
+  },
+  "help_feedback": "ಸಹಾಯ ಮತ್ತು ಪ್ರತಿಕ್ರಿಯೆ",
+  "@help_feedback": {
+    "description": "ಸಹಾಯ ಮತ್ತು ಪ್ರತಿಕ್ರಿಯೆ ಪಠ್ಯ"
+  },
+  "support_us": "ನಮ್ಮನ್ನು ಬೆಂಬಲಿಸಿ",
+  "@support_us": {
+    "description": "ನಮ್ಮನ್ನು ಬೆಂಬಲಿಸಲು ಪಠ್ಯ"
+  },
+  "log_out": "ಲಾಗ್ ಔಟ್",
+  "@log_out": {
+    "description": "ಲಾಗ್ ಔಟ್ ಪಠ್ಯ"
+  },
+  "take_picture": "ಚಿತ್ರ ತೆಗೆಯಿರಿ",
+  "@take_picture": {
+    "description": "ಚಿತ್ರ ತೆಗೆಯಲು ಪಠ್ಯ"
+  },
+  "import_from_gallery": "ಗ್ಯಾಲರಿ ನಿಂದ ಆಮದು ಮಾಡಿ",
+  "@import_from_gallery": {
+    "description": "ಗ್ಯಾಲರಿ ನಿಂದ ಆಮದು ಮಾಡಲು ಪಠ್ಯ"
+  },
+  "import_from_google_drive": "Google ಡ್ರೈವ್ ನಿಂದ ಆಮದು ಮಾಡಿ",
+  "@import_from_google_drive": {
+    "description": "Google ಡ್ರೈವ್ ನಿಂದ ಆಮದು ಮಾಡಲು ಪಠ್ಯ"
+  },
+  "change_app_color": "ಅಪ್ಲಿಕೇಶನ್ ಬಣ್ಣ ಬದಲಾಯಿಸಿ",
+  "@change_app_color": {
+    "description": "ಅಪ್ಲಿಕೇಶನ್ ಬಣ್ಣ ಬದಲಾಯಿಸಲು ಪಠ್ಯ"
+  },
+  "change_app_typography": "ಅಪ್ಲಿಕೇಶನ್ ಟೈಪೋಗ್ರಫಿ ಬದಲಾಯಿಸಿ",
+  "@change_app_typography": {
+    "description": "ಅಪ್ಲಿಕೇಶನ್ ಟೈಪೋಗ್ರಫಿ ಬದಲಾಯಿಸಲು ಪಠ್ಯ"
+  },
+  "change_app_language": "ಅಪ್ಲಿಕೇಶನ್ ಭಾಷೆ ಬದಲಾಯಿಸಿ",
+  "@change_app_language": {
+    "description": "ಅಪ್ಲಿಕೇಶನ್ ಭಾಷೆ ಬದಲಾಯಿಸಲು ಪಠ್ಯ"
+  },
+  "import_from_google_calendar": "Google ಕ್ಯಾಲೆಂಡರ್ ನಿಂದ ಆಮದು ಮಾಡಿ",
+  "@import_from_google_calendar": {
+    "description": "Google ಕ್ಯಾಲೆಂಡರ್ ನಿಂದ ಆಮದು ಮಾಡಲು ಪಠ್ಯ"
+  }
+}

@@ -1,0 +1,319 @@
+{
+  "@@locale": "hi",
+  "app_name": "अपटूडो",
+  "@app_name": {
+    "description": "एप्लिकेशन का नाम"
+  },
+  "onboarding_title_1": "अपने कार्यों का प्रबंधन करें",
+  "@onboarding_title_1": {
+    "description": "पहले ऑनबोर्डिंग स्क्रीन के लिए शीर्षक"
+  },
+  "onboarding_desc_1": "आप अपटूडो में अपने दैनिक कार्यों का आसानी से प्रबंधन कर सकते हैं, और वो भी बिल्कुल मुफ्त",
+  "@onboarding_desc_1": {
+    "description": "पहले ऑनबोर्डिंग स्क्रीन के लिए विवरण"
+  },
+  "onboarding_title_2": "दैनिक रूटीन बनाएं",
+  "@onboarding_title_2": {
+    "description": "दूसरे ऑनबोर्डिंग स्क्रीन के लिए शीर्षक"
+  },
+  "onboarding_desc_2": "अपटूडो में आप उत्पादक रहने के लिए अपने व्यक्तिगत रूटीन को बना सकते हैं",
+  "@onboarding_desc_2": {
+    "description": "दूसरे ऑनबोर्डिंग स्क्रीन के लिए विवरण"
+  },
+  "onboarding_title_3": "अपने कार्यों को संगठित करें",
+  "@onboarding_title_3": {
+    "description": "तीसरे ऑनबोर्डिंग स्क्रीन के लिए शीर्षक"
+  },
+  "onboarding_desc_3": "आप अपने दैनिक कार्यों को विभिन्न श्रेणियों में विभाजित करके संगठित कर सकते हैं",
+  "@onboarding_desc_3": {
+    "description": "तीसरे ऑनबोर्डिंग स्क्रीन के लिए विवरण"
+  },
+  "welcome_title": "अपटूडो में आपका स्वागत है",
+  "@welcome_title": {
+    "description": "लॉगिन और साइनअप विकल्पों के साथ स्वागत स्क्रीन के लिए शीर्षक"
+  },
+  "welcome_desc": "कृपया अपने खाते में लॉगिन करें या जारी रखने के लिए नया खाता बनाएं",
+  "@welcome_desc": {
+    "description": "लॉगिन और साइनअप विकल्पों के साथ स्वागत स्क्रीन के लिए विवरण"
+  },
+  "button_skip": "छोड़ें",
+  "@button_skip": {
+    "description": "ऑनबोर्डिंग स्क्रीन में स्किप बटन के लिए पाठ"
+  },
+  "button_back": "वापस",
+  "@button_back": {
+    "description": "ऑनबोर्डिंग स्क्रीन में वापस बटन के लिए पाठ"
+  },
+  "button_next": "अगला",
+  "@button_next": {
+    "description": "ऑनबोर्डिंग स्क्रीन में अगला बटन के लिए पाठ"
+  },
+  "button_get_started": "शुरू करें",
+  "@button_get_started": {
+    "description": "ऑनबोर्डिंग स्क्रीन में गेट स्टार्टेड बटन के लिए पाठ"
+  },
+  "button_login": "लॉगिन",
+  "@button_login": {
+    "description": "लॉगिन बटन के लिए पाठ"
+  },
+  "button_create_account": "खाता बनाएं",
+  "@button_create_account": {
+    "description": "खाता बनाने के लिए बटन के लिए पाठ"
+  },
+  "username": "उपयोगकर्ता नाम",
+  "@username": {
+    "description": "उपयोगकर्ता नाम के लिए लेबल"
+  },
+  "password": "पासवर्ड",
+  "@password": {
+    "description": "पासवर्ड फ़ील्ड के लिए लेबल"
+  },
+  "or": "या",
+  "@or": {
+    "description": "लॉगिन विकल्पों में 'या' के लिए पाठ"
+  },
+  "login_with_google": "Google से लॉगिन करें",
+  "@login_with_google": {
+    "description": "Google से लॉगिन करने के लिए पाठ"
+  },
+  "login_with_apple": "Apple से लॉगिन करें",
+  "@login_with_apple": {
+    "description": "Apple से लॉगिन करने के लिए पाठ"
+  },
+  "dont_have_account": "खाता नहीं है?",
+  "@dont_have_account": {
+    "description": "'खाता नहीं है?' प्रोम्प्ट के लिए पाठ"
+  },
+  "register": "रजिस्टर करें",
+  "@register": {
+    "description": "रजिस्टर विकल्प के लिए पाठ"
+  },
+  "confirm_password": "पासवर्ड की पुष्टि करें",
+  "@confirm_password": {
+    "description": "पासवर्ड की पुष्टि फ़ील्ड के लिए लेबल"
+  },
+  "register_with_google": "Google से रजिस्टर करें",
+  "@register_with_google": {
+    "description": "Google से रजिस्टर करने के लिए पाठ"
+  },
+  "register_with_apple": "Apple से रजिस्टर करें",
+  "@register_with_apple": {
+    "description": "Apple से रजिस्टर करने के लिए पाठ"
+  },
+  "fingerprint_description": "कृपया अपनी उंगली को फिंगरप्रिंट स्कैनर पर रखें ताकि आपकी पहचान सत्यापित की जा सके",
+  "@fingerprint_description": {
+    "description": "फिंगरप्रिंट प्रमाणीकरण के लिए विवरण"
+  },
+  "cancel": "रद्द करें",
+  "@cancel": {
+    "description": "रद्द बटन के लिए पाठ"
+  },
+  "use_password": "पासवर्ड उपयोग करें",
+  "@use_password": {
+    "description": "पासवर्ड उपयोग करें बटन के लिए पाठ"
+  },
+  "fingerprint_not_matched": "आपकी फिंगरप्रिंट मेल नहीं खा रही है। कृपया बाद में पुनः प्रयास करें!!!",
+  "@fingerprint_not_matched": {
+    "description": "फिंगरप्रिंट मेल नहीं खा रही है के लिए त्रुटि संदेश"
+  },
+  "index": "सूचकांक",
+  "@index": {
+    "description": "सूचकांक स्क्रीन के लिए पाठ"
+  },
+  "calendar": "कैलेंडर",
+  "@calendar": {
+    "description": "कैलेंडर के लिए पाठ"
+  },
+  "focus": "फोकस",
+  "@focus": {
+    "description": "फोकस के लिए पाठ"
+  },
+  "profile": "प्रोफ़ाइल",
+  "@profile": {
+    "description": "प्रोफ़ाइल के लिए पाठ"
+  },
+  "what_do_you_want_to_do_today": "आज आप क्या करना चाहेंगे?",
+  "@what_do_you_want_to_do_today": {
+    "description": "आज क्या करना चाहेंगे? के लिए पूछने वाला संकेत"
+  },
+  "tap_to_add_tasks": "कार्यों को जोड़ने के लिए + टैप करें",
+  "@tap_to_add_tasks": {
+    "description": "कार्यों को जोड़ने के लिए + बटन टैप करने के लिए निर्देश"
+  },
+  "add_task": "कार्य जोड़ें",
+  "@add_task": {
+    "description": "कार्य जोड़ने के लिए बटन के लिए पाठ"
+  },
+  "description": "विवरण",
+  "@description": {
+    "description": "विवरण क्षेत्र के लिए लेबल"
+  },
+  "choose_category": "श्रेणी चुनें",
+  "@choose_category": {
+    "description": "श्रेणी चुनने के लिए प्रश्न चिह्न"
+  },
+  "add_category": "श्रेणी जोड़ें",
+  "@add_category": {
+    "description": "श्रेणी जोड़ने के लिए बटन के लिए पाठ"
+  },
+  "create_new": "नया बनाएं",
+  "@create_new": {
+    "description": "कुछ नया बनाने के लिए प्रांप्ट"
+  },
+  "create_new_category": "नई श्रेणी बनाएं",
+  "@create_new_category": {
+    "description": "नई श्रेणी बनाने के लिए प्रांप्ट"
+  },
+  "category_name": "श्रेणी का नाम:",
+  "@category_name": {
+    "description": "श्रेणी के नाम क्षेत्र के लिए लेबल"
+  },
+  "category_icon": "श्रेणी आइकन:",
+  "@category_icon": {
+    "description": "श्रेणी आइकन क्षेत्र के लिए लेबल"
+  },
+  "choose_icon_from_library": "लाइब्रेरी से आइकन चुनें",
+  "@choose_icon_from_library": {
+    "description": "लाइब्रेरी से आइकन चुनने के लिए निर्देश"
+  },
+  "category_color": "श्रेणी का रंग:",
+  "@category_color": {
+    "description": "श्रेणी के रंग के लिए लेबल"
+  },
+  "create_category": "श्रेणी बनाएं",
+  "@create_category": {
+    "description": "श्रेणी बनाने के लिए बटन के लिए पाठ"
+  },
+  "task_time": "कार्य का समय:",
+  "@task_time": {
+    "description": "कार्य के समय के लिए लेबल"
+  },
+  "task_category": "कार्य श्रेणी:",
+  "@task_category": {
+    "description": "कार्य श्रेणी के लिए लेबल"
+  },
+  "task_priority": "कार्य की प्राथमिकता:",
+  "@task_priority": {
+    "description": "कार्य की प्राथमिकता के लिए लेबल"
+  },
+  "sub_task": "उप-कार्य",
+  "@sub_task": {
+    "description": "उप-कार्य के लिए पाठ"
+  },
+  "delete_task": "कार्य हटाएं",
+  "@delete_task": {
+    "description": "कार्य हटाने के लिए बटन के लिए पाठ"
+  },
+  "edit_task_title": "कार्य शीर्षक संपादित करें",
+  "@edit_task_title": {
+    "description": "संपादन कार्य के लिए शीर्षक"
+  },
+  "edit": "संपादित करें",
+  "@edit": {
+    "description": "संपादित के लिए पाठ"
+  },
+  "edit_task_priority": "कार्य प्राथमिकता संपादित करें",
+  "@edit_task_priority": {
+    "description": "संपादित कार्य प्राथमिकता के लिए शीर्षक"
+  },
+  "confirm_delete_task": "क्या आप इस कार्य को हटाना चाहते हैं?",
+  "@confirm_delete_task": {
+    "description": "किसी कार्य को हटाने की पुष्टि के लिए प्रॉम्प्ट"
+  },
+  "task_title": "कार्य शीर्षक: {शीर्षक}",
+  "@task_title": {
+    "description": "प्लेसहोल्डर सहित कार्य शीर्षक के लिए लेबल"
+  },
+  "today": "आज",
+  "@today": {
+    "description": "आज के लिए पाठ"
+  },
+  "completed": "पूरा हुआ",
+  "@completed": {
+    "description": "पूरा होने के लिए पाठ"
+  },
+  "focus_mode": "फोकस मोड",
+  "@focus_mode": {
+    "description": "फोकस मोड के लिए पाठ"
+  },
+  "focus_mode_description": "जब आपका फोकस मोड चालू होता है, तो आपके सभी अधिसूचनाएँ बंद हो जाती हैं",
+  "@focus_mode_description": {
+    "description": "फोकस मोड के लिए विवरण"
+  },
+  "start_focusing": "ध्यान केंद्रित करना शुरू करें",
+  "@start_focusing": {
+    "description": "ध्यान केंद्रित करने के लिए बटन के लिए पाठ"
+  },
+  "applications": "अनुप्रयोग",
+  "@applications": {
+    "description": "अनुप्रयोगों के लिए पाठ"
+  },
+  "overview": "अवलोकन",
+  "@overview": {
+    "description": "अवलोकन के लिए पाठ"
+  },
+  "app_settings": "अनुप्रयोग सेटिंग्स",
+  "@app_settings": {
+    "description": "अनुप्रयोग सेटिंग्स के लिए पाठ"
+  },
+  "change_account_name": "खाता नाम बदलें",
+  "@change_account_name": {
+    "description": "खाता नाम बदलने के लिए पाठ"
+  },
+  "change_account_password": "खाता पासवर्ड बदलें",
+  "@change_account_password": {
+    "description": "खाता पासवर्ड बदलने के लिए पाठ"
+  },
+  "change_account_image": "खाता छवि बदलें",
+  "@change_account_image": {
+    "description": "खाता छवि बदलने के लिए पाठ"
+  },
+  "about_us": "हमारे बारे में",
+  "@about_us": {
+    "description": "हमारे बारे में के लिए पाठ"
+  },
+  "faq": "सामान्य प्रश्न",
+  "@faq": {
+    "description": "सामान्य प्रश्न के लिए पाठ"
+  },
+  "help_feedback": "सहायता और प्रतिक्रिया",
+  "@help_feedback": {
+    "description": "सहायता और प्रतिक्रिया के लिए पाठ"
+  },
+  "support_us": "हमें समर्थन दें",
+  "@support_us": {
+    "description": "हमें समर्थन देने के लिए पाठ"
+  },
+  "log_out": "लॉग आउट",
+  "@log_out": {
+    "description": "लॉग आउट के लिए पाठ"
+  },
+  "take_picture": "तस्वीर लें",
+  "@take_picture": {
+    "description": "तस्वीर लेने के लिए पाठ"
+  },
+  "import_from_gallery": "गैलरी से आयात करें",
+  "@import_from_gallery": {
+    "description": "गैलरी से आयात के लिए पाठ"
+  },
+  "import_from_google_drive": "गूगल ड्राइव से आयात करें",
+  "@import_from_google_drive": {
+    "description": "गूगल ड्राइव से आयात के लिए पाठ"
+  },
+  "change_app_color": "ऐप का रंग बदलें",
+  "@change_app_color": {
+    "description": "ऐप का रंग बदलने के लिए पाठ"
+  },
+  "change_app_typography": "ऐप की टाइपोग्राफी बदलें",
+  "@change_app_typography": {
+    "description": "ऐप की टाइपोग्राफी बदलने के लिए पाठ"
+  },
+  "change_app_language": "ऐप की भाषा बदलें",
+  "@change_app_language": {
+    "description": "ऐप की भाषा बदलने के लिए पाठ"
+  },
+  "import_from_google_calendar": "गूगल कैलेंडर से आयात करें",
+  "@import_from_google_calendar": {
+    "description": "गूगल कैलेंडर से आयात के लिए पाठ"
+  }
+}

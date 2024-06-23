@@ -1,9 +1,319 @@
 {
+  "@@locale": "en",
   "app_name": "UpTodo",
-  "onboarding_headline_1" : "Manage your tasks",
-  "onboarding_message_1" : "You can easily manage all of your daily tasks in DoMe for free",
-  "onboarding_headline_2" : "Create daily routine",
-  "onboarding_message_2" : "In UpTodo  you can create your personalized routine to stay productive",
-  "onboarding_headline_3" : "Organize your tasks",
-  "onboarding_message_3" : "You can organize your daily tasks by adding your tasks into separate categories"
+  "@app_name": {
+    "description": "App name"
+  },
+  "onboarding_title_1": "Manage your tasks",
+  "@onboarding_title_1": {
+    "description": "Title for the first onboarding screen"
+  },
+  "onboarding_desc_1": "You can easily manage all of your daily tasks in UpTodo for free",
+  "@onboarding_desc_1": {
+    "description": "Description for the first onboarding screen"
+  },
+  "onboarding_title_2": "Create daily routine",
+  "@onboarding_title_2": {
+    "description": "Title for the second onboarding screen"
+  },
+  "onboarding_desc_2": "In Uptodo you can create your personalized routine to stay productive",
+  "@onboarding_desc_2": {
+    "description": "Description for the second onboarding screen"
+  },
+  "onboarding_title_3": "Organize your tasks",
+  "@onboarding_title_3": {
+    "description": "Title for the third onboarding screen"
+  },
+  "onboarding_desc_3": "You can organize your daily tasks by adding your tasks into separate categories.",
+  "@onboarding_desc_3": {
+    "description": "Description for the third onboarding screen"
+  },
+  "welcome_title": "Welcome to UpTodo",
+  "@welcome_title": {
+    "description": "Title for the welcome screen with login and signup options"
+  },
+  "welcome_desc": "Please login to your account or create new account to continue",
+  "@welcome_desc": {
+    "description": "Description for the welcome screen with login and signup options"
+  },
+  "button_skip": "Skip",
+  "@button_skip": {
+    "description": "Text for the skip button in onboarding screens"
+  },
+  "button_back": "Back",
+  "@button_back": {
+    "description": "Text for the back button in onboarding screens"
+  },
+  "button_next": "Next",
+  "@button_next": {
+    "description": "Text for the next button in onboarding screens"
+  },
+  "button_get_started": "Get Started",
+  "@button_get_started": {
+    "description": "Text for the get started button in onboarding screens"
+  },
+  "button_login": "Login",
+  "@button_login": {
+    "description": "Text for the login button"
+  },
+  "button_create_account": "Create Account",
+  "@button_create_account": {
+    "description": "Text for the create account button"
+  },
+  "username": "Username",
+  "@username": {
+    "description": "Label for username field"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Label for password field"
+  },
+  "or": "or",
+  "@or": {
+    "description": "Text for 'or' in login options"
+  },
+  "login_with_google": "Login with Google",
+  "@login_with_google": {
+    "description": "Text for login with Google option"
+  },
+  "login_with_apple": "Login with Apple",
+  "@login_with_apple": {
+    "description": "Text for login with Apple option"
+  },
+  "dont_have_account": "Don’t have an account?",
+  "@dont_have_account": {
+    "description": "Text for 'Don’t have an account?' prompt"
+  },
+  "register": "Register",
+  "@register": {
+    "description": "Text for register option"
+  },
+  "confirm_password": "Confirm Password",
+  "@confirm_password": {
+    "description": "Label for confirm password field"
+  },
+  "register_with_google": "Register with Google",
+  "@register_with_google": {
+    "description": "Text for register with Google option"
+  },
+  "register_with_apple": "Register with Apple",
+  "@register_with_apple": {
+    "description": "Text for register with Apple option"
+  },
+  "fingerprint_description": "Please hold your finger at the fingerprint scanner to verify your identity",
+  "@fingerprint_description": {
+    "description": "Description for fingerprint authentication"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Text for cancel button"
+  },
+  "use_password": "Use Password",
+  "@use_password": {
+    "description": "Text for use password button"
+  },
+  "fingerprint_not_matched": "Your fingerprint is not matched. Please try again later!!!",
+  "@fingerprint_not_matched": {
+    "description": "Error message for fingerprint not matched"
+  },
+  "index": "Index",
+  "@index": {
+    "description": "Text for index screen"
+  },
+  "calendar": "Calendar",
+  "@calendar": {
+    "description": "Text for calendar"
+  },
+  "focus": "Focus",
+  "@focus": {
+    "description": "Text for focus"
+  },
+  "profile": "Profile",
+  "@profile": {
+    "description": "Text for profile"
+  },
+  "what_do_you_want_to_do_today": "What do you want to do today?",
+  "@what_do_you_want_to_do_today": {
+    "description": "Prompt for what to do today"
+  },
+  "tap_to_add_tasks": "Tap + to add your tasks",
+  "@tap_to_add_tasks": {
+    "description": "Instruction to tap + button to add tasks"
+  },
+  "add_task": "Add Task",
+  "@add_task": {
+    "description": "Text for add task button"
+  },
+  "description": "Description",
+  "@description": {
+    "description": "Label for description field"
+  },
+  "choose_category": "Choose Category",
+  "@choose_category": {
+    "description": "Prompt to choose category"
+  },
+  "add_category": "Add Category",
+  "@add_category": {
+    "description": "Text for add category button"
+  },
+  "create_new": "Create New",
+  "@create_new": {
+    "description": "Prompt to create something new"
+  },
+  "create_new_category": "Create new category",
+  "@create_new_category": {
+    "description": "Prompt to create a new category"
+  },
+  "category_name": "Category name:",
+  "@category_name": {
+    "description": "Label for category name field"
+  },
+  "category_icon": "Category icon:",
+  "@category_icon": {
+    "description": "Label for category icon field"
+  },
+  "choose_icon_from_library": "Choose icon from library",
+  "@choose_icon_from_library": {
+    "description": "Instruction to choose icon from library"
+  },
+  "category_color": "Category color:",
+  "@category_color": {
+    "description": "Label for category color field"
+  },
+  "create_category": "Create Category",
+  "@create_category": {
+    "description": "Text for create category button"
+  },
+  "task_time": "Task Time:",
+  "@task_time": {
+    "description": "Label for task time field"
+  },
+  "task_category": "Task Category:",
+  "@task_category": {
+    "description": "Label for task category field"
+  },
+  "task_priority": "Task Priority:",
+  "@task_priority": {
+    "description": "Label for task priority field"
+  },
+  "sub_task": "Sub-Task",
+  "@sub_task": {
+    "description": "Text for sub-task"
+  },
+  "delete_task": "Delete Task",
+  "@delete_task": {
+    "description": "Text for delete task button"
+  },
+  "edit_task_title": "Edit Task title",
+  "@edit_task_title": {
+    "description": "Title for edit task"
+  },
+  "edit": "Edit",
+  "@edit": {
+    "description": "Text for edit"
+  },
+  "edit_task_priority": "Edit Task Priority",
+  "@edit_task_priority": {
+    "description": "Title for edit task priority"
+  },
+  "confirm_delete_task": "Are you sure you want to delete this task?",
+  "@confirm_delete_task": {
+    "description": "Confirmation prompt for deleting a task"
+  },
+  "task_title": "Task title: {Title}",
+  "@task_title": {
+    "description": "Label for task title with placeholder"
+  },
+  "today": "Today",
+  "@today": {
+    "description": "Text for today"
+  },
+  "completed": "Completed",
+  "@completed": {
+    "description": "Text for completed"
+  },
+  "focus_mode": "Focus Mode",
+  "@focus_mode": {
+    "description": "Text for focus mode"
+  },
+  "focus_mode_description": "While your focus mode is on, all of your notifications will be off",
+  "@focus_mode_description": {
+    "description": "Description for focus mode"
+  },
+  "start_focusing": "Start Focusing",
+  "@start_focusing": {
+    "description": "Text for start focusing button"
+  },
+  "applications": "Applications",
+  "@applications": {
+    "description": "Text for applications"
+  },
+  "overview": "Overview",
+  "@overview": {
+    "description": "Text for overview"
+  },
+  "app_settings": "App Settings",
+  "@app_settings": {
+    "description": "Text for app settings"
+  },
+  "change_account_name": "Change account name",
+  "@change_account_name": {
+    "description": "Text for change account name"
+  },
+  "change_account_password": "Change account password",
+  "@change_account_password": {
+    "description": "Text for change account password"
+  },
+  "change_account_image": "Change account Image",
+  "@change_account_image": {
+    "description": "Text for change account image"
+  },
+  "about_us": "About US",
+  "@about_us": {
+    "description": "Text for about us"
+  },
+  "faq": "FAQ",
+  "@faq": {
+    "description": "Text for FAQ"
+  },
+  "help_feedback": "Help & Feedback",
+  "@help_feedback": {
+    "description": "Text for help and feedback"
+  },
+  "support_us": "Support US",
+  "@support_us": {
+    "description": "Text for support us"
+  },
+  "log_out": "Log out",
+  "@log_out": {
+    "description": "Text for log out"
+  },
+  "take_picture": "Take picture",
+  "@take_picture": {
+    "description": "Text for take picture"
+  },
+  "import_from_gallery": "Import from gallery",
+  "@import_from_gallery": {
+    "description": "Text for import from gallery"
+  },
+  "import_from_google_drive": "Import from Google Drive",
+  "@import_from_google_drive": {
+    "description": "Text for import from Google Drive"
+  },
+  "change_app_color": "Change app color",
+  "@change_app_color": {
+    "description": "Text for change app color"
+  },
+  "change_app_typography": "Change app typography",
+  "@change_app_typography": {
+    "description": "Text for change app typography"
+  },
+  "change_app_language": "Change app language",
+  "@change_app_language": {
+    "description": "Text for change app language"
+  },
+  "import_from_google_calendar": "Import from Google calendar",
+  "@import_from_google_calendar": {
+    "description": "Text for import from Google calendar"
+  }
 }
