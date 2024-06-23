@@ -3,6 +3,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'features/splash_screen/splash_page.dart';
 
 Future<void> main() async {
   ///  this ensures that the Flutter engine is properly initialized
@@ -39,11 +41,38 @@ class UpTodo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: AppLocalizations.of(context)!.app_name,
       debugShowCheckedModeBanner: false,
+      // Define the default locale. This will be used if the system's locale is not supported.
+      locale: const Locale('en', 'US'),
+      // Define supported locales
+      supportedLocales: const [
+        Locale('en', 'US'), // English
+        Locale('bn', 'IN'), // Bengali
+        Locale('kn', 'IN'), // Kannada
+        Locale('hi', 'IN'), // Hindi
+        // Add more locales here
+      ],
       localizationsDelegates: const [
+        // Built-in localization for text direction LTR/RTL
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        // Your custom delegate for app-specific localization
+        AppLocalizations.delegate, // Add this line
       ],
+      // Returns a locale which will be used if the system's locale is not supported.
+      localeResolutionCallback: (locale, supportedLocales) {
+        // Check if the current device locale is supported
+        for (var supportedLocale in supportedLocales) {
+          if (supportedLocale.languageCode == locale?.languageCode &&
+              supportedLocale.countryCode == locale?.countryCode) {
+            return supportedLocale;
+          }
+        }
+        // If the device's locale is not supported, use the first one from the list (default)
+        return supportedLocales.first;
+      },
       builder: _builder,
       theme: ThemeData(
         useMaterial3: false,
@@ -51,6 +80,7 @@ class UpTodo extends StatelessWidget {
       darkTheme: ThemeData(
         useMaterial3: false,
       ),
+      home: const SplashPage(),
     );
   }
 

@@ -220,7 +220,7 @@
   "@confirm_delete_task": {
     "description": "কাজ মুছে ফেলার নিশ্চিতকরণ প্রম্পট"
   },
-  "task_title": "কাজের শিরোনাম: {শিরোনাম}",
+  "task_title": "কাজের শিরোনাম: {Title}",
   "@task_title": {
     "description": "প্লেসহোল্ডার সহ কাজের শিরোনামের লেবেল"
   },
