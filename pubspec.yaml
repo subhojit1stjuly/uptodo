@@ -11,6 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.6
+  flutter_screenutil: ^5.9.3
+# Database for the app
+  drift: ^2.18.0
 
   flutter_dotenv: ^5.1.0
 # state management
@@ -33,6 +36,7 @@ dev_dependencies:
   flutter_gen_runner:
   intl_translation:
   intl_utils: ^2.8.7
+  go_router_builder:
 
 
 flutter:
