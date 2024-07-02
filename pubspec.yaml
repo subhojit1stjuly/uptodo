@@ -11,6 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.6
+  flutter_screenutil: ^5.9.3
+# Database for the app
+  drift: ^2.18.0
 
   flutter_dotenv: ^5.1.0
 # state management
@@ -20,6 +23,7 @@ dependencies:
 # dependency injection and functional Programming.
   get_it: ^7.7.0
   intl: ^0.19.0
+  calendar_date_picker2: ^1.1.5
   flutter_localizations:
     sdk: flutter
 
@@ -33,9 +37,20 @@ dev_dependencies:
   flutter_gen_runner:
   intl_translation:
   intl_utils: ^2.8.7
+  go_router_builder:
 
 
 flutter:
   uses-material-design: true
   generate: true # Enables generation of localized strings from arb files
-
+  assets:
+    - assets/icons/
+    - assets/anim/
+  fonts:
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/Lato-Regular.ttf
+        - asset: assets/fonts/Lato-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Lato-Bold.ttf
+          weight: 700

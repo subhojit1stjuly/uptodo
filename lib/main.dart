@@ -4,6 +4,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'core/theme/dark_theme.dart';
+import 'core/theme/light_theme.dart';
 import 'features/splash_screen/splash_page.dart';
 
 Future<void> main() async {
@@ -61,6 +63,7 @@ class UpTodo extends StatelessWidget {
         // Your custom delegate for app-specific localization
         AppLocalizations.delegate, // Add this line
       ],
+      //TODO: need to re-visit (for testing)
       // Returns a locale which will be used if the system's locale is not supported.
       localeResolutionCallback: (locale, supportedLocales) {
         // Check if the current device locale is supported
@@ -74,16 +77,13 @@ class UpTodo extends StatelessWidget {
         return supportedLocales.first;
       },
       builder: _builder,
-      theme: ThemeData(
-        useMaterial3: false,
-      ),
-      darkTheme: ThemeData(
-        useMaterial3: false,
-      ),
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.system, // Use system theme mode (light/dark)
       home: const SplashPage(),
     );
   }
-
+  //TODO: need to revisit (for re-design)
   Widget _builder(BuildContext context,Widget? widget){
     Widget error = const Text('...rendering error...');
     if (widget is Scaffold || widget is Navigator) {
