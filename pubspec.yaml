@@ -26,6 +26,7 @@ dependencies:
   calendar_date_picker2: ^1.1.5
   flutter_localizations:
     sdk: flutter
+  flutter_svg: ^2.0.10+1
 
 
 dev_dependencies:
@@ -39,6 +40,20 @@ dev_dependencies:
   intl_utils: ^2.8.7
   go_router_builder:
 
+flutter_gen:
+  output: lib/assets/ # Optional (default: lib/gen/)
+  line_length: 80 # Optional (default: 80)
+
+  # Optional
+  integrations:
+    flutter_svg: true
+    flare_flutter: true
+    rive: true
+    lottie: true
+
+  outputs:
+    # Specify the naming convention here
+    naming: snake_case  # Options include snake_case, camelCase, etc.
 
 flutter:
   uses-material-design: true
