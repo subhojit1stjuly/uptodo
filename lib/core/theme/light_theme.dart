@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-
+/// global style which is used in the later stages
 const TextStyle globalLightTextStyle = TextStyle(
   color: Colors.black87,
 );
+/// object for the light theme used in the main
 final lightTheme = ThemeData(
   fontFamily: 'Lato',
   splashColor: Colors.white70,

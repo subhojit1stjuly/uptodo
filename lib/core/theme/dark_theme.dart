@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-
+/// this field is created since we are using it on later stages
 const TextStyle globalDarkTextStyle = TextStyle(
   fontFamily: 'Lato',
   color: Colors.white70,
 );
+/// object for the dark themes
 final darkTheme = ThemeData(
   fontFamily: 'Lato',
   splashColor: Colors.black87,

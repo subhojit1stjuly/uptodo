@@ -44,8 +44,9 @@ Future<void> main() async {
     debugPrint('Stack trace: $stack');
   });
 }
-
+/// added the App Widget for the Project
 class UpTodo extends StatelessWidget {
+  /// constructor is getting only key as parameter
   const UpTodo({super.key});
 
   @override

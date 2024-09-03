@@ -37,6 +37,7 @@ dependencies:
   # custom widgets
   calendar_date_picker2: ^1.1.5
   smooth_page_indicator: ^1.2.0+3
+  full_coverage: ^1.0.0
 
 
 dev_dependencies:
