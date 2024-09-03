@@ -15,19 +15,19 @@ final darkTheme = ThemeData(
       fontSize: 32,
     ),
     bodyLarge: globalDarkTextStyle.copyWith(
-      fontSize: 16.0,
+      fontSize: 16,
     ),
     bodyMedium: globalDarkTextStyle.copyWith(
-      fontSize: 20.0,
+      fontSize: 20,
     ),
     bodySmall: globalDarkTextStyle.copyWith(
-      fontSize: 14.0,
+      fontSize: 14,
     ),
     labelSmall: globalDarkTextStyle.copyWith(
-      fontSize: 12.0,
+      fontSize: 12,
     ),
     labelLarge: globalDarkTextStyle.copyWith(
-      fontSize: 16.0,
+      fontSize: 16,
     ),
   ),
   buttonTheme: const ButtonThemeData(
@@ -38,11 +38,11 @@ final darkTheme = ThemeData(
       foregroundColor: Colors.white70,
       backgroundColor: const Color(0xFF8875FF),
       textStyle: globalDarkTextStyle.copyWith(
-        fontSize: 16.0,
+        fontSize: 16,
         color: Colors.white70,
       ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0), // Radius value
+        borderRadius: BorderRadius.circular(12), // Radius value
       ),
     ),
   ),
@@ -50,19 +50,19 @@ final darkTheme = ThemeData(
     style: TextButton.styleFrom(
       foregroundColor: Colors.white70,
       backgroundColor: Colors.transparent,
-      textStyle: globalDarkTextStyle.copyWith(fontSize: 16.0),
+      textStyle: globalDarkTextStyle.copyWith(fontSize: 16),
       shadowColor: const Color(0x1AFFFFFF), // Light shade
     ),
   ),
   inputDecorationTheme: InputDecorationTheme(
     labelStyle: globalDarkTextStyle.copyWith(
-      fontSize: 16.0,
+      fontSize: 16,
     ),
     hintStyle: globalDarkTextStyle.copyWith(
-      fontSize: 14.0,
+      fontSize: 14,
     ),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8.0),
+      borderRadius: BorderRadius.circular(8),
     ),
     focusedBorder: const OutlineInputBorder(
       borderSide: BorderSide(
