@@ -1,11 +1,15 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:uptodo/common/bloc/provider/auth_bloc.dart';
 import 'package:uptodo/core/theme/dark_theme.dart';
 import 'package:uptodo/core/theme/light_theme.dart';
 import 'package:uptodo/features/splash_screen/splash_page.dart';
+
+import 'core/routing/routes.dart';
 
 Future<void> main() async {
   ///  this ensures that the Flutter engine is properly initialized
@@ -44,6 +48,7 @@ Future<void> main() async {
     debugPrint('Stack trace: $stack');
   });
 }
+
 /// added the App Widget for the Project
 class UpTodo extends StatelessWidget {
   /// constructor is getting only key as parameter
@@ -51,47 +56,55 @@ class UpTodo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: AppLocalizations.of(context)!.app_name,
-      debugShowCheckedModeBanner: false,
-      // Define the default locale. This will be used if
-      // the system's locale is not supported.
-      locale: const Locale('en', 'US'),
-      // Define supported locales
-      supportedLocales: const [
-        Locale('en', 'US'), // English
-        Locale('bn', 'IN'), // Bengali
-        Locale('kn', 'IN'), // Kannada
-        Locale('hi', 'IN'), // Hindi
-        // Add more locales here
-      ],
-      localizationsDelegates: const [
-        // Built-in localization for text direction LTR/RTL
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        // Your custom delegate for app-specific localization
-        AppLocalizations.delegate, // Add this line
-      ],
-      // TODO(subhojit): need to re-visit (for testing)
-      // Returns a locale which will be used if the
-      // system's locale is not supported.
-      localeResolutionCallback: (locale, supportedLocales) {
-        // Check if the current device locale is supported
-        for (final supportedLocale in supportedLocales) {
-          if (supportedLocale.languageCode == locale?.languageCode &&
-              supportedLocale.countryCode == locale?.countryCode) {
-            return supportedLocale;
+    return BlocProvider(
+      create: (context) => AuthBloc(),
+      child: MaterialApp.router(
+        routerDelegate: router(context).routerDelegate,
+        routeInformationParser: router(context).routeInformationParser,
+        title: AppLocalizations.of(context)!.app_name,
+        debugShowCheckedModeBanner: false,
+
+        /// Define the default locale. This will be used if
+        /// the system's locale is not supported.
+        locale: const Locale('en', 'US'),
+
+        /// Define supported locales
+        supportedLocales: const [
+          Locale('en', 'US'), // English
+          Locale('bn', 'IN'), // Bengali
+          Locale('kn', 'IN'), // Kannada
+          Locale('hi', 'IN'), // Hindi
+          /// Add more locales here
+        ],
+        localizationsDelegates: const [
+          /// Built-in localization for text direction LTR/RTL
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+
+          /// Your custom delegate for app-specific localization
+          AppLocalizations.delegate, // Add this line
+        ],
+        // TODO(subhojit): need to re-visit (for testing)
+        /// Returns a locale which will be used if the
+        /// system's locale is not supported.
+        localeResolutionCallback: (locale, supportedLocales) {
+          /// Check if the current device locale is supported
+          for (final supportedLocale in supportedLocales) {
+            if (supportedLocale.languageCode == locale?.languageCode &&
+                supportedLocale.countryCode == locale?.countryCode) {
+              return supportedLocale;
+            }
           }
-        }
-        // If the device's locale is not supported, use
-        // the first one from the list (default)
-        return supportedLocales.first;
-      },
-      builder: _builder,
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      home: const SplashPage(),
+
+          /// If the device's locale is not supported, use
+          /// the first one from the list (default)
+          return supportedLocales.first;
+        },
+        builder: _builder,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+      ),
     );
   }
 
