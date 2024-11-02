@@ -1,141 +1,152 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uptodo/common/bloc/event/auth_event.dart';
 import 'package:uptodo/common/bloc/state/auth_state.dart';
+import 'package:uptodo/core/routing/routes.dart';
 
 ///This Authentication bloc, which is handling these flows of the application
 /// 1: after Splashscreen checks if user Logged in or not
 /// so its calls the AuthSessionCheck event and if session is valid then
-/// emits AuthSessionValidState otherwise emits AuthSessionInvalidState
+/// emits SessionValidState otherwise emits SessionInvalidState
 /// if session is invalid then it redirects to onboarding screen
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   /// this is a bloc constructor
   /// here we are mapping events and states
   AuthBloc() : super(const AuthInitialState()) {
-    on<AuthEmailChangedEvent>(_onEmailChanged);
-    on<AuthPasswordChangedEvent>(_onPasswordChanged);
-    on<AuthLoginSubmittedEvent>(_onLoginSubmitted);
-    on<AuthSignupSubmittedEvent>(_onSignupSubmitted);
-    on<AuthLoginWithGoogleEvent>(_onLoginWithGoogle);
-    on<AuthLoginWithFacebookEvent>(_onLoginWithFacebook);
-    on<AuthLoginWithAppleEvent>(_onLoginWithApple);
-    on<AuthLogoutRequestedEvent>(_onLogoutRequested);
-    on<AuthResetPasswordRequestedEvent>(_onResetPasswordRequested);
-    on<AuthSessionCheckEvent>(_onSessionCheck);
+    on<EmailChangedEvent>(_onEmailChanged);
+    on<PasswordChangedEvent>(_onPasswordChanged);
+    on<LoginSubmittedEvent>(_onLoginSubmitted);
+    on<SignupSubmittedEvent>(_onSignupSubmitted);
+    on<LoginWithGoogleEvent>(_onLoginWithGoogle);
+    on<LoginWithFacebookEvent>(_onLoginWithFacebook);
+    on<LoginWithAppleEvent>(_onLoginWithApple);
+    on<LogoutRequestedEvent>(_onLogoutRequested);
+    on<ResetPasswordRequestedEvent>(_onResetPasswordRequested);
+    on<SessionCheckEvent>(_onSessionCheck);
+    on<SessionExpiredEvent>(_onSessionExpired);
   }
 
-  void _onEmailChanged(AuthEmailChangedEvent event, Emitter<AuthState> emit) {
+  final _router = AppRouter().config;
+
+  void _onEmailChanged(EmailChangedEvent event, Emitter<AuthState> emit) {
     // Validate email format
     if (_isValidEmail(event.email)) {
-      emit(const AuthFormValidState());
+      emit(const FormValidState());
     } else {
-      emit(const AuthEmailInvalidState());
+      emit(const EmailInvalidState());
     }
   }
 
   void _onPasswordChanged(
-    AuthPasswordChangedEvent event,
+    PasswordChangedEvent event,
     Emitter<AuthState> emit,
   ) {
     // Validate password complexity
     if (_isValidPassword(event.password)) {
-      emit(const AuthFormValidState());
+      emit(const FormValidState());
     } else {
-      emit(const AuthPasswordInvalidState());
+      emit(const PasswordInvalidState());
     }
   }
 
   Future<void> _onLoginSubmitted(
-    AuthLoginSubmittedEvent event,
+    LoginSubmittedEvent event,
     Emitter<AuthState> emit,
   ) async {
     emit(const AuthLoadingState());
     try {
       // Perform login logic here
-      emit(const AuthAuthenticatedState());
+      emit(const AuthenticatedState());
     } catch (e) {
-      emit(AuthLoginFailureState(e.toString()));
+      emit(LoginFailureState(e.toString()));
     }
   }
 
   Future<void> _onSignupSubmitted(
-    AuthSignupSubmittedEvent event,
+    SignupSubmittedEvent event,
     Emitter<AuthState> emit,
   ) async {
     emit(const AuthLoadingState());
     try {
       // Perform sign-up logic here
-      emit(const AuthAuthenticatedState());
+      emit(const AuthenticatedState());
     } catch (e) {
-      emit(AuthSignupFailureState(e.toString()));
+      emit(SignupFailureState(e.toString()));
     }
   }
 
   Future<void> _onLoginWithGoogle(
-    AuthLoginWithGoogleEvent event,
+    LoginWithGoogleEvent event,
     Emitter<AuthState> emit,
   ) async {
     emit(const AuthLoadingState());
     try {
       // Google login logic
-      emit(const AuthAuthenticatedState());
+      emit(const AuthenticatedState());
     } catch (e) {
-      emit(AuthLoginFailureState(e.toString()));
+      emit(LoginFailureState(e.toString()));
     }
   }
 
   Future<void> _onLoginWithFacebook(
-    AuthLoginWithFacebookEvent event,
+    LoginWithFacebookEvent event,
     Emitter<AuthState> emit,
   ) async {
     emit(const AuthLoadingState());
     try {
       // Facebook login logic
-      emit(const AuthAuthenticatedState());
+      emit(const AuthenticatedState());
     } catch (e) {
-      emit(AuthLoginFailureState(e.toString()));
+      emit(LoginFailureState(e.toString()));
     }
   }
 
   Future<void> _onLoginWithApple(
-    AuthLoginWithAppleEvent event,
+    LoginWithAppleEvent event,
     Emitter<AuthState> emit,
   ) async {
     emit(const AuthLoadingState());
     try {
       // Apple login logic
-      emit(const AuthAuthenticatedState());
+      emit(const AuthenticatedState());
     } catch (e) {
-      emit(AuthLoginFailureState(e.toString()));
+      emit(LoginFailureState(e.toString()));
     }
   }
 
   Future<void> _onLogoutRequested(
-    AuthLogoutRequestedEvent event,
+    LogoutRequestedEvent event,
     Emitter<AuthState> emit,
   ) async {
     // Logout logic
-    emit(const AuthUnauthenticatedState());
+    emit(const UnauthenticatedState());
+    _router.refresh();
   }
 
   Future<void> _onResetPasswordRequested(
-    AuthResetPasswordRequestedEvent event,
+    ResetPasswordRequestedEvent event,
     Emitter<AuthState> emit,
   ) async {
     emit(const AuthLoadingState());
     try {
       // Password reset logic
-      emit(const AuthPasswordResetSuccessState());
+      emit(const PasswordResetSuccessState());
     } catch (e) {
-      emit(AuthPasswordResetFailureState(e.toString()));
+      emit(PasswordResetFailureState(e.toString()));
     }
   }
 
   Future<void> _onSessionCheck(
-    AuthSessionCheckEvent event,
+    SessionCheckEvent event,
     Emitter<AuthState> emit,
   ) async {
     // Session validation logic
-    emit(const AuthSessionValidState());
+    emit(const SessionValidState());
+  }
+  Future<void> _onSessionExpired(
+      SessionExpiredEvent event,
+      Emitter<AuthState> state,
+      )async{
+    emit(const SessionInvalidState());
   }
 
   bool _isValidEmail(String email) {
@@ -147,4 +158,5 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     // Password validation logic here
     return password.length >= 6;
   }
+
 }

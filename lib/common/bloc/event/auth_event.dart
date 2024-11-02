@@ -4,14 +4,15 @@ part 'auth_event.freezed.dart';
 
 @freezed
 class AuthEvent with _$AuthEvent {
-  const factory AuthEvent.emailChanged(String email) = AuthEmailChangedEvent;
-  const factory AuthEvent.passwordChanged(String password) = AuthPasswordChangedEvent;
-  const factory AuthEvent.loginSubmitted() = AuthLoginSubmittedEvent;
-  const factory AuthEvent.signupSubmitted() = AuthSignupSubmittedEvent;
-  const factory AuthEvent.loginWithGoogle() = AuthLoginWithGoogleEvent;
-  const factory AuthEvent.loginWithFacebook() = AuthLoginWithFacebookEvent;
-  const factory AuthEvent.loginWithApple() = AuthLoginWithAppleEvent;
-  const factory AuthEvent.logoutRequested() = AuthLogoutRequestedEvent;
-  const factory AuthEvent.resetPasswordRequested() = AuthResetPasswordRequestedEvent;
-  const factory AuthEvent.sessionCheck() = AuthSessionCheckEvent;
+  const factory AuthEvent.emailChanged(String email) = EmailChangedEvent;
+  const factory AuthEvent.passwordChanged(String password) = PasswordChangedEvent;
+  const factory AuthEvent.loginSubmitted() = LoginSubmittedEvent;
+  const factory AuthEvent.signupSubmitted() = SignupSubmittedEvent;
+  const factory AuthEvent.loginWithGoogle() = LoginWithGoogleEvent;
+  const factory AuthEvent.loginWithFacebook() = LoginWithFacebookEvent;
+  const factory AuthEvent.loginWithApple() = LoginWithAppleEvent;
+  const factory AuthEvent.logoutRequested() = LogoutRequestedEvent;
+  const factory AuthEvent.resetPasswordRequested() = ResetPasswordRequestedEvent;
+  const factory AuthEvent.sessionCheck() = SessionCheckEvent;
+  const factory AuthEvent.sessionExpired() = SessionExpiredEvent;
 }

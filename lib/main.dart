@@ -107,6 +107,8 @@ class UpTodo extends StatelessWidget {
   }
 
   // TODO(Subhojit): need to revisit (for re-design)
+  /// adding conditions later for the feedback package
+  /// for error handling
   Widget _builder(BuildContext context, Widget? widget) {
     Widget error = const Text('...rendering error...');
     if (widget is Scaffold || widget is Navigator) {

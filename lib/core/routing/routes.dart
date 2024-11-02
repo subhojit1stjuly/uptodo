@@ -1,5 +1,8 @@
 // Method to define the GoRouter instance
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:uptodo/common/bloc/provider/auth_bloc.dart';
+import 'package:uptodo/common/bloc/state/auth_state.dart';
 import 'package:uptodo/core/routing/route_constants.dart';
 import 'package:uptodo/features/home_page/index_screen/home_page.dart';
 import 'package:uptodo/features/login_screen/login_page.dart';
@@ -29,47 +32,20 @@ class AppRouter {
         builder: (context, state) => const HomePage(),
       ),
     ],
+    redirect: (context, state) {
+      final authState = context.read<AuthBloc>().state;
+
+      if (authState is AuthenticatedState) {
+        return RouteConstants.home;
+      } else if (authState is UnauthenticatedState) {
+        return RouteConstants.login;
+      }
+
+      return null; // No redirection if conditions are met
+    },
   );
+
   /// this is the final variable will be used in the Main.dart file in the
   /// routerConfig parameter
   GoRouter get config => _config;
 }
-
-/*GoRouter router(BuildContext context) {
-
-  return GoRouter(
-    debugLogDiagnostics: true,
-    initialLocation: '/',
-    //refreshListenable: authStateNotifier,
-    routes: [
-      GoRoute(
-        path: '/',
-        builder: (context, state) => const SplashPage(),
-      ),
-      GoRoute(
-        path: '/login',
-        builder: (context, state) => const OnboardingPage(),
-      ),
-      GoRoute(
-        path: '/login',
-        builder: (context, state) => const LoginPage(),
-      ),
-      GoRoute(
-        path: '/home',
-        builder: (context, state) => const HomePage(),
-      ),
-    ],
-   */ /* redirect: (context, state) {
-      final authState = authenticationBloc.state;
-
-      if (authState is AuthAuthenticatedState) {
-        return state.matchedLocation == '/home' ? null : '/home';
-      } else if (authState is AuthUnauthenticatedState ||
-          authState is AuthInitialState) {
-        return state.matchedLocation == '/login' ? null : '/login';
-      }
-
-      return null; // No redirection if conditions are met
-    },*/ /*
-  );
-}*/

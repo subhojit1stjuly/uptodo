@@ -6,15 +6,15 @@ part 'auth_state.freezed.dart';
 class AuthState with _$AuthState {
   const factory AuthState.initial() = AuthInitialState;
   const factory AuthState.loading() = AuthLoadingState;
-  const factory AuthState.authenticated() = AuthAuthenticatedState;
-  const factory AuthState.unauthenticated() = AuthUnauthenticatedState;
-  const factory AuthState.loginFailure(String error) = AuthLoginFailureState;
-  const factory AuthState.signupFailure(String error) = AuthSignupFailureState;
-  const factory AuthState.emailInvalid() = AuthEmailInvalidState;
-  const factory AuthState.passwordInvalid() = AuthPasswordInvalidState;
-  const factory AuthState.formValid() = AuthFormValidState;
-  const factory AuthState.passwordResetSuccess() = AuthPasswordResetSuccessState;
-  const factory AuthState.passwordResetFailure(String error) = AuthPasswordResetFailureState;
-  const factory AuthState.sessionValid() = AuthSessionValidState;
-  const factory AuthState.sessionInvalid() = AuthSessionInvalidState;
+  const factory AuthState.authenticated() = AuthenticatedState;
+  const factory AuthState.unauthenticated() = UnauthenticatedState;
+  const factory AuthState.loginFailure(String error) = LoginFailureState;
+  const factory AuthState.signupFailure(String error) = SignupFailureState;
+  const factory AuthState.emailInvalid() = EmailInvalidState;
+  const factory AuthState.passwordInvalid() = PasswordInvalidState;
+  const factory AuthState.formValid() = FormValidState;
+  const factory AuthState.passwordResetSuccess() = PasswordResetSuccessState;
+  const factory AuthState.passwordResetFailure(String error) = PasswordResetFailureState;
+  const factory AuthState.sessionValid() = SessionValidState;
+  const factory AuthState.sessionInvalid() = SessionInvalidState;
 }
