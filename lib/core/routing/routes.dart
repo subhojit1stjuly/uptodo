@@ -1,42 +1,75 @@
 // Method to define the GoRouter instance
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:uptodo/common/bloc/provider/auth_bloc.dart';
-import 'package:uptodo/common/bloc/state/auth_state.dart';
-/// this is the routing configuration class
-GoRouter router(BuildContext context) {
-  final authenticationBloc = context.read<AuthBloc>();
-  final authStateNotifier =
-      ValueNotifier<AuthState>(context.read<AuthBloc>().state);
+import 'package:uptodo/core/routing/route_constants.dart';
+import 'package:uptodo/features/home_page/index_screen/home_page.dart';
+import 'package:uptodo/features/login_screen/login_page.dart';
+import 'package:uptodo/features/splash_screen/splash_page.dart';
 
-  context.read<AuthBloc>().stream.listen((state) {
-    authStateNotifier.value = state;
-  });
+/// this is the routing configuration class
+class AppRouter {
+  /// creating a singleton for this class
+  factory AppRouter() => _instance;
+
+  AppRouter._();
+
+  static final AppRouter _instance = AppRouter._();
+  final _config = GoRouter(
+    initialLocation: RouteConstants.splash,
+    routes: <RouteBase>[
+      GoRoute(
+        path: RouteConstants.splash,
+        builder: (context, state) => const SplashPage(),
+      ),
+      GoRoute(
+        path: RouteConstants.login,
+        builder: (context, state) => const LoginPage(),
+      ),
+      GoRoute(
+        path: RouteConstants.home,
+        builder: (context, state) => const HomePage(),
+      ),
+    ],
+  );
+  /// this is the final variable will be used in the Main.dart file in the
+  /// routerConfig parameter
+  GoRouter get config => _config;
+}
+
+/*GoRouter router(BuildContext context) {
+
   return GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: '/login',
-    refreshListenable: authStateNotifier,
+    initialLocation: '/',
+    //refreshListenable: authStateNotifier,
     routes: [
       GoRoute(
+        path: '/',
+        builder: (context, state) => const SplashPage(),
+      ),
+      GoRoute(
         path: '/login',
-        builder: (context, state) => LoginPage(),
+        builder: (context, state) => const OnboardingPage(),
+      ),
+      GoRoute(
+        path: '/login',
+        builder: (context, state) => const LoginPage(),
       ),
       GoRoute(
         path: '/home',
-        builder: (context, state) => HomePage(),
+        builder: (context, state) => const HomePage(),
       ),
     ],
-    redirect: (context, state) {
+   */ /* redirect: (context, state) {
       final authState = authenticationBloc.state;
 
-      if (authState is AuthAuthenticated) {
+      if (authState is AuthAuthenticatedState) {
         return state.matchedLocation == '/home' ? null : '/home';
-      } else if (authState is AuthUnauthenticated || authState is AuthInitial) {
+      } else if (authState is AuthUnauthenticatedState ||
+          authState is AuthInitialState) {
         return state.matchedLocation == '/login' ? null : '/login';
       }
 
       return null; // No redirection if conditions are met
-    },
+    },*/ /*
   );
-}
+}*/

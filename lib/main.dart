@@ -5,20 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:uptodo/common/bloc/provider/auth_bloc.dart';
+import 'package:uptodo/core/routing/routes.dart';
 import 'package:uptodo/core/theme/dark_theme.dart';
 import 'package:uptodo/core/theme/light_theme.dart';
-import 'package:uptodo/features/splash_screen/splash_page.dart';
 
-import 'core/routing/routes.dart';
 
 Future<void> main() async {
-  ///  this ensures that the Flutter engine is properly initialized
-  ///  if application logic needs to interact with
-  ///  the native platform (e.g., accessing device features)
-  ///  even before building the UI, initializing the
-  ///  engine early , then this is crucial.
-  WidgetsFlutterBinding.ensureInitialized();
-
   /// All errors caught by Flutter are routed to here
   /// Placing FlutterError.onError outside of runZonedGuarded
   /// is the generally recommended approach.
@@ -42,6 +34,12 @@ Future<void> main() async {
   /// running the entire application inside this Guarded Zone to
   /// stop unnecessary app crash.
   runZonedGuarded(() {
+    ///  this ensures that the Flutter engine is properly initialized
+    ///  if application logic needs to interact with
+    ///  the native platform (e.g., accessing device features)
+    ///  even before building the UI, initializing the
+    ///  engine early , then this is crucial.
+    WidgetsFlutterBinding.ensureInitialized();
     runApp(const UpTodo());
   }, (error, StackTrace stack) {
     debugPrint('Caught error: $error');
@@ -59,9 +57,8 @@ class UpTodo extends StatelessWidget {
     return BlocProvider(
       create: (context) => AuthBloc(),
       child: MaterialApp.router(
-        routerDelegate: router(context).routerDelegate,
-        routeInformationParser: router(context).routeInformationParser,
-        title: AppLocalizations.of(context)!.app_name,
+        routerConfig: AppRouter().config,
+        title: 'UpTodo',
         debugShowCheckedModeBanner: false,
 
         /// Define the default locale. This will be used if
@@ -77,6 +74,7 @@ class UpTodo extends StatelessWidget {
           /// Add more locales here
         ],
         localizationsDelegates: const [
+
           /// Built-in localization for text direction LTR/RTL
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
