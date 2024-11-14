@@ -1,6 +1,7 @@
 // Method to define the GoRouter instance
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:injectable/injectable.dart';
 import 'package:uptodo/common/bloc/provider/auth_bloc.dart';
 import 'package:uptodo/common/bloc/state/auth_state.dart';
 import 'package:uptodo/core/routing/route_constants.dart';
@@ -9,13 +10,8 @@ import 'package:uptodo/features/login_screen/login_page.dart';
 import 'package:uptodo/features/splash_screen/splash_page.dart';
 
 /// this is the routing configuration class
-class AppRouter {
-  /// creating a singleton for this class
-  factory AppRouter() => _instance;
-
-  AppRouter._();
-
-  static final AppRouter _instance = AppRouter._();
+@module
+abstract class AppRouter {
   final _config = GoRouter(
     initialLocation: RouteConstants.splash,
     routes: <RouteBase>[
@@ -47,5 +43,6 @@ class AppRouter {
 
   /// this is the final variable will be used in the Main.dart file in the
   /// routerConfig parameter
+  @singleton
   GoRouter get config => _config;
 }

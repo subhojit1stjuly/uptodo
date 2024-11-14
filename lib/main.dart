@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:uptodo/common/bloc/provider/auth_bloc.dart';
+import 'package:uptodo/core/injector/injector.dart';
 import 'package:uptodo/core/routing/routes.dart';
 import 'package:uptodo/core/theme/dark_theme.dart';
 import 'package:uptodo/core/theme/light_theme.dart';
-
 
 Future<void> main() async {
   /// All errors caught by Flutter are routed to here
@@ -40,6 +42,9 @@ Future<void> main() async {
     ///  even before building the UI, initializing the
     ///  engine early , then this is crucial.
     WidgetsFlutterBinding.ensureInitialized();
+
+    /// setting the dependencies
+    configureDependencies();
     runApp(const UpTodo());
   }, (error, StackTrace stack) {
     debugPrint('Caught error: $error');
@@ -57,7 +62,7 @@ class UpTodo extends StatelessWidget {
     return BlocProvider(
       create: (context) => AuthBloc(),
       child: MaterialApp.router(
-        routerConfig: AppRouter().config,
+        routerConfig: GetIt.instance<GoRouter>(),
         title: 'UpTodo',
         debugShowCheckedModeBanner: false,
 
@@ -74,7 +79,6 @@ class UpTodo extends StatelessWidget {
           /// Add more locales here
         ],
         localizationsDelegates: const [
-
           /// Built-in localization for text direction LTR/RTL
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,

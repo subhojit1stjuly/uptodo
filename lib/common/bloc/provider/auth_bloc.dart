@@ -1,7 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:uptodo/common/bloc/event/auth_event.dart';
 import 'package:uptodo/common/bloc/state/auth_state.dart';
-import 'package:uptodo/core/routing/routes.dart';
 
 ///This Authentication bloc, which is handling these flows of the application
 /// 1: after Splashscreen checks if user Logged in or not
@@ -25,7 +26,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SessionExpiredEvent>(_onSessionExpired);
   }
 
-  final _router = AppRouter().config;
+  final _router = GetIt.instance<GoRouter>();
 
   void _onEmailChanged(EmailChangedEvent event, Emitter<AuthState> emit) {
     // Validate email format
@@ -142,10 +143,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     // Session validation logic
     emit(const SessionValidState());
   }
+
   Future<void> _onSessionExpired(
-      SessionExpiredEvent event,
-      Emitter<AuthState> state,
-      )async{
+    SessionExpiredEvent event,
+    Emitter<AuthState> state,
+  ) async {
     emit(const SessionInvalidState());
   }
 
@@ -158,5 +160,4 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     // Password validation logic here
     return password.length >= 6;
   }
-
 }

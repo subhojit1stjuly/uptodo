@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 /// This widget is made fot App Text Button for the entire application,
-class AppElevatedButton extends StatelessWidget {
+class AppOutlineButton extends StatelessWidget {
   /// the constructor accepts text value and the voidCallBack method
-  const AppElevatedButton({
+  const AppOutlineButton({
     required this.text,
-    required this.onPressed,
     required this.toUpperCase,
+    required this.onPressed,
     super.key,
   });
 
@@ -21,9 +21,11 @@ class AppElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return OutlinedButton(
       onPressed: onPressed,
-      child: Text(toUpperCase ? text.toUpperCase() : text),
+      child: Text(
+        toUpperCase ? text.toUpperCase() : text,
+      ),
     );
   }
 }

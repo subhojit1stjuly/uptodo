@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+
 /// this field is created since we are using it on later stages
 const TextStyle globalDarkTextStyle = TextStyle(
   fontFamily: 'Lato',
-  color: Colors.white70,
+  color: Colors.white,
 );
+
 /// object for the dark themes
 final darkTheme = ThemeData(
   fontFamily: 'Lato',
@@ -53,6 +55,17 @@ final darkTheme = ThemeData(
       backgroundColor: Colors.transparent,
       textStyle: globalDarkTextStyle.copyWith(fontSize: 16),
       shadowColor: const Color(0x1AFFFFFF), // Light shade
+    ),
+  ),
+  outlinedButtonTheme: OutlinedButtonThemeData(
+    style: OutlinedButton.styleFrom(
+      foregroundColor: Colors.white70, // Text and icon color
+      side: const BorderSide(color: Color(0xFF8875FF)), // Outline color
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12), // Radius value
+      ),
+      shadowColor: const Color(0x1AFFFFFF),
+      textStyle: globalDarkTextStyle.copyWith(fontSize: 16),
     ),
   ),
   inputDecorationTheme: InputDecorationTheme(

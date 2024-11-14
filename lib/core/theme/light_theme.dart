@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+
 /// global style which is used in the later stages
 const TextStyle globalLightTextStyle = TextStyle(
   color: Colors.black87,
 );
+
 /// object for the light theme used in the main
 final lightTheme = ThemeData(
   fontFamily: 'Lato',
@@ -33,7 +35,6 @@ final lightTheme = ThemeData(
   buttonTheme: const ButtonThemeData(
     buttonColor: Colors.transparent,
   ),
-
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       foregroundColor: Colors.white70,
@@ -55,7 +56,18 @@ final lightTheme = ThemeData(
       shadowColor: const Color(0x1A8875FF), // Light shade
     ),
   ),
-  inputDecorationTheme:InputDecorationTheme(
+  outlinedButtonTheme: OutlinedButtonThemeData(
+    style: OutlinedButton.styleFrom(
+      foregroundColor: const Color(0xFF8875FF), // Text and icon color
+      side: const BorderSide(color: Color(0xFF8875FF)), // Outline color
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12), // Radius value
+      ),
+      shadowColor: const Color(0x1AFFFFFF),
+      textStyle: globalLightTextStyle.copyWith(fontSize: 16),
+    ),
+  ),
+  inputDecorationTheme: InputDecorationTheme(
     labelStyle: globalLightTextStyle.copyWith(
       fontSize: 16,
     ),
@@ -71,5 +83,5 @@ final lightTheme = ThemeData(
       ),
     ),
   ),
-  scaffoldBackgroundColor: Colors.white70,
+  scaffoldBackgroundColor: Colors.white,
 );

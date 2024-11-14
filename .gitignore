@@ -41,11 +41,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-
+# all the generated types 
 *.gen.dart
-# Freezed generated files
 *.freezed.dart
 *.g.dart
-
-# Mock files
+*.config.dart
 *.mocks.dart
