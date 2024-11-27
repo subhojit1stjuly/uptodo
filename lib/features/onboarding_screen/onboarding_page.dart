@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uptodo/core/injector/injector.dart';
 import 'package:uptodo/features/onboarding_screen/bloc/onboard_model.dart';
 import 'package:uptodo/features/onboarding_screen/bloc/onboarding_bloc.dart';
 import 'package:uptodo/features/onboarding_screen/bloc/state/onboarding_state.dart';
