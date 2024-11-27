@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uptodo/core/injector/injector.dart';
+import 'package:uptodo/features/onboarding_screen/bloc/onboard_model.dart';
+import 'package:uptodo/features/onboarding_screen/bloc/onboarding_bloc.dart';
+import 'package:uptodo/features/onboarding_screen/bloc/state/onboarding_state.dart';
+import 'package:uptodo/features/onboarding_screen/widget/onboarding_widget.dart';
+import 'package:uptodo/features/onboarding_screen/widget/welcome_widget.dart';
 
+/// this is the onboarding Page
 class OnboardingPage extends StatefulWidget {
+  /// this the constructor for the Widget
   const OnboardingPage({super.key});
 
   @override
@@ -10,8 +19,21 @@ class OnboardingPage extends StatefulWidget {
 class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Onboarding'),
+    return BlocBuilder<OnboardingBloc, OnboardingState>(
+      buildWhen: (_,curr)=> curr is WelComeState || curr is OnboardState,
+      bloc: context.read<OnboardingBloc>(),
+      builder: (context, state) {
+        return state.maybeWhen(
+          welcome: () => const WelcomeWidget(),
+          onboard: (List<OnboardModel> data) => OnboardingWidget(
+            bloc: context.read<OnboardingBloc>(),
+            data: data,
+          ),
+          orElse: () {
+            return const SizedBox.shrink();
+          },
+        );
+      },
     );
   }
 }

@@ -10,5 +10,6 @@ final getIt = GetIt.instance;
   preferRelativeImports: true, // default
   asExtension: true, // default
 )
+
 /// generated dependencies using injectables
 void configureDependencies() => getIt.init();

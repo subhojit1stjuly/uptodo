@@ -6,9 +6,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:uptodo/common/bloc/provider/auth_bloc.dart';
+import 'package:uptodo/common/bloc/auth_bloc.dart';
 import 'package:uptodo/core/injector/injector.dart';
-import 'package:uptodo/core/routing/routes.dart';
 import 'package:uptodo/core/theme/dark_theme.dart';
 import 'package:uptodo/core/theme/light_theme.dart';
 
@@ -60,7 +59,7 @@ class UpTodo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthBloc(),
+      create: (context) => getIt<AuthBloc>(),
       child: MaterialApp.router(
         routerConfig: GetIt.instance<GoRouter>(),
         title: 'UpTodo',

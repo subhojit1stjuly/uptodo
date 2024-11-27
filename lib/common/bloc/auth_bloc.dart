@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:injectable/injectable.dart';
 import 'package:uptodo/common/bloc/event/auth_event.dart';
 import 'package:uptodo/common/bloc/state/auth_state.dart';
 
@@ -9,6 +10,7 @@ import 'package:uptodo/common/bloc/state/auth_state.dart';
 /// so its calls the AuthSessionCheck event and if session is valid then
 /// emits SessionValidState otherwise emits SessionInvalidState
 /// if session is invalid then it redirects to onboarding screen
+@LazySingleton()
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   /// this is a bloc constructor
   /// here we are mapping events and states
@@ -146,7 +148,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _onSessionExpired(
     SessionExpiredEvent event,
-    Emitter<AuthState> state,
+    Emitter<AuthState> emit,
   ) async {
     emit(const SessionInvalidState());
   }

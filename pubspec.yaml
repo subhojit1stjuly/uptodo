@@ -47,6 +47,8 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
+  patrol_finders: ^2.5.0
+  patrol: ^3.13.0
   mockito: ^5.4.4
   bloc_test: ^9.1.7
   # for code generation

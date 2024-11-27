@@ -8,6 +8,7 @@ const TextStyle globalDarkTextStyle = TextStyle(
 
 /// object for the dark themes
 final darkTheme = ThemeData(
+  primaryColorDark: const Color(0xFF8875FF),
   fontFamily: 'Lato',
   splashColor: Colors.black87,
   brightness: Brightness.dark,
@@ -18,10 +19,10 @@ final darkTheme = ThemeData(
       fontSize: 32,
     ),
     bodyLarge: globalDarkTextStyle.copyWith(
-      fontSize: 16,
+      fontSize: 20,
     ),
     bodyMedium: globalDarkTextStyle.copyWith(
-      fontSize: 20,
+      fontSize: 16,
     ),
     bodySmall: globalDarkTextStyle.copyWith(
       fontSize: 14,
@@ -45,7 +46,7 @@ final darkTheme = ThemeData(
         color: Colors.white70,
       ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12), // Radius value
+        borderRadius: BorderRadius.circular(8), // Radius value
       ),
     ),
   ),
@@ -62,7 +63,7 @@ final darkTheme = ThemeData(
       foregroundColor: Colors.white70, // Text and icon color
       side: const BorderSide(color: Color(0xFF8875FF)), // Outline color
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12), // Radius value
+        borderRadius: BorderRadius.circular(8), // Radius value
       ),
       shadowColor: const Color(0x1AFFFFFF),
       textStyle: globalDarkTextStyle.copyWith(fontSize: 16),
@@ -85,4 +86,11 @@ final darkTheme = ThemeData(
     ),
   ),
   scaffoldBackgroundColor: Colors.black87,
+  iconTheme: const IconThemeData(
+    color: Colors.white,
+    size: 18,
+  ),
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Colors.black87,
+  ),
 );

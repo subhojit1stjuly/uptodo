@@ -7,6 +7,7 @@ const TextStyle globalLightTextStyle = TextStyle(
 
 /// object for the light theme used in the main
 final lightTheme = ThemeData(
+  primaryColorLight: const Color(0xFF8875FF),
   fontFamily: 'Lato',
   splashColor: Colors.white70,
   brightness: Brightness.light,
@@ -17,10 +18,10 @@ final lightTheme = ThemeData(
       fontSize: 32,
     ),
     bodyLarge: globalLightTextStyle.copyWith(
-      fontSize: 16,
+      fontSize: 20,
     ),
     bodyMedium: globalLightTextStyle.copyWith(
-      fontSize: 20,
+      fontSize: 16,
     ),
     bodySmall: globalLightTextStyle.copyWith(
       fontSize: 14,
@@ -61,7 +62,7 @@ final lightTheme = ThemeData(
       foregroundColor: const Color(0xFF8875FF), // Text and icon color
       side: const BorderSide(color: Color(0xFF8875FF)), // Outline color
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12), // Radius value
+        borderRadius: BorderRadius.circular(8), // Radius value
       ),
       shadowColor: const Color(0x1AFFFFFF),
       textStyle: globalLightTextStyle.copyWith(fontSize: 16),
@@ -84,4 +85,11 @@ final lightTheme = ThemeData(
     ),
   ),
   scaffoldBackgroundColor: Colors.white,
+  iconTheme: const IconThemeData(
+    color: Colors.black87,
+    size: 18,
+  ),
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Colors.white,
+  ),
 );
