@@ -47,3 +47,6 @@ app.*.map.json
 *.g.dart
 *.config.dart
 *.mocks.dart
+full_coverage_test.dart
+/lib/assets
+/lib/core/offline_datasource/object_box_database/config/objectbox-models.json
