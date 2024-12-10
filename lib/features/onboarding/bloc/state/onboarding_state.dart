@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:uptodo/features/onboarding_screen/bloc/onboard_model.dart';
+import 'package:uptodo/features/onboarding/bloc/onboard_model.dart';
 
 part 'onboarding_state.freezed.dart';
 

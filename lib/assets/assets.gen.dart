@@ -58,8 +58,7 @@ class $AssetsIconsGen {
   SvgGenImage get facebook => const SvgGenImage('assets/icons/facebook.svg');
 
   /// File path: assets/icons/fingerprint.svg
-  SvgGenImage get fingerprint =>
-      const SvgGenImage('assets/icons/fingerprint.svg');
+  SvgGenImage get fingerprint => const SvgGenImage('assets/icons/fingerprint.svg');
 
   /// File path: assets/icons/flag.svg
   SvgGenImage get flag => const SvgGenImage('assets/icons/flag.svg');
@@ -116,23 +115,19 @@ class $AssetsIconsGen {
   SvgGenImage get menu => const SvgGenImage('assets/icons/menu.svg');
 
   /// File path: assets/icons/mortarboard.svg
-  SvgGenImage get mortarboard =>
-      const SvgGenImage('assets/icons/mortarboard.svg');
+  SvgGenImage get mortarboard => const SvgGenImage('assets/icons/mortarboard.svg');
 
   /// File path: assets/icons/music.svg
   SvgGenImage get music => const SvgGenImage('assets/icons/music.svg');
 
   /// File path: assets/icons/onboard001.svg
-  SvgGenImage get onboard001 =>
-      const SvgGenImage('assets/icons/onboard001.svg');
+  SvgGenImage get onboard001 => const SvgGenImage('assets/icons/onboard001.svg');
 
   /// File path: assets/icons/onboard002.svg
-  SvgGenImage get onboard002 =>
-      const SvgGenImage('assets/icons/onboard002.svg');
+  SvgGenImage get onboard002 => const SvgGenImage('assets/icons/onboard002.svg');
 
   /// File path: assets/icons/onboard003.svg
-  SvgGenImage get onboard003 =>
-      const SvgGenImage('assets/icons/onboard003.svg');
+  SvgGenImage get onboard003 => const SvgGenImage('assets/icons/onboard003.svg');
 
   /// File path: assets/icons/repeat.svg
   SvgGenImage get repeat => const SvgGenImage('assets/icons/repeat.svg');
@@ -168,8 +163,7 @@ class $AssetsIconsGen {
   SvgGenImage get user => const SvgGenImage('assets/icons/user.svg');
 
   /// File path: assets/icons/video_camera.svg
-  SvgGenImage get videoCamera =>
-      const SvgGenImage('assets/icons/video_camera.svg');
+  SvgGenImage get videoCamera => const SvgGenImage('assets/icons/video_camera.svg');
 
   /// List of all assets
   List<SvgGenImage> get values => [
@@ -297,8 +291,7 @@ class SvgGenImage {
       placeholderBuilder: placeholderBuilder,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
-      colorFilter: colorFilter ??
-          (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
+      colorFilter: colorFilter ?? (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
       clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
     );

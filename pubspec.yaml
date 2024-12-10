@@ -32,7 +32,8 @@ dependencies:
     sdk: flutter
 
   flutter_svg: ^2.0.10+1
-
+  path_provider: ^2.0.5
+  path: ^1.8.0
   flutter_hooks: ^0.20.5
   rxdart: ^0.28.0
   # custom widgets
@@ -63,20 +64,8 @@ dev_dependencies:
   intl_translation:
   intl_utils: ^2.8.7
 
-flutter_gen:
-  output: lib/assets/ # Optional (default: lib/gen/)
-  line_length: 80 # Optional (default: 80)
-
-  # Optional
-  integrations:
-    flutter_svg: true
-    flare_flutter: true
-    rive: true
-    lottie: true
-
-  outputs:
-    # Specify the naming convention here
-    naming: snake_case  # Options include snake_case, camelCase, etc.
+objectbox:
+  output_dir: core/offline_datasource/object_box_database/config/
 
 flutter:
   uses-material-design: true

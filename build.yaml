@@ -1,0 +1,23 @@
+# build.yaml
+# ...
+
+targets:
+  $default:
+    builders:
+      flutter_gen:
+        options: 
+          output: lib/assets/ # Optional (default: lib/gen/)
+          line_length: 120 # Optional (default: 80)
+          # Optional
+          integrations:
+            flutter_svg: true
+            flare_flutter: true
+            rive: true
+            lottie: true
+
+          outputs:
+            # Specify the naming convention here
+            naming: snake_case  # Options include snake_case, camelCase, etc.
+      source_gen:combining_builder:
+        generate_for:
+          - "**/[!objectbox]**.dart"

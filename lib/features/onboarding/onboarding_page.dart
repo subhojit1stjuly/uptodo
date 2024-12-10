@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uptodo/features/onboarding_screen/bloc/onboard_model.dart';
-import 'package:uptodo/features/onboarding_screen/bloc/onboarding_bloc.dart';
-import 'package:uptodo/features/onboarding_screen/bloc/state/onboarding_state.dart';
-import 'package:uptodo/features/onboarding_screen/widget/onboarding_widget.dart';
-import 'package:uptodo/features/onboarding_screen/widget/welcome_widget.dart';
+import 'package:uptodo/features/onboarding/bloc/onboard_model.dart';
+import 'package:uptodo/features/onboarding/bloc/onboarding_bloc.dart';
+import 'package:uptodo/features/onboarding/bloc/state/onboarding_state.dart';
+import 'package:uptodo/features/onboarding/widget/onboarding_widget.dart';
+import 'package:uptodo/features/onboarding/widget/welcome_widget.dart';
 
 /// this is the onboarding Page
 class OnboardingPage extends StatefulWidget {

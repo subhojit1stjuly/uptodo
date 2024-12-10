@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uptodo/assets/assets.gen.dart';
-import 'package:uptodo/features/onboarding_screen/bloc/event/onboarding_event.dart';
-import 'package:uptodo/features/onboarding_screen/bloc/onboard_model.dart';
-import 'package:uptodo/features/onboarding_screen/bloc/state/onboarding_state.dart';
+import 'package:uptodo/features/onboarding/bloc/event/onboarding_event.dart';
+import 'package:uptodo/features/onboarding/bloc/onboard_model.dart';
+import 'package:uptodo/features/onboarding/bloc/state/onboarding_state.dart';
 import 'package:uptodo/l10n/app_localizations_service.dart';
 
 /// this the Bloc for the onboarding screen
@@ -25,7 +25,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
               OnboardModel(
                 title: localizationsService.getOnboardingTitle(1),
                 desc: localizationsService.getOnboardingDescription(1),
-                image: Assets.icons.onboard001.svg(
+                image: Assets.icons.onboard002.svg(
                   height: 93.5,
                   width: 80.46,
                 ),
@@ -33,7 +33,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
               OnboardModel(
                 title: localizationsService.getOnboardingTitle(2),
                 desc: localizationsService.getOnboardingDescription(2),
-                image: Assets.icons.onboard001.svg(
+                image: Assets.icons.onboard003.svg(
                   height: 93.5,
                   width: 80.46,
                 ),

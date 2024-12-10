@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:uptodo/features/onboarding_screen/bloc/event/onboarding_event.dart';
-import 'package:uptodo/features/onboarding_screen/bloc/onboard_model.dart';
-import 'package:uptodo/features/onboarding_screen/bloc/onboarding_bloc.dart';
-import 'package:uptodo/features/onboarding_screen/bloc/state/onboarding_state.dart';
+import 'package:uptodo/features/onboarding/bloc/event/onboarding_event.dart';
+import 'package:uptodo/features/onboarding/bloc/onboard_model.dart';
+import 'package:uptodo/features/onboarding/bloc/onboarding_bloc.dart';
+import 'package:uptodo/features/onboarding/bloc/state/onboarding_state.dart';
 
 /// this Widget represent the Onboarding Page
 class OnboardingWidget extends StatefulWidget {
@@ -203,7 +203,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                       ),
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 40,
                 ),
                 Text(
                   widget.data[pageNo].desc,
