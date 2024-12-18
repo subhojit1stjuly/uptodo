@@ -6,15 +6,15 @@ import 'package:injectable/injectable.dart';
 import 'package:uptodo/common/bloc/session_bloc.dart';
 import 'package:uptodo/common/bloc/state/session_state.dart';
 import 'package:uptodo/core/routing/route_constants.dart';
-import 'package:uptodo/features/authentication/login_page.dart';
-import 'package:uptodo/features/authentication/register_page.dart';
-import 'package:uptodo/features/home/index_screen/home_page.dart';
-import 'package:uptodo/features/onboarding/bloc/onboarding_bloc.dart';
-import 'package:uptodo/features/onboarding/onboarding_page.dart';
-import 'package:uptodo/features/onboarding/permission_page.dart';
-import 'package:uptodo/features/settings/change_language_page.dart';
-import 'package:uptodo/features/splash/splash_page.dart';
 import 'package:uptodo/l10n/app_localizations_service.dart';
+import 'package:uptodo/presentation/authentication/login_page.dart';
+import 'package:uptodo/presentation/authentication/register_page.dart';
+import 'package:uptodo/presentation/home/index_screen/home_page.dart';
+import 'package:uptodo/presentation/onboarding/bloc/onboarding_bloc.dart';
+import 'package:uptodo/presentation/onboarding/onboarding_page.dart';
+import 'package:uptodo/presentation/onboarding/permission_page.dart';
+import 'package:uptodo/presentation/settings/change_language_page.dart';
+import 'package:uptodo/presentation/splash/splash_page.dart';
 
 /// this is the routing configuration class
 @module

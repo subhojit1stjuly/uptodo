@@ -1,10 +1,11 @@
 import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uptodo/assets/assets.gen.dart';
-import 'package:uptodo/features/onboarding/bloc/event/onboarding_event.dart';
-import 'package:uptodo/features/onboarding/bloc/onboard_model.dart';
-import 'package:uptodo/features/onboarding/bloc/state/onboarding_state.dart';
 import 'package:uptodo/l10n/app_localizations_service.dart';
+import 'package:uptodo/presentation/onboarding/bloc/event/onboarding_event.dart';
+import 'package:uptodo/presentation/onboarding/bloc/onboard_model.dart';
+import 'package:uptodo/presentation/onboarding/bloc/state/onboarding_state.dart';
 
 /// this the Bloc for the onboarding screen
 class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {

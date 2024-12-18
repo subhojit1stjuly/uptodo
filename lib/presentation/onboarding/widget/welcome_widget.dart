@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:uptodo/features/onboarding/bloc/event/onboarding_event.dart';
-import 'package:uptodo/features/onboarding/bloc/onboarding_bloc.dart';
+import 'package:uptodo/presentation/onboarding/bloc/event/onboarding_event.dart';
+import 'package:uptodo/presentation/onboarding/bloc/onboarding_bloc.dart';
 
 /// welcome screen with Login and Register button
 class WelcomeWidget extends StatelessWidget {
