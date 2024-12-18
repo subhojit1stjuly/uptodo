@@ -5,7 +5,8 @@ import 'package:uptodo/presentation/onboarding/bloc/event/onboarding_event.dart'
 import 'package:uptodo/presentation/onboarding/bloc/onboarding_bloc.dart';
 import 'package:uptodo/presentation/onboarding/bloc/state/onboarding_state.dart';
 
-import '../../../common/mocks.mocks.dart';
+import '../../../mocks/miscellaneous_mocks.mocks.dart';
+
 
 void main() {
   late OnboardingBloc onboardingBloc;
