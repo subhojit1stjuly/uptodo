@@ -76,7 +76,7 @@ lib/
 │   └── utils/                  # Utility classes
 │       ├── date_utils.dart     # Date handling utilities
 │       ├── string_utils.dart   # String manipulation utilities
-│       └── validation_utils.dart# Input validation utilities
+│       └── validation_utils.dart # Input validation utilities
 │
 ├── features/                    # Feature modules
 │   └── feature_name/           # Individual feature

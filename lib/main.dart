@@ -1,15 +1,16 @@
 import 'dart:async';
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:uptodo/common/bloc/session_bloc.dart';
-import 'package:uptodo/core/injector/injector.dart';
+import 'package:uptodo/core/di/injector.dart';
 import 'package:uptodo/core/theme/dark_theme.dart';
 import 'package:uptodo/core/theme/light_theme.dart';
+import 'package:uptodo/shared/bloc/session_bloc.dart';
 
 Future<void> main() async {
   /// All errors caught by Flutter are routed to here
