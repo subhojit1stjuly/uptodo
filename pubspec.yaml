@@ -49,7 +49,7 @@ dev_dependencies:
   integration_test:
     sdk: flutter
   patrol_finders: ^2.5.0
-  patrol: ^3.13.0
+  patrol: ^3.13.2
   mockito: ^5.4.4
   bloc_test: ^9.1.7
   # for code generation
@@ -81,3 +81,10 @@ flutter:
           style: italic
         - asset: assets/fonts/Lato-Bold.ttf
           weight: 700
+
+patrol:
+  app_name: UpTodo
+  android:
+    package_name: com.example.uptodo
+  ios:
+    bundle_id: com.example.uptodo

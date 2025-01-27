@@ -26,6 +26,7 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
     on<ResetPasswordRequestedEvent>(_onResetPasswordRequested);*/
     on<SessionCheckEvent>(_onSessionCheck);
     on<SessionExpiredEvent>(_onSessionExpired);
+    add(const SessionCheckEvent());
   }
 
   final _router = GetIt.instance<GoRouter>();
@@ -144,6 +145,7 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
   ) async {
     // Session validation logic
     emit(const SessionState.sessionValid());
+    _router.refresh();
   }
 
   Future<void> _onSessionExpired(
@@ -151,6 +153,7 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
     Emitter<SessionState> emit,
   ) async {
     emit(const SessionState.sessionInvalid());
+    _router.refresh();
   }
 
   bool _isValidEmail(String email) {
