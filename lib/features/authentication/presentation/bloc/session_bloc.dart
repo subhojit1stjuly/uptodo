@@ -2,8 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
-import 'package:uptodo/shared/bloc/event/session_event.dart';
-import 'package:uptodo/shared/bloc/state/session_state.dart';
+import 'package:uptodo/features/authentication/presentation/bloc/event/session_event.dart';
+import 'package:uptodo/features/authentication/presentation/bloc/state/session_state.dart';
 
 ///This Authentication bloc, which is handling these flows of the application
 /// 1: after Splashscreen checks if user Logged in or not
@@ -14,7 +14,7 @@ import 'package:uptodo/shared/bloc/state/session_state.dart';
 class SessionBloc extends Bloc<SessionEvent, SessionState> {
   /// this is a bloc constructor
   /// here we are mapping events and states
-  SessionBloc() : super(const SessionInitialState()) {
+  SessionBloc() : super(const SessionStateInitial()) {
     /*on<EmailChangedEvent>(_onEmailChanged);
     on<PasswordChangedEvent>(_onPasswordChanged);
     on<LoginSubmittedEvent>(_onLoginSubmitted);
@@ -143,8 +143,11 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
     SessionCheckEvent event,
     Emitter<SessionState> emit,
   ) async {
+    emit(const SessionState.loading());
     // Session validation logic
-    emit(const SessionState.sessionValid());
+    await Future.delayed(const Duration(seconds: 3));
+    // emit(const SessionState.sessionValid());
+    emit(const SessionState.sessionInvalid());
     _router.refresh();
   }
 

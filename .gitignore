@@ -50,3 +50,4 @@ app.*.map.json
 full_coverage_test.dart
 /lib/assets
 /lib/core/storage/objectbox/config/objectbox-model.json
+/integration_test/test_bundle.dart

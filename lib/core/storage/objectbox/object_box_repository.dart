@@ -2,8 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:objectbox/objectbox.dart';
 
 /// base class for the objectBox database
-abstract class ObjectBoxRepository<T> {
-
+abstract base class ObjectBoxRepository<T> {
   /// constructor for the objectBox database
   ObjectBoxRepository(this.store, this.box);
 

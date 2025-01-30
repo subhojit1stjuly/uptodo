@@ -10,7 +10,7 @@ import 'package:go_router/go_router.dart';
 import 'package:uptodo/core/di/injector.dart';
 import 'package:uptodo/core/theme/dark_theme.dart';
 import 'package:uptodo/core/theme/light_theme.dart';
-import 'package:uptodo/shared/bloc/session_bloc.dart';
+import 'package:uptodo/features/authentication/presentation/bloc/session_bloc.dart';
 
 Future<void> main() async {
   /// All errors caught by Flutter are routed to here
