@@ -1,0 +1,52 @@
+name: PR Merge Actions
+
+on:
+  push:
+    branches:
+      - dev
+
+env:
+  FLUTTER_VERSION: '3.0.0' # Set your desired Flutter version here
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+
+      - name: Clean Flutter project
+        run: flutter clean
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run build_runner
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Reinstall dependencies
+        run: flutter pub get
+
+      - name: Run full coverage
+        run: dart pub global run full_coverage
+
+      - name: Run tests
+        run: flutter test --coverage
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Upload APK to GitHub Releases
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: build/app/outputs/flutter-apk/app-release.apk
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: Release ${{ github.sha }}
+          tag: ${{ github.sha }}
+          generate_release_notes: true
