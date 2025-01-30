@@ -1,9 +1,9 @@
 import 'package:objectbox/objectbox.dart';
 
-@Entity()
-
 /// UserPreference is a class that represents a
-/// user preference stored in the database class UserInfo {
+/// user preference stored in the database
+@Entity()
+class UserInfo {
   /// constructor for the UserPreference class
   UserInfo({
     required this.name,
@@ -25,5 +25,4 @@ import 'package:objectbox/objectbox.dart';
 
   /// last login
   String lastLogin;
-
 }
