@@ -6,7 +6,8 @@ on:
       - dev
 
 env:
-  FLUTTER_VERSION: '3.0.0' # Set your desired Flutter version here
+  FLUTTER_VERSION: '3.27.1' # Set your desired Flutter version here
+  DART_SDK_VERSION: '>=3.3.4 <4.0.0' # Dart SDK version from pubspec.yaml
 
 jobs:
   build:
@@ -21,23 +22,10 @@ jobs:
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
 
-      - name: Clean Flutter project
-        run: flutter clean
-
-      - name: Install dependencies
-        run: flutter pub get
-
-      - name: Run build_runner
-        run: dart run build_runner build --delete-conflicting-outputs
-
-      - name: Reinstall dependencies
-        run: flutter pub get
-
-      - name: Run full coverage
-        run: dart pub global run full_coverage
-
-      - name: Run tests
-        run: flutter test --coverage
+      - name: Run quality checks
+        uses: ./.github/workflows/pr-quality-checks.yml
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
 
       - name: Build APK
         run: flutter build apk --release
