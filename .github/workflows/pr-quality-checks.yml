@@ -6,8 +6,7 @@ on:
       - dev
 
 env:
-  FLUTTER_VERSION: '3.27.1' # Set your desired Flutter version here
-  DART_SDK_VERSION: '>=3.3.4 <4.0.0' # Dart SDK version from pubspec.yaml
+  FLUTTER_VERSION: '3.27.1'
 
 jobs:
   build:
@@ -21,11 +20,6 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
-
-      - name: Install Dart SDK
-        uses: dart-lang/setup-dart@v1
-        with:
-          sdk: ${{ env.DART_SDK_VERSION }}
 
       - name: Clean Flutter project
         run: flutter clean
