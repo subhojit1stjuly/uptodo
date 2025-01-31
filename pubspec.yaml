@@ -12,33 +12,61 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.6
   flutter_screenutil: ^5.9.3
-# Database for the app
+  # Database for the app
   drift: ^2.18.0
+  objectbox: ^4.0.1
+  objectbox_flutter_libs: ^4.0.1
 
   flutter_dotenv: ^5.1.0
-# state management
+  # state management
   flutter_bloc: ^8.1.5
-# routing
+  # routing
   go_router: ^14.1.4
-# dependency injection and functional Programming.
+  # dependency injection and functional Programming.
   get_it: ^7.7.0
+  injectable: ^2.4.4
+  freezed_annotation: ^2.4.4
+  # for localizations
   intl: ^0.19.0
-  calendar_date_picker2: ^1.1.5
   flutter_localizations:
     sdk: flutter
 
+  flutter_svg: ^2.0.10+1
+  path_provider: ^2.0.5
+  path: ^1.8.0
+  flutter_hooks: ^0.20.5
+  rxdart: ^0.28.0
+  fpdart: ^1.1.1
+  # custom widgets
+  calendar_date_picker2: ^1.1.5
+  smooth_page_indicator: ^1.2.0+3
+  feedback: ^3.1.0
 
 dev_dependencies:
+  flutter_lints: ^4.0.0
+  # for testing
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
-
+  integration_test:
+    sdk: flutter
+  patrol_finders: ^2.5.0
+  patrol: ^3.13.2
+  mocktail: ^1.0.4
+  bloc_test: ^9.1.7
+  # for code generation
+  full_coverage: ^1.0.0
+  go_router_builder:
+  objectbox_generator: ^4.0.1
   build_runner:
+  freezed: ^2.5.7
   flutter_gen_runner:
+  injectable_generator: ^2.6.2
+  # for translation
   intl_translation:
   intl_utils: ^2.8.7
-  go_router_builder:
 
+objectbox:
+  output_dir: core/storage/objectbox/config/
 
 flutter:
   uses-material-design: true
@@ -54,3 +82,10 @@ flutter:
           style: italic
         - asset: assets/fonts/Lato-Bold.ttf
           weight: 700
+
+patrol:
+  app_name: UpTodo
+  android:
+    package_name: com.example.uptodo
+  ios:
+    bundle_id: com.example.uptodo
