@@ -28,17 +28,22 @@ class OnboardingWidget extends StatefulWidget {
 
 class _OnboardingWidgetState extends State<OnboardingWidget> {
   late final PageController _controller;
+  final ValueNotifier<bool> lastPageNotifier = ValueNotifier(false);
 
   @override
   void initState() {
     super.initState();
     widget.bloc.add(const OnboardingEvent.initialize());
     _controller = PageController();
+    _controller.addListener(() {
+      lastPageNotifier.value = _controller.page!.toInt() == 2;
+    });
   }
 
   @override
   void dispose() {
     _controller.dispose(); // Don't forget to dispose the controller
+    lastPageNotifier.dispose();
     super.dispose();
   }
 
@@ -158,27 +163,31 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                   ),
             ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              widget.bloc.add(const OnboardingEvent.next());
-              _controller.nextPage(
-                duration: const Duration(
-                  milliseconds: 500,
+          ValueListenableBuilder<bool>(
+            valueListenable: lastPageNotifier,
+            builder: (context, lastPage, _) {
+              return ElevatedButton(
+                onPressed: () {
+                  widget.bloc.add(const OnboardingEvent.next());
+                  _controller.nextPage(
+                    duration: const Duration(
+                      milliseconds: 500,
+                    ),
+                    curve: Curves.decelerate,
+                  );
+                },
+                child: Text(
+                  lastPage
+                      ? AppLocalizations.of(context)!
+                          .button_get_started
+                          .toUpperCase()
+                      : AppLocalizations.of(context)!.button_next.toUpperCase(),
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
                 ),
-                curve: Curves.decelerate,
               );
             },
-            child: Text(
-              /*_controller.page!.toInt() == 2
-                  ? AppLocalizations.of(context)!
-                      .button_get_started
-                      .toUpperCase()
-                  : */
-              AppLocalizations.of(context)!.button_next.toUpperCase(),
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                    fontWeight: FontWeight.w700,
-                  ),
-            ),
           ),
         ],
       ),

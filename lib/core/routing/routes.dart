@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:uptodo/core/routing/route_constants.dart';
 import 'package:uptodo/features/authentication/presentation/bloc/session_bloc.dart';
-import 'package:uptodo/features/authentication/presentation/bloc/state/session_state.dart';
 import 'package:uptodo/features/authentication/presentation/pages/login_page.dart';
 import 'package:uptodo/features/authentication/presentation/pages/register_page.dart';
 import 'package:uptodo/features/home/index_screen/home_page.dart';
@@ -83,17 +82,15 @@ abstract class AppRouter {
       ),
     ],
     redirect: (context, state) {
-      final session = context.read<SessionBloc>().state;
-      switch (session.runtimeType) {
-        case SessionLoadingState _:
-          return null; // No redirection if conditions are met
-        case SessionValidState _:
-          return RouteConstants.home;
-        case SessionInvalidState _:
-          return RouteConstants.login;
-        default:
-          return null; // No redirection if conditions are met
-      }
+      return context.read<SessionBloc>().state.maybeWhen(
+            sessionValid: () => RouteConstants.home,
+            sessionInvalid: (hasSeenOnboarding) => hasSeenOnboarding
+                ? RouteConstants.login
+                : RouteConstants.onBoarding,
+            orElse: () {
+              return null;
+            },
+          );
     },
   );
 

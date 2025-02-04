@@ -25,5 +25,6 @@ class SessionState with _$SessionState {
   const factory SessionState.sessionValid() = SessionValidState;
 
   /// this state is emitted when the session is invalid
-  const factory SessionState.sessionInvalid() = SessionInvalidState;
+  const factory SessionState.sessionInvalid({required bool hasSeenOnboarding}) =
+      SessionInvalidState;
 }

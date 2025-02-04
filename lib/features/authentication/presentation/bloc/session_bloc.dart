@@ -145,9 +145,16 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
   ) async {
     emit(const SessionState.loading());
     // Session validation logic
-    await Future.delayed(const Duration(seconds: 3));
+    await Future<void>.delayed(const Duration(seconds: 3));
+
+    /// this is a dummy implementation
+    /// in real app we will check if user is logged in or not and then
+    /// emit the state accordingly with the help of session validation logic
+    /// if session is valid then emit SessionValidState
+    /// otherwise emit SessionInvalidState
+    /// also will check if the user has seen the onboarding screen or not
+    emit(const SessionState.sessionInvalid(hasSeenOnboarding: false));
     // emit(const SessionState.sessionValid());
-    emit(const SessionState.sessionInvalid());
     _router.refresh();
   }
 
@@ -155,7 +162,8 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
     SessionExpiredEvent event,
     Emitter<SessionState> emit,
   ) async {
-    emit(const SessionState.sessionInvalid());
+    // when session is expired it is expected that user has seen the onboarding
+    emit(const SessionState.sessionInvalid(hasSeenOnboarding: true));
     _router.refresh();
   }
 
