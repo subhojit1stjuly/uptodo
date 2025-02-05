@@ -32,7 +32,7 @@ jobs:
       - name: Create config directory
         run: mkdir -p lib/core/storage/objectbox/config/
       - name: Create gen directory
-        run: mkdir -p lib/gen/
+        run: mkdir -p lib/core/constants/
 
       - name: Install dependencies
         run: flutter pub get
