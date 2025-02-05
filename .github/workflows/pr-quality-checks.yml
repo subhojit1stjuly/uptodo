@@ -34,9 +34,7 @@ jobs:
         id: get-deps
 
       - name: Check formatting
-        run: |
-          dart format .
-          git diff --exit-code
+        run: dart format --output=none --set-exit-if-changed .
 
       - name: Run build_runner
         if: success() && steps.get-deps.outcome == 'success'
