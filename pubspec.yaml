@@ -73,7 +73,6 @@ flutter:
   generate: true # Enables generation of localized strings from arb files
   assets:
     - assets/icons/
-    - assets/anim/
   fonts:
     - family: Lato
       fonts:
