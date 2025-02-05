@@ -70,7 +70,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     SkippedEvent event,
     Emitter<OnboardingState> emit,
   ) async {
-    emit(const WelComeState());
+    emit(const OnboardingState.welcome());
   }
 
   FutureOr<void> _onBackPress(
@@ -92,7 +92,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     if (currentState is ChangeState) {
       emit(
         currentState.pageNo >= 2
-            ? const WelComeState()
+            ? const OnboardingState.welcome()
             : OnboardingState.change(currentState.pageNo + 1),
       );
     }

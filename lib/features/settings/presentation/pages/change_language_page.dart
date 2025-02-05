@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 /// screen for the changing the language
 class ChangeLanguagePage extends StatefulWidget {
@@ -17,7 +18,7 @@ class _ChangeLanguagePageState extends State<ChangeLanguagePage> {
         title: const Text('Change Language'),
         leading: BackButton(
           onPressed: () {
-
+            context.pop();
           },
         ),
       ),

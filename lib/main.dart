@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uptodo/core/di/injector.dart';
 import 'package:uptodo/core/theme/dark_theme.dart';
@@ -62,7 +61,7 @@ class UpTodo extends StatelessWidget {
     return BlocProvider(
       create: (context) => getIt<SessionBloc>(),
       child: MaterialApp.router(
-        routerConfig: GetIt.instance<GoRouter>(),
+        routerConfig: getIt<GoRouter>(),
         title: 'UpTodo',
         debugShowCheckedModeBanner: false,
 

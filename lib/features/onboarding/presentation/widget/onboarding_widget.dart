@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:uptodo/core/routing/route_constants.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/event/onboarding_event.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/onboard_model.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/onboarding_bloc.dart';
@@ -132,7 +134,9 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
             ),
           ),
           OutlinedButton(
-            onPressed: () {},
+            onPressed: () {
+              context.push(RouteConstants.changeLanguage);
+            },
             child: const Icon(Icons.translate_rounded),
           ),
         ],

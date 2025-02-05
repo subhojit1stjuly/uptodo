@@ -19,7 +19,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OnboardingBloc, OnboardingState>(
-      buildWhen: (_,curr)=> curr is WelComeState || curr is OnboardState,
+      buildWhen: (_, curr) => curr is WelComeState || curr is OnboardState,
       bloc: context.read<OnboardingBloc>(),
       builder: (context, state) {
         return state.maybeWhen(
