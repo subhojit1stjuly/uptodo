@@ -31,6 +31,8 @@ jobs:
 
       - name: Create config directory
         run: mkdir -p lib/core/storage/objectbox/config/
+      - name: Create gen directory
+        run: mkdir -p lib/gen/
 
       - name: Install dependencies
         run: flutter pub get
@@ -58,18 +60,3 @@ jobs:
       - name: Run tests
         if: success()
         run: flutter test --coverage
-
-      - name: Build APK
-        if: success() && github.event_name == 'push' && github.ref == 'refs/heads/dev'
-        run: flutter build apk --release
-
-      - name: Upload APK to GitHub Releases
-        if: success() && github.event_name == 'push' && github.ref == 'refs/heads/dev'
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: build/app/outputs/flutter-apk/app-release.apk
-          token: ${{ secrets.GITHUB_TOKEN }}
-          name: Release ${{ github.sha }}
-          tag: v${{ github.run_number }}-${{ github.sha }}
-          generate_release_notes: true
-          prerelease: true
