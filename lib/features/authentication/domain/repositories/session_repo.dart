@@ -1,6 +1,8 @@
+import 'package:injectable/injectable.dart';
 import 'package:uptodo/features/authentication/data/models/user_info_model.dart';
 
 /// contract for session repo
+@factoryMethod
 abstract class SessionRepo {
   /// this method will be called to check the session from db
   Future<bool> isSessionValid();

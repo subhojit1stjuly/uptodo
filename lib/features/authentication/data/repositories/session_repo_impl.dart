@@ -4,7 +4,7 @@ import 'package:uptodo/features/authentication/data/models/user_info_model.dart'
 import 'package:uptodo/features/authentication/domain/repositories/session_repo.dart';
 
 /// SessionRepoImpl is the implementation of SessionRepo
-@injectable
+@Injectable(as: SessionRepo)
 class SessionRepoImpl implements SessionRepo {
   /// constructor for the SessionRepoImpl
   SessionRepoImpl(this.datasource);
