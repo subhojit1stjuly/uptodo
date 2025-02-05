@@ -27,8 +27,8 @@ jobs:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: 'stable'
 
-      - name: Install dependencies
-        run: flutter pub get
+      - name: Run quality checks
+        uses: ./.github/workflows/pr-quality-checks.yml
 
       - name: Build APK
         run: flutter build apk --release
