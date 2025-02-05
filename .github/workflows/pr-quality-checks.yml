@@ -37,9 +37,6 @@ jobs:
         run: |
           dart format .
           git diff --exit-code
-        
-      - name: Analyze project
-        run: flutter analyze
 
       - name: Run build_runner
         if: success() && steps.get-deps.outcome == 'success'
@@ -48,6 +45,9 @@ jobs:
       - name: Reinstall dependencies
         if: success()
         run: flutter pub get
+
+      - name: Analyze project
+        run: flutter analyze
 
       - name: Run full coverage
         run: |
