@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// LoginPage is the page where the user will login
 class LoginPage extends StatefulWidget {
+  /// const constructor for LoginPage
   const LoginPage({super.key});
 
   @override
