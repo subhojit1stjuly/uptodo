@@ -59,7 +59,7 @@ dev_dependencies:
   objectbox_generator: ^4.0.1
   build_runner:
   freezed: ^2.5.7
-  flutter_gen_runner:
+  flutter_gen_runner: 5.8.0
   injectable_generator: ^2.6.2
   # for translation
   intl_translation:
