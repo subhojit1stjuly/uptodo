@@ -29,6 +29,9 @@ jobs:
       - name: Clean Flutter project
         run: flutter clean
 
+      - name: Create config directory
+        run: mkdir -p lib/core/storage/objectbox/config/
+
       - name: Install dependencies
         run: flutter pub get
         id: get-deps
