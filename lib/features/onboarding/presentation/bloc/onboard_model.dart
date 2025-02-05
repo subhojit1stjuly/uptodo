@@ -9,10 +9,13 @@ class OnboardModel {
     required this.desc,
     required this.image,
   });
+
   /// Onboarding Title
   final String title;
+
   /// Onboarding Description
   final String desc;
+
   /// Onboarding Image
   final SvgPicture image;
 }

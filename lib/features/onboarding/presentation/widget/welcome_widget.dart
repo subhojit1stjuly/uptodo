@@ -39,6 +39,7 @@ class WelcomeWidget extends StatelessWidget {
             const SizedBox(
               height: 35,
             ),
+
             ///welcomes subtitle
             Text(
               textAlign: TextAlign.center,
@@ -64,11 +65,14 @@ class WelcomeWidget extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
+
             ///create account
             OutlinedButton(
               onPressed: () {},
               child: Text(
-                AppLocalizations.of(context)!.button_create_account.toUpperCase(),
+                AppLocalizations.of(context)!
+                    .button_create_account
+                    .toUpperCase(),
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontWeight: FontWeight.w700,
                     ),

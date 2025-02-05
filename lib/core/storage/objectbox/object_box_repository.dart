@@ -67,10 +67,11 @@ abstract base class ObjectBoxRepository<T> {
     store.runInTransaction(TxMode.write, () {
       try {
         // Add multiple items
-        box..putMany(itemsToAdd)
+        box
+          ..putMany(itemsToAdd)
 
-        // Remove multiple items
-        ..removeMany(idsToRemove);
+          // Remove multiple items
+          ..removeMany(idsToRemove);
       } catch (e) {
         // Handle exceptions
         if (kDebugMode) {

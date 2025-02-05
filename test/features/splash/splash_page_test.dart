@@ -10,7 +10,7 @@ import 'package:uptodo/features/splash/splash_page.dart';
 void main() {
   testWidgets('SplashPage displays logo', (WidgetTester tester) async {
     await tester.pumpWidget(
-        testingApp(),
+      testingApp(),
     );
 
     expect(find.byType(SvgPicture), findsOneWidget);
@@ -82,7 +82,8 @@ void main() {
     expect((appNameCenter.dy - logoCenter.dy).abs(), greaterThan(0));
   });
 }
-MaterialApp testingApp({ThemeMode themeMode = ThemeMode.light}){
+
+MaterialApp testingApp({ThemeMode themeMode = ThemeMode.light}) {
   return MaterialApp(
     locale: const Locale('en', 'US'),
 

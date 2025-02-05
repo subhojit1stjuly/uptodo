@@ -34,7 +34,9 @@ jobs:
         id: get-deps
 
       - name: Check formatting
-        run: dart format --set-exit-if-changed .
+        run: |
+          dart format .
+          git diff --exit-code
         
       - name: Analyze project
         run: flutter analyze
