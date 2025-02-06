@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'session_state.freezed.dart';
@@ -17,4 +19,8 @@ class SessionState with _$SessionState {
   /// this state is emitted when the session is invalid
   const factory SessionState.sessionInvalid({required bool hasSeenOnboarding}) =
       SessionInvalidState;
+
+  /// this state is emitted when the local is changed
+  const factory SessionState.localChanged({required Locale local}) =
+      LocalChangedState;
 }

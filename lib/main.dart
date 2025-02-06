@@ -1,36 +1,21 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:uptodo/core/constants/locale_constants.dart';
 import 'package:uptodo/core/di/injector.dart';
+import 'package:uptodo/core/errors/app_error_handler.dart';
 import 'package:uptodo/core/theme/dark_theme.dart';
 import 'package:uptodo/core/theme/light_theme.dart';
 import 'package:uptodo/features/authentication/presentation/bloc/session_bloc.dart';
+import 'package:uptodo/features/authentication/presentation/bloc/state/session_state.dart';
 
 Future<void> main() async {
-  /// All errors caught by Flutter are routed to here
-  /// Placing FlutterError.onError outside of runZonedGuarded
-  /// is the generally recommended approach.
-  /// This ensures that the global handler catches UI-related errors thrown by
-  /// the Flutter framework itself, even if those errors occur outside
-  /// of the zone created by runZonedGuarded.
-  FlutterError.onError = (details) {
-    debugPrint('Caught UI error: ${details.exception}');
-    debugPrint('Stack trace: ${details.stack}');
-  };
-
-  /// If invokeMethod throws an error, it won't be forwarded
-  /// to FlutterError.onError.
-  /// Instead, it's forwarded to the PlatformDispatcher.
-  PlatformDispatcher.instance.onError = (error, stack) {
-    debugPrint('Caught error: $error');
-    debugPrint('Stack trace: $stack');
-    return true;
-  };
+  /// initializing the error handler
+  AppErrorHandler.initialize();
 
   /// running the entire application inside this Guarded Zone to
   /// stop unnecessary app crash.
@@ -56,55 +41,65 @@ class UpTodo extends StatelessWidget {
   /// constructor is getting only key as parameter
   const UpTodo({super.key});
 
+  List<LocalizationsDelegate<dynamic>> get _localizationsDelegates => const [
+        /// Built-in localization for text direction LTR/RTL
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+
+        /// Your custom delegate for app-specific localization
+        AppLocalizations.delegate, // Add this line
+      ];
+
+  Locale? _localeResolutionCallback(
+    Locale? locale,
+    Iterable<Locale> supportedLocales,
+  ) {
+    /// Check if the current device locale is supported
+    for (final supportedLocale in supportedLocales) {
+      if (supportedLocale.languageCode == locale?.languageCode &&
+          supportedLocale.countryCode == locale?.countryCode) {
+        return supportedLocale;
+      }
+    }
+
+    /// If the device's locale is not supported, use
+    /// the first one from the list (default)
+    return supportedLocales.first;
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<SessionBloc>(),
-      child: MaterialApp.router(
-        routerConfig: getIt<GoRouter>(),
-        title: 'UpTodo',
-        debugShowCheckedModeBanner: false,
+      child: BlocBuilder<SessionBloc, SessionState>(
+        buildWhen: (previous, current) => current is LocalChangedState,
+        builder: (context, state) {
+          final locale = state.maybeWhen(
+            localChanged: (local) => local,
+            orElse: () => LocaleConstants.defaultLocale,
+          );
+          return MaterialApp.router(
+            routerConfig: getIt<GoRouter>(),
+            title: 'UpTodo',
+            debugShowCheckedModeBanner: false,
 
-        /// Define the default locale. This will be used if
-        /// the system's locale is not supported.
-        locale: const Locale('en', 'US'),
+            /// Define the default locale. This will be used if
+            /// the system's locale is not supported.
+            locale: locale,
 
-        /// Define supported locales
-        supportedLocales: const [
-          Locale('en', 'US'), // English
-          Locale('bn', 'IN'), // Bengali
-          Locale('kn', 'IN'), // Kannada
-          Locale('hi', 'IN'), // Hindi
-          /// Add more locales here
-        ],
-        localizationsDelegates: const [
-          /// Built-in localization for text direction LTR/RTL
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
+            /// Define supported locales
+            supportedLocales: LocaleConstants.supportedLocales,
+            localizationsDelegates: _localizationsDelegates,
 
-          /// Your custom delegate for app-specific localization
-          AppLocalizations.delegate, // Add this line
-        ],
-        // TODO(subhojit): need to re-visit (for testing)
-        /// Returns a locale which will be used if the
-        /// system's locale is not supported.
-        localeResolutionCallback: (locale, supportedLocales) {
-          /// Check if the current device locale is supported
-          for (final supportedLocale in supportedLocales) {
-            if (supportedLocale.languageCode == locale?.languageCode &&
-                supportedLocale.countryCode == locale?.countryCode) {
-              return supportedLocale;
-            }
-          }
-
-          /// If the device's locale is not supported, use
-          /// the first one from the list (default)
-          return supportedLocales.first;
+            /// Returns a locale which will be used if the
+            /// system's locale is not supported.
+            localeResolutionCallback: _localeResolutionCallback,
+            builder: _builder,
+            theme: lightTheme,
+            darkTheme: darkTheme,
+          );
         },
-        builder: _builder,
-        theme: lightTheme,
-        darkTheme: darkTheme,
       ),
     );
   }
@@ -113,12 +108,19 @@ class UpTodo extends StatelessWidget {
   /// adding conditions later for the feedback package
   /// for error handling
   Widget _builder(BuildContext context, Widget? widget) {
-    Widget error = const Text('...rendering error...');
-    if (widget is Scaffold || widget is Navigator) {
-      error = Scaffold(body: Center(child: error));
-    }
-    ErrorWidget.builder = (errorDetails) => error;
-    if (widget != null) return widget;
-    throw StateError('widget is null');
+    if (widget == null) throw StateError('widget is null');
+
+    ErrorWidget.builder = (errorDetails) {
+      final error = Text(
+        '...rendering error...',
+        style: Theme.of(context).textTheme.bodyLarge,
+      );
+
+      return widget is Scaffold || widget is Navigator
+          ? Scaffold(body: Center(child: error))
+          : error;
+    };
+
+    return widget;
   }
 }

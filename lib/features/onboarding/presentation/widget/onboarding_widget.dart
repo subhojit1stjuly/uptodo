@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:uptodo/core/routing/route_constants.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/event/onboarding_event.dart';
-import 'package:uptodo/features/onboarding/presentation/bloc/onboard_model.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/state/onboarding_state.dart';
+import 'package:uptodo/l10n/app_localizations_service.dart';
 
 /// this Widget represent the Onboarding Page
 class OnboardingWidget extends StatefulWidget {
@@ -19,7 +20,7 @@ class OnboardingWidget extends StatefulWidget {
   });
 
   /// this object holds the data
-  final List<OnboardModel> data;
+  final List<SvgPicture> data;
 
   /// bloc for the ui
   final OnboardingBloc bloc;
@@ -31,6 +32,7 @@ class OnboardingWidget extends StatefulWidget {
 class _OnboardingWidgetState extends State<OnboardingWidget> {
   late final PageController _controller;
   final ValueNotifier<bool> lastPageNotifier = ValueNotifier(false);
+  late AppLocalizationsService localizationsService;
 
   @override
   void initState() {
@@ -51,6 +53,8 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
 
   @override
   Widget build(BuildContext context) {
+    localizationsService =
+        AppLocalizationsService(AppLocalizations.of(context)!);
     return Scaffold(
       body: SafeArea(
         child: ColoredBox(
@@ -75,7 +79,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                     controller: _controller,
                     itemCount: widget.data.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return widget.data[index].image;
+                      return widget.data[index];
                     },
                   ),
                 ),
@@ -210,16 +214,17 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
             change: (pageNo) => Column(
               children: [
                 Text(
-                  widget.data[pageNo].title,
+                  localizationsService.getOnboardingTitle(pageNo),
                   style: Theme.of(context).textTheme.displayLarge!.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
+                  textAlign: TextAlign.center,
                 ),
                 const SizedBox(
                   height: 40,
                 ),
                 Text(
-                  widget.data[pageNo].desc,
+                  localizationsService.getOnboardingDescription(pageNo),
                   style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         fontWeight: FontWeight.w700,
                       ),

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:uptodo/core/constants/locale_constants.dart';
+import 'package:uptodo/features/authentication/presentation/bloc/event/session_event.dart';
+import 'package:uptodo/features/authentication/presentation/bloc/session_bloc.dart';
 
 /// screen for the changing the language
 class ChangeLanguagePage extends StatefulWidget {
@@ -15,34 +20,47 @@ class _ChangeLanguagePageState extends State<ChangeLanguagePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Change Language'),
+        title: Text(
+          'Select Language',
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
+        ),
         leading: BackButton(
           onPressed: () {
             context.pop();
           },
         ),
       ),
-      body: Column(
-        children: [
-          ListTile(
-            title: const Text('English'),
-            onTap: () {
-              // change the language to English
-            },
-          ),
-          ListTile(
-            title: const Text('Hindi'),
-            onTap: () {
-              // change the language to Hindi
-            },
-          ),
-          ListTile(
-            title: const Text('Spanish'),
-            onTap: () {
-              // change the language to Spanish
-            },
-          ),
-        ],
+      body: ListTileTheme(
+        data: Theme.of(context).listTileTheme,
+        child: ListView.builder(
+          itemBuilder: (context, index) {
+            final locale = LocaleConstants.supportedLocales[index];
+            return Padding(
+              padding: const EdgeInsets.all(10),
+              child: ListTile(
+                title: Text(
+                  LocaleConstants.getLocaleName(locale),
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                trailing: Radio(
+                  value: locale,
+                  groupValue: AppLocalizations.of(context),
+                  onChanged: (value) {
+                    context.read<SessionBloc>().add(
+                          SessionEvent.localChanges(
+                            local: locale,
+                          ),
+                        );
+                    context.pop();
+                  },
+                ),
+              ),
+            );
+          },
+          itemCount: LocaleConstants.supportedLocales.length,
+        ),
       ),
     );
   }

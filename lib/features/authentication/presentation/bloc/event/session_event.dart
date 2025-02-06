@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'session_event.freezed.dart';
@@ -10,4 +12,8 @@ class SessionEvent with _$SessionEvent {
 
   /// event to notify UI that session is expired
   const factory SessionEvent.sessionExpired() = SessionExpiredEvent;
+
+  /// event to notify UI that session is expired
+  const factory SessionEvent.localChanges({required Locale local}) =
+      LocalChangesEvent;
 }

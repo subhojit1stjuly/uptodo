@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
@@ -17,6 +19,7 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
   SessionBloc() : super(const SessionStateInitial()) {
     on<SessionCheckEvent>(_onSessionCheck);
     on<SessionExpiredEvent>(_onSessionExpired);
+    on<LocalChangesEvent>(_onLocalChanges);
     add(const SessionCheckEvent());
   }
 
@@ -48,5 +51,12 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
     // when session is expired it is expected that user has seen the onboarding
     emit(const SessionState.sessionInvalid(hasSeenOnboarding: true));
     _router.refresh();
+  }
+
+  FutureOr<void> _onLocalChanges(
+    LocalChangesEvent event,
+    Emitter<SessionState> emit,
+  ) async {
+    emit(SessionState.localChanged(local: event.local));
   }
 }
