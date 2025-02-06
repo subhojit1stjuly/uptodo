@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uptodo/features/onboarding/presentation/bloc/onboard_model.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/state/onboarding_state.dart';
 import 'package:uptodo/features/onboarding/presentation/widget/onboarding_widget.dart';
@@ -24,7 +24,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       builder: (context, state) {
         return state.maybeWhen(
           welcome: () => const WelcomeWidget(),
-          onboard: (List<OnboardModel> data) => OnboardingWidget(
+          onboard: (List<SvgPicture> data) => OnboardingWidget(
             bloc: context.read<OnboardingBloc>(),
             data: data,
           ),

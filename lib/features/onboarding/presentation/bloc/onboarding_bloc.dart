@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:uptodo/core/constants/assets.gen.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/event/onboarding_event.dart';
-import 'package:uptodo/features/onboarding/presentation/bloc/onboard_model.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/state/onboarding_state.dart';
 import 'package:uptodo/l10n/app_localizations_service.dart';
 
@@ -15,29 +15,17 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
       : super(
           OnboardState(
             data: [
-              OnboardModel(
-                title: localizationsService.getOnboardingTitle(0),
-                desc: localizationsService.getOnboardingDescription(0),
-                image: Assets.icons.onboard001.svg(
-                  height: 93.5,
-                  width: 80.46,
-                ),
+              Assets.icons.onboard001.svg(
+                height: 93.5,
+                width: 80.46,
               ),
-              OnboardModel(
-                title: localizationsService.getOnboardingTitle(1),
-                desc: localizationsService.getOnboardingDescription(1),
-                image: Assets.icons.onboard002.svg(
-                  height: 93.5,
-                  width: 80.46,
-                ),
+              Assets.icons.onboard002.svg(
+                height: 93.5,
+                width: 80.46,
               ),
-              OnboardModel(
-                title: localizationsService.getOnboardingTitle(2),
-                desc: localizationsService.getOnboardingDescription(2),
-                image: Assets.icons.onboard003.svg(
-                  height: 93.5,
-                  width: 80.46,
-                ),
+              Assets.icons.onboard003.svg(
+                height: 93.5,
+                width: 80.46,
               ),
             ],
           ),
@@ -54,7 +42,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     _onboardingData = currentState is OnboardState ? currentState.data : [];
   }
 
-  late final List<OnboardModel> _onboardingData;
+  late final List<SvgPicture> _onboardingData;
 
   /// Localization object
   final AppLocalizationsService localizationsService;

@@ -36,6 +36,25 @@ final lightTheme = ThemeData(
   buttonTheme: const ButtonThemeData(
     buttonColor: Colors.transparent,
   ),
+  listTileTheme: const ListTileThemeData(
+    tileColor: Color(0xFFC1B8FF),
+    contentPadding: EdgeInsets.all(16),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(8),
+      ),
+    ),
+  ),
+  radioTheme: RadioThemeData(
+    fillColor: WidgetStateProperty.resolveWith<Color>(
+      (Set<WidgetState> states) {
+        if (states.contains(WidgetState.selected)) {
+          return const Color(0xFF8875FF);
+        }
+        return Colors.black;
+      },
+    ),
+  ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       foregroundColor: Colors.white70,

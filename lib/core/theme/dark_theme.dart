@@ -34,6 +34,25 @@ final darkTheme = ThemeData(
       fontSize: 16,
     ),
   ),
+  listTileTheme: const ListTileThemeData(
+    tileColor: Color(0xFFC1B8FF),
+    contentPadding: EdgeInsets.all(16),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(8),
+      ),
+    ),
+  ),
+  radioTheme: RadioThemeData(
+    fillColor: WidgetStateProperty.resolveWith<Color>(
+      (Set<WidgetState> states) {
+        if (states.contains(WidgetState.selected)) {
+          return const Color(0xFF8875FF);
+        }
+        return Colors.white;
+      },
+    ),
+  ),
   buttonTheme: const ButtonThemeData(
     buttonColor: Colors.transparent,
   ),

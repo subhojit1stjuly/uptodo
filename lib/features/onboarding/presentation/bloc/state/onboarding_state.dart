@@ -1,5 +1,5 @@
+import 'package:flutter_svg/svg.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:uptodo/features/onboarding/presentation/bloc/onboard_model.dart';
 
 part 'onboarding_state.freezed.dart';
 
@@ -12,7 +12,7 @@ class OnboardingState with _$OnboardingState {
 
   /// or press back in the welcomes screen
   const factory OnboardingState.onboard({
-    required List<OnboardModel> data,
+    required List<SvgPicture> data,
   }) = OnboardState;
 
   /// this state is emitted when user clicks on next button
