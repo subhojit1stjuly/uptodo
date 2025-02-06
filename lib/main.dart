@@ -51,8 +51,8 @@ class UpTodo extends StatelessWidget {
         AppLocalizations.delegate, // Add this line
       ];
 
-  Locale? _localeResolutionCallback(
-      Locale? locale, Iterable<Locale> supportedLocales) {
+  Locale? _localeResolutionCallback(Locale? locale,
+      Iterable<Locale> supportedLocales,) {
     /// Check if the current device locale is supported
     for (final supportedLocale in supportedLocales) {
       if (supportedLocale.languageCode == locale?.languageCode &&
