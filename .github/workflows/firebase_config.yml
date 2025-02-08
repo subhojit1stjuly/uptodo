@@ -19,8 +19,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Create environments directory
+      run: mkdir -p environments
+
     - name: Create .env file
       run: |
+        cat > environments/.env << EOL
         echo "FIREBASE_WEB_API_KEY=${{ secrets.FIREBASE_WEB_API_KEY }}" >> .env
         echo "FIREBASE_WEB_APP_ID=${{ secrets.FIREBASE_WEB_APP_ID }}" >> .env
         echo "FIREBASE_WEB_MEASUREMENT_ID=${{ secrets.FIREBASE_WEB_MEASUREMENT_ID }}" >> .env
