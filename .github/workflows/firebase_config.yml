@@ -2,9 +2,15 @@ name: Firebase Configuration
 
 on:
   push:
-    branches: [ main ]
+    branches: 
+      - main
+      - dev
+      - test
   pull_request:
-    branches: [ main ]
+    branches: 
+      - main
+      - dev
+      - test
 
 jobs:
   build:
