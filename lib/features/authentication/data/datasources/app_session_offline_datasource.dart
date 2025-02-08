@@ -10,7 +10,8 @@ import 'package:uptodo/features/authentication/domain/entities/user_info.dart';
 @injectable
 final class AppSessionOfflineDatasource extends ObjectBoxRepository<UserInfo> {
   /// Constructor for the app_session offline datasource
-  AppSessionOfflineDatasource(this.objectBox,
+  AppSessionOfflineDatasource(
+    this.objectBox,
   ) : super(objectBox.store, objectBox.getBox<UserInfo>());
 
   /// object box instance
