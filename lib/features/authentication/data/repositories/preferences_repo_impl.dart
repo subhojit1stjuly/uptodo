@@ -29,11 +29,13 @@ class PreferencesRepoImpl implements PreferencesRepo {
 
   @override
   Future<void> setPreference(UserPreferenceModel userPreference) async {
-    datasource.updateItem(UserPreference(
-      key: userPreference.key,
-      value: userPreference.value,
-      type: userPreference.type,
-    ));
+    datasource.updateItem(
+      UserPreference(
+        key: userPreference.key,
+        value: userPreference.value,
+        type: userPreference.type,
+      ),
+    );
   }
 
   @override

@@ -13,10 +13,6 @@ This project is based on
 the [UpTodo App Design](https://www.figma.com/design/NT2TkQ2BSUZCojTguVHBCV/UpTodo---Todo-list-app-UI-Kit-(Community))
 from the Figma Community.
 
-### Design Preview
-
-![UpTodo Design Preview](URL_TO_DESIGN_PREVIEW_IMAGE)
-
 ### Design Credits
 
 - **Designer**: Amir Baghestani
@@ -202,3 +198,25 @@ Currently supported languages:
 - Bengali (bn)
 - Kannada (kn)
 - Hindi (hi)
+
+## Firebase Configuration
+
+### Setup
+
+1. Download configuration files from Firebase Console
+2. Place them in the following locations:
+    - Android:
+        - Development: `android/app/src/debug/google-services.json`
+        - Production: `android/app/src/release/google-services.json`
+    - iOS:
+        - Development: `ios/config/development/GoogleService-Info.plist`
+        - Production: `ios/config/production/GoogleService-Info.plist`
+
+### Environment Files
+
+Copy `.env.example` to create your environment files:
+
+```bash
+cp .env.example .env.development
+cp .env.example .env.production
+```

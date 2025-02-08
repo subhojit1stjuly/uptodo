@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
+import 'package:uptodo/core/routing/route_constants.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/event/onboarding_event.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 
@@ -54,7 +56,9 @@ class WelcomeWidget extends StatelessWidget {
 
             ///login button
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                context.push(RouteConstants.login);
+              },
               child: Text(
                 AppLocalizations.of(context)!.button_login.toUpperCase(),
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -68,7 +72,9 @@ class WelcomeWidget extends StatelessWidget {
 
             ///create account
             OutlinedButton(
-              onPressed: () {},
+              onPressed: () {
+                context.push(RouteConstants.register);
+              },
               child: Text(
                 AppLocalizations.of(context)!
                     .button_create_account

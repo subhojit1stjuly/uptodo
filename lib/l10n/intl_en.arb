@@ -64,9 +64,21 @@
   "@username": {
     "description": "Label for username field"
   },
+  "username_hint": "Enter your username",
+  "@username_hint": {
+    "description": "Hint for username field"
+  },
   "password": "Password",
   "@password": {
     "description": "Label for password field"
+  },
+  "password_hint": "Enter your password",
+  "@password_hint": {
+    "description": "Hint for password field"
+  },
+  "confirm_password_hint": "Confirm your password",
+  "@confirm_password_hint": {
+    "description": "Hint for confirm password field"
   },
   "or": "or",
   "@or": {
@@ -87,6 +99,10 @@
   "register": "Register",
   "@register": {
     "description": "Text for register option"
+  },
+  "already_have_account": "Already have an account?",
+  "@already_have_account": {
+    "description": "Text for 'Already have an account?' prompt"
   },
   "confirm_password": "Confirm Password",
   "@confirm_password": {

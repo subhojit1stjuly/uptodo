@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
@@ -14,6 +15,8 @@ import 'package:uptodo/features/authentication/presentation/bloc/state/user_sess
 import 'package:uptodo/features/authentication/presentation/bloc/user_session_bloc.dart';
 
 Future<void> main() async {
+  await dotenv.load(fileName: 'environments/.env');
+
   /// initializing the error handler
   AppErrorHandler.initialize();
 
