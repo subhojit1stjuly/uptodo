@@ -25,7 +25,9 @@ dependencies:
   # dependency injection and functional Programming.
   get_it: ^7.7.0
   injectable: ^2.4.4
+  # for code generation
   freezed_annotation: ^2.4.4
+  json_annotation: ^4.0.0
   # for localizations
   intl: ^0.19.0
   flutter_localizations:
@@ -41,6 +43,7 @@ dependencies:
   calendar_date_picker2: ^1.1.5
   smooth_page_indicator: ^1.2.0+3
   feedback: ^3.1.0
+  talker: ^4.6.10
 
 dev_dependencies:
   flutter_lints: ^4.0.0
@@ -64,6 +67,7 @@ dev_dependencies:
   # for translation
   intl_translation:
   intl_utils: ^2.8.7
+  json_serializable: ^6.9.0
 
 objectbox:
   output_dir: core/storage/objectbox/config/

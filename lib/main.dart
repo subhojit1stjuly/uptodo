@@ -10,8 +10,8 @@ import 'package:uptodo/core/di/injector.dart';
 import 'package:uptodo/core/errors/app_error_handler.dart';
 import 'package:uptodo/core/theme/dark_theme.dart';
 import 'package:uptodo/core/theme/light_theme.dart';
-import 'package:uptodo/features/authentication/presentation/bloc/session_bloc.dart';
-import 'package:uptodo/features/authentication/presentation/bloc/state/session_state.dart';
+import 'package:uptodo/features/authentication/presentation/bloc/state/user_session_state.dart';
+import 'package:uptodo/features/authentication/presentation/bloc/user_session_bloc.dart';
 
 Future<void> main() async {
   /// initializing the error handler
@@ -19,7 +19,7 @@ Future<void> main() async {
 
   /// running the entire application inside this Guarded Zone to
   /// stop unnecessary app crash.
-  runZonedGuarded(() {
+  await runZonedGuarded(() async {
     ///  this ensures that the Flutter engine is properly initialized
     ///  if application logic needs to interact with
     ///  the native platform (e.g., accessing device features)
@@ -28,7 +28,7 @@ Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
 
     /// setting the dependencies
-    configureDependencies();
+    await configureDependencies();
     runApp(const UpTodo());
   }, (error, StackTrace stack) {
     debugPrint('Caught error: $error');
@@ -71,13 +71,16 @@ class UpTodo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<SessionBloc>(),
-      child: BlocBuilder<SessionBloc, SessionState>(
-        buildWhen: (previous, current) => current is LocalChangedState,
+      create: (context) => getIt<UserSessionBloc>(),
+      child: BlocBuilder<UserSessionBloc, UserSessionState>(
+        buildWhen: (previous, current) => current is PreferencesChangedState,
         builder: (context, state) {
-          final locale = state.maybeWhen(
-            localChanged: (local) => local,
-            orElse: () => LocaleConstants.defaultLocale,
+          final prefs = state.maybeWhen(
+            preferencesChanged: (preferences) => preferences,
+            orElse: () => (
+              themeMode: ThemeMode.system,
+              local: LocaleConstants.defaultLocale
+            ),
           );
           return MaterialApp.router(
             routerConfig: getIt<GoRouter>(),
@@ -86,7 +89,7 @@ class UpTodo extends StatelessWidget {
 
             /// Define the default locale. This will be used if
             /// the system's locale is not supported.
-            locale: locale,
+            locale: prefs.local,
 
             /// Define supported locales
             supportedLocales: LocaleConstants.supportedLocales,
@@ -98,6 +101,7 @@ class UpTodo extends StatelessWidget {
             builder: _builder,
             theme: lightTheme,
             darkTheme: darkTheme,
+            themeMode: prefs.themeMode,
           );
         },
       ),

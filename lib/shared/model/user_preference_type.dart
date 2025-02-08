@@ -1,22 +1,29 @@
 /// User preference type enum
 enum UserPreferenceType {
   /// Theme mode
-  themeMode,
+  themeMode('ThemeMode'),
 
   /// Language
-  language,
+  language('Locale'),
 
   /// Sync email
-  syncEmail,
+  syncEmail('bool'),
 
   /// Has seen onboarding
-  hasSeenOnboarding,
+  hasSeenOnboarding('bool');
+
+  const UserPreferenceType(
+    this.type,
+  );
+
+  /// type code
+  final String type;
 }
 
 /// User preference type extension
 extension UserPreferenceTypeExtension on UserPreferenceType {
   /// Converts the UserPreferenceType to a string
-  String get value {
+  String get key {
     switch (this) {
       case UserPreferenceType.themeMode:
         return 'ThemeMode';

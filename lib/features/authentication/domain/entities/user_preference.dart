@@ -9,11 +9,11 @@ class UserPreference {
     required this.key,
     required this.value,
     required this.type,
-    this.id = 0,
+    this.id,
   });
 
   /// The id of the preference
-  int id;
+  int? id;
 
   @Unique()
 

@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:uptodo/core/routing/route_constants.dart';
-import 'package:uptodo/features/authentication/presentation/bloc/session_bloc.dart';
+import 'package:uptodo/features/authentication/presentation/bloc/user_session_bloc.dart';
 import 'package:uptodo/features/authentication/presentation/pages/login_page.dart';
 import 'package:uptodo/features/home/index_screen/home_page.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/onboarding_bloc.dart';
@@ -57,7 +57,7 @@ abstract class AppRouter {
           ),
         ],
         redirect: (context, state) {
-          final sessionState = context.read<SessionBloc>().state;
+          final sessionState = context.read<UserSessionBloc>().state;
           if (state.matchedLocation != RouteConstants.splash) {
             return null;
           }
@@ -71,5 +71,6 @@ abstract class AppRouter {
             },
           );
         },
+        // TODO(Subhojit): add error Page builder and error builder
       );
 }
