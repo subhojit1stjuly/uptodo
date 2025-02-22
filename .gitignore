@@ -69,3 +69,7 @@ firebase-debug.log
 /ios/Runner/GoogleService-Info.plist
 /ios/config/development/GoogleService-Info.plist
 /ios/config/production/GoogleService-Info.plist
+.qodo
+
+# FVM Version Cache
+.fvm/

@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:uptodo/core/constants/locale_constants.dart';
 import 'package:uptodo/core/utils/user_preference_utils.dart';
-import 'package:uptodo/features/authentication/domain/usecases/session_validation_use_case.dart';
+import 'package:uptodo/features/authentication/domain/usecases/session/session_validation_use_case.dart';
 import 'package:uptodo/features/authentication/presentation/bloc/event/user_session_event.dart';
 import 'package:uptodo/features/authentication/presentation/bloc/state/user_session_state.dart';
 import 'package:uptodo/shared/model/user_preference_type.dart';

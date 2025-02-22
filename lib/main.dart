@@ -15,14 +15,14 @@ import 'package:uptodo/features/authentication/presentation/bloc/state/user_sess
 import 'package:uptodo/features/authentication/presentation/bloc/user_session_bloc.dart';
 
 Future<void> main() async {
-  await dotenv.load(fileName: 'environments/.env');
-
-  /// initializing the error handler
-  AppErrorHandler.initialize();
-
   /// running the entire application inside this Guarded Zone to
   /// stop unnecessary app crash.
   await runZonedGuarded(() async {
+    /// initializing the error handler
+    AppErrorHandler.initialize();
+
+    await dotenv.load(fileName: 'environments/.env');
+
     ///  this ensures that the Flutter engine is properly initialized
     ///  if application logic needs to interact with
     ///  the native platform (e.g., accessing device features)
