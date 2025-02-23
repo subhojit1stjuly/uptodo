@@ -13,3 +13,4 @@ key.properties
 **/*.jks
 
 .qodo
+app/.cxx

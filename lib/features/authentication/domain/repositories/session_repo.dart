@@ -11,5 +11,5 @@ abstract class SessionRepo {
   Future<void> clearSession();
 
   /// this will be used to create a session
-  Future<void> createSession(UserInfoModel userInfo);
+  Future<bool> createSession(UserInfoModel userInfo);
 }

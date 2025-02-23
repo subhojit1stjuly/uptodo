@@ -18,7 +18,7 @@ class GoogleAuthenticationProvider implements AuthProviderStrategy {
   final UserMapper _userMapper;
 
   @override
-  Future<AuthResult> signIn(Map<String, String> credentials) async {
+  Future<AuthResult> signIn(_) async {
     final googleUser = await _googleSignIn.signIn();
     if (googleUser == null) {
       return AuthResult.failure(message: 'Sign in cancelled');

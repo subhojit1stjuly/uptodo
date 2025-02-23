@@ -35,7 +35,10 @@ class AuthenticationBloc extends Bloc<AuthEvent, AuthState> {
     LoginWithGoogleEvent event,
     Emitter<AuthState> emit,
   ) async {
-    await _logInWithGoogleUseCase.execute(null);
+    final isSuccess = await _logInWithGoogleUseCase.execute(null);
+    if(isSuccess){
+      emit(const AuthState.loginSuccess());
+    }
   }
 
   Future<void> _loginWithPhone(
