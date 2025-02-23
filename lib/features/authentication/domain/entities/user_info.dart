@@ -6,23 +6,38 @@ import 'package:objectbox/objectbox.dart';
 class UserInfo {
   /// constructor for the UserPreference class
   UserInfo({
-    required this.name,
-    required this.email,
     required this.lastLogin,
+    required this.emailVerified,
+    required this.pID,
+    this.name,
+    this.email,
+    this.phoneNumber,
     this.id = 0,
+    this.avatarUrl = '',
   });
 
   /// The id of the preference
-  int id;
 
+  int id;
   @Unique()
 
+  /// server ID
+  String pID;
+
   /// The name of user
-  String name;
+  final String? name;
 
   /// The email of the user
-  String email;
+  final String? email;
 
   /// last login
-  String lastLogin;
+  final String? lastLogin;
+
+  /// phone number
+  final String? phoneNumber;
+
+  /// is email verified
+  final bool emailVerified;
+
+  final String avatarUrl;
 }

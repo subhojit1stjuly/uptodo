@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uptodo/core/constants/assets.gen.dart';
 import 'package:uptodo/core/routing/route_constants.dart';
+import 'package:uptodo/features/authentication/presentation/bloc/authentication_bloc.dart';
+import 'package:uptodo/features/authentication/presentation/bloc/event/auth_event.dart';
 import 'package:uptodo/features/authentication/presentation/widgets/dynamic_hyphen_widget.dart';
 import 'package:uptodo/shared/widgets/texts/custom_textfield.dart';
 
@@ -16,8 +19,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<AuthenticationBloc>();
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
@@ -43,6 +50,7 @@ class _LoginPageState extends State<LoginPage> {
 
               /// username
               CustomTextField(
+                controller: _emailController,
                 labelText: AppLocalizations.of(context)!.username,
                 hintText: AppLocalizations.of(context)!.username_hint,
                 keyboardType: TextInputType.emailAddress,
@@ -51,6 +59,7 @@ class _LoginPageState extends State<LoginPage> {
 
               /// password
               CustomTextField(
+                controller: _passwordController,
                 labelText: AppLocalizations.of(context)!.password,
                 hintText: AppLocalizations.of(context)!.password_hint,
                 keyboardType: TextInputType.visiblePassword,
@@ -61,7 +70,12 @@ class _LoginPageState extends State<LoginPage> {
               /// login button
               ElevatedButton(
                 onPressed: () {
-                  context.pushReplacement(RouteConstants.home);
+                  bloc.add(
+                    AuthEvent.loginWithEmail(
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                    ),
+                  );
                 },
                 child: Text(
                   AppLocalizations.of(context)!.button_login.toUpperCase(),
@@ -78,7 +92,9 @@ class _LoginPageState extends State<LoginPage> {
 
               /// social login buttons google
               OutlinedButton(
-                onPressed: () {},
+                onPressed: () {
+                  bloc.add(const AuthEvent.loginWithGoogle());
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -100,7 +116,9 @@ class _LoginPageState extends State<LoginPage> {
 
               /// social login buttons apple
               OutlinedButton(
-                onPressed: () {},
+                onPressed: () {
+                  bloc.add(const AuthEvent.loginWithPhone());
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

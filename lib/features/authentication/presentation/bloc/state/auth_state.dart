@@ -7,4 +7,10 @@ part 'auth_state.freezed.dart';
 class AuthState with _$AuthState {
   /// this state is emitted when the AuthenticationBloc is created is initial
   const factory AuthState.initial() = AuthStateInitial;
+
+  /// this state is emitted when the login/ register is successful
+  const factory AuthState.success() = AuthStateSuccess;
+
+  /// this state is emitted when the login/ register is unsuccessful
+  const factory AuthState.failed() = AuthStateFailed;
 }

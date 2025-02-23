@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uptodo/core/constants/assets.gen.dart';
 import 'package:uptodo/core/routing/route_constants.dart';
+import 'package:uptodo/features/authentication/presentation/bloc/authentication_bloc.dart';
+import 'package:uptodo/features/authentication/presentation/bloc/event/auth_event.dart';
 import 'package:uptodo/features/authentication/presentation/widgets/dynamic_hyphen_widget.dart';
 import 'package:uptodo/shared/widgets/texts/custom_textfield.dart';
 
@@ -18,6 +21,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<AuthenticationBloc>();
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
@@ -72,7 +76,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ElevatedButton(
                 onPressed: () {},
                 child: Text(
-                  AppLocalizations.of(context)!.button_login.toUpperCase(),
+                  AppLocalizations.of(context)!.register.toUpperCase(),
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
@@ -84,9 +88,11 @@ class _RegisterPageState extends State<RegisterPage> {
               const DynamicHyphenWidget(),
               const SizedBox(height: 10),
 
-              /// social login buttons google
+              /// social register buttons google
               OutlinedButton(
-                onPressed: () {},
+                onPressed: () {
+                  bloc.add(const AuthEvent.loginWithGoogle());
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -96,7 +102,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      AppLocalizations.of(context)!.login_with_google,
+                      AppLocalizations.of(context)!.register_with_apple,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             fontWeight: FontWeight.w500,
                           ),
@@ -106,7 +112,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               const SizedBox(height: 8),
 
-              /// social login buttons apple
+              /// social register buttons apple
               OutlinedButton(
                 onPressed: () {},
                 child: Row(
@@ -118,7 +124,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      AppLocalizations.of(context)!.login_with_apple,
+                      AppLocalizations.of(context)!.register_with_apple,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             fontWeight: FontWeight.w500,
                           ),

@@ -12,14 +12,14 @@ class AuthEvent with _$AuthEvent {
   const factory AuthEvent.loginWithPhone() = LoginWithPhoneEvent;
 
   /// event to login with email
-  const factory AuthEvent.loginWithEmail() = LoginWithEmailEvent;
-
-  /// event to login with google
-  const factory AuthEvent.registerWithGoogle() = RegisterWithGoogleEvent;
-
-  /// event to register with phone
-  const factory AuthEvent.registerWithPhone() = RegisterWithPhoneEvent;
+  const factory AuthEvent.loginWithEmail({
+    required String email,
+    required String password,
+  }) = LoginWithEmailEvent;
 
   /// event to register with email
-  const factory AuthEvent.registerWithEmail() = RegisterWithEmailEvent;
+  const factory AuthEvent.registerWithEmail({
+    required String email,
+    required String password,
+  }) = RegisterWithEmailEvent;
 }
