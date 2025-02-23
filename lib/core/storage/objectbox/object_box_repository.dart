@@ -47,6 +47,11 @@ abstract base class ObjectBoxRepository<T> {
     return query.find();
   }
 
+  /// query a single item from the database
+  T? queryItem(Query<T> query) {
+    return query.findFirst();
+  }
+
   /// count items in the database
   int countItems() {
     return box.count();

@@ -7,6 +7,7 @@ const TextStyle globalLightTextStyle = TextStyle(
 
 /// object for the light theme used in the main
 final lightTheme = ThemeData(
+  primaryColorDark: const Color(0xFF8875FF),
   primaryColorLight: const Color(0xFF8875FF),
   fontFamily: 'Lato',
   splashColor: Colors.white70,
@@ -14,6 +15,9 @@ final lightTheme = ThemeData(
   useMaterial3: true,
   primaryColor: Colors.white70,
   textTheme: TextTheme(
+    titleLarge: globalLightTextStyle.copyWith(
+      fontSize: 38,
+    ),
     displayLarge: globalLightTextStyle.copyWith(
       fontSize: 32,
     ),

@@ -64,9 +64,21 @@
   "@username": {
     "description": "उपयोगकर्ता नाम के लिए लेबल"
   },
+  "username_hint": "अपना उपयोगकर्ता नाम दर्ज करें",
+  "@username_hint": {
+    "description": "उपयोगकर्ता नाम के लिए हिंट"
+  },
   "password": "पासवर्ड",
   "@password": {
     "description": "पासवर्ड फ़ील्ड के लिए लेबल"
+  },
+  "password_hint": "अपना पासवर्ड दर्ज करें",
+  "@password_hint": {
+    "description": "पासवर्ड फ़ील्ड के लिए हिंट"
+  },
+  "confirm_password_hint": "अपना पासवर्ड पुनः दर्ज करें",
+  "@confirm_password_hint": {
+    "description": "पासवर्ड की पुष्टि फ़ील्ड के लिए हिंट"
   },
   "or": "या",
   "@or": {
@@ -87,6 +99,10 @@
   "register": "रजिस्टर करें",
   "@register": {
     "description": "रजिस्टर विकल्प के लिए पाठ"
+  },
+  "already_have_account": "पहले से ही खाता है?",
+  "@already_have_account": {
+    "description": "'पहले से ही खाता है?' प्रोम्प्ट के लिए पाठ"
   },
   "confirm_password": "पासवर्ड की पुष्टि करें",
   "@confirm_password": {

@@ -64,9 +64,21 @@
   "@username": {
     "description": "ব্যবহারকারীর নাম ক্ষেত্রের লেবেল"
   },
+  "username_hint": "আপনার ব্যবহারকারীর নাম লিখুন",
+  "@username_hint": {
+    "description": "ব্যবহারকারীর নাম ক্ষেত্রের হিন্ট"
+  },
   "password": "পাসওয়ার্ড",
   "@password": {
     "description": "পাসওয়ার্ড ক্ষেত্রের লেবেল"
+  },
+  "password_hint": "আপনার পাসওয়ার্ড লিখুন",
+  "@password_hint": {
+    "description": "পাসওয়ার্ড ক্ষেত্রের হিন্ট"
+  },
+  "confirm_password_hint": "আপনার পাসওয়ার্ড নিশ্চিত করুন",
+  "@confirm_password_hint": {
+    "description": "পাসওয়ার্ড নিশ্চিত করার ক্ষেত্রের হিন্ট"
   },
   "or": "বা",
   "@or": {
@@ -87,6 +99,10 @@
   "register": "নিবন্ধন করুন",
   "@register": {
     "description": "নিবন্ধনের বিকল্পের জন্য পাঠ্য"
+  },
+  "already_have_account": "ইতিমধ্যে অ্যাকাউন্ট আছে?",
+  "@already_have_account": {
+    "description": "'ইতিমধ্যে অ্যাকাউন্ট আছে?' জন্য পাঠ্য"
   },
   "confirm_password": "পাসওয়ার্ড নিশ্চিত করুন",
   "@confirm_password": {

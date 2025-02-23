@@ -25,14 +25,16 @@ dependencies:
   # dependency injection and functional Programming.
   get_it: ^7.7.0
   injectable: ^2.4.4
+  # for code generation
   freezed_annotation: ^2.4.4
+  json_annotation: ^4.0.0
   # for localizations
   intl: ^0.19.0
   flutter_localizations:
     sdk: flutter
 
   flutter_svg: ^2.0.10+1
-  path_provider: ^2.0.5
+  path_provider: ^2.1.0
   path: ^1.8.0
   flutter_hooks: ^0.20.5
   rxdart: ^0.28.0
@@ -41,7 +43,12 @@ dependencies:
   calendar_date_picker2: ^1.1.5
   smooth_page_indicator: ^1.2.0+3
   feedback: ^3.1.0
+  talker: ^4.6.10
 
+  #firebase
+  firebase_core: ^3.11.0
+  firebase_auth: ^5.5.0
+  google_sign_in: ^6.2.2
 dev_dependencies:
   flutter_lints: ^4.0.0
   # for testing
@@ -64,6 +71,7 @@ dev_dependencies:
   # for translation
   intl_translation:
   intl_utils: ^2.8.7
+  json_serializable: ^6.9.0
 
 objectbox:
   output_dir: core/storage/objectbox/config/
@@ -73,6 +81,7 @@ flutter:
   generate: true # Enables generation of localized strings from arb files
   assets:
     - assets/icons/
+    - environments/.env
   fonts:
     - family: Lato
       fonts:

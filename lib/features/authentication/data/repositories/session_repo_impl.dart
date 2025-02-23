@@ -19,8 +19,8 @@ class SessionRepoImpl implements SessionRepo {
 
   @override
   Future<bool> isSessionValid() async {
-    final userPreferences = await datasource.getUserInfo();
-    return userPreferences.fold(
+    final userInfo = await datasource.getUserInfo();
+    return userInfo.fold(
       (l) => false,
       (r) => r.isNotEmpty,
     );

@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:uptodo/features/settings/domain/enums/language.dart';
+
 /// This class contains the supported locales and
 /// helper methods to work with locales.
 class LocaleConstants {
@@ -14,7 +16,7 @@ class LocaleConstants {
   /// Default locale
   static const defaultLocale = Locale('en', 'US');
 
-  /// You can also add helper methods if needed
+  /// Check if a locale is supported
   static bool isSupported(Locale locale) {
     return supportedLocales.contains(locale);
   }
@@ -22,10 +24,10 @@ class LocaleConstants {
   /// Get locale name for display
   static String getLocaleName(Locale locale) {
     final names = {
-      'en': 'English',
-      'bn': 'বাংলা', // Bengali
-      'kn': 'ಕನ್ನಡ', // Kannada
-      'hi': 'हिंदी', // Hindi
+      Language.english.code: 'English',
+      Language.bengali.code: 'বাংলা', // Bengali
+      Language.kannada.code: 'ಕನ್ನಡ', // Kannada
+      Language.hindi.code: 'हिंदी', // Hindi
     };
     return names[locale.languageCode] ?? locale.languageCode;
   }

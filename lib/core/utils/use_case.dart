@@ -1,7 +1,7 @@
 /// UseCase is a class that will be
 /// used to define the use case of the application.
 abstract class UseCase<Type, Params> {
-  /// this method will be called from the presentation layer
+  /// this method will be called from the presentation/useCase layer
   Future<Type> execute(Params params) async {
     // Pre-processing (if any)
     final result = await run(params);

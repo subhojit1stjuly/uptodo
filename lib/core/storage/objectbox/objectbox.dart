@@ -1,11 +1,12 @@
+import 'dart:async';
+
 import 'package:injectable/injectable.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:uptodo/core/storage/objectbox/config/objectbox.g.dart'; // updated path
 
-@singleton
-
 /// the main objectBox provider class
+@singleton
 class ObjectBox {
   /// Factory constructor to return the same instance
   factory ObjectBox() {
@@ -18,7 +19,7 @@ class ObjectBox {
   // The single instance of the class
   static final ObjectBox _instance = ObjectBox._privateConstructor();
 
-  late final Store _store;
+  Store? _store;
 
   /// initialize the store
   Future<void> init() async {
@@ -30,15 +31,24 @@ class ObjectBox {
   }
 
   /// get the store
-  Store get store => _store;
+  Store get store {
+    if (_store == null) {
+      throw Exception('ObjectBox is not initialized. Call init() first.');
+    }
+    return _store!;
+  }
 
   /// get the box
   Box<T> getBox<T>() {
-    return _store.box<T>();
+    if (_store == null) {
+      throw Exception('ObjectBox is not initialized. Call init() first.');
+    }
+    return _store!.box<T>();
   }
 
   /// close the store
   Future<void> close() async {
-    _store.close();
+    _store?.close();
+    _store = null;
   }
 }

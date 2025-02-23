@@ -51,3 +51,25 @@ full_coverage_test.dart
 /lib/assets
 /lib/core/storage/objectbox/config/objectbox-model.json
 /integration_test/test_bundle.dart
+# Firebase secrets Environment files
+.env
+.env.development
+.env.production
+
+# Firebase config files
+google-services.json
+GoogleService-Info.plist
+firebase.json
+.firebaserc
+firebase-debug.log
+
+# Environment configurations
+/android/app/src/debug/google-services.json
+/android/app/src/release/google-services.json
+/ios/Runner/GoogleService-Info.plist
+/ios/config/development/GoogleService-Info.plist
+/ios/config/production/GoogleService-Info.plist
+.qodo
+
+# FVM Version Cache
+.fvm/

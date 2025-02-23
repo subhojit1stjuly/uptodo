@@ -8,6 +8,7 @@ const TextStyle globalDarkTextStyle = TextStyle(
 
 /// object for the dark themes
 final darkTheme = ThemeData(
+  primaryColorLight: const Color(0xFF8875FF),
   primaryColorDark: const Color(0xFF8875FF),
   fontFamily: 'Lato',
   splashColor: Colors.black87,
@@ -15,6 +16,9 @@ final darkTheme = ThemeData(
   useMaterial3: true,
   primaryColor: Colors.black87,
   textTheme: TextTheme(
+    titleLarge: globalDarkTextStyle.copyWith(
+      fontSize: 38,
+    ),
     displayLarge: globalDarkTextStyle.copyWith(
       fontSize: 32,
     ),

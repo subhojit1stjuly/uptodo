@@ -64,9 +64,21 @@
   "@username": {
     "description": "ಬಳಕೆದಾರ ಹೆಸರಿನ ಲೇಬಲ್"
   },
+  "username_hint": "ನಿಮ್ಮ ಬಳಕೆದಾರ ಹೆಸರನ್ನು ನಮೂದಿಸಿ",
+  "@username_hint": {
+    "description": "ಬಳಕೆದಾರ ಹೆಸರು ಸೂಚನೆ"
+  },
   "password": "ಪಾಸ್‌ವರ್ಡ್",
   "@password": {
     "description": "ಪಾಸ್‌ವರ್ಡ್ ಕ್ಷೇತ್ರದ ಲೇಬಲ್"
+  },
+  "password_hint": "ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ",
+  "@password_hint": {
+    "description": "ಪಾಸ್‌ವರ್ಡ್ ಸೂಚನೆ"
+  },
+  "confirm_password_hint": "ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ದೃಢೀಕರಿಸಿ",
+  "@confirm_password_hint": {
+    "description": "ಪಾಸ್‌ವರ್ಡ್ ದೃಢೀಕರಿಸು ಸೂಚನೆ"
   },
   "or": "ಅಥವಾ",
   "@or": {
@@ -87,6 +99,10 @@
   "register": "ನೋಂದಾಯಿಸು",
   "@register": {
     "description": "ನೋಂದಾಯಿಸು ಆಯ್ಕೆ ಪಠ್ಯ"
+  },
+  "already_have_account": "ಈಗಾಗಲೇ ಖಾತೆ ಇದೆಯೇ?",
+  "@already_have_account": {
+    "description": "'ಈಗಾಗಲೇ ಖಾತೆ ಇದೆಯೇ?' ಪ್ರಮ್ಪ್ಟ್ ಪಠ್ಯ"
   },
   "confirm_password": "ಪಾಸ್‌ವರ್ಡ್ ದೃಢೀಕರಿಸಿ",
   "@confirm_password": {
