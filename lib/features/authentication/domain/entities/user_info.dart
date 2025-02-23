@@ -39,5 +39,6 @@ class UserInfo {
   /// is email verified
   final bool emailVerified;
 
+  /// avatar url
   final String avatarUrl;
 }

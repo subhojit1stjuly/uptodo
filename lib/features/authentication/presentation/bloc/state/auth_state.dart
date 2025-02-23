@@ -8,9 +8,16 @@ class AuthState with _$AuthState {
   /// this state is emitted when the AuthenticationBloc is created is initial
   const factory AuthState.initial() = AuthStateInitial;
 
-  /// this state is emitted when the login/ register is successful
-  const factory AuthState.success() = AuthStateSuccess;
+  /// this state is emitted when the login is successful
+  const factory AuthState.loginSuccess() = AuthStateLoginSuccess;
 
-  /// this state is emitted when the login/ register is unsuccessful
-  const factory AuthState.failed() = AuthStateFailed;
+  /// this state is emitted when the register is successful
+
+  const factory AuthState.registerSuccess() = AuthStateRegisterSuccess;
+
+  /// this state is emitted when the login is unsuccessful
+  const factory AuthState.loginFailed() = AuthStateLoginFailed;
+
+  /// this state is emitted when the register is unsuccessful
+  const factory AuthState.registerFailed() = AuthStateRegisterFailed;
 }

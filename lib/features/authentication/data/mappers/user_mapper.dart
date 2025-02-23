@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
 import 'package:injectable/injectable.dart';
 import 'package:uptodo/features/authentication/data/models/user_info_model.dart';
-
+/// Maps a Firebase User to our domain UserInfoModel
+/// Returns null if the Firebase User is null
 @injectable
 class UserMapper {
   /// Maps a Firebase User to our domain UserInfoModel
