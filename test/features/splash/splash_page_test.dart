@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:uptodo/core/constants/app_localizations.dart';
 import 'package:uptodo/core/theme/dark_theme.dart';
 import 'package:uptodo/core/theme/light_theme.dart';
 import 'package:uptodo/features/splash/splash_page.dart';
@@ -88,22 +87,8 @@ MaterialApp testingApp({ThemeMode themeMode = ThemeMode.light}) {
     locale: const Locale('en', 'US'),
 
     /// Define supported locales
-    supportedLocales: const [
-      Locale('en', 'US'), // English
-      Locale('bn', 'IN'), // Bengali
-      Locale('kn', 'IN'), // Kannada
-      Locale('hi', 'IN'), // Hindi
-      /// Add more locales here
-    ],
-    localizationsDelegates: const [
-      /// Built-in localization for text direction LTR/RTL
-      GlobalMaterialLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate,
-      GlobalCupertinoLocalizations.delegate,
-
-      /// Your custom delegate for app-specific localization
-      AppLocalizations.delegate, // Add this line
-    ],
+    localizationsDelegates: AppLocalizations.localizationsDelegates,
+    supportedLocales: AppLocalizations.supportedLocales,
     theme: lightTheme,
     darkTheme: darkTheme,
     themeMode: themeMode,

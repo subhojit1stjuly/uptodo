@@ -1,4 +1,4 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:uptodo/core/constants/app_localizations.dart';
 
 /// service class for the Localization as the data can be used from the
 /// blocs, so moving the logic here, so that, there will be no need fo the

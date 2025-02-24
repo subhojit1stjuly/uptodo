@@ -1,3 +1,6 @@
-arb-dir: lib/l10n
+synthetic-package: false
+arb-dir: assets/l10n
+# Or, specifically provide an output path:
+output-dir: lib/core/constants
 template-arb-file: intl_en.arb
 output-localization-file: app_localizations.dart
