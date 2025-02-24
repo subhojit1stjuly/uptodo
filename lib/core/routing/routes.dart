@@ -2,7 +2,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
-import 'package:uptodo/core/constants/app_localizations.dart';
 import 'package:uptodo/core/di/injector.dart';
 import 'package:uptodo/core/routing/route_constants.dart';
 import 'package:uptodo/features/authentication/presentation/bloc/authentication_bloc.dart';
@@ -14,7 +13,6 @@ import 'package:uptodo/features/onboarding/presentation/bloc/onboarding_bloc.dar
 import 'package:uptodo/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:uptodo/features/settings/presentation/pages/change_language_page.dart';
 import 'package:uptodo/features/splash/splash_page.dart';
-import 'package:uptodo/l10n/app_localizations_service.dart';
 
 /// this is the routing configuration class
 @module
@@ -34,11 +32,8 @@ abstract class AppRouter {
             name: RouteConstants.onBoarding,
             path: RouteConstants.onBoarding,
             builder: (context, state) {
-              final localizations = AppLocalizations.of(context)!;
               return BlocProvider(
-                create: (_) => OnboardingBloc(
-                  localizationsService: AppLocalizationsService(localizations),
-                ),
+                create: (_) => OnboardingBloc(),
                 child: const OnboardingPage(),
               );
             },

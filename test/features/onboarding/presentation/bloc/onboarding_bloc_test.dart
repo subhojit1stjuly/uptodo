@@ -1,10 +1,10 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:uptodo/core/localizations/app_localizations_service.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/event/onboarding_event.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/state/onboarding_state.dart';
-import 'package:uptodo/l10n/app_localizations_service.dart';
 
 class MockAppLocalizationsService extends Mock
     implements AppLocalizationsService {}
@@ -19,7 +19,7 @@ void main() {
         .thenReturn('Title');
     when(() => localizationsService.getOnboardingDescription(any()))
         .thenReturn('Description');
-    onboardingBloc = OnboardingBloc(localizationsService: localizationsService);
+    onboardingBloc = OnboardingBloc();
   });
 
   blocTest<OnboardingBloc, OnboardingState>(

@@ -5,13 +5,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:uptodo/core/constants/assets.gen.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/event/onboarding_event.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/state/onboarding_state.dart';
-import 'package:uptodo/l10n/app_localizations_service.dart';
 
 /// this the Bloc for the onboarding screen
 class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   /// this is the constructor for the bloc with initial state sent
   /// to the super class
-  OnboardingBloc({required this.localizationsService})
+  OnboardingBloc()
       : super(
           OnboardState(
             data: [
@@ -43,9 +42,6 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   }
 
   late final List<SvgPicture> _onboardingData;
-
-  /// Localization object
-  final AppLocalizationsService localizationsService;
 
   Future<void> _initializeOnboarding(
     InitializeEvent event,

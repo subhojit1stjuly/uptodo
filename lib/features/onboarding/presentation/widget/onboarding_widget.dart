@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:uptodo/core/constants/app_localizations.dart';
+import 'package:uptodo/core/localizations/app_localizations.dart';
+import 'package:uptodo/core/localizations/app_localizations_service.dart';
 import 'package:uptodo/core/routing/route_constants.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/event/onboarding_event.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/state/onboarding_state.dart';
-import 'package:uptodo/l10n/app_localizations_service.dart';
 
 /// this Widget represent the Onboarding Page
 class OnboardingWidget extends StatefulWidget {

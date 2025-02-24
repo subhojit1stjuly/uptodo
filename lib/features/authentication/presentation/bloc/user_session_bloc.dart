@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
-import 'package:uptodo/core/constants/locale_constants.dart';
 import 'package:uptodo/core/utils/user_preference_utils.dart';
 import 'package:uptodo/features/authentication/domain/usecases/session/session_validation_use_case.dart';
 import 'package:uptodo/features/authentication/presentation/bloc/event/user_session_event.dart';
@@ -97,9 +96,9 @@ class UserSessionBloc extends Bloc<UserSessionEvent, UserSessionState> {
   ) async {
     // TODO(Subhojit): Implement the logic to save the local changes
     emit(
-      const UserSessionState.preferencesChanged(
+      UserSessionState.preferencesChanged(
         preferences: (
-          local: LocaleConstants.defaultLocale,
+          local: event.local,
           themeMode: ThemeMode.system,
         ),
       ),

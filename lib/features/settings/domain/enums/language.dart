@@ -3,27 +3,24 @@ import 'dart:ui';
 /// supported languages
 enum Language {
   /// English
-  english('en', 'US'),
+  english('en'),
 
   /// Bengali
-  bengali('bn', 'IN'),
+  bengali('bn'),
 
   /// Kannada
-  kannada('kn', 'IN'),
+  kannada('kn'),
 
   /// Hindi
-  hindi('hi', 'IN');
+  hindi('hi');
 
-  const Language(this.code, this.countryCode);
+  const Language(this.code);
 
   /// language code
   final String code;
 
-  /// country code
-  final String countryCode;
-
   /// Converts the Language to a Locale
-  Locale get locale => Locale(code, countryCode);
+  Locale get locale => Locale(code);
 
   /// Converts a string to a Language
   static Language fromString(String value) {

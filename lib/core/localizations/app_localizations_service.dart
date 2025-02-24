@@ -1,4 +1,7 @@
-import 'package:uptodo/core/constants/app_localizations.dart';
+import 'dart:ui';
+
+import 'package:uptodo/core/localizations/app_localizations.dart';
+import 'package:uptodo/features/settings/domain/enums/language.dart';
 
 /// service class for the Localization as the data can be used from the
 /// blocs, so moving the logic here, so that, there will be no need fo the
@@ -41,4 +44,15 @@ class AppLocalizationsService {
 
   /// Skip text
   String get skip => localizations.button_skip;
+
+  /// Returns the name of the language based on the Locale
+  String getLocaleName(Locale locale) {
+    final names = {
+      Language.english.code: 'English',
+      Language.bengali.code: 'বাংলা', // Bengali
+      Language.kannada.code: 'ಕನ್ನಡ', // Kannada
+      Language.hindi.code: 'हिंदी', // Hindi
+    };
+    return names[locale.languageCode] ?? locale.languageCode;
+  }
 }

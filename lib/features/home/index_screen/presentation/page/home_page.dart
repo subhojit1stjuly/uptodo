@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:uptodo/core/constants/app_localizations.dart';
 import 'package:uptodo/core/constants/assets.gen.dart';
+import 'package:uptodo/core/localizations/app_localizations.dart';
 import 'package:uptodo/features/home/index_screen/presentation/widget/custom_bottom_nav.dart';
 
 /// HomePage is the page where the user will land after login
