@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:uptodo/core/constants/app_localizations.dart';
 import 'package:uptodo/core/constants/locale_constants.dart';
 import 'package:uptodo/features/authentication/presentation/bloc/event/user_session_event.dart';
 import 'package:uptodo/features/authentication/presentation/bloc/user_session_bloc.dart';

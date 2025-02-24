@@ -3,9 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:uptodo/core/constants/app_localizations.dart';
 import 'package:uptodo/core/constants/locale_constants.dart';
 import 'package:uptodo/core/di/injector.dart';
 import 'package:uptodo/core/errors/app_error_handler.dart';
@@ -43,16 +42,6 @@ Future<void> main() async {
 class UpTodo extends StatelessWidget {
   /// constructor is getting only key as parameter
   const UpTodo({super.key});
-
-  List<LocalizationsDelegate<dynamic>> get _localizationsDelegates => const [
-        /// Built-in localization for text direction LTR/RTL
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-
-        /// Your custom delegate for app-specific localization
-        AppLocalizations.delegate, // Add this line
-      ];
 
   Locale? _localeResolutionCallback(
     Locale? locale,
@@ -95,8 +84,8 @@ class UpTodo extends StatelessWidget {
             locale: prefs.local,
 
             /// Define supported locales
-            supportedLocales: LocaleConstants.supportedLocales,
-            localizationsDelegates: _localizationsDelegates,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
 
             /// Returns a locale which will be used if the
             /// system's locale is not supported.
