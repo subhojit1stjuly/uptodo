@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uptodo/core/constants/assets.gen.dart';
+import 'package:uptodo/core/localizations/app_localizations.dart';
+import 'package:uptodo/features/home/index_screen/presentation/bloc/event/home_event.dart';
+import 'package:uptodo/features/home/index_screen/presentation/bloc/home_bloc.dart';
 
 /// A custom bottom navigation bar.
 class CustomBottomNavBar extends StatelessWidget {
@@ -50,7 +54,7 @@ class CustomBottomNavBar extends StatelessWidget {
                             height: 24,
                             width: 24,
                           ),
-                          label: 'Home',
+                          label: AppLocalizations.of(context)!.index,
                           isSelected: selectedIndex == 0,
                           onTap: () => onTap(0),
                         ),
@@ -59,7 +63,7 @@ class CustomBottomNavBar extends StatelessWidget {
                             height: 24,
                             width: 24,
                           ),
-                          label: 'Calendar',
+                          label: AppLocalizations.of(context)!.calendar,
                           isSelected: selectedIndex == 1,
                           onTap: () => onTap(1),
                         ),
@@ -76,7 +80,7 @@ class CustomBottomNavBar extends StatelessWidget {
                             height: 24,
                             width: 24,
                           ),
-                          label: 'Focus',
+                          label: AppLocalizations.of(context)!.focus,
                           isSelected: selectedIndex == 2,
                           onTap: () => onTap(2),
                         ),
@@ -85,7 +89,7 @@ class CustomBottomNavBar extends StatelessWidget {
                             height: 24,
                             width: 24,
                           ),
-                          label: 'Profile',
+                          label: AppLocalizations.of(context)!.profile,
                           isSelected: selectedIndex == 3,
                           onTap: () => onTap(3),
                         ),
@@ -101,7 +105,11 @@ class CustomBottomNavBar extends StatelessWidget {
             right: 0,
             top: 0,
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                context.read<HomeBloc>().add(
+                      const HomeEvent.openTaskCreateDialog(),
+                    );
+              },
               child: Container(
                 width: 55,
                 height: 55,

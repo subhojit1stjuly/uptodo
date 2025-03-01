@@ -10,7 +10,8 @@ import 'package:uptodo/features/authentication/presentation/pages/login_page.dar
 import 'package:uptodo/features/authentication/presentation/pages/register_page.dart';
 import 'package:uptodo/features/home/calendar_screen/presentation/page/calendar_page.dart';
 import 'package:uptodo/features/home/focus_screen/presentation/page/focus_page.dart';
-import 'package:uptodo/features/home/index_screen/presentation/cubit/navigation_cubit.dart';
+import 'package:uptodo/features/home/index_screen/presentation/bloc/home_bloc.dart';
+import 'package:uptodo/features/home/index_screen/presentation/bloc/state/home_state.dart';
 import 'package:uptodo/features/home/index_screen/presentation/page/home_page.dart';
 import 'package:uptodo/features/home/index_screen/presentation/page/index_page.dart';
 import 'package:uptodo/features/home/profile_screen/presentation/page/profile_page.dart';
@@ -61,7 +62,7 @@ abstract class AppRouter {
           ),
           ShellRoute(
             builder: (context, state, child) => BlocProvider.value(
-              value: getIt<NavigationCubit>(),
+              value: getIt<HomeBloc>(),
               child: HomePage(
                 child: child,
               ),
@@ -89,10 +90,14 @@ abstract class AppRouter {
               ),
             ],
             redirect: (context, state) {
-              final state = getIt<NavigationCubit>().state;
-
-              /// Handle navigation between tabs
-              return RouteConstants.homeNavigation[state.selectedIndex];
+              final state = getIt<HomeBloc>().state;
+              if (state is NavigationChangeState) {
+                /// Handle navigation between tabs
+                return RouteConstants.homeNavigation[state.index];
+              } else if (state is LogoutState) {
+                return RouteConstants.login;
+              }
+              return null;
             },
           ),
           GoRoute(
