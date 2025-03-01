@@ -58,7 +58,7 @@ class _CalendarTabsWidgetState extends State<CalendarTabsWidget> {
             pressedColor: Theme.of(context).primaryColorLight.withOpacity(0.2),
           ),
           // Content area that changes based on selected tab
-          _buildTabContent()
+          _buildTabContent(),
         ],
       ),
     );
