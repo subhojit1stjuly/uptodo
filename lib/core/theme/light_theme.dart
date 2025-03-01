@@ -14,6 +14,7 @@ final lightTheme = ThemeData(
   brightness: Brightness.light,
   useMaterial3: true,
   primaryColor: Colors.white70,
+  shadowColor: const Color(0xFC1B8FF),
   textTheme: TextTheme(
     titleLarge: globalLightTextStyle.copyWith(
       fontSize: 38,

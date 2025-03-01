@@ -15,6 +15,7 @@ final darkTheme = ThemeData(
   brightness: Brightness.dark,
   useMaterial3: true,
   primaryColor: Colors.black87,
+  shadowColor: const Color(0x1AFFFFFF),
   textTheme: TextTheme(
     titleLarge: globalDarkTextStyle.copyWith(
       fontSize: 38,
