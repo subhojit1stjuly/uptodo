@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:uptodo/core/constants/app_localizations.dart';
+import 'package:uptodo/core/localizations/app_localizations.dart';
 import 'package:uptodo/core/theme/dark_theme.dart';
 import 'package:uptodo/core/theme/light_theme.dart';
 import 'package:uptodo/features/splash/splash_page.dart';

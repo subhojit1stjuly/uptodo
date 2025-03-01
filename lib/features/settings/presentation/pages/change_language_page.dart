@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:uptodo/core/constants/app_localizations.dart';
-import 'package:uptodo/core/constants/locale_constants.dart';
+import 'package:uptodo/core/localizations/app_localizations.dart';
+import 'package:uptodo/core/localizations/app_localizations_service.dart';
 import 'package:uptodo/features/authentication/presentation/bloc/event/user_session_event.dart';
 import 'package:uptodo/features/authentication/presentation/bloc/user_session_bloc.dart';
 
@@ -36,12 +36,13 @@ class _ChangeLanguagePageState extends State<ChangeLanguagePage> {
         data: Theme.of(context).listTileTheme,
         child: ListView.builder(
           itemBuilder: (context, index) {
-            final locale = LocaleConstants.supportedLocales[index];
+            final locale = AppLocalizations.supportedLocales[index];
             return Padding(
               padding: const EdgeInsets.all(10),
               child: ListTile(
                 title: Text(
-                  LocaleConstants.getLocaleName(locale),
+                  AppLocalizationsService(AppLocalizations.of(context)!)
+                      .getLocaleName(locale),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 trailing: Radio(
@@ -59,7 +60,7 @@ class _ChangeLanguagePageState extends State<ChangeLanguagePage> {
               ),
             );
           },
-          itemCount: LocaleConstants.supportedLocales.length,
+          itemCount: AppLocalizations.supportedLocales.length,
         ),
       ),
     );

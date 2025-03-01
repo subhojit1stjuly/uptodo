@@ -73,8 +73,8 @@ firebase-debug.log
 
 # FVM Version Cache
 .fvm/
-/lib/core/constants/app_localizations.dart
-/lib/core/constants/app_localizations_bn.dart
-/lib/core/constants/app_localizations_en.dart
-/lib/core/constants/app_localizations_hi.dart
-/lib/core/constants/app_localizations_kn.dart
+/lib/core/localizations/app_localizations.dart
+/lib/core/localizations/app_localizations_bn.dart
+/lib/core/localizations/app_localizations_en.dart
+/lib/core/localizations/app_localizations_hi.dart
+/lib/core/localizations/app_localizations_kn.dart

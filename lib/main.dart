@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
-import 'package:uptodo/core/constants/app_localizations.dart';
-import 'package:uptodo/core/constants/locale_constants.dart';
 import 'package:uptodo/core/di/injector.dart';
 import 'package:uptodo/core/errors/app_error_handler.dart';
+import 'package:uptodo/core/localizations/app_localizations.dart';
 import 'package:uptodo/core/theme/dark_theme.dart';
 import 'package:uptodo/core/theme/light_theme.dart';
 import 'package:uptodo/features/authentication/presentation/bloc/state/user_session_state.dart';
@@ -71,7 +70,7 @@ class UpTodo extends StatelessWidget {
             preferencesChanged: (preferences) => preferences,
             orElse: () => (
               themeMode: ThemeMode.system,
-              local: LocaleConstants.defaultLocale
+              local: const Locale('en'),
             ),
           );
           return MaterialApp.router(

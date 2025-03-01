@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:uptodo/core/constants/app_localizations.dart';
 import 'package:uptodo/core/constants/assets.gen.dart';
+import 'package:uptodo/core/localizations/app_localizations.dart';
 import 'package:uptodo/core/routing/route_constants.dart';
 import 'package:uptodo/features/authentication/presentation/bloc/authentication_bloc.dart';
 import 'package:uptodo/features/authentication/presentation/bloc/event/auth_event.dart';
