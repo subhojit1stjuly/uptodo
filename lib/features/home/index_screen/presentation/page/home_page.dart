@@ -1,64 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uptodo/core/constants/assets.gen.dart';
-import 'package:uptodo/core/localizations/app_localizations.dart';
+import 'package:uptodo/features/home/index_screen/presentation/cubit/navigation_cubit.dart';
+import 'package:uptodo/features/home/index_screen/presentation/cubit/navigation_state.dart';
 import 'package:uptodo/features/home/index_screen/presentation/widget/custom_bottom_nav.dart';
+import 'package:uptodo/features/home/index_screen/presentation/widget/loading_widget.dart';
 
-/// HomePage is the page where the user will land after login
-class HomePage extends StatefulWidget {
-  /// const constructor for HomePage
-  const HomePage({super.key});
+/// Home page
+class HomePage extends StatelessWidget {
+  /// Constructor for HomePage
+  const HomePage({
+    required this.child,
+    super.key,
+  });
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-
-  final List<Widget> _pages = const [
-    Text('Home'),
-    Text('Calendar'),
-    Text('Focus'),
-    Text('Settings'),
-  ];
+  /// Child widget to display in the body
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: Assets.icons.dash.svg(
-          height: 24,
-          width: 24,
-        ),
-        centerTitle: true,
-        title: Text(
-          textAlign: TextAlign.center,
-          AppLocalizations.of(context)!.index,
-          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                fontWeight: FontWeight.w700,
-              ),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () {},
-          ),
-        ],
+    return BlocBuilder<NavigationCubit, NavigationState>(
+      bloc: context.read<NavigationCubit>(),
+      builder: (context, state) {
+        if (state.isLoading) {
+          return const LoadingWidget();
+        }
+
+        if (state.error != null) {
+          return ErrorWidget.withDetails(message: state.error!);
+        }
+
+        return Scaffold(
+          appBar: _buildAppBar(context, state),
+          bottomNavigationBar: _buildNavigationBar(context, state),
+          body: SafeArea(child: child),
+        );
+      },
+    );
+  }
+
+  PreferredSizeWidget _buildAppBar(
+    BuildContext context,
+    NavigationState state,
+  ) {
+    return AppBar(
+      leading: Assets.icons.dash.svg(height: 24, width: 24),
+      centerTitle: true,
+      title: Text(
+        state.items[state.selectedIndex].title,
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              fontWeight: FontWeight.w700,
+            ),
       ),
-      bottomNavigationBar: CustomBottomNavBar(
-        selectedIndex: _selectedIndex,
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-      ),
-      body: SafeArea(
-        child: IndexedStack(
-          index: _selectedIndex,
-          children: _pages,
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.logout),
+          onPressed: () => context.read<NavigationCubit>().logout(),
         ),
-      ),
+      ],
+    );
+  }
+
+  Widget _buildNavigationBar(BuildContext context, NavigationState state) {
+    return CustomBottomNavBar(
+      selectedIndex: state.selectedIndex,
+      onTap: (index) {
+        context.read<NavigationCubit>().setIndex(index);
+      },
     );
   }
 }

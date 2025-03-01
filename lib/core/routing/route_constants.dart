@@ -20,4 +20,27 @@ class RouteConstants {
 
   /// change language route
   static const String changeLanguage = '/changeLanguage';
+
+  /// settings route
+  static const String settings = '/settings';
+
+  /// index screen route
+  static const String index = '/index';
+
+  /// calendar screen route
+  static const String calendar = '/calendar';
+
+  /// focus screen route
+  static const String focus = '/focus';
+
+  /// profile screen route
+  static const String profile = '/profile';
+
+  /// home navigation
+  static const Map<int, String> homeNavigation = {
+    0: home,
+    1: calendar,
+    2: focus,
+    3: profile,
+  };
 }

@@ -8,7 +8,12 @@ import 'package:uptodo/features/authentication/presentation/bloc/authentication_
 import 'package:uptodo/features/authentication/presentation/bloc/user_session_bloc.dart';
 import 'package:uptodo/features/authentication/presentation/pages/login_page.dart';
 import 'package:uptodo/features/authentication/presentation/pages/register_page.dart';
+import 'package:uptodo/features/home/calendar_screen/presentation/page/calendar_page.dart';
+import 'package:uptodo/features/home/focus_screen/presentation/page/focus_page.dart';
+import 'package:uptodo/features/home/index_screen/presentation/cubit/navigation_cubit.dart';
 import 'package:uptodo/features/home/index_screen/presentation/page/home_page.dart';
+import 'package:uptodo/features/home/index_screen/presentation/page/index_page.dart';
+import 'package:uptodo/features/home/profile_screen/presentation/page/profile_page.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:uptodo/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:uptodo/features/settings/presentation/pages/change_language_page.dart';
@@ -54,10 +59,41 @@ abstract class AppRouter {
               child: const RegisterPage(),
             ),
           ),
-          GoRoute(
-            name: RouteConstants.home,
-            path: RouteConstants.home,
-            builder: (context, state) => const HomePage(),
+          ShellRoute(
+            builder: (context, state, child) => BlocProvider.value(
+              value: getIt<NavigationCubit>(),
+              child: HomePage(
+                child: child,
+              ),
+            ),
+            routes: [
+              GoRoute(
+                name: RouteConstants.index,
+                path: RouteConstants.home,
+                builder: (context, state) => const IndexPage(),
+              ),
+              GoRoute(
+                name: RouteConstants.calendar,
+                path: RouteConstants.calendar,
+                builder: (context, state) => const CalendarPage(),
+              ),
+              GoRoute(
+                name: RouteConstants.focus,
+                path: RouteConstants.focus,
+                builder: (context, state) => const FocusPage(),
+              ),
+              GoRoute(
+                name: RouteConstants.profile,
+                path: RouteConstants.profile,
+                builder: (context, state) => const ProfilePage(),
+              ),
+            ],
+            redirect: (context, state) {
+              final state = getIt<NavigationCubit>().state;
+
+              /// Handle navigation between tabs
+              return RouteConstants.homeNavigation[state.selectedIndex];
+            },
           ),
           GoRoute(
             name: RouteConstants.changeLanguage,
