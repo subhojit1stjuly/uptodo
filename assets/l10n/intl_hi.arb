@@ -240,6 +240,10 @@
   "@task_title": {
     "description": "प्लेसहोल्डर सहित कार्य शीर्षक के लिए लेबल"
   },
+  "add_task_title": "कार्य शीर्षक जोड़ें",
+  "@add_task_title": {
+    "description": "प्लेसहोल्डर के साथ कार्य शीर्षक का लेबल"
+  },
   "today": "आज",
   "@today": {
     "description": "आज के लिए पाठ"

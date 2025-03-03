@@ -240,6 +240,10 @@
   "@task_title": {
     "description": "প্লেসহোল্ডার সহ কাজের শিরোনামের লেবেল"
   },
+  "add_task_title": "কাজের শিরোনাম যোগ করুন",
+  "@add_task_title": {
+    "description": "প্লেসহোল্ডার সহ কাজের শিরোনামের লেবেল"
+  },
   "today": "আজ",
   "@today": {
     "description": "আজকের জন্য পাঠ্য"

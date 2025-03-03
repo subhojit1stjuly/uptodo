@@ -240,6 +240,10 @@
   "@task_title": {
     "description": "Label for task title with placeholder"
   },
+  "add_task_title": "Add Task title",
+  "@add_task_title": {
+    "description": "Label for Add task title with placeholder"
+  },
   "today": "Today",
   "@today": {
     "description": "Text for today"
