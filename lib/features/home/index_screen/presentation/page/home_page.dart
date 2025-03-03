@@ -6,6 +6,7 @@ import 'package:uptodo/features/home/index_screen/presentation/bloc/home_bloc.da
 import 'package:uptodo/features/home/index_screen/presentation/bloc/state/home_state.dart';
 import 'package:uptodo/features/home/index_screen/presentation/widget/custom_bottom_nav.dart';
 import 'package:uptodo/features/home/index_screen/presentation/widget/loading_widget.dart';
+import 'package:uptodo/features/task_details/presentation/bloc/task_bloc.dart';
 import 'package:uptodo/shared/widgets/task/task_creation_bottom_sheet.dart';
 
 /// Home page
@@ -28,7 +29,11 @@ class HomePage extends StatelessWidget {
         if (curr is OpenTaskDialogState) {
           showModalBottomSheet<void>(
             context: context,
-            builder: (context) => const TaskCreationBottomSheet(),
+            isScrollControlled: true,
+            builder: (context) => BlocProvider(
+              create: (context) => TaskBloc(),
+              child: const TaskCreationBottomSheet(),
+            ),
           );
         }
       },

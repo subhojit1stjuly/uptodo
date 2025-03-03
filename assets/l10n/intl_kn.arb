@@ -224,6 +224,10 @@
   "@edit_task_title": {
     "description": "ಕಾರ್ಯ ಸಂಪಾದಿಸಲು ಶೀರ್ಷಿಕೆ ಪಠ್ಯ"
   },
+  "add_task_title": "ಕಾರ್ಯ ಶೀರ್ಷಿಕೆ ಸೇರಿಸಿ",
+  "@add_task_title": {
+    "description": "ಪ್ಲೇಸ್ಹೋಲ್ಡರ್ ಜೊತೆಗೆ ಕಾರ್ಯ ಶೀರ್ಷಿಕೆ ಲೇಬಲ್"
+  },
   "edit": "ಸಂಪಾದಿಸಿ",
   "@edit": {
     "description": "ಸಂಪಾದಿಸಲು ಪಠ್ಯ"

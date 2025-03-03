@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatefulWidget {
   /// Constructor for the CustomTextField
   const CustomTextField({
-    required this.labelText,
+    this.labelText = '',
     this.hintText,
     super.key,
     this.controller,
@@ -51,15 +51,18 @@ class _CustomTextFieldState extends State<CustomTextField> {
       mainAxisSize: MainAxisSize.min,
       children: [
         // Label text positioned above the TextFormField
-        Padding(
-          padding: const EdgeInsets.only(left: 4, bottom: 12),
+        if (widget.labelText.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(left: 4, bottom: 12),
           child: Text(
             widget.labelText,
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
           ),
-        ),
+          )
+        else
+          const SizedBox.shrink(),
         // Custom styled TextFormField
         TextFormField(
           controller: widget.controller,
