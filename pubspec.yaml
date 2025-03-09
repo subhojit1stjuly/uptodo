@@ -13,7 +13,9 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter_screenutil: ^5.9.3
   # Database for the app
-  drift: ^2.18.0
+  drift: ^2.26.0
+  sqlcipher_flutter_libs: ^0.6.5
+  drift_flutter: ^0.2.4
   objectbox: ^4.0.1
   objectbox_flutter_libs: ^4.0.1
 
@@ -73,6 +75,7 @@ dev_dependencies:
   intl_translation:
   intl_utils: ^2.8.7
   json_serializable: ^6.9.0
+  drift_dev: ^2.26.0
 
 objectbox:
   output_dir: core/storage/objectbox/config/
