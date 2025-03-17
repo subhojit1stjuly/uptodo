@@ -55,9 +55,6 @@ class _TaskCreationBottomSheetState extends State<TaskCreationBottomSheet> {
                 initialDate: DateTime.now(),
               );
             } else if (type == TaskPropertyEvents.categoryPicker) {
-              // Open category picker
-            } else {
-              // Show the category picker dialog
               /// Shows category selection dialog
               await showDialog<CategoryItem>(
                 context: context,
@@ -82,6 +79,8 @@ class _TaskCreationBottomSheetState extends State<TaskCreationBottomSheet> {
                   );
                 },
               );
+            } else {
+              // Show the priority picker dialog
             }
           },
           orElse: () {},

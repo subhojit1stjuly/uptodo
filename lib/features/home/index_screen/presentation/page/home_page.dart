@@ -7,7 +7,7 @@ import 'package:uptodo/features/home/index_screen/presentation/bloc/state/home_s
 import 'package:uptodo/features/home/index_screen/presentation/widget/custom_bottom_nav.dart';
 import 'package:uptodo/features/home/index_screen/presentation/widget/loading_widget.dart';
 import 'package:uptodo/features/task_details/presentation/bloc/task_bloc.dart';
-import 'package:uptodo/shared/widgets/task/task_creation_bottom_sheet.dart';
+import 'package:uptodo/features/task_details/presentation/widget/task_creation_bottom_sheet.dart';
 
 /// Home page
 class HomePage extends StatelessWidget {

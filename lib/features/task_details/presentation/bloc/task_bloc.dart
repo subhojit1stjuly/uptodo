@@ -11,8 +11,9 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   void _onOpenPicker(OpenPickerEvent event, Emitter<TaskState> emit) {
-    emit(TaskState.pickerOpen(
-        event.type, DateTime.now().millisecondsSinceEpoch));
+    emit(
+      TaskState.pickerOpen(event.type, DateTime.now().millisecondsSinceEpoch),
+    );
   }
 
   void _onCreateTask(CreateEvent event, Emitter<TaskState> emit) {
