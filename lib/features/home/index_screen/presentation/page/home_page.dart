@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uptodo/core/constants/assets.gen.dart';
+import 'package:uptodo/core/di/injector.dart';
 import 'package:uptodo/features/home/index_screen/presentation/bloc/event/home_event.dart';
 import 'package:uptodo/features/home/index_screen/presentation/bloc/home_bloc.dart';
 import 'package:uptodo/features/home/index_screen/presentation/bloc/state/home_state.dart';
@@ -31,7 +32,7 @@ class HomePage extends StatelessWidget {
             context: context,
             isScrollControlled: true,
             builder: (context) => BlocProvider(
-              create: (context) => TaskBloc(),
+              create: (context) => getIt<TaskBloc>(),
               child: const TaskCreationBottomSheet(),
             ),
           );

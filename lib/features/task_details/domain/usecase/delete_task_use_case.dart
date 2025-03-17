@@ -1,19 +1,18 @@
 import 'package:injectable/injectable.dart';
 import 'package:uptodo/core/utils/use_case.dart';
-import 'package:uptodo/features/task_details/data/model/task_model.dart';
 import 'package:uptodo/features/task_details/domain/repositories/task_repository.dart';
 
-/// UseCase for creating a new task
+/// UseCase for deleting a task
 @injectable
-class CreateTaskUseCase extends UseCase<int, TaskModel> {
+class DeleteTaskUseCase extends UseCase<bool, int> {
   /// constructor
-  CreateTaskUseCase(this.taskRepository);
+  DeleteTaskUseCase(this.taskRepository);
 
   /// repository that handles task operations
   final TaskRepository taskRepository;
 
   @override
-  Future<int> run(TaskModel params) async {
-    return taskRepository.createTask(params);
+  Future<bool> run(int params) async {
+    return taskRepository.deleteTask(params);
   }
 }
