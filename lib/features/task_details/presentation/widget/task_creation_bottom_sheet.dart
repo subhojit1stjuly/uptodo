@@ -8,6 +8,7 @@ import 'package:uptodo/core/di/injector.dart';
 import 'package:uptodo/core/localizations/app_localizations.dart';
 import 'package:uptodo/features/category/presentation/widget/choose_category_widget.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/event_type.dart';
+import 'package:uptodo/features/task_details/data/model/task_model.dart';
 import 'package:uptodo/features/task_details/presentation/bloc/event/task_event.dart';
 import 'package:uptodo/features/task_details/presentation/bloc/state/task_state.dart';
 import 'package:uptodo/features/task_details/presentation/bloc/task_bloc.dart';
@@ -55,9 +56,6 @@ class _TaskCreationBottomSheetState extends State<TaskCreationBottomSheet> {
                 initialDate: DateTime.now(),
               );
             } else if (type == TaskPropertyEvents.categoryPicker) {
-              // Open category picker
-            } else {
-              // Show the category picker dialog
               /// Shows category selection dialog
               await showDialog<CategoryItem>(
                 context: context,
@@ -82,6 +80,8 @@ class _TaskCreationBottomSheetState extends State<TaskCreationBottomSheet> {
                   );
                 },
               );
+            } else {
+              // Show the priority picker dialog
             }
           },
           orElse: () {},
@@ -175,7 +175,19 @@ class _TaskCreationBottomSheetState extends State<TaskCreationBottomSheet> {
                       height: 24,
                       width: 24,
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      bloc.add(
+                        TaskEvent.create(
+                          TaskModel(
+                            description: _taskDescriptionController.text,
+                            title: _taskNameController.text,
+                            priorityId: 1,
+                            taskTime: DateTime.now(),
+                            categoryId: 1,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

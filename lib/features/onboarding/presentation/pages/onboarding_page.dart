@@ -18,14 +18,15 @@ class OnboardingPage extends StatefulWidget {
 class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<OnboardingBloc>();
     return BlocBuilder<OnboardingBloc, OnboardingState>(
       buildWhen: (_, curr) => curr is WelComeState || curr is OnboardState,
-      bloc: context.read<OnboardingBloc>(),
+      bloc: bloc,
       builder: (context, state) {
         return state.maybeWhen(
           welcome: () => const WelcomeWidget(),
           onboard: (List<SvgPicture> data) => OnboardingWidget(
-            bloc: context.read<OnboardingBloc>(),
+            bloc: bloc,
             data: data,
           ),
           orElse: () {
