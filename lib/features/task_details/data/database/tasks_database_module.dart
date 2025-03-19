@@ -1,10 +1,12 @@
 import 'package:drift/drift.dart';
+import 'package:injectable/injectable.dart';
 import 'package:uptodo/core/storage/database/config/app_database.dart';
 import 'package:uptodo/features/task_details/domain/entities/tasks_entity.dart';
 
 part 'tasks_database_module.g.dart';
 
 /// TasksDatabaseModule
+@injectable
 @DriftAccessor(tables: [TasksEntity])
 class TasksDatabaseModule extends DatabaseAccessor<AppDatabase>
     with _$TasksDatabaseModuleMixin {
@@ -12,7 +14,7 @@ class TasksDatabaseModule extends DatabaseAccessor<AppDatabase>
   TasksDatabaseModule(super.attachedDatabase);
 
   /// Get all tasks
-  Future<List<TasksEntityData>> getAllTasks() => select(tasksEntity).get();
+  Stream<List<TasksEntityData>> watchAllTasks() => select(tasksEntity).watch();
 
   /// Get task by id
   Future<TasksEntityData> getTaskById(int id) {

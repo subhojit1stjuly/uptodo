@@ -49,4 +49,23 @@ class TaskRepositoryImpl implements TaskRepository {
   Future<bool> deleteTask(int id) {
     return _databaseModule.deleteTask(id).then((value) => value > 0);
   }
+
+  @override
+  Stream<List<TaskModel>> watchAllTasks() =>
+      _databaseModule.watchAllTasks().map(
+            (tasks) => tasks
+                .map(
+                  (task) => TaskModel(
+                    taskId: task.taskId.toString(),
+                    title: task.title,
+                    description: task.description,
+                    subTaskId: task.subTaskId,
+                    priorityId: task.priorityId,
+                    taskTime: task.taskTime,
+                    categoryId: task.categoryId,
+                    status: task.status,
+                  ),
+                )
+                .toList(),
+          );
 }
