@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:uptodo/core/di/injector.dart';
 import 'package:uptodo/core/localizations/app_localizations.dart';
+import 'package:uptodo/features/category/data/model/category_model.dart';
+import 'package:uptodo/features/category/presentation/bloc/category_bloc.dart';
+import 'package:uptodo/features/category/presentation/bloc/state/category_state.dart';
 
 /// A widget to choose a category
 class ChooseCategoryWidget extends StatefulWidget {
   /// ChooseCategoryWidget constructor
-  const ChooseCategoryWidget({super.key});
+  const ChooseCategoryWidget({required this.onCategorySelected, super.key});
+
+  /// Callback when category is selected
+  final void Function(CategoryItem value) onCategorySelected;
 
   @override
   State<ChooseCategoryWidget> createState() => _ChooseCategoryWidgetState();
@@ -13,107 +22,92 @@ class ChooseCategoryWidget extends StatefulWidget {
 class _ChooseCategoryWidgetState extends State<ChooseCategoryWidget> {
   int? _selectedCategoryIndex;
 
-  // Mock categories - replace with your actual data source
-  final List<CategoryItem> _categories = [
-    CategoryItem(name: 'Work', color: Colors.blue, icon: Icons.work),
-    CategoryItem(name: 'Study', color: Colors.green, icon: Icons.school),
-    CategoryItem(name: 'Personal', color: Colors.orange, icon: Icons.person),
-    CategoryItem(
-      name: 'Shopping',
-      color: Colors.purple,
-      icon: Icons.shopping_cart,
-    ),
-    CategoryItem(name: 'Health', color: Colors.red, icon: Icons.favorite),
-    CategoryItem(
-      name: 'Finance',
-      color: Colors.indigo,
-      icon: Icons.attach_money,
-    ),
-    CategoryItem(name: 'Home', color: Colors.brown, icon: Icons.home),
-    CategoryItem(name: 'Entertainment', color: Colors.pink, icon: Icons.movie),
-    CategoryItem(
-      name: 'Family',
-      color: Colors.teal,
-      icon: Icons.family_restroom,
-    ),
-    CategoryItem(name: 'Other', color: Colors.grey, icon: Icons.more_horiz),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            AppLocalizations.of(context)?.choose_category ?? 'Choose Category',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
+    return BlocBuilder<CategoryBloc, CategoryState>(
+      bloc: context.read<CategoryBloc>(),
+      buildWhen: (previous, current) =>
+          current is LoadingState || current is LoadedState,
+      builder: (context, state) {
+        return state.when(
+          loading: () => const Center(child: CircularProgressIndicator()),
+          loaded: (categories) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Text(
+                    AppLocalizations.of(context)!.choose_category,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
                 ),
-          ),
-        ),
-        GridView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
-          ),
-          itemCount: _categories.length + 1,
-          // Categories + add button
-          itemBuilder: (context, index) {
-            if (index < _categories.length) {
-              return _buildCategoryItem(index);
-            } else {
-              return _buildAddCategoryItem();
-            }
-          },
-        ),
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {
-                // Handle create new category button tap
-              },
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-              ),
-              child: Text(
-                AppLocalizations.of(context)!.create_new_category,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
+                GridView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                  ),
+                  itemCount: categories.length + 1,
+                  // Categories + add button
+                  itemBuilder: (context, index) {
+                    if (index < categories.length) {
+                      return _buildCategoryItem(index, categories);
+                    } else {
+                      return const SizedBox.shrink();
+                    }
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Handle create new category button tap
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                      ),
+                      child: Text(
+                        AppLocalizations.of(context)!.create_new_category,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
                     ),
-              ),
-            ),
-          ),
-        ),
-      ],
+                  ),
+                ),
+              ],
+            );
+          },
+          error: (message) => Center(child: Text(message)),
+          empty: () => const Center(child: Text('No categories')),
+        );
+      },
     );
   }
 
-  Widget _buildCategoryItem(int index) {
-    final category = _categories[index];
+  Widget _buildCategoryItem(int index, List<CategoryItem> categories) {
+    final category = categories[index];
     final isSelected = _selectedCategoryIndex == index;
 
     return InkWell(
       onTap: () {
-        setState(() {
-          _selectedCategoryIndex = index;
-        });
+        widget.onCategorySelected(category);
+        getIt<GoRouter>().pop();
         // Report selected category
       },
       child: Container(
         decoration: BoxDecoration(
           color: category.color.withValues(alpha: 0.2),
           borderRadius: BorderRadius.circular(8),
-          border:
-              isSelected ? Border.all(color: category.color, width: 2) : null,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -136,55 +130,4 @@ class _ChooseCategoryWidgetState extends State<ChooseCategoryWidget> {
       ),
     );
   }
-
-  Widget _buildAddCategoryItem() {
-    return InkWell(
-      onTap: () {
-        // Handle add category item tap
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.grey.withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color: Colors.grey,
-          ),
-        ),
-        child: const Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.add,
-              color: Colors.grey,
-              size: 32,
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Add New',
-              style: TextStyle(color: Colors.grey),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-/// Category item model
-class CategoryItem {
-  /// Constructor for CategoryItem
-  CategoryItem({
-    required this.name,
-    required this.color,
-    required this.icon,
-  });
-
-  /// Category name
-  final String name;
-
-  /// Category color
-  final Color color;
-
-  /// Category icon
-  final IconData icon;
 }

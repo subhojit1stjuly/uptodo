@@ -4,8 +4,6 @@ import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uptodo/features/category/data/database/category_database_module.dart';
 import 'package:uptodo/features/category/domain/entities/category_entity.dart';
-import 'package:uptodo/features/priority/data/database/priority_database_module.dart';
-import 'package:uptodo/features/priority/domain/entities/priority_entity.dart';
 import 'package:uptodo/features/task_details/data/database/tasks_database_module.dart';
 import 'package:uptodo/features/task_details/domain/entities/tasks_entity.dart';
 import 'package:uptodo/shared/model/shred_enums.dart';
@@ -22,8 +20,8 @@ abstract class DatabaseProvider {
 
 /// The Drift database implementation
 @DriftDatabase(
-  tables: [TasksEntity, PriorityEntity, CategoryEntity],
-  daos: [TasksDatabaseModule, CategoryDatabaseModule, PriorityDatabaseModule],
+  tables: [TasksEntity, CategoryEntity],
+  daos: [TasksDatabaseModule, CategoryDatabaseModule],
 )
 class AppDatabase extends _$AppDatabase {
   /// After generating code, this class needs to define a `schemaVersion` getter
@@ -35,6 +33,17 @@ class AppDatabase extends _$AppDatabase {
   @override
   int get schemaVersion => 1;
 
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+        onCreate: (Migrator m) async {
+          // First create all tables
+          await m.createAll();
+
+          /// Insert default categories
+          await categoryDatabaseModule.defaultBatchInsert();
+        },
+      );
+
   static QueryExecutor _openConnection() {
     return driftDatabase(
       name: 'drift-uptodo.sqlite',
@@ -43,8 +52,6 @@ class AppDatabase extends _$AppDatabase {
         /// database files in `getApplicationDocumentsDirectory()`.
         databaseDirectory: getApplicationSupportDirectory,
       ),
-
-      /// If you need web support, see https://drift.simonbinder.eu/platforms/web/
     );
   }
 
@@ -55,7 +62,4 @@ class AppDatabase extends _$AppDatabase {
   @override
   late final CategoryDatabaseModule categoryDatabaseModule =
       CategoryDatabaseModule(this);
-  @override
-  late final PriorityDatabaseModule priorityDatabaseModule =
-      PriorityDatabaseModule(this);
 }

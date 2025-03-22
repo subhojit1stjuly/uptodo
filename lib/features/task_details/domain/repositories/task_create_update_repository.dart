@@ -3,7 +3,7 @@ import 'package:uptodo/features/task_details/data/model/task_model/task_model.da
 
 /// TaskRepository
 @factoryMethod
-abstract class TaskRepository {
+abstract class TaskCreateUpdateRepository {
   /// create task
   Future<int> createTask(
     TaskModel taskModel,
@@ -18,7 +18,4 @@ abstract class TaskRepository {
   Future<bool> deleteTask(
     int id,
   );
-
-  /// watch all tasks
-  Stream<List<TaskModel>> watchAllTasks();
 }

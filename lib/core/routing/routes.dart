@@ -11,6 +11,7 @@ import 'package:uptodo/features/authentication/presentation/pages/register_page.
 import 'package:uptodo/features/home/calendar_screen/presentation/page/calendar_page.dart';
 import 'package:uptodo/features/home/focus_screen/presentation/page/focus_page.dart';
 import 'package:uptodo/features/home/index_screen/presentation/bloc/home_bloc.dart';
+import 'package:uptodo/features/home/index_screen/presentation/bloc/index_bloc.dart';
 import 'package:uptodo/features/home/index_screen/presentation/bloc/state/home_state.dart';
 import 'package:uptodo/features/home/index_screen/presentation/page/home_page.dart';
 import 'package:uptodo/features/home/index_screen/presentation/page/index_page.dart';
@@ -71,7 +72,10 @@ abstract class AppRouter {
               GoRoute(
                 name: RouteConstants.index,
                 path: RouteConstants.home,
-                builder: (context, state) => const IndexPage(),
+                builder: (context, state) => BlocProvider.value(
+                  value: getIt<IndexBloc>(),
+                  child: const IndexPage(),
+                ),
               ),
               GoRoute(
                 name: RouteConstants.calendar,

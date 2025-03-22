@@ -244,9 +244,25 @@
   "@add_task_title": {
     "description": "प्लेसहोल्डर के साथ कार्य शीर्षक का लेबल"
   },
+  "search_tasks": "अपना कार्य खोजें...",
+  "@search_tasks": {
+    "description": "कार्य खोज क्षेत्र के लिए संकेत पाठ"
+  },
   "today": "आज",
   "@today": {
     "description": "आज के लिए पाठ"
+  },
+  "tomorrow": "कल",
+  "@tomorrow": {
+    "description": "कल के लिए पाठ"
+  },
+  "yesterday": "बीता हुआ कल",
+  "@yesterday": {
+    "description": "बीते हुए कल के लिए पाठ"
+  },
+  "overdue": "समय सीमा समाप्त",
+  "@overdue": {
+    "description": "समय सीमा समाप्त कार्यों के लिए पाठ"
   },
   "completed": "पूरा हुआ",
   "@completed": {

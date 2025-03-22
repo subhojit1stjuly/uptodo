@@ -208,7 +208,7 @@
   "@task_category": {
     "description": "Label for task category field"
   },
-  "task_priority": "Task Priority:",
+  "task_priority": "Task Priority",
   "@task_priority": {
     "description": "Label for task priority field"
   },
@@ -244,13 +244,29 @@
   "@add_task_title": {
     "description": "Label for Add task title with placeholder"
   },
+  "search_tasks": "Search for your task...",
+  "@search_tasks": {
+    "description": "Hint text for task search field"
+  },
   "today": "Today",
   "@today": {
     "description": "Text for today"
   },
+  "tomorrow": "Tomorrow",
+  "@tomorrow": {
+    "description": "Text for tomorrow"
+  },
+  "yesterday": "Yesterday",
+  "@yesterday": {
+    "description": "Text for yesterday"
+  },
   "completed": "Completed",
   "@completed": {
     "description": "Text for completed"
+  },
+  "overdue": "Overdue",
+  "@overdue": {
+    "description": "Text for overdue"
   },
   "focus_mode": "Focus Mode",
   "@focus_mode": {

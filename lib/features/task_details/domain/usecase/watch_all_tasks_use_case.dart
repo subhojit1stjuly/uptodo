@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:uptodo/features/task_details/data/model/task_model.dart';
+import 'package:uptodo/features/task_details/data/model/task_model/task_model.dart';
 import 'package:uptodo/features/task_details/domain/repositories/task_repository.dart';
 
 /// UseCase for watching all tasks and getting real-time updates
