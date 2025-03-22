@@ -244,9 +244,25 @@
   "@task_title": {
     "description": "ಪ್ಲೇಸ್ಹೋಲ್ಡರ್ ಜೊತೆಗೆ ಕಾರ್ಯ ಶೀರ್ಷಿಕೆ ಲೇಬಲ್"
   },
+  "search_tasks": "ನಿಮ್ಮ ಕಾರ್ಯವನ್ನು ಹುಡುಕಿ...",
+  "@search_tasks": {
+    "description": "ಕಾರ್ಯ ಹುಡುಕಾಟ ಕ್ಷೇತ್ರದ ಸುಳಿವು ಪಠ್ಯ"
+  },
   "today": "ಇಂದು",
   "@today": {
     "description": "ಇಂದುಕ್ಕಾಗಿ ಪಠ್ಯ"
+  },
+  "tomorrow": "ನಾಳೆ",
+  "@tomorrow": {
+    "description": "ನಾಳೆಯ ಕುರಿತ ಪಠ್ಯ"
+  },
+  "yesterday": "ನಿನ��ನೆ",
+  "@yesterday": {
+    "description": "ನಿನ್ನೆಯ ಕುರಿತ ಪಠ್ಯ"
+  },
+  "overdue": "ಸಮಯ ಮೀರಿದ",
+  "@overdue": {
+    "description": "ಸಮಯ ಮೀರಿದ ಕಾರ್ಯಗಳ ಕುರಿತ ಪಠ್ಯ"
   },
   "completed": "ಪೂರ್ಣಗೊಂಡಿದೆ",
   "@completed": {

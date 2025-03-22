@@ -136,6 +136,10 @@
   "@index": {
     "description": "সূচী স্ক্রীনের জন্য পাঠ্য"
   },
+  "search_tasks": "আপনার কাজ খুঁজুন...",
+  "@search_tasks": {
+    "description": "কাজ অনুসন্ধান ক্ষেত্রের হিন্ট পাঠ্য"
+  },
   "calendar": "ক্যালেন্ডার",
   "@calendar": {
     "description": "ক্যালেন্ডারের জন্য পাঠ্য"
@@ -247,6 +251,18 @@
   "today": "আজ",
   "@today": {
     "description": "আজকের জন্য পাঠ্য"
+  },
+  "tomorrow": "ನಾಳೆ",
+  "@tomorrow": {
+    "description": "ನಾಳೆಯ ಕುರಿತ ಪಠ್ಯ"
+  },
+  "yesterday": "ನಿನ��ನೆ",
+  "@yesterday": {
+    "description": "ನಿನ್ನೆಯ ಕುರಿತ ಪಠ್ಯ"
+  },
+  "overdue": "ಸಮಯ ಮೀರಿದ",
+  "@overdue": {
+    "description": "ಸಮಯ ಮೀರಿದ ಕಾರ್ಯಗಳ ಕುರಿತ ಪಠ್ಯ"
   },
   "completed": "সম্পন্ন",
   "@completed": {

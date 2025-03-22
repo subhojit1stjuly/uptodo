@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 /// A reusable date time picker component that can be used anywhere in the app
 class DateTimePicker {
-  /// Shows date time picker and returns the selected DateTime
-  static Future<DateTime?> show({
+  /// Shows date picker and returns the selected DateTime
+  static Future<DateTime?> showDates({
     required BuildContext context,
     DateTime? initialDate,
     DateTime? firstDate,
@@ -26,6 +26,20 @@ class DateTimePicker {
     if (!context.mounted) {
       return null;
     }
+    // Combine date and time
+    return DateTime(
+      pickedDate.year,
+      pickedDate.month,
+      pickedDate.day,
+    );
+  }
+
+  /// Shows time picker and returns the selected TimeOfDay
+  static Future<TimeOfDay?> showTime({
+    required BuildContext context,
+    DateTime? initialDate,
+  }) async {
+    final now = DateTime.now();
     // Show time picker
     final pickedTime = await showTimePicker(
       context: context,
@@ -36,14 +50,6 @@ class DateTimePicker {
     if (pickedTime == TimeOfDay.fromDateTime(now) && initialDate == null) {
       return null;
     }
-
-    // Combine date and time
-    return DateTime(
-      pickedDate.year,
-      pickedDate.month,
-      pickedDate.day,
-      pickedTime.hour,
-      pickedTime.minute,
-    );
+    return pickedTime;
   }
 }
