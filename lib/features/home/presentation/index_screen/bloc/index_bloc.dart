@@ -33,6 +33,10 @@ class IndexBloc extends Bloc<IndexEvent, IndexState> {
     });
   }
 
+  final GetAllTaskByDateUseCase _getAllTaskByDateUseCase;
+  final LoadTaskSummaryUseCase _loadTaskSummaryUseCase;
+  final WatchTasksChangesStreamUseCase _watchTasksChangesStreamUseCase;
+
   Future<void> _onTaskTableEvent(
     TaskTableEvent event,
     Emitter<IndexState> emit,
@@ -110,12 +114,10 @@ class IndexBloc extends Bloc<IndexEvent, IndexState> {
             ),
           );
       }
+    } else {
+      add(const LoadRecentTasksEvent());
     }
   }
-
-  final GetAllTaskByDateUseCase _getAllTaskByDateUseCase;
-  final LoadTaskSummaryUseCase _loadTaskSummaryUseCase;
-  final WatchTasksChangesStreamUseCase _watchTasksChangesStreamUseCase;
 
   Future<void> _onLoadTaskSummary(
     LoadTaskSummaryEvent event,
