@@ -136,6 +136,14 @@
   "@index": {
     "description": "সূচী স্ক্রীনের জন্য পাঠ্য"
   },
+  "done_for_the_day": "আজকের দিন শেষ?",
+  "@done_for_the_day": {
+    "description": "আজকের দিন শেষ?"
+  },
+  "no_task_was_planned": "কোন পরিকল্পিত কাজ পাওয়া যায়নি",
+  "@no_task_was_planned": {
+    "description": "কোন পরিকল্পিত কাজ পাওয়া যায়নি"
+  },
   "search_tasks": "আপনার কাজ খুঁজুন...",
   "@search_tasks": {
     "description": "কাজ অনুসন্ধান ক্ষেত্রের হিন্ট পাঠ্য"

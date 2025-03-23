@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uptodo/core/constants/assets.gen.dart';
 import 'package:uptodo/core/localizations/app_localizations.dart';
 import 'package:uptodo/features/home/presentation/index_screen/bloc/event/index_event.dart';
 import 'package:uptodo/features/home/presentation/index_screen/bloc/index_bloc.dart';
@@ -42,56 +43,57 @@ class _IndexPageState extends State<IndexPage> {
               message:
                   AppLocalizations.of(context)!.what_do_you_want_to_do_today,
               subtitle: AppLocalizations.of(context)!.tap_to_add_tasks,
+              iconToShow: Assets.icons.checkList.svg(
+                height: 227,
+                width: 227,
+              ),
             );
           },
           summaryFound: () {
             return SingleChildScrollView(
-              child: Column(
-                children: [
-                  /// searchbar
-                  SearchBarWidget(
-                    onSearch: (String value) {},
-                  ),
-
-                  /// pending task list
-                  DropdownTaskWidget<DayFilterType>(
-                    dropdownMenuEntries: [
-                      DropdownMenuEntry(
-                        value: DayFilterType.yesterday,
-                        label: AppLocalizations.of(context)!.yesterday,
-                      ),
-                      DropdownMenuEntry(
-                        value: DayFilterType.today,
-                        label: AppLocalizations.of(context)!.today,
-                      ),
-                      DropdownMenuEntry(
-                        value: DayFilterType.tomorrow,
-                        label: AppLocalizations.of(context)!.tomorrow,
-                      ),
-                    ],
-                    initialSelection: DayFilterType.today,
-                    onSelected: (DayFilterType? type) {
-                      if (type != null) {
-                        context.read<IndexBloc>().add(
-                              IndexEvent.changeDaysFilter(type),
-                            );
-                      }
-                    },
-                  ),
-                  const PendingTaskListWidget(),
-
-                  /// completed task
-                  Card(
-                    color: Theme.of(context).primaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                child: Column(
+                  spacing: 12,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    /// searchbar
+                    SearchBarWidget(
+                      onSearch: (String value) {},
                     ),
-                    child: Text(
-                      AppLocalizations.of(context)!.completed,
+
+                    /// pending task list
+                    DropdownTaskWidget<DayFilterType>(
+                      dropdownMenuEntries: [
+                        DropdownMenuEntry(
+                          value: DayFilterType.yesterday,
+                          label: AppLocalizations.of(context)!.yesterday,
+                        ),
+                        DropdownMenuEntry(
+                          value: DayFilterType.today,
+                          label: AppLocalizations.of(context)!.today,
+                        ),
+                        DropdownMenuEntry(
+                          value: DayFilterType.tomorrow,
+                          label: AppLocalizations.of(context)!.tomorrow,
+                        ),
+                      ],
+                      initialSelection: DayFilterType.today,
+                      onSelected: (DayFilterType? type) {
+                        if (type != null) {
+                          context.read<IndexBloc>().add(
+                                IndexEvent.changeDaysFilter(type),
+                              );
+                        }
+                      },
                     ),
-                  ),
-                  const OtherTaskListWidget(),
-                ],
+                    const PendingTaskListWidget(),
+
+                    /// completed task list
+                    const OtherTaskListWidget(),
+                  ],
+                ),
               ),
             );
           },

@@ -136,6 +136,14 @@
   "@index": {
     "description": "Text for index screen"
   },
+  "done_for_the_day": "Done for the day?",
+  "@done_for_the_day": {
+    "description": "Done for the day?"
+  },
+  "no_task_was_planned": "No planned task found",
+  "@no_task_was_planned": {
+    "description": "No planned task found"
+  },
   "calendar": "Calendar",
   "@calendar": {
     "description": "Text for calendar"
