@@ -15,7 +15,7 @@ abstract class TaskCreateUpdateRepository {
   );
 
   /// delete task
-  Future<bool> deleteTask(
+  Future<void> deleteTask(
     int id,
   );
 }
