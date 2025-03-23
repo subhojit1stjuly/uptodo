@@ -22,13 +22,16 @@ from the Figma Community.
 
 ## 🌟 Features
 
-- Task Management
-- Categories Organization
-- Clean and Intuitive UI
-- Multi-language Support
-- Dark/Light Theme
-- Local Data Persistence
-- Task reminder notification
+- **Task Management**: Create, edit, delete, and mark tasks as complete
+- **Categories Organization**: Group tasks by custom categories with color coding
+- **Priority Levels**: Assign priority levels to tasks
+- **Due Dates & Reminders**: Set due dates and receive notifications
+- **Clean and Intuitive UI**: User-friendly interface designed for productivity
+- **Multi-language Support**: Available in English, Bengali, Kannada, and Hindi
+- **Dark/Light Theme**: Choose your preferred visual mode
+- **Local Data Persistence**: All your tasks are stored locally
+- **Task Search & Filtering**: Easily find tasks with powerful search and filtering options
+- **Task Statistics**: Visual representation of your productivity
 
 # Project Structure
 
@@ -65,7 +68,7 @@ lib/
 │   │   └── secure_storage/     # Secure storage implementation
 │   │
 │   ├── theme/                  # Theming
-│   │   ├── app_colors.dart     # Color definitions
+│   ���   ├── app_colors.dart     # Color definitions
 │   │   ├── app_text_styles.dart# Text style definitions
 │   │   └── app_theme.dart      # Theme data
 │   │
@@ -104,26 +107,26 @@ lib/
 
 ## Key Points:
 
-# 1: Core Layer:
+### 1: Core Layer:
 
 - Contains all the core functionality and configurations
 - Handles cross-cutting concerns like networking, storage, and theming
 - Houses all constants and utilities used across the app
 
-# 2: Feature Layer:
+### 2: Feature Layer:
 
 - Follows Clean Architecture principles
 - Each feature is self-contained with its own data, domain,
   and presentation layers
 - Promotes separation of concerns and maintainability
 
-# 3: Shared Layer:
+### 3: Shared Layer:
 
 - Contains reusable widgets and mixins
 - Promotes code reuse across features
 - Reduces duplication
 
-# 4: Testing Structure:
+### 4: Testing Structure:
 
 ```
  test/
@@ -171,14 +174,16 @@ This project follows Clean Architecture principles with three main layers:
 - **API Client**: Dio
 - **Localization**: flutter_localizations
 - **Code Generation**: build_runner
+- **Testing**: flutter_test, mocktail, bloc_test
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- Flutter SDK (Version X.X.X)
-- Dart SDK (Version X.X.X)
+- Flutter SDK (Version 3.10.0 or higher)
+- Dart SDK (Version 3.0.0 or higher)
 - Android Studio / VS Code
+- Git
 
 ### Installation
 
@@ -186,11 +191,50 @@ This project follows Clean Architecture principles with three main layers:
 
 ```bash
 git clone https://github.com/subhojit1stjuly/uptodo.git
+cd uptodo
 ```
 
-### 📲 Download
+2. Install dependencies
 
-### 🌍 Localization
+```bash
+flutter pub get
+```
+
+3. Run code generation
+
+```bash
+flutter pub run build_runner build --delete-conflicting-outputs
+```
+
+### Running the App
+
+#### Development Environment
+
+```bash
+flutter run --flavor development --target lib/main_development.dart
+```
+
+#### Production Environment
+
+```bash
+flutter run --flavor production --target lib/main_production.dart
+```
+
+### Building the App
+
+#### Android
+
+```bash
+flutter build apk --flavor production --target lib/main_production.dart
+```
+
+#### iOS
+
+```bash
+flutter build ios --flavor production --target lib/main_production.dart
+```
+
+## 🌍 Localization
 
 Currently supported languages:
 
@@ -199,12 +243,26 @@ Currently supported languages:
 - Kannada (kn)
 - Hindi (hi)
 
+To add a new language:
+
+1. Create a new ARB file in `lib/l10n/` named `app_<language_code>.arb`
+2. Add the language to the supported locales in `lib/core/config/app_config.dart`
+
+## 📱 Download
+
+[App download links will be added here]
+
 ## Firebase Configuration
 
 ### Setup
 
-1. Download configuration files from Firebase Console
-2. Place them in the following locations:
+1. Create a Firebase project at [Firebase Console](https://console.firebase.google.com/)
+2. Add Android and iOS apps to your Firebase project
+3. Download configuration files:
+    - Android: `google-services.json`
+    - iOS: `GoogleService-Info.plist`
+
+4. Place them in the following locations:
     - Android:
         - Development: `android/app/src/debug/google-services.json`
         - Production: `android/app/src/release/google-services.json`
@@ -212,11 +270,27 @@ Currently supported languages:
         - Development: `ios/config/development/GoogleService-Info.plist`
         - Production: `ios/config/production/GoogleService-Info.plist`
 
-### Environment Files
+### Environment Configuration
 
-Copy `.env.example` to create your environment files:
+1. Copy `.env.example` to create your environment files:
 
 ```bash
 cp .env.example .env.development
 cp .env.example .env.production
 ```
+
+2. Update the environment files with your API keys and configuration values
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
