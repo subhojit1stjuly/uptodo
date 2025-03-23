@@ -35,6 +35,32 @@ class _DropdownTaskWidgetState<T> extends State<DropdownTaskWidget<T>> {
   @override
   Widget build(BuildContext context) {
     return DropdownMenu<T>(
+      width: 135,
+      inputDecorationTheme: const InputDecorationTheme(
+        isDense: true,
+        contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+          borderSide: BorderSide(width: 0.5),
+        ),
+        constraints: BoxConstraints(maxHeight: 40),
+      ),
+      textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+            fontWeight: FontWeight.w500,
+          ),
+      menuStyle: MenuStyle(
+        padding: const WidgetStatePropertyAll<EdgeInsetsGeometry>(
+          EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        ),
+        visualDensity: VisualDensity.compact,
+        maximumSize:
+            const WidgetStatePropertyAll<Size>(Size(double.infinity, 200)),
+        shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+      ),
       initialSelection: widget.initialSelection,
       onSelected: (T? value) {
         // This is called when the user selects an item.

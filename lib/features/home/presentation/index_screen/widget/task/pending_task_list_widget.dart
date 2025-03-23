@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uptodo/core/constants/assets.gen.dart';
 import 'package:uptodo/core/localizations/app_localizations.dart';
 import 'package:uptodo/features/home/presentation/index_screen/bloc/index_bloc.dart';
 import 'package:uptodo/features/home/presentation/index_screen/bloc/state/index_state.dart';
 import 'package:uptodo/features/task_details/presentation/widget/pending_task_widget.dart';
+import 'package:uptodo/shared/model/shred_enums.dart';
 import 'package:uptodo/shared/widgets/task/no_task_found_widget.dart';
 
 /// IndexTaskListWidget
@@ -42,9 +44,18 @@ class _PendingTaskListWidgetState extends State<PendingTaskListWidget> {
                     },
                   )
                 : NoTaskFoundWidget(
-                    message: AppLocalizations.of(context)!
-                        .what_do_you_want_to_do_today,
+                    message: (currentDayFilter == DayFilterType.today &&
+                            completedTasks.isNotEmpty)
+                        ? AppLocalizations.of(context)!.done_for_the_day
+                        : currentDayFilter != DayFilterType.today
+                            ? AppLocalizations.of(context)!.no_task_was_planned
+                            : AppLocalizations.of(context)!
+                                .what_do_you_want_to_do_today,
                     subtitle: AppLocalizations.of(context)!.tap_to_add_tasks,
+                    iconToShow: Assets.icons.noPlansToday.svg(
+                      height: 227,
+                      width: 227,
+                    ),
                   );
           },
           orElse: () => const SizedBox.shrink(),

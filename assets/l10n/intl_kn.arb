@@ -136,6 +136,14 @@
   "@index": {
     "description": "ಸೂಚಿ ವಿನ್ಯಾಸದ ಪಠ್ಯ"
   },
+  "done_for_the_day": "ದಿನಕ್ಕೆ ಮುಗಿದಿದೆಯೇ?",
+  "@done_for_the_day": {
+    "description": "ದಿನಕ್ಕೆ ಮುಗಿದಿದೆಯೇ?"
+  },
+  "no_task_was_planned": "ಯೋಜಿಸಿದ ಕಾರ್ಯಗಳು ಕಂಡುಬಂದಿಲ್ಲ",
+  "@no_task_was_planned": {
+    "description": "ಯೋಜಿಸಿದ ಕಾರ್ಯಗಳು ಕಂಡುಬಂದಿಲ್ಲ"
+  },
   "calendar": "ಕ್ಯಾಲೆಂಡರ್",
   "@calendar": {
     "description": "ಕ್ಯಾಲೆಂಡರ್ ಪಠ್ಯ"

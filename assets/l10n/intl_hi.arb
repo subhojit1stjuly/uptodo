@@ -136,6 +136,14 @@
   "@index": {
     "description": "सूचकांक स्क्रीन के लिए पाठ"
   },
+  "done_for_the_day": "आज के लिए हो गया?",
+  "@done_for_the_day": {
+    "description": "आज के लिए हो गया?"
+  },
+  "no_task_was_planned": "कोई नियोजित कार्य नहीं मिला",
+  "@no_task_was_planned": {
+    "description": "कोई नियोजित कार्य नहीं मिला"
+  },
   "calendar": "कैलेंडर",
   "@calendar": {
     "description": "कैलेंडर के लिए पाठ"

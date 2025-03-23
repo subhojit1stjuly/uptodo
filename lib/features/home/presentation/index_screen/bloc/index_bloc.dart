@@ -37,7 +37,80 @@ class IndexBloc extends Bloc<IndexEvent, IndexState> {
     TaskTableEvent event,
     Emitter<IndexState> emit,
   ) async {
-    /// Implementation will be added later
+    final currentState = state;
+    if (currentState is TasksLoadedState) {
+      final task = event.taskEvent.taskModel;
+      // Get current date based on filter
+      var date = DateTime.now();
+      switch (currentState.currentDayFilter) {
+        case DayFilterType.today:
+          date = DateTime.now();
+        case DayFilterType.tomorrow:
+          date = DateTime.now().add(const Duration(days: 1));
+        case DayFilterType.yesterday:
+          date = DateTime.now().add(const Duration(days: -1));
+      }
+      if (task.taskDate.day != date.day) return;
+      switch (event.taskEvent.eventType) {
+        case TaskTableEventType.created:
+          final updatedState = currentState.copyWith(
+            pendingTasks: [...currentState.pendingTasks, task],
+            completedTasks: currentState.completedTasks,
+            currentDayFilter: currentState.currentDayFilter,
+            currentStatusFilter: currentState.currentStatusFilter,
+          );
+          emit(
+            IndexState.tasksLoaded(
+              pendingTasks: updatedState.pendingTasks,
+              completedTasks: updatedState.completedTasks,
+              currentDayFilter: updatedState.currentDayFilter,
+              currentStatusFilter: updatedState.currentStatusFilter,
+            ),
+          );
+        case TaskTableEventType.updated:
+          final indexPending = currentState.pendingTasks.indexWhere(
+            (element) => element.taskId == task.taskId,
+          );
+          if (indexPending != -1) {
+            currentState.pendingTasks[indexPending] = task;
+          } else {
+            final indexCompleted = currentState.completedTasks.indexWhere(
+              (element) => element.taskId == task.taskId,
+            );
+            if (indexCompleted != -1) {
+              currentState.completedTasks[indexCompleted] = task;
+            }
+          }
+          emit(
+            IndexState.tasksLoaded(
+              pendingTasks: currentState.pendingTasks,
+              completedTasks: currentState.completedTasks,
+              currentDayFilter: currentState.currentDayFilter,
+              currentStatusFilter: currentState.currentStatusFilter,
+            ),
+          );
+        case TaskTableEventType.deleted:
+          final updatedPendingTasks = currentState.pendingTasks;
+          final updatedCompletedTasks = currentState.completedTasks;
+          if (!updatedPendingTasks.remove(task)) {
+            updatedCompletedTasks.remove(task);
+          }
+          final updatedState = currentState.copyWith(
+            pendingTasks: updatedPendingTasks,
+            completedTasks: updatedCompletedTasks,
+            currentDayFilter: currentState.currentDayFilter,
+            currentStatusFilter: currentState.currentStatusFilter,
+          );
+          emit(
+            IndexState.tasksLoaded(
+              pendingTasks: updatedState.pendingTasks,
+              completedTasks: updatedState.completedTasks,
+              currentDayFilter: updatedState.currentDayFilter,
+              currentStatusFilter: updatedState.currentStatusFilter,
+            ),
+          );
+      }
+    }
   }
 
   final GetAllTaskByDateUseCase _getAllTaskByDateUseCase;

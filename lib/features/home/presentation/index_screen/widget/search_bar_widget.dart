@@ -43,30 +43,27 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: TextField(
-        controller: _searchController,
-        decoration: InputDecoration(
-          hintText: AppLocalizations.of(context)!.search_tasks,
-          filled: true,
-          fillColor: Theme.of(context).colorScheme.surface,
-          prefixIcon: const Icon(Icons.search),
-          suffixIcon: _showClearButton
-              ? IconButton(
-                  icon: const Icon(Icons.clear),
-                  onPressed: _searchController.clear,
-                )
-              : null,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide.none,
-          ),
-          contentPadding: const EdgeInsets.symmetric(vertical: 12),
+    return TextField(
+      controller: _searchController,
+      decoration: InputDecoration(
+        hintText: AppLocalizations.of(context)!.search_tasks,
+        filled: true,
+        fillColor: Theme.of(context).colorScheme.surface,
+        prefixIcon: const Icon(Icons.search),
+        suffixIcon: _showClearButton
+            ? IconButton(
+                icon: const Icon(Icons.clear),
+                onPressed: _searchController.clear,
+              )
+            : null,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
         ),
-        textInputAction: TextInputAction.search,
-        onSubmitted: widget.onSearch,
+        contentPadding: const EdgeInsets.symmetric(vertical: 12),
       ),
+      textInputAction: TextInputAction.search,
+      onSubmitted: widget.onSearch,
     );
   }
 }
