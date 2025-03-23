@@ -8,14 +8,14 @@ import 'package:uptodo/features/authentication/presentation/bloc/authentication_
 import 'package:uptodo/features/authentication/presentation/bloc/user_session_bloc.dart';
 import 'package:uptodo/features/authentication/presentation/pages/login_page.dart';
 import 'package:uptodo/features/authentication/presentation/pages/register_page.dart';
-import 'package:uptodo/features/home/calendar_screen/presentation/page/calendar_page.dart';
-import 'package:uptodo/features/home/focus_screen/presentation/page/focus_page.dart';
-import 'package:uptodo/features/home/index_screen/presentation/bloc/home_bloc.dart';
-import 'package:uptodo/features/home/index_screen/presentation/bloc/index_bloc.dart';
-import 'package:uptodo/features/home/index_screen/presentation/bloc/state/home_state.dart';
-import 'package:uptodo/features/home/index_screen/presentation/page/home_page.dart';
-import 'package:uptodo/features/home/index_screen/presentation/page/index_page.dart';
-import 'package:uptodo/features/home/profile_screen/presentation/page/profile_page.dart';
+import 'package:uptodo/features/home/presentation/calendar_screen/page/calendar_page.dart';
+import 'package:uptodo/features/home/presentation/focus_screen/page/focus_page.dart';
+import 'package:uptodo/features/home/presentation/index_screen/bloc/home_bloc.dart';
+import 'package:uptodo/features/home/presentation/index_screen/bloc/index_bloc.dart';
+import 'package:uptodo/features/home/presentation/index_screen/bloc/state/home_state.dart';
+import 'package:uptodo/features/home/presentation/index_screen/page/home_page.dart';
+import 'package:uptodo/features/home/presentation/index_screen/page/index_page.dart';
+import 'package:uptodo/features/home/presentation/profile_screen/page/profile_page.dart';
 import 'package:uptodo/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:uptodo/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:uptodo/features/settings/presentation/pages/change_language_page.dart';
@@ -61,36 +61,54 @@ abstract class AppRouter {
               child: const RegisterPage(),
             ),
           ),
-          ShellRoute(
-            builder: (context, state, child) => BlocProvider.value(
-              value: getIt<HomeBloc>(),
-              child: HomePage(
-                child: child,
-              ),
-            ),
-            routes: [
-              GoRoute(
-                name: RouteConstants.index,
-                path: RouteConstants.home,
-                builder: (context, state) => BlocProvider.value(
-                  value: getIt<IndexBloc>(),
-                  child: const IndexPage(),
+          StatefulShellRoute.indexedStack(
+            builder: (context, state, navigationShell) {
+              return BlocProvider.value(
+                value: getIt<HomeBloc>(),
+                child: HomePage(
+                  navigationShell: navigationShell,
                 ),
+              );
+            },
+            branches: [
+              StatefulShellBranch(
+                routes: [
+                  GoRoute(
+                    name: RouteConstants.index,
+                    path: RouteConstants.home,
+                    builder: (context, state) => BlocProvider.value(
+                      value: getIt<IndexBloc>(),
+                      child: const IndexPage(),
+                    ),
+                  ),
+                ],
               ),
-              GoRoute(
-                name: RouteConstants.calendar,
-                path: RouteConstants.calendar,
-                builder: (context, state) => const CalendarPage(),
+              StatefulShellBranch(
+                routes: [
+                  GoRoute(
+                    name: RouteConstants.calendar,
+                    path: RouteConstants.calendar,
+                    builder: (context, state) => const CalendarPage(),
+                  ),
+                ],
               ),
-              GoRoute(
-                name: RouteConstants.focus,
-                path: RouteConstants.focus,
-                builder: (context, state) => const FocusPage(),
+              StatefulShellBranch(
+                routes: [
+                  GoRoute(
+                    name: RouteConstants.focus,
+                    path: RouteConstants.focus,
+                    builder: (context, state) => const FocusPage(),
+                  ),
+                ],
               ),
-              GoRoute(
-                name: RouteConstants.profile,
-                path: RouteConstants.profile,
-                builder: (context, state) => const ProfilePage(),
+              StatefulShellBranch(
+                routes: [
+                  GoRoute(
+                    name: RouteConstants.profile,
+                    path: RouteConstants.profile,
+                    builder: (context, state) => const ProfilePage(),
+                  ),
+                ],
               ),
             ],
             redirect: (context, state) {

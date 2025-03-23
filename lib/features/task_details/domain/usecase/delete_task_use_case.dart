@@ -4,7 +4,7 @@ import 'package:uptodo/features/task_details/domain/repositories/task_create_upd
 
 /// UseCase for deleting a task
 @injectable
-class DeleteTaskUseCase extends UseCase<bool, int> {
+class DeleteTaskUseCase extends UseCase<void, int> {
   /// constructor
   DeleteTaskUseCase(this.taskRepository);
 
@@ -12,7 +12,7 @@ class DeleteTaskUseCase extends UseCase<bool, int> {
   final TaskCreateUpdateRepository taskRepository;
 
   @override
-  Future<bool> run(int params) async {
-    return taskRepository.deleteTask(params);
+  Future<void> run(int params) async {
+    await taskRepository.deleteTask(params);
   }
 }

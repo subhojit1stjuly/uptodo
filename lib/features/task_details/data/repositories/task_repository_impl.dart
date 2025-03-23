@@ -62,7 +62,7 @@ class TaskRepositoryImpl implements TaskCreateUpdateRepository {
   }
 
   @override
-  Future<bool> deleteTask(int id) {
-    return _databaseModule.deleteTask(id).then((value) => value > 0);
+  Future<void> deleteTask(int id) async {
+    return _databaseModule.deleteTask(id);
   }
 }

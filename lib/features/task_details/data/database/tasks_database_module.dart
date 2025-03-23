@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:drift/drift.dart';
 import 'package:injectable/injectable.dart';
 import 'package:uptodo/core/storage/database/config/app_database.dart';
+import 'package:uptodo/features/task_details/data/model/task_event_types.dart';
 import 'package:uptodo/features/task_details/domain/entities/tasks_entity.dart';
+import 'package:uptodo/shared/model/shred_enums.dart';
 
 part 'tasks_database_module.g.dart';
 
@@ -15,23 +17,14 @@ class TasksDatabaseModule extends DatabaseAccessor<AppDatabase>
   /// TasksDatabaseModule constructor
   TasksDatabaseModule(super.attachedDatabase);
 
-  /// You'll need a StreamController for deleted tasks
-  final _deletedTasksController =
-      StreamController<TasksEntityData?>.broadcast();
-
-  /// Stream of deleted tasks
-  Stream<TasksEntityData?> get deletedTasksStream =>
-      _deletedTasksController.stream;
-
   /// Watch for the most recent task operation (create, update, delete)
   /// Returns a stream that emits the affected task whenever there's a change
-  Stream<TasksEntityData?> watchTaskChanges() {
+  Stream<TaskTableEvents> watchTaskChanges() {
     /// Create a broadcast stream controller to emit task changes
-    final controller = StreamController<TasksEntityData?>.broadcast();
+    final controller = StreamController<TaskTableEvents>.broadcast();
 
-    /// Variable to store the last task ID for comparison
-    int? lastTaskId;
-    TasksEntityData? lastTask;
+    /// Track the last known tasks to detect changes
+    var previousTasks = <TasksEntityData>[];
 
     /// Subscribe to the underlying database changes
     (select(tasksEntity)
@@ -41,55 +34,69 @@ class TasksDatabaseModule extends DatabaseAccessor<AppDatabase>
           ]))
         .watch()
         .listen((tasks) {
-      /// If there are no tasks or the list is empty
-      if (tasks.isEmpty) {
-        /// If we had a last task, it means it was deleted
-        if (lastTask != null) {
-          controller.add(lastTask); // Emit the deleted task
-          lastTask = null;
-          lastTaskId = null;
+      if (previousTasks.isEmpty && tasks.isNotEmpty) {
+        // First load or all tasks were previously deleted
+        for (final task in tasks) {
+          controller.add(TaskTableEvents(task, TaskTableEventType.created));
         }
-        return;
+      } else {
+        // Find created tasks (in current but not in previous)
+        for (final task in tasks) {
+          if (!previousTasks.any((t) => t.taskId == task.taskId)) {
+            controller.add(TaskTableEvents(task, TaskTableEventType.created));
+          }
+        }
+
+        // Find updated tasks (in both, but with changes)
+        for (final task in tasks) {
+          final previousTask = previousTasks.firstWhere(
+            (t) => t.taskId == task.taskId,
+            orElse: () => TasksEntityData(
+              taskId: -1,
+              title: '',
+              description: '',
+              priorityId: 0,
+              taskTime: DateTime.now(),
+              categoryId: 0,
+              status: TaskStatus.pending,
+            ),
+          );
+          if (previousTask.taskId != -1 && !_tasksEqual(previousTask, task)) {
+            controller.add(TaskTableEvents(task, TaskTableEventType.updated));
+          }
+        }
+
+        // Find deleted tasks (in previous but not in current)
+        for (final previousTask in previousTasks) {
+          if (!tasks.any((t) => t.taskId == previousTask.taskId)) {
+            controller
+                .add(TaskTableEvents(previousTask, TaskTableEventType.deleted));
+          }
+        }
       }
 
-      /// Check if the first task is new or updated
-      if (lastTaskId == null || tasks[0].taskId != lastTaskId) {
-        lastTaskId = tasks[0].taskId;
-        lastTask = tasks[0];
-        controller.add(tasks[0]);
-
-        /// Emit the new/updated task
-      }
-    });
-
-    /// Listen for delete operations specifically
-    deletedTasksStream.listen((deletedTask) {
-      if (deletedTask != null) {
-        controller.add(deletedTask);
-        lastTask = deletedTask;
-      }
+      previousTasks = List.from(tasks);
     });
 
     return controller.stream;
   }
 
+  /// Helper method to compare tasks
+  bool _tasksEqual(TasksEntityData a, TasksEntityData b) {
+    return a.taskId == b.taskId &&
+        a.title == b.title &&
+        a.description == b.description &&
+        a.priorityId == b.priorityId &&
+        a.taskTime == b.taskTime &&
+        a.categoryId == b.categoryId &&
+        a.status == b.status;
+  }
+
   /// Override the delete method to track the deleted task
-  Future<int> deleteTask(int id) async {
-    /// Get the task before deleting it
-    final taskToDelete = await getTaskById(id).catchError((_) {
+  Future<void> deleteTask(int id) async {
+    await getTaskById(id).catchError((_) {
       throw Exception('Task not found');
     });
-
-    /// Perform the deletion
-    final result =
-        await (delete(tasksEntity)..where((t) => t.taskId.equals(id))).go();
-
-    /// If deletion was successful and we have the task, emit it
-    if (result > 0) {
-      _deletedTasksController.add(taskToDelete);
-    }
-
-    return result;
   }
 
   /// Get all tasks by date
@@ -123,5 +130,39 @@ class TasksDatabaseModule extends DatabaseAccessor<AppDatabase>
   /// Update task
   Future<bool> updateTask(TasksEntityCompanion task) {
     return update(tasksEntity).replace(task);
+  }
+
+  /// Checks if any tasks exist for a specific date and its adjacent days
+  /// Returns a map with dates as keys and boolean values
+  /// indicating task presence
+  Future<Map<DateTime, bool>> hasTasksInThreeDayRange(DateTime date) async {
+    // Create normalized dates (time set to midnight)
+    final yesterday = DateTime(date.year, date.month, date.day - 1);
+    final today = DateTime(date.year, date.month, date.day);
+    final tomorrow = DateTime(date.year, date.month, date.day + 1);
+
+    final result = <DateTime, bool>{
+      yesterday: false,
+      today: false,
+      tomorrow: false,
+    };
+
+    for (final checkDate in [yesterday, today, tomorrow]) {
+      // Get start and end of the day
+      final startOfDay =
+          DateTime(checkDate.year, checkDate.month, checkDate.day);
+      final endOfDay = DateTime(
+          checkDate.year, checkDate.month, checkDate.day, 23, 59, 59, 999);
+
+      // Count tasks on this date
+      final count = await (select(tasksEntity)
+            ..where((t) => t.taskTime.isBetweenValues(startOfDay, endOfDay)))
+          .get()
+          .then((tasks) => tasks.length);
+
+      result[checkDate] = count > 0;
+    }
+
+    return result;
   }
 }
