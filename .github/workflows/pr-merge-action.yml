@@ -1,0 +1,48 @@
+name: PR Merge Actions
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+env:
+  FLUTTER_VERSION: '3.27.1'
+
+jobs:
+  release:
+    if: github.event.pull_request.merged == true || github.event_name == 'push'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: 'stable'
+
+      - name: Run quality checks
+        uses: ./.github/workflows/pr-quality-checks.yml
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Generate version number
+        id: version
+        run: echo "version=$(date +'%Y.%m.%d')-${GITHUB_RUN_NUMBER}" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: build/app/outputs/flutter-apk/app-release.apk
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: Release ${{ steps.version.outputs.version }}
+          tag: v${{ steps.version.outputs.version }}
+          generate_release_notes: true
+          makeLatest: true

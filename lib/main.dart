@@ -1,54 +1,121 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:go_router/go_router.dart';
+import 'package:uptodo/core/di/injector.dart';
+import 'package:uptodo/core/errors/app_error_handler.dart';
+import 'package:uptodo/core/localizations/app_localizations.dart';
+import 'package:uptodo/core/theme/dark_theme.dart';
+import 'package:uptodo/core/theme/light_theme.dart';
+import 'package:uptodo/features/authentication/presentation/bloc/state/user_session_state.dart';
+import 'package:uptodo/features/authentication/presentation/bloc/user_session_bloc.dart';
 
 Future<void> main() async {
-  ///  this ensures that the Flutter engine is properly initialized
-  ///  if application logic needs to interact with the native platform (e.g., accessing device features)
-  ///  even before building the UI, initializing the engine early , then this is crucial.
-  WidgetsFlutterBinding.ensureInitialized();
-  /// All errors caught by Flutter are routed to here
-  /// Placing FlutterError.onError outside of runZonedGuarded is the generally recommended approach.
-  /// This ensures that the global handler catches UI-related errors thrown by
-  /// the Flutter framework itself, even if those errors occur outside
-  /// of the zone created by runZonedGuarded.
-  FlutterError.onError = (details) {
-    debugPrint('Caught UI error: ${details.exception}');
-    debugPrint('Stack trace: ${details.stack}');
-  };
-  /// If invokeMethod throws an error, it won't be forwarded to FlutterError.onError.
-  /// Instead, it's forwarded to the PlatformDispatcher.
-  PlatformDispatcher.instance.onError = (error, stack) {
-    debugPrint('Caught error: ${error.toString()}');
-    debugPrint('Stack trace: ${stack.toString()}');
-    return true;
-  };
-  /// running the entire application inside this Guarded Zone to stop unnecessary app crash.
-  runZonedGuarded((){
+  /// running the entire application inside this Guarded Zone to
+  /// stop unnecessary app crash.
+  await runZonedGuarded(() async {
+    /// initializing the error handler
+    AppErrorHandler.initialize();
+
+    await dotenv.load(fileName: 'environments/.env');
+
+    ///  this ensures that the Flutter engine is properly initialized
+    ///  if application logic needs to interact with
+    ///  the native platform (e.g., accessing device features)
+    ///  even before building the UI, initializing the
+    ///  engine early , then this is crucial.
+    WidgetsFlutterBinding.ensureInitialized();
+
+    /// setting the dependencies
+    await configureDependencies();
     runApp(const UpTodo());
-  },(error,StackTrace stack) {
-    debugPrint('Caught error: ${error.toString()}');
-    debugPrint('Stack trace: ${stack.toString()}');
+  }, (error, StackTrace stack) {
+    debugPrint('Caught error: $error');
+    debugPrint('Stack trace: $stack');
   });
 }
+
+/// added the App Widget for the Project
 class UpTodo extends StatelessWidget {
+  /// constructor is getting only key as parameter
   const UpTodo({super.key});
+
+  Locale? _localeResolutionCallback(
+    Locale? locale,
+    Iterable<Locale> supportedLocales,
+  ) {
+    /// Check if the current device locale is supported
+    for (final supportedLocale in supportedLocales) {
+      if (supportedLocale.languageCode == locale?.languageCode &&
+          supportedLocale.countryCode == locale?.countryCode) {
+        return supportedLocale;
+      }
+    }
+
+    /// If the device's locale is not supported, use
+    /// the first one from the list (default)
+    return supportedLocales.first;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      builder: (context, widget) {
-        Widget error = const Text('...rendering error...');
-        if (widget is Scaffold || widget is Navigator) {
-          error = Scaffold(body: Center(child: error));
-        }
-        ErrorWidget.builder = (errorDetails) => error;
-        if (widget != null) return widget;
-        throw StateError('widget is null');
-      },
+    return BlocProvider(
+      create: (context) => getIt<UserSessionBloc>(),
+      child: BlocBuilder<UserSessionBloc, UserSessionState>(
+        buildWhen: (previous, current) => current is PreferencesChangedState,
+        builder: (context, state) {
+          final prefs = state.maybeWhen(
+            preferencesChanged: (preferences) => preferences,
+            orElse: () => (
+              themeMode: ThemeMode.system,
+              local: const Locale('en'),
+            ),
+          );
+          return MaterialApp.router(
+            routerConfig: getIt<GoRouter>(),
+            title: 'UpTodo',
+            debugShowCheckedModeBanner: false,
+
+            /// Define the default locale. This will be used if
+            /// the system's locale is not supported.
+            locale: prefs.local,
+
+            /// Define supported locales
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+
+            /// Returns a locale which will be used if the
+            /// system's locale is not supported.
+            localeResolutionCallback: _localeResolutionCallback,
+            builder: _builder,
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: prefs.themeMode,
+          );
+        },
+      ),
     );
   }
-}
 
+  // TODO(Subhojit): need to revisit (for re-design)
+  /// adding conditions later for the feedback package
+  /// for error handling
+  Widget _builder(BuildContext context, Widget? widget) {
+    if (widget == null) throw StateError('widget is null');
+
+    ErrorWidget.builder = (errorDetails) {
+      final error = Text(
+        '...rendering error...',
+        style: Theme.of(context).textTheme.bodyLarge,
+      );
+
+      return widget is Scaffold || widget is Navigator
+          ? Scaffold(body: Center(child: error))
+          : error;
+    };
+
+    return widget;
+  }
+}

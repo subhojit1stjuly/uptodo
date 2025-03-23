@@ -1,0 +1,168 @@
+import 'dart:async';
+
+import 'package:drift/drift.dart';
+import 'package:injectable/injectable.dart';
+import 'package:uptodo/core/storage/database/config/app_database.dart';
+import 'package:uptodo/features/task_details/data/model/task_event_types.dart';
+import 'package:uptodo/features/task_details/domain/entities/tasks_entity.dart';
+import 'package:uptodo/shared/model/shred_enums.dart';
+
+part 'tasks_database_module.g.dart';
+
+/// TasksDatabaseModule
+@injectable
+@DriftAccessor(tables: [TasksEntity])
+class TasksDatabaseModule extends DatabaseAccessor<AppDatabase>
+    with _$TasksDatabaseModuleMixin {
+  /// TasksDatabaseModule constructor
+  TasksDatabaseModule(super.attachedDatabase);
+
+  /// Watch for the most recent task operation (create, update, delete)
+  /// Returns a stream that emits the affected task whenever there's a change
+  Stream<TaskTableEvents> watchTaskChanges() {
+    /// Create a broadcast stream controller to emit task changes
+    final controller = StreamController<TaskTableEvents>.broadcast();
+
+    /// Track the last known tasks to detect changes
+    var previousTasks = <TasksEntityData>[];
+
+    /// Subscribe to the underlying database changes
+    (select(tasksEntity)
+          ..orderBy([
+            (t) =>
+                OrderingTerm(expression: t.taskTime, mode: OrderingMode.desc),
+          ]))
+        .watch()
+        .listen((tasks) {
+      if (previousTasks.isEmpty && tasks.isNotEmpty) {
+        // First load or all tasks were previously deleted
+        for (final task in tasks) {
+          controller.add(TaskTableEvents(task, TaskTableEventType.created));
+        }
+      } else {
+        // Find created tasks (in current but not in previous)
+        for (final task in tasks) {
+          if (!previousTasks.any((t) => t.taskId == task.taskId)) {
+            controller.add(TaskTableEvents(task, TaskTableEventType.created));
+          }
+        }
+
+        // Find updated tasks (in both, but with changes)
+        for (final task in tasks) {
+          final previousTask = previousTasks.firstWhere(
+            (t) => t.taskId == task.taskId,
+            orElse: () => TasksEntityData(
+              taskId: -1,
+              title: '',
+              description: '',
+              priorityId: 0,
+              taskTime: DateTime.now(),
+              categoryId: 0,
+              status: TaskStatus.pending,
+            ),
+          );
+          if (previousTask.taskId != -1 && !_tasksEqual(previousTask, task)) {
+            controller.add(TaskTableEvents(task, TaskTableEventType.updated));
+          }
+        }
+
+        // Find deleted tasks (in previous but not in current)
+        for (final previousTask in previousTasks) {
+          if (!tasks.any((t) => t.taskId == previousTask.taskId)) {
+            controller
+                .add(TaskTableEvents(previousTask, TaskTableEventType.deleted));
+          }
+        }
+      }
+
+      previousTasks = List.from(tasks);
+    });
+
+    return controller.stream;
+  }
+
+  /// Helper method to compare tasks
+  bool _tasksEqual(TasksEntityData a, TasksEntityData b) {
+    return a.taskId == b.taskId &&
+        a.title == b.title &&
+        a.description == b.description &&
+        a.priorityId == b.priorityId &&
+        a.taskTime == b.taskTime &&
+        a.categoryId == b.categoryId &&
+        a.status == b.status;
+  }
+
+  /// Override the delete method to track the deleted task
+  Future<void> deleteTask(int id) async {
+    await getTaskById(id).catchError((_) {
+      throw Exception('Task not found');
+    });
+  }
+
+  /// Get all tasks by date
+  Future<List<TasksEntityData>> getAllTasksByDateAndPage({
+    required DateTime date,
+    int page = 0,
+    int pageSize = 20,
+  }) async {
+    return (select(tasksEntity)
+          ..where((t) => t.taskTime.year.equals(date.year))
+          ..where((t) => t.taskTime.month.equals(date.month))
+          ..where((t) => t.taskTime.day.equals(date.day))
+          ..orderBy([
+            (t) =>
+                OrderingTerm(expression: t.taskTime, mode: OrderingMode.desc),
+          ])
+          ..limit(pageSize, offset: page * pageSize))
+        .get();
+  }
+
+  /// Get task by id
+  Future<TasksEntityData> getTaskById(int id) {
+    return (select(tasksEntity)..where((t) => t.taskId.equals(id))).getSingle();
+  }
+
+  /// Insert task
+  Future<int> insertTask(TasksEntityCompanion task) {
+    return into(tasksEntity).insert(task);
+  }
+
+  /// Update task
+  Future<bool> updateTask(TasksEntityCompanion task) {
+    return update(tasksEntity).replace(task);
+  }
+
+  /// Checks if any tasks exist for a specific date and its adjacent days
+  /// Returns a map with dates as keys and boolean values
+  /// indicating task presence
+  Future<Map<DateTime, bool>> hasTasksInThreeDayRange(DateTime date) async {
+    // Create normalized dates (time set to midnight)
+    final yesterday = DateTime(date.year, date.month, date.day - 1);
+    final today = DateTime(date.year, date.month, date.day);
+    final tomorrow = DateTime(date.year, date.month, date.day + 1);
+
+    final result = <DateTime, bool>{
+      yesterday: false,
+      today: false,
+      tomorrow: false,
+    };
+
+    for (final checkDate in [yesterday, today, tomorrow]) {
+      // Get start and end of the day
+      final startOfDay =
+          DateTime(checkDate.year, checkDate.month, checkDate.day);
+      final endOfDay = DateTime(
+          checkDate.year, checkDate.month, checkDate.day, 23, 59, 59, 999);
+
+      // Count tasks on this date
+      final count = await (select(tasksEntity)
+            ..where((t) => t.taskTime.isBetweenValues(startOfDay, endOfDay)))
+          .get()
+          .then((tasks) => tasks.length);
+
+      result[checkDate] = count > 0;
+    }
+
+    return result;
+  }
+}

@@ -30,7 +30,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-
+pubspec.lock
 # Symbolication related
 app.*.symbols
 
@@ -41,3 +41,40 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+# all the generated types 
+*.gen.dart
+*.freezed.dart
+*.g.dart
+*.config.dart
+*.mocks.dart
+full_coverage_test.dart
+/lib/assets
+/lib/core/storage/objectbox/config/objectbox-model.json
+/integration_test/test_bundle.dart
+# Firebase secrets Environment files
+.env
+.env.development
+.env.production
+
+# Firebase config files
+google-services.json
+GoogleService-Info.plist
+firebase.json
+.firebaserc
+firebase-debug.log
+
+# Environment configurations
+/android/app/src/debug/google-services.json
+/android/app/src/release/google-services.json
+/ios/Runner/GoogleService-Info.plist
+/ios/config/development/GoogleService-Info.plist
+/ios/config/production/GoogleService-Info.plist
+.qodo
+
+# FVM Version Cache
+.fvm/
+/lib/core/localizations/app_localizations.dart
+/lib/core/localizations/app_localizations_bn.dart
+/lib/core/localizations/app_localizations_en.dart
+/lib/core/localizations/app_localizations_hi.dart
+/lib/core/localizations/app_localizations_kn.dart
