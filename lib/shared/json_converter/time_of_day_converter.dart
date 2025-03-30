@@ -6,6 +6,7 @@ class TimeOfDayConverter implements JsonConverter<TimeOfDay, int> {
   /// Constructor for TimeOfDayConverter
   const TimeOfDayConverter();
 
+  /// Convert from JSON to TimeOfDay
   @override
   TimeOfDay fromJson(int json) {
     return TimeOfDay(
@@ -14,6 +15,7 @@ class TimeOfDayConverter implements JsonConverter<TimeOfDay, int> {
     );
   }
 
+  /// Convert from TimeOfDay to JSON
   @override
   int toJson(TimeOfDay object) {
     return object.hour * 60 + object.minute;

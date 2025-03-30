@@ -40,11 +40,12 @@ final darkTheme = ThemeData(
     ),
   ),
   listTileTheme: const ListTileThemeData(
-    tileColor: Color(0xFFC1B8FF),
-    contentPadding: EdgeInsets.all(16),
+    tileColor: Color(0x1AFFFFFF),
+    contentPadding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+    // Reduced padding
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(
-        Radius.circular(8),
+        Radius.circular(16),
       ),
     ),
   ),

@@ -234,6 +234,7 @@ class _TaskCreationBottomSheetState extends State<TaskCreationBottomSheet> {
                               current is CategoryUpdatedState,
                           builder: (context, state) {
                             return AnimatedValueButton<CategoryItem>(
+                              itemWidth: 40,
                               value: state.maybeWhen(
                                 categoryUpdated: (category) => category,
                                 orElse: () => null,

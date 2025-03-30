@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uptodo/shared/widgets/texts/marquee_text_widget.dart';
 
 /// An animated button that can optionally display a value alongside an icon.
 ///
@@ -22,6 +23,7 @@ class AnimatedValueButton<T> extends StatefulWidget {
     this.value,
     this.formatter,
     this.backgroundColor,
+    this.itemWidth,
   });
 
   /// The value to display alongside the icon.
@@ -46,6 +48,9 @@ class AnimatedValueButton<T> extends StatefulWidget {
   /// If not specified, a semi-transparent version of the theme's
   /// surfaceContainerHighest color will be used.
   final Color? backgroundColor;
+
+  /// The width of the button item.
+  final double? itemWidth;
 
   @override
   State<AnimatedValueButton<T>> createState() => _AnimatedValueButtonState<T>();
@@ -132,18 +137,28 @@ class _AnimatedValueButtonState<T> extends State<AnimatedValueButton<T>>
                       width: 15,
                       child: widget.icon,
                     ),
-                    Text(
-                      widget.formatter != null
-                          ? widget.formatter!(widget.value as T)
-                          : widget.value.toString(),
-                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            fontWeight: FontWeight.w500,
-                          ),
-                    ),
+                    if (widget.itemWidth != null)
+                      SizedBox(
+                        width: widget.itemWidth,
+                        child: buildMarqueeText(),
+                      )
+                    else
+                      buildMarqueeText(),
                   ],
                 ),
         ),
       ),
+    );
+  }
+
+  Widget buildMarqueeText() {
+    return MarqueeTextAnimate(
+      text: widget.formatter != null
+          ? widget.formatter!(widget.value as T)
+          : widget.value.toString(),
+      style: Theme.of(context).textTheme.labelSmall!.copyWith(
+            fontWeight: FontWeight.w500,
+          ),
     );
   }
 }

@@ -68,15 +68,15 @@ class _IndexPageState extends State<IndexPage> {
                       dropdownMenuEntries: [
                         DropdownMenuEntry(
                           value: DayFilterType.yesterday,
-                          label: AppLocalizations.of(context)!.yesterday,
+                          label: DayFilterType.yesterday.value(context),
                         ),
                         DropdownMenuEntry(
                           value: DayFilterType.today,
-                          label: AppLocalizations.of(context)!.today,
+                          label: DayFilterType.today.value(context),
                         ),
                         DropdownMenuEntry(
                           value: DayFilterType.tomorrow,
-                          label: AppLocalizations.of(context)!.tomorrow,
+                          label: DayFilterType.tomorrow.value(context),
                         ),
                       ],
                       initialSelection: DayFilterType.today,

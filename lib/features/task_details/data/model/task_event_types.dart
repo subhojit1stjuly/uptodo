@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:uptodo/core/storage/database/config/app_database.dart';
+import 'package:uptodo/core/utils/common_extainsions.dart';
+import 'package:uptodo/features/category/data/model/category_model.dart';
 import 'package:uptodo/features/task_details/data/model/task_model/task_model.dart';
+import 'package:uptodo/features/task_details/data/model/task_with_category.dart';
 
 /// Class to represent a task event
 class TaskTableEvents {
   /// TaskEvent constructor
-  TaskTableEvents(this.task, this.eventType);
+  TaskTableEvents(this.taskWithCategory, this.eventType);
 
   /// Task entity data
-  final TasksEntityData task;
+  final TaskWithCategory taskWithCategory;
 
   /// Task event type
   final TaskTableEventType eventType;
+
+  /// getter for task entity data
+  TasksEntityData get task => taskWithCategory.task;
+
+  /// getter for category data
+  CategoryEntityData get category => taskWithCategory.category;
 
   /// TaskModel getter
   TaskModel get taskModel => TaskModel(
@@ -27,6 +36,12 @@ class TaskTableEvents {
           task.taskTime.year,
           task.taskTime.month,
           task.taskTime.day,
+        ),
+        category: CategoryItem(
+          id: category.id,
+          name: category.name,
+          color: Color(int.parse(category.color)),
+          icon: category.icon.getIconFromCodePoint(),
         ),
       );
 }
