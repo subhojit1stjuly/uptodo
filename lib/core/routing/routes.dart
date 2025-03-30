@@ -8,6 +8,8 @@ import 'package:uptodo/features/authentication/presentation/bloc/authentication_
 import 'package:uptodo/features/authentication/presentation/bloc/user_session_bloc.dart';
 import 'package:uptodo/features/authentication/presentation/pages/login_page.dart';
 import 'package:uptodo/features/authentication/presentation/pages/register_page.dart';
+import 'package:uptodo/features/category/presentation/page/category_create_edit_page.dart';
+import 'package:uptodo/features/error/presentation/page/error_page.dart';
 import 'package:uptodo/features/home/presentation/calendar_screen/page/calendar_page.dart';
 import 'package:uptodo/features/home/presentation/focus_screen/page/focus_page.dart';
 import 'package:uptodo/features/home/presentation/index_screen/bloc/home_bloc.dart';
@@ -20,6 +22,9 @@ import 'package:uptodo/features/onboarding/presentation/bloc/onboarding_bloc.dar
 import 'package:uptodo/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:uptodo/features/settings/presentation/pages/change_language_page.dart';
 import 'package:uptodo/features/splash/splash_page.dart';
+import 'package:uptodo/features/task_details/data/model/task_model/task_model.dart';
+import 'package:uptodo/features/task_details/presentation/bloc/task_bloc.dart';
+import 'package:uptodo/features/task_details/presentation/page/task_details_page.dart';
 
 /// this is the routing configuration class
 @module
@@ -126,6 +131,38 @@ abstract class AppRouter {
             name: RouteConstants.changeLanguage,
             path: RouteConstants.changeLanguage,
             builder: (context, state) => const ChangeLanguagePage(),
+          ),
+          GoRoute(
+            name: RouteConstants.taskDetails,
+            path: RouteConstants.taskDetails,
+            builder: (context, state) {
+              /// Add null/type checking for better error handling
+              if (state.extra == null || state.extra is! (TaskModel, String)) {
+                /// Handle error case - could redirect or show an error page
+                return const ErrorPage(message: 'Task not found');
+              }
+
+              /// Extract the TaskModel from the extra parameter
+              final (taskModel, timeOfTheWeek) =
+                  state.extra! as (TaskModel, String);
+              return BlocProvider.value(
+                value: getIt<TaskBloc>(),
+                child: TaskDetailsPage(
+                  taskModel: taskModel,
+                  timeOfTheWeek: timeOfTheWeek,
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            name: RouteConstants.categoryDetails,
+            path: RouteConstants.categoryDetails,
+            builder: (context, state) {
+              return BlocProvider.value(
+                value: getIt<TaskBloc>(),
+                child: const CategoryCreateEditPage(),
+              );
+            },
           ),
         ],
         redirect: (context, state) {

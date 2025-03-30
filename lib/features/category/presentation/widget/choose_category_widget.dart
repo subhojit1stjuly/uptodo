@@ -7,6 +7,7 @@ import 'package:uptodo/features/category/data/model/category_model.dart';
 import 'package:uptodo/features/category/presentation/bloc/category_bloc.dart';
 import 'package:uptodo/features/category/presentation/bloc/state/category_state.dart';
 import 'package:uptodo/features/category/presentation/widget/loading_category_widget.dart';
+import 'package:uptodo/shared/widgets/texts/marquee_text_widget.dart';
 
 /// A widget to choose a category
 class ChooseCategoryWidget extends StatefulWidget {
@@ -109,7 +110,7 @@ class _ChooseCategoryWidgetState extends State<ChooseCategoryWidget> {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: category.color.withValues(alpha: 0.2),
+          color: category.color,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
@@ -117,15 +118,19 @@ class _ChooseCategoryWidgetState extends State<ChooseCategoryWidget> {
           children: [
             Icon(
               category.icon,
-              color: category.color,
+              color: Colors.white,
               size: 32,
             ),
             const SizedBox(height: 8),
-            Text(
-              category.name,
-              style: TextStyle(
-                color: category.color,
-                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+            SizedBox(
+              width: 80,
+              child: MarqueeTextAnimate(
+                text: category.name,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                ),
               ),
             ),
           ],

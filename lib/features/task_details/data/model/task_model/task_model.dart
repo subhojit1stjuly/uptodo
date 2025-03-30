@@ -22,6 +22,7 @@ class TaskModel with _$TaskModel {
     String? taskId,
     String? subTaskId,
     @CategoryConverter() CategoryItem? category,
+    TaskModel? childTask,
     @Default(TaskStatus.pending) TaskStatus status,
   }) = _TaskModel;
 

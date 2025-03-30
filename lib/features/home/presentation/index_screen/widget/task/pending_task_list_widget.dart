@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:uptodo/core/constants/assets.gen.dart';
 import 'package:uptodo/core/localizations/app_localizations.dart';
 import 'package:uptodo/features/home/presentation/index_screen/bloc/index_bloc.dart';
@@ -42,21 +42,15 @@ class _PendingTaskListWidgetState extends State<PendingTaskListWidget> {
                       return PendingTaskWidget(
                         taskModel: pendingTasks[index],
                         dayFilterType: currentDayFilter,
-                        formatter: (time) {
-                          if (time != null) {
-                            final now = DateTime.now();
-                            final dt = DateTime(
-                              now.year,
-                              now.month,
-                              now.day,
-                              time.hour,
-                              time.minute,
-                            );
-                            return DateFormat.jm().format(dt);
-                          }
-                          return '';
-                        },
-                      );
+                      )
+                          .animate(delay: Duration(milliseconds: 50 * index))
+                          .fadeIn(duration: 300.ms)
+                          .slideX(
+                            begin: 0.2,
+                            end: 0,
+                            duration: 400.ms,
+                            curve: Curves.easeOutQuad,
+                          );
                     },
                     separatorBuilder: (BuildContext context, int index) {
                       return const SizedBox(
@@ -77,7 +71,15 @@ class _PendingTaskListWidgetState extends State<PendingTaskListWidget> {
                       height: 227,
                       width: 227,
                     ),
-                  );
+                  )
+                    .animate(delay: const Duration(milliseconds: 50))
+                    .fadeIn(duration: 300.ms)
+                    .slideX(
+                      begin: 0.2,
+                      end: 0,
+                      duration: 400.ms,
+                      curve: Curves.easeOutQuad,
+                    );
           },
           orElse: () => const SizedBox.shrink(),
         );
