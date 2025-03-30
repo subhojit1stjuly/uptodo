@@ -22,6 +22,7 @@ class CommonDialogWidget extends StatelessWidget {
         ),
         backgroundColor: Theme.of(context).primaryColor,
         shape: RoundedRectangleBorder(
+          side: BorderSide(color: Theme.of(context).shadowColor, width: 5),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Padding(

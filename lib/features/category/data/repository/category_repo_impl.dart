@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:uptodo/core/utils/common_extainsions.dart';
 import 'package:uptodo/features/category/data/database/category_database_module.dart';
 import 'package:uptodo/features/category/data/model/category_model.dart';
 import 'package:uptodo/features/category/domain/repository/category_repository.dart';
@@ -33,8 +34,8 @@ class CategoryRepositoryImpl implements CategoryRepository {
           (item) => CategoryItem(
             id: item.id,
             name: item.name,
-            color: Color(int.parse(item.color.substring(2), radix: 16)),
-            icon: _getIconFromCodePoint(item.icon),
+            color: Color(int.parse(item.color)),
+            icon: item.icon.getIconFromCodePoint(),
           ),
         )
         .toList();
@@ -44,16 +45,5 @@ class CategoryRepositoryImpl implements CategoryRepository {
   Future<bool> updateCategory(CategoryItem item) {
     // TODO: implement updateCategory
     throw UnimplementedError();
-  }
-
-  IconData _getIconFromCodePoint(String codePointString) {
-    // Parse the codePoint string to an integer
-    final codePoint = int.parse(codePointString);
-
-    // Create an IconData with the codePoint and material icons font family
-    return IconData(
-      codePoint,
-      fontFamily: 'MaterialIcons',
-    );
   }
 }

@@ -6,6 +6,7 @@ import 'package:uptodo/core/localizations/app_localizations.dart';
 import 'package:uptodo/features/category/data/model/category_model.dart';
 import 'package:uptodo/features/category/presentation/bloc/category_bloc.dart';
 import 'package:uptodo/features/category/presentation/bloc/state/category_state.dart';
+import 'package:uptodo/features/category/presentation/widget/loading_category_widget.dart';
 
 /// A widget to choose a category
 class ChooseCategoryWidget extends StatefulWidget {
@@ -30,11 +31,13 @@ class _ChooseCategoryWidgetState extends State<ChooseCategoryWidget> {
           current is LoadingState || current is LoadedState,
       builder: (context, state) {
         return state.when(
-          loading: () => const Center(child: CircularProgressIndicator()),
+          loading: () => const Center(child: LoadingCategoryWidget()),
           loaded: (categories) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              spacing: 30,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(16),
@@ -54,7 +57,7 @@ class _ChooseCategoryWidgetState extends State<ChooseCategoryWidget> {
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
                   ),
-                  itemCount: categories.length + 1,
+                  itemCount: categories.length,
                   // Categories + add button
                   itemBuilder: (context, index) {
                     if (index < categories.length) {

@@ -20,20 +20,19 @@ class PriorityDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      spacing: 15,
       children: [
         // Header Section
-        Padding(
-          padding: const EdgeInsets.only(top: 8, bottom: 16),
-          child: Text(
-            AppLocalizations.of(context)!.task_priority,
-            style: Theme.of(context).textTheme.bodyLarge,
-            textAlign: TextAlign.center,
-          ),
+        Text(
+          AppLocalizations.of(context)!.task_priority,
+          style: Theme.of(context).textTheme.bodyLarge,
+          textAlign: TextAlign.center,
         ),
         const Divider(),
         // Content Section - Grid View
         SizedBox(
-          height: 300, // Adjust height as needed
+          height: 250, // Adjust height as needed
           child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4, // 5x2 grid

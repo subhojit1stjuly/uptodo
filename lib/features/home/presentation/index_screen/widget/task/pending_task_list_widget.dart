@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:uptodo/core/constants/assets.gen.dart';
 import 'package:uptodo/core/localizations/app_localizations.dart';
 import 'package:uptodo/features/home/presentation/index_screen/bloc/index_bloc.dart';
@@ -33,13 +34,33 @@ class _PendingTaskListWidgetState extends State<PendingTaskListWidget> {
             currentStatusFilter,
           ) {
             return pendingTasks.isNotEmpty
-                ? ListView.builder(
+                ? ListView.separated(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: pendingTasks.length,
                     itemBuilder: (context, index) {
                       return PendingTaskWidget(
                         taskModel: pendingTasks[index],
+                        dayFilterType: currentDayFilter,
+                        formatter: (time) {
+                          if (time != null) {
+                            final now = DateTime.now();
+                            final dt = DateTime(
+                              now.year,
+                              now.month,
+                              now.day,
+                              time.hour,
+                              time.minute,
+                            );
+                            return DateFormat.jm().format(dt);
+                          }
+                          return '';
+                        },
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const SizedBox(
+                        height: 8,
                       );
                     },
                   )

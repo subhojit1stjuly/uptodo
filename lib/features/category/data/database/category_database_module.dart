@@ -36,47 +36,47 @@ class CategoryDatabaseModule extends DatabaseAccessor<AppDatabase>
         batch.insertAll(categoryEntity, [
           CategoryEntityCompanion.insert(
             name: 'Work',
-            color: '0x2196F3FF',
+            color: Colors.blue.toARGB32().toString(),
             icon: Icons.work.codePoint.toString(),
           ),
           CategoryEntityCompanion.insert(
             name: 'Study',
-            color: '0x4CAF50FF',
+            color: Colors.green.toARGB32().toString(),
             icon: Icons.school.codePoint.toString(),
           ),
           CategoryEntityCompanion.insert(
             name: 'Personal',
-            color: '0xFF9800FF',
+            color: Colors.orange.toARGB32().toString(),
             icon: Icons.person.codePoint.toString(),
           ),
           CategoryEntityCompanion.insert(
             name: 'Shopping',
-            color: '0x9C27B0FF',
+            color: Colors.purple.toARGB32().toString(),
             icon: Icons.shopping_cart.codePoint.toString(),
           ),
           CategoryEntityCompanion.insert(
             name: 'Health',
-            color: '0xF44336FF',
+            color: Colors.red.toARGB32().toString(),
             icon: Icons.favorite.codePoint.toString(),
           ),
           CategoryEntityCompanion.insert(
             name: 'Finance',
-            color: '0x3F51B5FF',
+            color: Colors.indigo.toARGB32().toString(),
             icon: Icons.attach_money.codePoint.toString(),
           ),
           CategoryEntityCompanion.insert(
             name: 'Home',
-            color: '0x795548FF',
+            color: Colors.brown.toARGB32().toString(),
             icon: Icons.home.codePoint.toString(),
           ),
           CategoryEntityCompanion.insert(
             name: 'Entertainment',
-            color: '0xE91E63FF',
+            color: Colors.pink.toARGB32().toString(),
             icon: Icons.movie.codePoint.toString(),
           ),
           CategoryEntityCompanion.insert(
             name: 'Family',
-            color: '0x009688FF',
+            color: Colors.grey.toARGB32().toString(),
             icon: Icons.family_restroom.codePoint.toString(),
           ),
         ]);

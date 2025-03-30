@@ -4,6 +4,7 @@ import 'package:drift/drift.dart';
 import 'package:injectable/injectable.dart';
 import 'package:uptodo/core/storage/database/config/app_database.dart';
 import 'package:uptodo/features/task_details/data/model/task_event_types.dart';
+import 'package:uptodo/features/task_details/data/model/task_with_category.dart';
 import 'package:uptodo/features/task_details/domain/entities/tasks_entity.dart';
 import 'package:uptodo/shared/model/shred_enums.dart';
 
@@ -23,59 +24,86 @@ class TasksDatabaseModule extends DatabaseAccessor<AppDatabase>
     /// Create a broadcast stream controller to emit task changes
     final controller = StreamController<TaskTableEvents>.broadcast();
 
+    /// Set up a join query between tasks and categories
+    final query = select(tasksEntity).join([
+      innerJoin(
+          categoryEntity, categoryEntity.id.equalsExp(tasksEntity.categoryId)),
+    ])
+      ..orderBy([
+        OrderingTerm(expression: tasksEntity.taskTime, mode: OrderingMode.desc),
+      ]);
+
     /// Track the last known tasks to detect changes
-    var previousTasks = <TasksEntityData>[];
+    var previousTasksWithCategories = <TaskWithCategory>[];
 
     /// Subscribe to the underlying database changes
-    (select(tasksEntity)
-          ..orderBy([
-            (t) =>
-                OrderingTerm(expression: t.taskTime, mode: OrderingMode.desc),
-          ]))
-        .watch()
-        .listen((tasks) {
-      if (previousTasks.isEmpty && tasks.isNotEmpty) {
+    query.watch().listen((rows) {
+      // Convert joined rows to TaskWithCategory objects
+      final currentTasksWithCategories = rows.map((row) {
+        return TaskWithCategory(
+          task: row.readTable(tasksEntity),
+          category: row.readTable(categoryEntity),
+        );
+      }).toList();
+
+      if (previousTasksWithCategories.isEmpty &&
+          currentTasksWithCategories.isNotEmpty) {
         // First load or all tasks were previously deleted
-        for (final task in tasks) {
-          controller.add(TaskTableEvents(task, TaskTableEventType.created));
+        for (final taskWithCategory in currentTasksWithCategories) {
+          controller.add(
+              TaskTableEvents(taskWithCategory, TaskTableEventType.created));
         }
       } else {
         // Find created tasks (in current but not in previous)
-        for (final task in tasks) {
-          if (!previousTasks.any((t) => t.taskId == task.taskId)) {
-            controller.add(TaskTableEvents(task, TaskTableEventType.created));
+        for (final current in currentTasksWithCategories) {
+          if (!previousTasksWithCategories
+              .any((prev) => prev.task.taskId == current.task.taskId)) {
+            controller
+                .add(TaskTableEvents(current, TaskTableEventType.created));
           }
         }
 
         // Find updated tasks (in both, but with changes)
-        for (final task in tasks) {
-          final previousTask = previousTasks.firstWhere(
-            (t) => t.taskId == task.taskId,
-            orElse: () => TasksEntityData(
-              taskId: -1,
-              title: '',
-              description: '',
-              priorityId: 0,
-              taskTime: DateTime.now(),
-              categoryId: 0,
-              status: TaskStatus.pending,
+        for (final current in currentTasksWithCategories) {
+          final previous = previousTasksWithCategories.firstWhere(
+            (prev) => prev.task.taskId == current.task.taskId,
+            orElse: () => TaskWithCategory(
+              task: TasksEntityData(
+                taskId: -1,
+                title: '',
+                description: '',
+                priorityId: 0,
+                taskTime: DateTime.now(),
+                categoryId: 0,
+                status: TaskStatus.pending,
+              ),
+              category: const CategoryEntityData(
+                id: -1,
+                name: '',
+                icon: '',
+                color: '',
+              ),
             ),
           );
-          if (previousTask.taskId != -1 && !_tasksEqual(previousTask, task)) {
-            controller.add(TaskTableEvents(task, TaskTableEventType.updated));
+
+          if (previous.task.taskId != -1 &&
+              !_tasksEqual(previous.task, current.task)) {
+            controller
+                .add(TaskTableEvents(current, TaskTableEventType.updated));
           }
         }
 
         // Find deleted tasks (in previous but not in current)
-        for (final previousTask in previousTasks) {
-          if (!tasks.any((t) => t.taskId == previousTask.taskId)) {
+        for (final previous in previousTasksWithCategories) {
+          if (!currentTasksWithCategories
+              .any((current) => current.task.taskId == previous.task.taskId)) {
             controller
-                .add(TaskTableEvents(previousTask, TaskTableEventType.deleted));
+                .add(TaskTableEvents(previous, TaskTableEventType.deleted));
           }
         }
       }
 
-      previousTasks = List.from(tasks);
+      previousTasksWithCategories = List.from(currentTasksWithCategories);
     });
 
     return controller.stream;
@@ -100,21 +128,37 @@ class TasksDatabaseModule extends DatabaseAccessor<AppDatabase>
   }
 
   /// Get all tasks by date
-  Future<List<TasksEntityData>> getAllTasksByDateAndPage({
+  Future<List<TaskWithCategory>> getAllTasksByDateAndPage({
     required DateTime date,
     int page = 0,
     int pageSize = 20,
   }) async {
-    return (select(tasksEntity)
-          ..where((t) => t.taskTime.year.equals(date.year))
-          ..where((t) => t.taskTime.month.equals(date.month))
-          ..where((t) => t.taskTime.day.equals(date.day))
-          ..orderBy([
-            (t) =>
-                OrderingTerm(expression: t.taskTime, mode: OrderingMode.desc),
-          ])
-          ..limit(pageSize, offset: page * pageSize))
-        .get();
+    // Create a join query between tasks and categories
+    final query = select(tasksEntity).join([
+      innerJoin(
+          categoryEntity, categoryEntity.id.equalsExp(tasksEntity.categoryId)),
+    ])
+      // Apply the date filter
+      ..where(tasksEntity.taskTime.year.equals(date.year))
+      ..where(tasksEntity.taskTime.month.equals(date.month))
+      ..where(tasksEntity.taskTime.day.equals(date.day))
+      // Apply ordering
+      ..orderBy([
+        OrderingTerm(expression: tasksEntity.taskTime, mode: OrderingMode.desc),
+      ])
+      // Apply pagination
+      ..limit(pageSize, offset: page * pageSize);
+
+    // Execute the query
+    final rows = await query.get();
+
+    // Map the results to your custom class
+    return rows.map((row) {
+      return TaskWithCategory(
+        task: row.readTable(tasksEntity),
+        category: row.readTable(categoryEntity),
+      );
+    }).toList();
   }
 
   /// Get task by id

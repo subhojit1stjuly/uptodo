@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:uptodo/core/utils/common_extainsions.dart';
+import 'package:uptodo/features/category/data/model/category_model.dart';
 import 'package:uptodo/features/home/domain/repositories/task_details_repository.dart';
 import 'package:uptodo/features/task_details/data/database/tasks_database_module.dart';
 import 'package:uptodo/features/task_details/data/model/task_analytics_data/task_analytics_data.dart';
@@ -20,26 +22,33 @@ class TaskDetailsRepositoryImpl implements TaskDetailsRepository {
     int page = 0,
     int pageSize = 20,
   }) async {
-    final allTask = await _databaseModule.getAllTasksByDateAndPage(
+    final taskWithCategories = await _databaseModule.getAllTasksByDateAndPage(
       date: date,
       page: page,
       pageSize: pageSize,
     );
-    return allTask
+
+    return taskWithCategories
         .map(
-          (task) => TaskModel(
-            taskId: task.taskId.toString(),
-            title: task.title,
-            description: task.description,
-            subTaskId: task.subTaskId,
-            priorityId: task.priorityId,
-            taskTime: TimeOfDay.fromDateTime(task.taskTime),
-            categoryId: task.categoryId,
-            status: task.status,
+          (data) => TaskModel(
+            taskId: data.task.taskId.toString(),
+            title: data.task.title,
+            description: data.task.description,
+            subTaskId: data.task.subTaskId,
+            priorityId: data.task.priorityId,
+            taskTime: TimeOfDay.fromDateTime(data.task.taskTime),
+            categoryId: data.task.categoryId,
+            status: data.task.status,
             taskDate: DateTime(
-              task.taskTime.year,
-              task.taskTime.month,
-              task.taskTime.day,
+              data.task.taskTime.year,
+              data.task.taskTime.month,
+              data.task.taskTime.day,
+            ),
+            category: CategoryItem(
+              id: data.category.id,
+              name: data.category.name,
+              color: Color(int.parse(data.category.color)),
+              icon: data.category.icon.getIconFromCodePoint(),
             ),
           ),
         )

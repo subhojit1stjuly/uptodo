@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:uptodo/core/localizations/app_localizations.dart';
+
 /// This file contains all the enums used in the app
 /// FilterType
 enum DayFilterType {
@@ -14,6 +17,21 @@ enum DayFilterType {
 
   /// id
   final int id;
+}
+
+/// extension for the enum [DayFilterType]
+extension DayFilterTypeExtension on DayFilterType {
+  /// get the string value of the enum
+  String value(BuildContext context) {
+    switch (this) {
+      case DayFilterType.today:
+        return AppLocalizations.of(context)!.today;
+      case DayFilterType.tomorrow:
+        return AppLocalizations.of(context)!.tomorrow;
+      case DayFilterType.yesterday:
+        return AppLocalizations.of(context)!.yesterday;
+    }
+  }
 }
 
 /// task Status

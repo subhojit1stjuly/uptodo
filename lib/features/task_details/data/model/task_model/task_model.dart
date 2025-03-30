@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:uptodo/features/category/data/model/category_model.dart';
+import 'package:uptodo/shared/json_converter/category_converter.dart';
 import 'package:uptodo/shared/json_converter/time_of_day_converter.dart';
 import 'package:uptodo/shared/model/shred_enums.dart';
 
@@ -19,6 +21,7 @@ class TaskModel with _$TaskModel {
     required int categoryId,
     String? taskId,
     String? subTaskId,
+    @CategoryConverter() CategoryItem? category,
     @Default(TaskStatus.pending) TaskStatus status,
   }) = _TaskModel;
 
