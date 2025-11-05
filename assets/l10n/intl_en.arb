@@ -212,6 +212,10 @@
   "@task_time": {
     "description": "Label for task time field"
   },
+  "task_date": "Task date:",
+  "@task_date": {
+    "description": "Label for task date field"
+  },
   "task_category": "Task Category:",
   "@task_category": {
     "description": "Label for task category field"

@@ -9,7 +9,7 @@ import 'package:uptodo/features/task_details/data/model/task_model/task_model.da
 import 'package:uptodo/shared/widgets/task/priority_widget.dart';
 
 /// A Screen to display task details
-class TaskDetailsPage extends StatefulWidget {
+class TaskDetailsPage extends StatelessWidget {
   /// TaskDetailsPage constructor
   const TaskDetailsPage({
     required this.taskModel,
@@ -23,11 +23,6 @@ class TaskDetailsPage extends StatefulWidget {
   /// timeOfTheWeek
   final String timeOfTheWeek;
 
-  @override
-  State<TaskDetailsPage> createState() => _TaskDetailsPageState();
-}
-
-class _TaskDetailsPageState extends State<TaskDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +45,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
         child: Padding(
           padding: const EdgeInsets.all(8),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 8,
             children: [
               ListTile(
@@ -62,13 +58,13 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
                   activeColor: Colors.white,
                 ),
                 title: Text(
-                  widget.taskModel.title,
+                  taskModel.title,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
                 ),
                 subtitle: Text(
-                  widget.taskModel.description,
+                  taskModel.description,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w400,
                       ),
@@ -95,9 +91,39 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
                 value: TextButton(
                   onPressed: () {},
                   child: decorateItem(
+                    context: context,
                     child: Text(
-                      '${widget.timeOfTheWeek} At '
-                      '${widget.taskModel.taskTime.convertTimeOfDayToString()}',
+                      '$timeOfTheWeek At '
+                          '${taskModel.taskTime.convertTimeOfDayToString()}',
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .bodyMedium,
+                    ),
+                  ),
+                ),
+              ),
+
+              /// task date
+              _buildTaskRow(
+                icon: Assets.icons.calendar.svg(
+                  width: 24,
+                  height: 24,
+                ),
+                text: Text(
+                  AppLocalizations.of(context)!.task_date,
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .bodyMedium,
+                ),
+                value: TextButton(
+                  onPressed: () {},
+                  child: decorateItem(
+                    context: context,
+                    child: Text(
+                      '$timeOfTheWeek At '
+                          '${taskModel.taskTime.convertTimeOfDayToString()}',
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
@@ -117,7 +143,8 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
                 value: TextButton(
                   onPressed: () {},
                   child: CategoryWidget(
-                    taskCategory: widget.taskModel.category,
+                    doesMarqueeRequired: false,
+                    taskCategory: taskModel.category,
                   ),
                 ),
               ),
@@ -135,7 +162,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
                 value: TextButton(
                   onPressed: () {},
                   child: PriorityWidget(
-                    priority: widget.taskModel.priorityId.toString(),
+                    priority: taskModel.priorityId.toString(),
                   ),
                 ),
               ),
@@ -153,9 +180,10 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
                 value: TextButton(
                   onPressed: () {},
                   child: decorateItem(
+                    context: context,
                     child: Text(
-                      widget.taskModel.subTaskId != null
-                          ? widget.taskModel.childTask!.title
+                      taskModel.subTaskId != null
+                          ? taskModel.childTask!.title
                           : AppLocalizations.of(context)!.add_task,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
@@ -167,6 +195,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
               TextButton(
                 onPressed: () {},
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
                   spacing: 4,
                   children: [
                     Assets.icons.trash.svg(
@@ -214,7 +243,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
     );
   }
 
-  Widget decorateItem({required Widget child}) {
+  Widget decorateItem({required Widget child, required BuildContext context}) {
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
