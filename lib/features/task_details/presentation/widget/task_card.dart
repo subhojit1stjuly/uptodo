@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:uptodo/core/constants/assets.gen.dart';
 import 'package:uptodo/features/category/data/model/category_model.dart';
-import 'package:uptodo/shared/widgets/texts/marquee_text_widget.dart';
+import 'package:uptodo/features/category/presentation/widget/categor_widget.dart';
+import 'package:uptodo/shared/widgets/task/priority_widget.dart';
 
 /// TaskListTileCard widget
 class TaskListTileCard extends StatelessWidget {
@@ -69,56 +69,11 @@ class TaskListTileCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               spacing: 8,
               children: <Widget>[
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color:
-                        taskCategory?.color ?? Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Row(
-                    spacing: 4,
-                    children: <Widget>[
-                      Icon(
-                        taskCategory?.icon ?? Icons.category,
-                        color: Colors.white,
-                        size: 16,
-                      ),
-                      SizedBox(
-                        width: 40,
-                        child: MarqueeTextAnimate(
-                          text: taskCategory?.name ?? '',
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: Colors.white,
-                                  ),
-                        ),
-                      ),
-                    ],
-                  ),
+                CategoryWidget(
+                  taskCategory: taskCategory,
                 ),
-                Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).shadowColor,
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Row(
-                    spacing: 4,
-                    children: <Widget>[
-                      Assets.icons.flag.svg(
-                        height: 18,
-                        width: 18,
-                      ),
-                      Text(
-                        priority.toString(),
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Colors.white,
-                            ),
-                      ),
-                    ],
-                  ),
+                PriorityWidget(
+                  priority: priority.toString(),
                 ),
                 const SizedBox(width: 4),
               ],

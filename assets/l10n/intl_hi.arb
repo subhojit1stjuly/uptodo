@@ -212,6 +212,10 @@
   "@task_time": {
     "description": "कार्य के समय के लिए लेबल"
   },
+  "task_date": "कार्य तिथि:",
+  "@task_date": {
+    "description": "कार्य तिथि फ़ील्ड के लिए लेबल"
+  },
   "task_category": "कार्य श्रेणी:",
   "@task_category": {
     "description": "कार्य श्रेणी के लिए लेबल"

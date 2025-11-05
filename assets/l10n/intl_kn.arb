@@ -212,6 +212,10 @@
   "@task_time": {
     "description": "ಕಾರ್ಯ ಸಮಯ ಲೇಬಲ್"
   },
+  "task_date": "ಕಾರ್ಯದ ದಿನಾಂಕ:",
+  "@task_date": {
+    "description": "ಕಾರ್ಯದ ದಿನಾಂಕ ಕ್ಷೇತ್ರದ ಲೇಬಲ್"
+  },
   "task_category": "ಕಾರ್ಯ ವರ್ಗ:",
   "@task_category": {
     "description": "ಕಾರ್ಯ ವರ್ಗ ಲೇಬಲ್"

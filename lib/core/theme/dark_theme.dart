@@ -85,8 +85,10 @@ final darkTheme = ThemeData(
   ),
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
-      foregroundColor: Colors.white70, // Text and icon color
-      side: const BorderSide(color: Color(0xFF8875FF)), // Outline color
+      foregroundColor: Colors.white70,
+      // Text and icon color
+      side: const BorderSide(color: Color(0xFF8875FF)),
+      // Outline color
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8), // Radius value
       ),

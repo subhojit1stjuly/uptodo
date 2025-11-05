@@ -216,6 +216,10 @@
   "@task_time": {
     "description": "কাজের সময় ক্ষেত্রের লেবেল"
   },
+  "task_date": "কাজের তারিখ:",
+  "@task_date": {
+    "description": "কাজের তারিখ ক্ষেত্রের জন্য লেবেল"
+  },
   "task_category": "কাজের বিভাগ:",
   "@task_category": {
     "description": "কাজের বিভাগ ক্ষেত্রের লেবেল"

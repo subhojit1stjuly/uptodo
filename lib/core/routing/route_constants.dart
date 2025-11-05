@@ -43,4 +43,10 @@ class RouteConstants {
     2: focus,
     3: profile,
   };
+
+  /// task details route
+  static const String taskDetails = '/taskDetails';
+
+  /// category details route
+  static const String categoryDetails = '/categoryDetails';
 }
