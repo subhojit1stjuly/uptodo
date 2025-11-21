@@ -11,7 +11,6 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.6
-  flutter_screenutil: ^5.9.3
   # Database for the app
   drift: ^2.26.0
   drift_flutter: ^0.2.4

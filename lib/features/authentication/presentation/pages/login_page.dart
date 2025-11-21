@@ -7,7 +7,6 @@ import 'package:uptodo/core/routing/route_constants.dart';
 import 'package:uptodo/features/authentication/presentation/bloc/authentication_bloc.dart';
 import 'package:uptodo/features/authentication/presentation/bloc/event/auth_event.dart';
 import 'package:uptodo/features/authentication/presentation/bloc/state/auth_state.dart';
-import 'package:uptodo/features/authentication/presentation/widgets/dynamic_hyphen_widget.dart';
 import 'package:uptodo/shared/widgets/dialogs/custom_toast.dart';
 import 'package:uptodo/shared/widgets/texts/custom_textfield.dart';
 
@@ -100,7 +99,13 @@ class _LoginPageState extends State<LoginPage> {
 
                 /// or
                 const SizedBox(height: 10),
-                const DynamicHyphenWidget(),
+                Text(
+                  '---------- ${AppLocalizations.of(context)!.or} ----------',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontWeight: FontWeight.w500,
+                      ),
+                ),
                 const SizedBox(height: 10),
 
                 /// social login buttons google

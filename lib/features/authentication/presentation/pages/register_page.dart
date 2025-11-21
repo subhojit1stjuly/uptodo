@@ -6,7 +6,6 @@ import 'package:uptodo/core/localizations/app_localizations.dart';
 import 'package:uptodo/core/routing/route_constants.dart';
 import 'package:uptodo/features/authentication/presentation/bloc/authentication_bloc.dart';
 import 'package:uptodo/features/authentication/presentation/bloc/event/auth_event.dart';
-import 'package:uptodo/features/authentication/presentation/widgets/dynamic_hyphen_widget.dart';
 import 'package:uptodo/shared/widgets/texts/custom_textfield.dart';
 
 /// this is the Register Page
@@ -85,7 +84,13 @@ class _RegisterPageState extends State<RegisterPage> {
 
               /// or
               const SizedBox(height: 10),
-              const DynamicHyphenWidget(),
+              Text(
+                AppLocalizations.of(context)!.or,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
               const SizedBox(height: 10),
 
               /// social register buttons google
