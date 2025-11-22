@@ -50,13 +50,18 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     CreateEvent event,
     Emitter<TaskState> emit,
   ) async {
-    if (state.taskModel!.title.isEmpty ||
-        state.taskModel!.description.isEmpty) {
-      emit(state.copyWith(editingStatus: TaskEditingStatus.invalid));
-      return;
+    try {
+      emit(state.copyWith(editingStatus: TaskEditingStatus.loading));
+      await createTaskUseCase.execute(state.taskModel!);
+      emit(state.copyWith(editingStatus: TaskEditingStatus.created));
+    } catch (e) {
+      emit(
+        state.copyWith(
+          editingStatus: TaskEditingStatus.errored,
+          errorMessage: e.toString(),
+        ),
+      );
     }
-    await createTaskUseCase.execute(state.taskModel!);
-    emit(state.copyWith(editingStatus: TaskEditingStatus.success));
   }
 
   Future<void> _onUpdateDate(
@@ -96,8 +101,11 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     UpdateTimeEvent event,
     Emitter<TaskState> emit,
   ) async {
-    /*_taskModel = _taskModel.copyWith(taskTime: event.time);
-    emit(TaskState.timeUpdated(event.time));*/
+    emit(
+      state.copyWith(
+        taskModel: state.taskModel!.copyWith(taskTime: event.time),
+      ),
+    );
   }
 
   Future<void> _onUpdateStatus(
@@ -115,23 +123,43 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     UpdateEvent event,
     Emitter<TaskState> emit,
   ) async {
-    await updateTaskUseCase.execute(event.taskModel);
-    emit(
-      state.copyWith(
-        editingStatus: TaskEditingStatus.success,
-      ),
-    );
+    try {
+      emit(state.copyWith(editingStatus: TaskEditingStatus.loading));
+      await updateTaskUseCase.execute(event.taskModel);
+      emit(
+        state.copyWith(
+          editingStatus: TaskEditingStatus.updated,
+        ),
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          editingStatus: TaskEditingStatus.errored,
+          errorMessage: e.toString(),
+        ),
+      );
+    }
   }
 
   Future<void> _onDeleteTask(
     DeleteEvent event,
     Emitter<TaskState> emit,
   ) async {
-    await deleteTaskUseCase.execute(int.parse(event.taskModel.taskId!));
-    emit(
-      state.copyWith(
-        editingStatus: TaskEditingStatus.success,
-      ),
-    );
+    try {
+      emit(state.copyWith(editingStatus: TaskEditingStatus.loading));
+      await deleteTaskUseCase.execute(int.parse(event.taskModel.taskId!));
+      emit(
+        state.copyWith(
+          editingStatus: TaskEditingStatus.deleted,
+        ),
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          editingStatus: TaskEditingStatus.errored,
+          errorMessage: e.toString(),
+        ),
+      );
+    }
   }
 }

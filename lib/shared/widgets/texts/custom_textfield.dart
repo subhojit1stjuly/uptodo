@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Custom styled TextFormField
+/// Custom styled TextFormField with password visibility toggle support
 class CustomTextField extends StatefulWidget {
   /// Constructor for the CustomTextField
   const CustomTextField({
@@ -12,47 +12,61 @@ class CustomTextField extends StatefulWidget {
     this.keyboardType,
     this.decoration,
     this.isPassword = false,
-    this.errorText, // Add for BLoC validation
-    this.autovalidateMode, // Add for real-time validation
+    this.errorText,
+    this.autoValidateMode,
   });
 
-  /// The label text for the TextFormField
+  /// Label text displayed above the TextFormField
   final String labelText;
 
-  /// The hint text for the TextFormField
+  /// Hint text displayed inside the TextFormField
   final String? hintText;
 
-  /// The controller for the TextFormField
+  /// Controller for managing the text being edited.
   final TextEditingController? controller;
 
-  /// The validator function for the TextFormField
+  /// Function for validating the input text.
   final String? Function(String?)? validator;
 
-  /// The keyboard type for the TextFormField
+  /// The type of keyboard to use for editing the text.
   final TextInputType? keyboardType;
 
-  /// The decoration for the TextFormField
+  /// Custom decoration for the TextFormField.
   final InputDecoration? decoration;
 
-  /// Whether the TextFormField is a password field
+  /// Whether the field should obscure the text (for passwords).
   final bool isPassword;
 
-  /// External error from BLoC
+  /// Error text to display below the TextFormField.
   final String? errorText;
 
-  /// Add for real-time validation
-  final AutovalidateMode? autovalidateMode;
+  /// Controls the auto-validation behavior of the TextFormField.
+  final AutovalidateMode? autoValidateMode;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-  bool _obscureText = true;
+  /// ValueNotifier to manage password visibility state
+  late final ValueNotifier<bool> _obscureTextNotifier;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the ValueNotifier with true (password hidden by default)
+    _obscureTextNotifier = ValueNotifier<bool>(true);
+  }
+
+  @override
+  void dispose() {
+    // Dispose the ValueNotifier to prevent memory leaks
+    _obscureTextNotifier.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    // Get the default input decoration from the theme
     final defaultDecoration = Theme.of(context).inputDecorationTheme;
 
     return Column(
@@ -69,82 +83,88 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     fontWeight: FontWeight.w600,
                   ),
             ),
-          )
-        else
-          const SizedBox.shrink(),
-        // Custom styled TextFormField
-        TextFormField(
-          controller: widget.controller,
-          validator: widget.validator,
-          autovalidateMode: widget.autovalidateMode,
-          keyboardType: widget.isPassword
-              ? TextInputType.visiblePassword
-              : widget.keyboardType,
-          obscureText: widget.isPassword && _obscureText,
-          decoration: (widget.decoration ?? const InputDecoration()).copyWith(
-            hintText: widget.hintText,
-            errorText: widget.errorText,
-            // BLoC error takes precedence
-            hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
-            filled: true,
-            fillColor: Theme.of(context).colorScheme.surface,
-            // Merge with theme's input decoration
-            isDense: widget.decoration?.isDense ?? defaultDecoration.isDense,
-            contentPadding: widget.decoration?.contentPadding ??
-                defaultDecoration.contentPadding ??
-                const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-            // Border styling
-            border: widget.decoration?.border ??
-                defaultDecoration.border ??
-                OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-            enabledBorder: widget.decoration?.enabledBorder ??
-                defaultDecoration.enabledBorder ??
-                OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(
-                    color: widget.errorText != null
-                        ? Theme.of(context).colorScheme.error
-                        : Colors.grey.shade400,
-                  ),
-                ),
-            focusedBorder: widget.decoration?.focusedBorder ??
-                defaultDecoration.focusedBorder ??
-                OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(
-                    color: widget.errorText != null
-                        ? Theme.of(context).colorScheme.error
-                        : Theme.of(context).primaryColor,
-                    width: 2,
-                  ),
-                ),
-            errorBorder: widget.decoration?.errorBorder ??
-                defaultDecoration.errorBorder ??
-                OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.error,
-                  ),
-                ),
-            // Remove the default floating label behavior
-            floatingLabelBehavior: FloatingLabelBehavior.never,
-            suffixIcon: widget.isPassword
-                ? IconButton(
-                    icon: Icon(
-                      _obscureText ? Icons.visibility : Icons.visibility_off,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _obscureText = !_obscureText;
-                      });
-                    },
-                  )
-                : null,
           ),
+        // Custom styled TextFormField with ValueListenableBuilder for password visibility
+        ValueListenableBuilder<bool>(
+          valueListenable: _obscureTextNotifier,
+          builder: (context, obscureText, child) {
+            return TextFormField(
+              controller: widget.controller,
+              validator: widget.validator,
+              autovalidateMode: widget.autoValidateMode,
+              keyboardType: widget.isPassword
+                  ? TextInputType.visiblePassword
+                  : widget.keyboardType,
+              obscureText: widget.isPassword && obscureText,
+              decoration:
+                  (widget.decoration ?? const InputDecoration()).copyWith(
+                hintText: widget.hintText,
+                errorText: widget.errorText,
+                // BLoC error takes precedence
+                hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+                filled: true,
+                fillColor: Theme.of(context).colorScheme.surface,
+                // Merge with theme's input decoration
+                isDense:
+                    widget.decoration?.isDense ?? defaultDecoration.isDense,
+                contentPadding: widget.decoration?.contentPadding ??
+                    defaultDecoration.contentPadding ??
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                // Border styling
+                border: widget.decoration?.border ??
+                    defaultDecoration.border ??
+                    OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                enabledBorder: widget.decoration?.enabledBorder ??
+                    defaultDecoration.enabledBorder ??
+                    OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: widget.errorText != null
+                            ? Theme.of(context).colorScheme.error
+                            : Colors.grey.shade400,
+                      ),
+                    ),
+                focusedBorder: widget.decoration?.focusedBorder ??
+                    defaultDecoration.focusedBorder ??
+                    OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: widget.errorText != null
+                            ? Theme.of(context).colorScheme.error
+                            : Theme.of(context).primaryColor,
+                        width: 2,
+                      ),
+                    ),
+                errorBorder: widget.decoration?.errorBorder ??
+                    defaultDecoration.errorBorder ??
+                    OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.error,
+                      ),
+                    ),
+                // Remove the default floating label behavior
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                // Password visibility toggle icon button
+                suffixIcon: widget.isPassword
+                    ? IconButton(
+                        icon: Icon(
+                          obscureText ? Icons.visibility : Icons.visibility_off,
+                        ),
+                        onPressed: () {
+                          // Toggle password visibility
+                          _obscureTextNotifier.value =
+                              !_obscureTextNotifier.value;
+                        },
+                      )
+                    : null,
+              ),
+            );
+          },
         ),
       ],
     );

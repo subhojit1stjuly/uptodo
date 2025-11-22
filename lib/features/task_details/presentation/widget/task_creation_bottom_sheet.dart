@@ -12,6 +12,7 @@ import 'package:uptodo/features/category/presentation/widget/choose_category_wid
 import 'package:uptodo/features/task_details/presentation/bloc/event/task_event.dart';
 import 'package:uptodo/features/task_details/presentation/bloc/state/task_state.dart';
 import 'package:uptodo/features/task_details/presentation/bloc/task_bloc.dart';
+import 'package:uptodo/features/task_details/presentation/validators/task_validators.dart';
 import 'package:uptodo/features/task_details/presentation/widget/priority_dialog_widget.dart';
 import 'package:uptodo/shared/widgets/buttons/animated_button.dart';
 import 'package:uptodo/shared/widgets/buttons/image_button.dart';
@@ -55,8 +56,8 @@ class _TaskCreationBottomSheetState extends State<TaskCreationBottomSheet> {
         decoration: BoxDecoration(
           color: Theme.of(context).shadowColor,
           borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(15),
-            topRight: Radius.circular(15),
+            topLeft: Radius.circular(25),
+            topRight: Radius.circular(25),
           ),
         ),
         child: Column(
@@ -72,11 +73,15 @@ class _TaskCreationBottomSheetState extends State<TaskCreationBottomSheet> {
             ),
             CustomTextField(
               hintText: AppLocalizations.of(context)!.add_task_title,
+              validator: TaskValidators.validateTitle,
               controller: _taskNameController,
+              autoValidateMode: AutovalidateMode.onUserInteraction,
             ),
             CustomTextField(
               hintText: AppLocalizations.of(context)!.description,
               controller: _taskDescriptionController,
+              autoValidateMode: AutovalidateMode.onUserInteraction,
+              validator: TaskValidators.validateDescription,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

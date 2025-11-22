@@ -8,14 +8,17 @@ enum TaskEditingStatus {
   /// initial state
   initial,
 
-  /// in success state
-  success,
+  /// loading
+  loading,
 
-  /// deleted
+  /// task created successfully
+  created,
+
+  /// task updated successfully
+  updated,
+
+  /// task deleted successfully
   deleted,
-
-  /// inValid state
-  invalid,
 
   /// error state
   errored
@@ -28,6 +31,6 @@ abstract class TaskState with _$TaskState {
   const factory TaskState({
     TaskModel? taskModel,
     @Default(TaskEditingStatus.initial) TaskEditingStatus editingStatus,
-    @Default(false) bool isInvalid,
+    String? errorMessage,
   }) = _TaskState;
 }
