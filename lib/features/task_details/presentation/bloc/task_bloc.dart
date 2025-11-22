@@ -15,18 +15,19 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   TaskBloc(
     this.createTaskUseCase,
     this.updateTaskUseCase,
-    this.deleteTaskUseCase,) : super(
-    TaskState(
-      taskModel: TaskModel(
-        title: '',
-        description: '',
-        priorityId: 0,
-        taskDate: DateTime.now(),
-        taskTime: TimeOfDay.now(),
-        categoryId: 0,
-      ),
-    ),
-  ) {
+    this.deleteTaskUseCase,
+  ) : super(
+          TaskState(
+            taskModel: TaskModel(
+              title: '',
+              description: '',
+              priorityId: 1,
+              taskDate: DateTime.now(),
+              taskTime: TimeOfDay.now(),
+              categoryId: 1,
+            ),
+          ),
+        ) {
     on<CreateEvent>(_onCreateTask);
     on<UpdateDateEvent>(_onUpdateDate);
     on<UpdatePriorityEvent>(_onUpdatePriority);
@@ -52,7 +53,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   ) async {
     try {
       emit(state.copyWith(editingStatus: TaskEditingStatus.loading));
-      await createTaskUseCase.execute(state.taskModel!);
+      await createTaskUseCase.execute(
+        state.taskModel!.copyWith(
+          title: event.title,
+          description: event.desc,
+        ),
+      );
       emit(state.copyWith(editingStatus: TaskEditingStatus.created));
     } catch (e) {
       emit(
