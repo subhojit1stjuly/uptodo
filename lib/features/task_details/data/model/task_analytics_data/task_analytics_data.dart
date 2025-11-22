@@ -5,7 +5,7 @@ part 'task_analytics_data.g.dart';
 
 /// Data model for task analytics
 @freezed
-class TaskAnalyticsData with _$TaskAnalyticsData {
+abstract class TaskAnalyticsData with _$TaskAnalyticsData {
   /// factory constructor for TaskAnalyticsData
   const factory TaskAnalyticsData({
     required int totalTasks,

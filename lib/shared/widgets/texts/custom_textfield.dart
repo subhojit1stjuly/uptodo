@@ -12,6 +12,8 @@ class CustomTextField extends StatefulWidget {
     this.keyboardType,
     this.decoration,
     this.isPassword = false,
+    this.errorText, // Add for BLoC validation
+    this.autovalidateMode, // Add for real-time validation
   });
 
   /// The label text for the TextFormField
@@ -35,17 +37,24 @@ class CustomTextField extends StatefulWidget {
   /// Whether the TextFormField is a password field
   final bool isPassword;
 
+  /// External error from BLoC
+  final String? errorText;
+
+  /// Add for real-time validation
+  final AutovalidateMode? autovalidateMode;
+
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-  final bool _obscureText = true;
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
     // Get the default input decoration from the theme
     final defaultDecoration = Theme.of(context).inputDecorationTheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -54,12 +63,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
         if (widget.labelText.isNotEmpty)
           Padding(
             padding: const EdgeInsets.only(left: 4, bottom: 12),
-          child: Text(
-            widget.labelText,
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
-          ),
+            child: Text(
+              widget.labelText,
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
           )
         else
           const SizedBox.shrink(),
@@ -67,12 +76,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
         TextFormField(
           controller: widget.controller,
           validator: widget.validator,
+          autovalidateMode: widget.autovalidateMode,
           keyboardType: widget.isPassword
               ? TextInputType.visiblePassword
               : widget.keyboardType,
           obscureText: widget.isPassword && _obscureText,
           decoration: (widget.decoration ?? const InputDecoration()).copyWith(
             hintText: widget.hintText,
+            errorText: widget.errorText,
+            // BLoC error takes precedence
             hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontWeight: FontWeight.w500,
                 ),
@@ -94,7 +106,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide(
-                    color: Colors.grey.shade400,
+                    color: widget.errorText != null
+                        ? Theme.of(context).colorScheme.error
+                        : Colors.grey.shade400,
                   ),
                 ),
             focusedBorder: widget.decoration?.focusedBorder ??
@@ -102,7 +116,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide(
-                    color: Theme.of(context).primaryColor,
+                    color: widget.errorText != null
+                        ? Theme.of(context).colorScheme.error
+                        : Theme.of(context).primaryColor,
                     width: 2,
                   ),
                 ),
@@ -116,6 +132,18 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 ),
             // Remove the default floating label behavior
             floatingLabelBehavior: FloatingLabelBehavior.never,
+            suffixIcon: widget.isPassword
+                ? IconButton(
+                    icon: Icon(
+                      _obscureText ? Icons.visibility : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
+                  )
+                : null,
           ),
         ),
       ],

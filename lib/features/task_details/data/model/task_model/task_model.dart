@@ -10,7 +10,7 @@ part 'task_model.g.dart';
 
 /// TaskModel
 @freezed
-class TaskModel with _$TaskModel {
+abstract class TaskModel with _$TaskModel {
   /// factory constructor for TaskModel
   const factory TaskModel({
     required String title,

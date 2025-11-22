@@ -6,7 +6,7 @@ part 'auth_result.freezed.dart';
 /// AuthResult is a class that will be used to
 /// represent the result of an authentication operation.
 @freezed
-class AuthResult with _$AuthResult {
+abstract class AuthResult with _$AuthResult {
   /// constructor for the AuthResult
   /// with the given fields replaced by the non-null parameter values.
   const factory AuthResult({

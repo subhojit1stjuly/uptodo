@@ -15,9 +15,18 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   TaskBloc(
     this.createTaskUseCase,
     this.updateTaskUseCase,
-    this.deleteTaskUseCase,
-  ) : super(const TaskState.initial()) {
-    on<OpenPickerEvent>(_onOpenPicker);
+    this.deleteTaskUseCase,) : super(
+    TaskState(
+      taskModel: TaskModel(
+        title: '',
+        description: '',
+        priorityId: 0,
+        taskDate: DateTime.now(),
+        taskTime: TimeOfDay.now(),
+        categoryId: 0,
+      ),
+    ),
+  ) {
     on<CreateEvent>(_onCreateTask);
     on<UpdateDateEvent>(_onUpdateDate);
     on<UpdatePriorityEvent>(_onUpdatePriority);
@@ -28,16 +37,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     on<UpdateStatusEvent>(_onUpdateStatus);
   }
 
-  /// TaskModel instance
-  TaskModel _taskModel = TaskModel(
-    title: '',
-    description: '',
-    priorityId: 0,
-    taskDate: DateTime.now(),
-    taskTime: TimeOfDay.now(),
-    categoryId: 0,
-  );
-
   /// UseCase for creating a new task
   final CreateTaskUseCase createTaskUseCase;
 
@@ -47,65 +46,69 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   /// UseCase for deleting a task
   final DeleteTaskUseCase deleteTaskUseCase;
 
-  void _onOpenPicker(OpenPickerEvent event, Emitter<TaskState> emit) {
-    emit(
-      TaskState.pickerOpen(event.type, DateTime.now().millisecondsSinceEpoch),
-    );
-  }
-
   Future<void> _onCreateTask(
     CreateEvent event,
     Emitter<TaskState> emit,
   ) async {
-    _taskModel = _taskModel.copyWith(
-      title: event.title,
-      description: event.desc,
-    );
-    await createTaskUseCase.execute(_taskModel);
-    emit(const TaskState.taskCreated());
+    if (state.taskModel!.title.isEmpty ||
+        state.taskModel!.description.isEmpty) {
+      emit(state.copyWith(editingStatus: TaskEditingStatus.invalid));
+      return;
+    }
+    await createTaskUseCase.execute(state.taskModel!);
+    emit(state.copyWith(editingStatus: TaskEditingStatus.success));
   }
 
   Future<void> _onUpdateDate(
     UpdateDateEvent event,
     Emitter<TaskState> emit,
   ) async {
-    _taskModel = _taskModel.copyWith(taskDate: event.date);
-    emit(TaskState.dateUpdated(event.date));
+    emit(
+      state.copyWith(
+        taskModel: state.taskModel!.copyWith(taskDate: event.date),
+      ),
+    );
   }
 
   Future<void> _onUpdatePriority(
     UpdatePriorityEvent event,
     Emitter<TaskState> emit,
   ) async {
-    _taskModel = _taskModel.copyWith(priorityId: event.priority);
-
-    emit(TaskState.priorityUpdated(event.priority));
+    emit(
+      state.copyWith(
+        taskModel: state.taskModel!.copyWith(priorityId: event.priority),
+      ),
+    );
   }
 
   Future<void> _onUpdateCategory(
     UpdateCategoryEvent event,
     Emitter<TaskState> emit,
   ) async {
-    _taskModel = _taskModel.copyWith(categoryId: event.category.id);
-
-    emit(TaskState.categoryUpdated(event.category));
+    emit(
+      state.copyWith(
+        taskModel: state.taskModel!.copyWith(category: event.category),
+      ),
+    );
   }
 
   Future<void> _onUpdateTime(
     UpdateTimeEvent event,
     Emitter<TaskState> emit,
   ) async {
-    _taskModel = _taskModel.copyWith(taskTime: event.time);
-    emit(TaskState.timeUpdated(event.time));
+    /*_taskModel = _taskModel.copyWith(taskTime: event.time);
+    emit(TaskState.timeUpdated(event.time));*/
   }
 
   Future<void> _onUpdateStatus(
     UpdateStatusEvent event,
     Emitter<TaskState> emit,
   ) async {
-    _taskModel = _taskModel.copyWith(status: event.status);
-
-    emit(TaskState.statusUpdated(event.status));
+    emit(
+      state.copyWith(
+        taskModel: state.taskModel!.copyWith(status: event.status),
+      ),
+    );
   }
 
   Future<void> _onUpdateTask(
@@ -113,7 +116,11 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     Emitter<TaskState> emit,
   ) async {
     await updateTaskUseCase.execute(event.taskModel);
-    emit(const TaskState.taskUpdated());
+    emit(
+      state.copyWith(
+        editingStatus: TaskEditingStatus.success,
+      ),
+    );
   }
 
   Future<void> _onDeleteTask(
@@ -121,6 +128,10 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     Emitter<TaskState> emit,
   ) async {
     await deleteTaskUseCase.execute(int.parse(event.taskModel.taskId!));
-    emit(const TaskState.taskDeleted());
+    emit(
+      state.copyWith(
+        editingStatus: TaskEditingStatus.success,
+      ),
+    );
   }
 }
