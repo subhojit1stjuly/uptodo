@@ -38,6 +38,8 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     on<UpdateEvent>(_onUpdateTask);
     on<DeleteEvent>(_onDeleteTask);
     on<UpdateStatusEvent>(_onUpdateStatus);
+    on<UpdateTitleEvent>(_onUpdateTitle);
+    on<UpdateDescriptionEvent>(_onUpdateDescription);
   }
 
   /// UseCase for creating a new task
@@ -134,10 +136,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     try {
       emit(state.copyWith(editingStatus: TaskEditingStatus.loading));
       await updateTaskUseCase.execute(
-        state.taskModel!.copyWith(
-          title: event.title,
-          description: event.desc,
-        ),
+        state.taskModel!,
       );
       emit(
         state.copyWith(
@@ -152,6 +151,28 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         ),
       );
     }
+  }
+
+  Future<void> _onUpdateTitle(
+    UpdateTitleEvent event,
+    Emitter<TaskState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        taskModel: state.taskModel!.copyWith(title: event.title),
+      ),
+    );
+  }
+
+  Future<void> _onUpdateDescription(
+    UpdateDescriptionEvent event,
+    Emitter<TaskState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        taskModel: state.taskModel!.copyWith(description: event.desc),
+      ),
+    );
   }
 
   Future<void> _onDeleteTask(
