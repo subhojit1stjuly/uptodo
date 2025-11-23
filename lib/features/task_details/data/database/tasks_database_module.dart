@@ -27,7 +27,9 @@ class TasksDatabaseModule extends DatabaseAccessor<AppDatabase>
     /// Set up a join query between tasks and categories
     final query = select(tasksEntity).join([
       innerJoin(
-          categoryEntity, categoryEntity.id.equalsExp(tasksEntity.categoryId)),
+        categoryEntity,
+        categoryEntity.id.equalsExp(tasksEntity.categoryId),
+      ),
     ])
       ..orderBy([
         OrderingTerm(expression: tasksEntity.taskTime, mode: OrderingMode.desc),
@@ -133,7 +135,9 @@ class TasksDatabaseModule extends DatabaseAccessor<AppDatabase>
     int page = 0,
     int pageSize = 20,
   }) async {
-    // Create a join query between tasks and categories
+    /// we don't need to change this date to utc since, the database
+    /// return the data in local format automatically
+    /// Create a join query between tasks and categories
     final query = select(tasksEntity).join([
       innerJoin(
           categoryEntity, categoryEntity.id.equalsExp(tasksEntity.categoryId)),
@@ -180,10 +184,11 @@ class TasksDatabaseModule extends DatabaseAccessor<AppDatabase>
   /// Returns a map with dates as keys and boolean values
   /// indicating task presence
   Future<Map<DateTime, bool>> hasTasksInThreeDayRange(DateTime date) async {
+    final dbDate = date.toUtc();
     // Create normalized dates (time set to midnight)
-    final yesterday = DateTime(date.year, date.month, date.day - 1);
-    final today = DateTime(date.year, date.month, date.day);
-    final tomorrow = DateTime(date.year, date.month, date.day + 1);
+    final yesterday = DateTime(dbDate.year, dbDate.month, dbDate.day - 1);
+    final today = DateTime(dbDate.year, dbDate.month, dbDate.day);
+    final tomorrow = DateTime(dbDate.year, dbDate.month, dbDate.day + 1);
 
     final result = <DateTime, bool>{
       yesterday: false,

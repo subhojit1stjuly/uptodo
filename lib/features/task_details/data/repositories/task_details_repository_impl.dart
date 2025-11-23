@@ -28,31 +28,30 @@ class TaskDetailsRepositoryImpl implements TaskDetailsRepository {
       pageSize: pageSize,
     );
 
-    return taskWithCategories
-        .map(
-          (data) => TaskModel(
-            taskId: data.task.taskId.toString(),
-            title: data.task.title,
-            description: data.task.description,
-            subTaskId: data.task.subTaskId,
-            priorityId: data.task.priorityId,
-            taskTime: TimeOfDay.fromDateTime(data.task.taskTime),
-            categoryId: data.task.categoryId,
-            status: data.task.status,
-            taskDate: DateTime(
-              data.task.taskTime.year,
-              data.task.taskTime.month,
-              data.task.taskTime.day,
-            ),
-            category: CategoryItem(
-              id: data.category.id,
-              name: data.category.name,
-              color: Color(int.parse(data.category.color)),
-              icon: data.category.icon.getIconFromCodePoint(),
-            ),
-          ),
-        )
-        .toList();
+    return taskWithCategories.map((data) {
+      final localDate = data.task.taskTime.toLocal();
+      return TaskModel(
+        taskId: data.task.taskId.toString(),
+        title: data.task.title,
+        description: data.task.description,
+        subTaskId: data.task.subTaskId,
+        priorityId: data.task.priorityId,
+        taskTime: TimeOfDay.fromDateTime(localDate),
+        categoryId: data.task.categoryId,
+        status: data.task.status,
+        taskDate: DateTime(
+          localDate.year,
+          localDate.month,
+          localDate.day,
+        ),
+        category: CategoryItem(
+          id: data.category.id,
+          name: data.category.name,
+          color: Color(int.parse(data.category.color)),
+          icon: data.category.icon.getIconFromCodePoint(),
+        ),
+      );
+    }).toList();
   }
 
   @override
