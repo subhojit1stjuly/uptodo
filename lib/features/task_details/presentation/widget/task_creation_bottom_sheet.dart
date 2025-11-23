@@ -3,21 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:uptodo/core/constants/assets.gen.dart';
 import 'package:uptodo/core/constants/useful_constants.dart';
-import 'package:uptodo/core/di/injector.dart';
 import 'package:uptodo/core/localizations/app_localizations.dart';
+import 'package:uptodo/core/utils/common_extainsions.dart';
 import 'package:uptodo/features/category/data/model/category_model.dart';
-import 'package:uptodo/features/category/presentation/bloc/category_bloc.dart';
-import 'package:uptodo/features/category/presentation/bloc/event/category_event.dart';
-import 'package:uptodo/features/category/presentation/widget/choose_category_widget.dart';
 import 'package:uptodo/features/task_details/presentation/bloc/event/task_event.dart';
 import 'package:uptodo/features/task_details/presentation/bloc/state/task_state.dart';
 import 'package:uptodo/features/task_details/presentation/bloc/task_bloc.dart';
 import 'package:uptodo/features/task_details/presentation/validators/task_validators.dart';
-import 'package:uptodo/features/task_details/presentation/widget/priority_dialog_widget.dart';
 import 'package:uptodo/shared/widgets/buttons/animated_button.dart';
 import 'package:uptodo/shared/widgets/buttons/image_button.dart';
-import 'package:uptodo/shared/widgets/dialogs/common_dialog_widget.dart';
 import 'package:uptodo/shared/widgets/pickers/date_time_picker.dart';
+import 'package:uptodo/shared/widgets/pickers/property_picker.dart';
 import 'package:uptodo/shared/widgets/texts/custom_textfield.dart';
 
 /// TaskCreationBottomSheet
@@ -159,15 +155,7 @@ class _TaskCreationBottomSheetState extends State<TaskCreationBottomSheet> {
                                 ),
                                 formatter: (time) {
                                   if (time != null) {
-                                    final now = DateTime.now();
-                                    final dt = DateTime(
-                                      now.year,
-                                      now.month,
-                                      now.day,
-                                      time.hour,
-                                      time.minute,
-                                    );
-                                    return DateFormat.jm().format(dt);
+                                    return time.convertTimeOfDayToString();
                                   }
                                   return '';
                                 },
@@ -202,43 +190,9 @@ class _TaskCreationBottomSheetState extends State<TaskCreationBottomSheet> {
                                 ),
                                 formatter: (category) => '${category?.name}',
                                 onTap: () {
-                                  showGeneralDialog(
+                                  PropertyPicker.pickCategory(
                                     context: context,
-                                    pageBuilder: (context, _, __) {
-                                      return CommonDialogWidget(
-                                        child: BlocProvider(
-                                          create: (context) =>
-                                              getIt<CategoryBloc>()
-                                                ..add(
-                                                  const CategoryEvent
-                                                      .loadAllCategory(),
-                                                ),
-                                          child: ChooseCategoryWidget(
-                                            onCategorySelected:
-                                                (CategoryItem value) {
-                                              bloc.add(
-                                                TaskEvent.updateCategory(value),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    transitionBuilder:
-                                        (context, anim1, anim2, child) {
-                                      return SlideTransition(
-                                        position: Tween(
-                                          begin: const Offset(0, 1),
-                                          end: Offset.zero,
-                                        ).animate(
-                                          CurvedAnimation(
-                                            parent: anim1,
-                                            curve: Curves.easeOutCubic,
-                                          ),
-                                        ),
-                                        child: child,
-                                      );
-                                    },
+                                    bloc: bloc,
                                   );
                                 },
                               );
@@ -261,34 +215,9 @@ class _TaskCreationBottomSheetState extends State<TaskCreationBottomSheet> {
                                 ),
                                 formatter: (priority) => '$priority',
                                 onTap: () {
-                                  showGeneralDialog(
+                                  PropertyPicker.pickPriority(
                                     context: context,
-                                    pageBuilder: (context, _, __) {
-                                      return CommonDialogWidget(
-                                        child: PriorityDialog(
-                                          onPrioritySelected: (int value) {
-                                            bloc.add(
-                                              TaskEvent.updatePriority(value),
-                                            );
-                                          },
-                                        ),
-                                      );
-                                    },
-                                    transitionBuilder:
-                                        (context, anim1, anim2, child) {
-                                      return SlideTransition(
-                                        position: Tween(
-                                          begin: const Offset(0, 1),
-                                          end: Offset.zero,
-                                        ).animate(
-                                          CurvedAnimation(
-                                            parent: anim1,
-                                            curve: Curves.easeOutCubic,
-                                          ),
-                                        ),
-                                        child: child,
-                                      );
-                                    },
+                                    bloc: bloc,
                                   );
                                 },
                               );

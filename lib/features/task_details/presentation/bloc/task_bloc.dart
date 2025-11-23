@@ -16,16 +16,18 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     this.createTaskUseCase,
     this.updateTaskUseCase,
     this.deleteTaskUseCase,
+    @factoryParam TaskModel? initialTaskModel,
   ) : super(
           TaskState(
-            taskModel: TaskModel(
-              title: '',
-              description: '',
-              priorityId: 1,
-              taskDate: DateTime.now(),
-              taskTime: TimeOfDay.now(),
-              categoryId: 1,
-            ),
+            taskModel: initialTaskModel ??
+                TaskModel(
+                  title: '',
+                  description: '',
+                  priorityId: 1,
+                  taskDate: DateTime.now(),
+                  taskTime: TimeOfDay.now(),
+                  categoryId: 1,
+                ),
           ),
         ) {
     on<CreateEvent>(_onCreateTask);
@@ -131,7 +133,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   ) async {
     try {
       emit(state.copyWith(editingStatus: TaskEditingStatus.loading));
-      await updateTaskUseCase.execute(event.taskModel);
+      await updateTaskUseCase.execute(
+        state.taskModel!.copyWith(
+          title: event.title,
+          description: event.desc,
+        ),
+      );
       emit(
         state.copyWith(
           editingStatus: TaskEditingStatus.updated,
@@ -153,7 +160,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   ) async {
     try {
       emit(state.copyWith(editingStatus: TaskEditingStatus.loading));
-      await deleteTaskUseCase.execute(int.parse(event.taskModel.taskId!));
+      await deleteTaskUseCase.execute(int.parse(state.taskModel!.taskId!));
       emit(
         state.copyWith(
           editingStatus: TaskEditingStatus.deleted,

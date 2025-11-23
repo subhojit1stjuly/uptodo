@@ -31,3 +31,16 @@ extension TimeOfDayExtainsion on TimeOfDay {
     return DateFormat.jm().format(dt);
   }
 }
+
+/// some common date time extensions
+extension DateTimeExtension on DateTime {
+  /// convert a DateTime to 'yyyy-MM-dd' string
+  String toDateString() {
+    return '$year-${month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')}';
+  }
+
+  /// convert a DateTime to 'MMM dd, yyyy' string
+  String toFormattedDate() {
+    return DateFormat('MMM dd, yyyy').format(this);
+  }
+}

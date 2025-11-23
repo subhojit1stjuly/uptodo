@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uptodo/core/constants/assets.gen.dart';
 import 'package:uptodo/core/di/injector.dart';
 import 'package:uptodo/core/localizations/app_localizations.dart';
 import 'package:uptodo/core/utils/common_extainsions.dart';
 import 'package:uptodo/features/category/presentation/widget/categor_widget.dart';
-import 'package:uptodo/features/task_details/data/model/task_model/task_model.dart';
+import 'package:uptodo/features/task_details/presentation/bloc/event/task_event.dart';
+import 'package:uptodo/features/task_details/presentation/bloc/state/task_state.dart';
+import 'package:uptodo/features/task_details/presentation/bloc/task_bloc.dart';
+import 'package:uptodo/shared/widgets/pickers/date_time_picker.dart';
+import 'package:uptodo/shared/widgets/pickers/property_picker.dart';
 import 'package:uptodo/shared/widgets/task/priority_widget.dart';
 
 /// A Screen to display task details
 class TaskDetailsPage extends StatelessWidget {
   /// TaskDetailsPage constructor
   const TaskDetailsPage({
-    required this.taskModel,
-    required this.timeOfTheWeek,
     super.key,
   });
 
-  /// Task Model
-  final TaskModel taskModel;
-
-  /// timeOfTheWeek
-  final String timeOfTheWeek;
-
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<TaskBloc>();
     return Scaffold(
       appBar: AppBar(
         leading: TextButton(
@@ -57,17 +55,30 @@ class TaskDetailsPage extends StatelessWidget {
                   },
                   activeColor: Colors.white,
                 ),
-                title: Text(
-                  taskModel.title,
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                title: BlocBuilder<TaskBloc, TaskState>(
+                  buildWhen: (previous, current) =>
+                      previous.taskModel?.title != current.taskModel?.title,
+                  builder: (context, state) {
+                    return Text(
+                      state.taskModel!.title,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                    );
+                  },
                 ),
-                subtitle: Text(
-                  taskModel.description,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.w400,
-                      ),
+                subtitle: BlocBuilder<TaskBloc, TaskState>(
+                  buildWhen: (previous, current) =>
+                      previous.taskModel?.description !=
+                      current.taskModel?.description,
+                  builder: (context, state) {
+                    return Text(
+                      state.taskModel!.description,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w400,
+                          ),
+                    );
+                  },
                 ),
                 trailing: TextButton(
                   onPressed: () {},
@@ -84,21 +95,33 @@ class TaskDetailsPage extends StatelessWidget {
                   width: 24,
                   height: 24,
                 ),
-                text: Text(
+                caption: Text(
                   AppLocalizations.of(context)!.task_time,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 value: TextButton(
-                  onPressed: () {},
-                  child: decorateItem(
+                  onPressed: () {
+                    DateTimePicker.showTime(
+                      context: context,
+                      initialDate: DateTime.now(),
+                    ).then((time) {
+                      if (time != null) {
+                        bloc.add(TaskEvent.updateTime(time));
+                      }
+                    });
+                  },
+                  child: _decorateItem(
                     context: context,
-                    child: Text(
-                      '$timeOfTheWeek At '
-                          '${taskModel.taskTime.convertTimeOfDayToString()}',
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .bodyMedium,
+                    child: BlocBuilder<TaskBloc, TaskState>(
+                      buildWhen: (previous, current) =>
+                          previous.taskModel?.taskTime !=
+                          current.taskModel?.taskTime,
+                      builder: (context, state) {
+                        return Text(
+                          state.taskModel!.taskTime.convertTimeOfDayToString(),
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        );
+                      },
                     ),
                   ),
                 ),
@@ -110,21 +133,33 @@ class TaskDetailsPage extends StatelessWidget {
                   width: 24,
                   height: 24,
                 ),
-                text: Text(
+                caption: Text(
                   AppLocalizations.of(context)!.task_date,
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .bodyMedium,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 value: TextButton(
-                  onPressed: () {},
-                  child: decorateItem(
+                  onPressed: () {
+                    // Open date picker
+                    DateTimePicker.showDates(
+                      context: context,
+                    ).then((date) {
+                      if (date != null) {
+                        bloc.add(TaskEvent.updateDate(date));
+                      }
+                    });
+                  },
+                  child: _decorateItem(
                     context: context,
-                    child: Text(
-                      '$timeOfTheWeek At '
-                          '${taskModel.taskTime.convertTimeOfDayToString()}',
-                      style: Theme.of(context).textTheme.bodyMedium,
+                    child: BlocBuilder<TaskBloc, TaskState>(
+                      buildWhen: (previous, current) =>
+                          previous.taskModel?.taskDate !=
+                          current.taskModel?.taskDate,
+                      builder: (context, state) {
+                        return Text(
+                          state.taskModel!.taskDate.toFormattedDate(),
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        );
+                      },
                     ),
                   ),
                 ),
@@ -136,16 +171,28 @@ class TaskDetailsPage extends StatelessWidget {
                   width: 24,
                   height: 24,
                 ),
-                text: Text(
+                caption: Text(
                   AppLocalizations.of(context)!.task_category,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                value: TextButton(
-                  onPressed: () {},
-                  child: CategoryWidget(
-                    doesMarqueeRequired: false,
-                    taskCategory: taskModel.category,
-                  ),
+                value: BlocBuilder<TaskBloc, TaskState>(
+                  buildWhen: (previous, current) =>
+                      previous.taskModel?.category !=
+                      current.taskModel?.category,
+                  builder: (context, state) {
+                    return TextButton(
+                      onPressed: () {
+                        PropertyPicker.pickCategory(
+                          context: context,
+                          bloc: bloc,
+                        );
+                      },
+                      child: CategoryWidget(
+                        doesMarqueeRequired: false,
+                        taskCategory: state.taskModel!.category,
+                      ),
+                    );
+                  },
                 ),
               ),
 
@@ -155,31 +202,44 @@ class TaskDetailsPage extends StatelessWidget {
                   width: 24,
                   height: 24,
                 ),
-                text: Text(
+                caption: Text(
                   AppLocalizations.of(context)!.task_priority,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                value: TextButton(
-                  onPressed: () {},
-                  child: PriorityWidget(
-                    priority: taskModel.priorityId.toString(),
-                  ),
+                value: BlocBuilder<TaskBloc, TaskState>(
+                  buildWhen: (previous, current) =>
+                      previous.taskModel?.priorityId !=
+                      current.taskModel?.priorityId,
+                  builder: (context, state) {
+                    return TextButton(
+                      onPressed: () {
+                        PropertyPicker.pickPriority(
+                          context: context,
+                          bloc: bloc,
+                        );
+                      },
+                      child: PriorityWidget(
+                        priority: state.taskModel!.priorityId.toString(),
+                      ),
+                    );
+                  },
                 ),
               ),
 
               /// sub task link
-              _buildTaskRow(
+              // TODO(Subhojit): redesing this section later
+              /*_buildTaskRow(
                 icon: Assets.icons.hierarchy.svg(
                   width: 24,
                   height: 24,
                 ),
-                text: Text(
+                caption: Text(
                   AppLocalizations.of(context)!.sub_task,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 value: TextButton(
                   onPressed: () {},
-                  child: decorateItem(
+                  child: _decorateItem(
                     context: context,
                     child: Text(
                       taskModel.subTaskId != null
@@ -189,11 +249,13 @@ class TaskDetailsPage extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
+              ),*/
 
               /// delete
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  bloc.add(const TaskEvent.delete());
+                },
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   spacing: 4,
@@ -222,7 +284,7 @@ class TaskDetailsPage extends StatelessWidget {
 
   Widget _buildTaskRow({
     required Widget icon,
-    required Widget text,
+    required Widget caption,
     required Widget value,
   }) {
     return Padding(
@@ -234,7 +296,7 @@ class TaskDetailsPage extends StatelessWidget {
             spacing: 4,
             children: [
               icon,
-              text,
+              caption,
             ],
           ),
           value,
@@ -243,7 +305,7 @@ class TaskDetailsPage extends StatelessWidget {
     );
   }
 
-  Widget decorateItem({required Widget child, required BuildContext context}) {
+  Widget _decorateItem({required Widget child, required BuildContext context}) {
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(

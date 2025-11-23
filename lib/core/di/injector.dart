@@ -10,9 +10,7 @@ import 'package:uptodo/core/storage/objectbox/objectbox.dart';
 final getIt = GetIt.instance;
 
 @InjectableInit(
-  initializerName: 'init', // default
   preferRelativeImports: true, // default
-  asExtension: true, // default
 )
 
 /// generated dependencies using injectables

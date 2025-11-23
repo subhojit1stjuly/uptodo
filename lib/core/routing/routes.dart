@@ -147,11 +147,8 @@ abstract class AppRouter {
               final (taskModel, timeOfTheWeek) =
                   state.extra! as (TaskModel, String);
               return BlocProvider.value(
-                value: getIt<TaskBloc>(),
-                child: TaskDetailsPage(
-                  taskModel: taskModel,
-                  timeOfTheWeek: timeOfTheWeek,
-                ),
+                value: getIt<TaskBloc>(param1: taskModel),
+                child: const TaskDetailsPage(),
               );
             },
           ),
