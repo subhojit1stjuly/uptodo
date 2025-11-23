@@ -1,13 +1,7 @@
 /// This file contains the useful constants used in the app
 class UsefulConstants {
-  /// The utc date-time format used for database storage
-  static const String UTC_DATETIME_FORMAT = 'yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'';
-
   /// Local date format for display to users
   static const String LOCAL_DATE_FORMAT = 'MMM dd, yyyy'; // e.g. Jan 01, 2023
-
-  /// Local time format for display to users
-  static const String LOCAL_TIME_FORMAT = 'HH:mm'; // e.g. 14:30
 
   /// Local date and time format for display to users
   static const String LOCAL_DATETIME_FORMAT =

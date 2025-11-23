@@ -39,196 +39,213 @@ class TaskDetailsPage extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 8,
-            children: [
-              ListTile(
-                leading: Radio(
-                  value: true,
-                  groupValue: null,
-                  onChanged: (value) {
-                    // Handle radio button selection
-                  },
-                  activeColor: Colors.white,
+      body: BlocListener<TaskBloc, TaskState>(
+        listener: (context, state) {
+          if (state.editingStatus == TaskEditingStatus.deleted ||
+              state.editingStatus == TaskEditingStatus.updated) {
+            getIt<GoRouter>().pop();
+          }
+          if (state.editingStatus == TaskEditingStatus.errored) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  state.errorMessage ?? '',
                 ),
-                title: BlocBuilder<TaskBloc, TaskState>(
-                  buildWhen: (previous, current) =>
-                      previous.taskModel?.title != current.taskModel?.title,
-                  builder: (context, state) {
-                    return Text(
-                      state.taskModel!.title,
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                    );
-                  },
+              ),
+            );
+          }
+        },
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 8,
+              children: [
+                ListTile(
+                  leading: Radio(
+                    value: true,
+                    groupValue: null,
+                    onChanged: (value) {
+                      // Handle radio button selection
+                    },
+                    activeColor: Colors.white,
+                  ),
+                  title: BlocBuilder<TaskBloc, TaskState>(
+                    buildWhen: (previous, current) =>
+                        previous.taskModel?.title != current.taskModel?.title,
+                    builder: (context, state) {
+                      return Text(
+                        state.taskModel!.title,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              fontWeight: FontWeight.w600,
+                            ),
+                      );
+                    },
+                  ),
+                  subtitle: BlocBuilder<TaskBloc, TaskState>(
+                    buildWhen: (previous, current) =>
+                        previous.taskModel?.description !=
+                        current.taskModel?.description,
+                    builder: (context, state) {
+                      return Text(
+                        state.taskModel!.description,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.w400,
+                            ),
+                      );
+                    },
+                  ),
+                  trailing: TextButton(
+                    onPressed: () {},
+                    child: Assets.icons.edit.svg(
+                      width: 24,
+                      height: 24,
+                    ),
+                  ),
                 ),
-                subtitle: BlocBuilder<TaskBloc, TaskState>(
-                  buildWhen: (previous, current) =>
-                      previous.taskModel?.description !=
-                      current.taskModel?.description,
-                  builder: (context, state) {
-                    return Text(
-                      state.taskModel!.description,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w400,
-                          ),
-                    );
-                  },
-                ),
-                trailing: TextButton(
-                  onPressed: () {},
-                  child: Assets.icons.edit.svg(
+
+                /// task time
+                _buildTaskRow(
+                  icon: Assets.icons.clock.svg(
                     width: 24,
                     height: 24,
                   ),
-                ),
-              ),
-
-              /// task time
-              _buildTaskRow(
-                icon: Assets.icons.clock.svg(
-                  width: 24,
-                  height: 24,
-                ),
-                caption: Text(
-                  AppLocalizations.of(context)!.task_time,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                value: TextButton(
-                  onPressed: () {
-                    DateTimePicker.showTime(
+                  caption: Text(
+                    AppLocalizations.of(context)!.task_time,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  value: TextButton(
+                    onPressed: () {
+                      DateTimePicker.showTime(
+                        context: context,
+                        initialDate: DateTime.now(),
+                      ).then((time) {
+                        if (time != null) {
+                          bloc.add(TaskEvent.updateTime(time));
+                        }
+                      });
+                    },
+                    child: _decorateItem(
                       context: context,
-                      initialDate: DateTime.now(),
-                    ).then((time) {
-                      if (time != null) {
-                        bloc.add(TaskEvent.updateTime(time));
-                      }
-                    });
-                  },
-                  child: _decorateItem(
-                    context: context,
-                    child: BlocBuilder<TaskBloc, TaskState>(
-                      buildWhen: (previous, current) =>
-                          previous.taskModel?.taskTime !=
-                          current.taskModel?.taskTime,
-                      builder: (context, state) {
-                        return Text(
-                          state.taskModel!.taskTime.convertTimeOfDayToString(),
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        );
-                      },
+                      child: BlocBuilder<TaskBloc, TaskState>(
+                        buildWhen: (previous, current) =>
+                            previous.taskModel?.taskTime !=
+                            current.taskModel?.taskTime,
+                        builder: (context, state) {
+                          return Text(
+                            state.taskModel!.taskTime
+                                .convertTimeOfDayToString(),
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
-              ),
 
-              /// task date
-              _buildTaskRow(
-                icon: Assets.icons.calendar.svg(
-                  width: 24,
-                  height: 24,
-                ),
-                caption: Text(
-                  AppLocalizations.of(context)!.task_date,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                value: TextButton(
-                  onPressed: () {
-                    // Open date picker
-                    DateTimePicker.showDates(
+                /// task date
+                _buildTaskRow(
+                  icon: Assets.icons.calendar.svg(
+                    width: 24,
+                    height: 24,
+                  ),
+                  caption: Text(
+                    AppLocalizations.of(context)!.task_date,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  value: TextButton(
+                    onPressed: () {
+                      // Open date picker
+                      DateTimePicker.showDates(
+                        context: context,
+                      ).then((date) {
+                        if (date != null) {
+                          bloc.add(TaskEvent.updateDate(date));
+                        }
+                      });
+                    },
+                    child: _decorateItem(
                       context: context,
-                    ).then((date) {
-                      if (date != null) {
-                        bloc.add(TaskEvent.updateDate(date));
-                      }
-                    });
-                  },
-                  child: _decorateItem(
-                    context: context,
-                    child: BlocBuilder<TaskBloc, TaskState>(
-                      buildWhen: (previous, current) =>
-                          previous.taskModel?.taskDate !=
-                          current.taskModel?.taskDate,
-                      builder: (context, state) {
-                        return Text(
-                          state.taskModel!.taskDate.toFormattedDate(),
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        );
-                      },
+                      child: BlocBuilder<TaskBloc, TaskState>(
+                        buildWhen: (previous, current) =>
+                            previous.taskModel?.taskDate !=
+                            current.taskModel?.taskDate,
+                        builder: (context, state) {
+                          return Text(
+                            state.taskModel!.taskDate.toFormattedDate(),
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
-              ),
 
-              /// task category
-              _buildTaskRow(
-                icon: Assets.icons.tag.svg(
-                  width: 24,
-                  height: 24,
+                /// task category
+                _buildTaskRow(
+                  icon: Assets.icons.tag.svg(
+                    width: 24,
+                    height: 24,
+                  ),
+                  caption: Text(
+                    AppLocalizations.of(context)!.task_category,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  value: BlocBuilder<TaskBloc, TaskState>(
+                    buildWhen: (previous, current) =>
+                        previous.taskModel?.category !=
+                        current.taskModel?.category,
+                    builder: (context, state) {
+                      return TextButton(
+                        onPressed: () {
+                          PropertyPicker.pickCategory(
+                            context: context,
+                            bloc: bloc,
+                          );
+                        },
+                        child: CategoryWidget(
+                          doesMarqueeRequired: false,
+                          taskCategory: state.taskModel!.category,
+                        ),
+                      );
+                    },
+                  ),
                 ),
-                caption: Text(
-                  AppLocalizations.of(context)!.task_category,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                value: BlocBuilder<TaskBloc, TaskState>(
-                  buildWhen: (previous, current) =>
-                      previous.taskModel?.category !=
-                      current.taskModel?.category,
-                  builder: (context, state) {
-                    return TextButton(
-                      onPressed: () {
-                        PropertyPicker.pickCategory(
-                          context: context,
-                          bloc: bloc,
-                        );
-                      },
-                      child: CategoryWidget(
-                        doesMarqueeRequired: false,
-                        taskCategory: state.taskModel!.category,
-                      ),
-                    );
-                  },
-                ),
-              ),
 
-              /// task priority
-              _buildTaskRow(
-                icon: Assets.icons.flag.svg(
-                  width: 24,
-                  height: 24,
+                /// task priority
+                _buildTaskRow(
+                  icon: Assets.icons.flag.svg(
+                    width: 24,
+                    height: 24,
+                  ),
+                  caption: Text(
+                    AppLocalizations.of(context)!.task_priority,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  value: BlocBuilder<TaskBloc, TaskState>(
+                    buildWhen: (previous, current) =>
+                        previous.taskModel?.priorityId !=
+                        current.taskModel?.priorityId,
+                    builder: (context, state) {
+                      return TextButton(
+                        onPressed: () {
+                          PropertyPicker.pickPriority(
+                            context: context,
+                            bloc: bloc,
+                          );
+                        },
+                        child: PriorityWidget(
+                          priority: state.taskModel!.priorityId.toString(),
+                        ),
+                      );
+                    },
+                  ),
                 ),
-                caption: Text(
-                  AppLocalizations.of(context)!.task_priority,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                value: BlocBuilder<TaskBloc, TaskState>(
-                  buildWhen: (previous, current) =>
-                      previous.taskModel?.priorityId !=
-                      current.taskModel?.priorityId,
-                  builder: (context, state) {
-                    return TextButton(
-                      onPressed: () {
-                        PropertyPicker.pickPriority(
-                          context: context,
-                          bloc: bloc,
-                        );
-                      },
-                      child: PriorityWidget(
-                        priority: state.taskModel!.priorityId.toString(),
-                      ),
-                    );
-                  },
-                ),
-              ),
 
-              /// sub task link
-              // TODO(Subhojit): redesing this section later
-              /*_buildTaskRow(
+                /// sub task link
+                // TODO(Subhojit): redesing this section later
+                /*_buildTaskRow(
                 icon: Assets.icons.hierarchy.svg(
                   width: 24,
                   height: 24,
@@ -251,31 +268,32 @@ class TaskDetailsPage extends StatelessWidget {
                 ),
               ),*/
 
-              /// delete
-              TextButton(
-                onPressed: () {
-                  bloc.add(const TaskEvent.delete());
-                },
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  spacing: 4,
-                  children: [
-                    Assets.icons.trash.svg(
-                      width: 24,
-                      height: 24,
-                    ),
-                    Text(
-                      AppLocalizations.of(context)!.delete_task,
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Colors.red,
-                          ),
-                    ),
-                  ],
+                /// delete
+                TextButton(
+                  onPressed: () {
+                    bloc.add(const TaskEvent.delete());
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: 4,
+                    children: [
+                      Assets.icons.trash.svg(
+                        width: 24,
+                        height: 24,
+                      ),
+                      Text(
+                        AppLocalizations.of(context)!.delete_task,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: Colors.red,
+                            ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
 
-              const SizedBox(height: 16),
-            ],
+                const SizedBox(height: 16),
+              ],
+            ),
           ),
         ),
       ),

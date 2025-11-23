@@ -124,9 +124,7 @@ class TasksDatabaseModule extends DatabaseAccessor<AppDatabase>
 
   /// Override the delete method to track the deleted task
   Future<void> deleteTask(int id) async {
-    await getTaskById(id).catchError((_) {
-      throw Exception('Task not found');
-    });
+    await (delete(tasksEntity)..where((t) => t.taskId.equals(id))).go();
   }
 
   /// Get all tasks by date
