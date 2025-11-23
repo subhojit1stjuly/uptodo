@@ -24,6 +24,7 @@ class AnimatedValueButton<T> extends StatefulWidget {
     this.formatter,
     this.backgroundColor,
     this.itemWidth,
+    this.decoration,
   });
 
   /// The value to display alongside the icon.
@@ -51,6 +52,9 @@ class AnimatedValueButton<T> extends StatefulWidget {
 
   /// The width of the button item.
   final double? itemWidth;
+
+  /// this decoration can be used to customize the button decoration
+  final Decoration? decoration;
 
   @override
   State<AnimatedValueButton<T>> createState() => _AnimatedValueButtonState<T>();
@@ -107,21 +111,22 @@ class _AnimatedValueButtonState<T> extends State<AnimatedValueButton<T>>
           horizontal: widget.value != null ? 4 : 10,
           vertical: 8,
         ),
-        decoration: BoxDecoration(
-          color: widget.value != null
-              ? Theme.of(context).colorScheme.surfaceContainerLow
-              : widget.backgroundColor ??
-                  Theme.of(context)
-                      .colorScheme
-                      .surfaceContainerHighest
-                      .withValues(alpha: 0.3),
-          borderRadius: BorderRadius.circular(8),
-          border: widget.value != null
-              ? Border.all(
-                  color: Theme.of(context).primaryColorDark,
-                )
-              : null,
-        ),
+        decoration: widget.decoration ??
+            BoxDecoration(
+              color: widget.value != null
+                  ? Theme.of(context).colorScheme.surfaceContainerLow
+                  : widget.backgroundColor ??
+                      Theme.of(context)
+                          .colorScheme
+                          .surfaceContainerHighest
+                          .withValues(alpha: 0.3),
+              borderRadius: BorderRadius.circular(8),
+              border: widget.value != null
+                  ? Border.all(
+                      color: Theme.of(context).primaryColorDark,
+                    )
+                  : null,
+            ),
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 200),
           transitionBuilder: (Widget child, Animation<double> animation) {

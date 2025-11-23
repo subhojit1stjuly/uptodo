@@ -6,6 +6,7 @@ import 'package:uptodo/features/home/domain/usecases/watch_tasks_changes_use_cas
 import 'package:uptodo/features/home/presentation/index_screen/bloc/event/index_event.dart';
 import 'package:uptodo/features/home/presentation/index_screen/bloc/state/index_state.dart';
 import 'package:uptodo/features/task_details/data/model/task_event_types.dart';
+import 'package:uptodo/features/task_details/data/model/task_model/task_model.dart';
 import 'package:uptodo/shared/model/shred_enums.dart';
 
 /// IndexBloc is a class that will be used to
@@ -45,16 +46,28 @@ class IndexBloc extends Bloc<IndexEvent, IndexState> {
     if (currentState is TasksLoadedState) {
       final task = event.taskEvent.taskModel;
       // Get current date based on filter
-      var date = DateTime.now();
+      var date = DateTime(
+        DateTime.now().year,
+        DateTime.now().month,
+        DateTime.now().day,
+      );
       switch (currentState.currentDayFilter) {
         case DayFilterType.today:
-          date = DateTime.now();
+          date = DateTime(
+            DateTime.now().year,
+            DateTime.now().month,
+            DateTime.now().day,
+          );
         case DayFilterType.tomorrow:
-          date = DateTime.now().add(const Duration(days: 1));
+          date = date.add(const Duration(days: 1));
         case DayFilterType.yesterday:
-          date = DateTime.now().add(const Duration(days: -1));
+          date = date.add(const Duration(days: -1));
       }
-      if (task.taskDate.day != date.day) return;
+      if (task.taskDate.day != date.day ||
+          task.taskDate.month != date.month ||
+          task.taskDate.year != date.year) {
+        return;
+      }
       switch (event.taskEvent.eventType) {
         case TaskTableEventType.created:
           final updatedState = currentState.copyWith(
@@ -72,30 +85,36 @@ class IndexBloc extends Bloc<IndexEvent, IndexState> {
             ),
           );
         case TaskTableEventType.updated:
-          final indexPending = currentState.pendingTasks.indexWhere(
+          final pendingTaskIndex = currentState.pendingTasks.indexWhere(
             (element) => element.taskId == task.taskId,
           );
-          if (indexPending != -1) {
-            currentState.pendingTasks[indexPending] = task;
+          final updatedPendingTasks =
+              List<TaskModel>.from(currentState.pendingTasks);
+          final updatedCompletedTasks =
+              List<TaskModel>.from(currentState.completedTasks);
+          if (pendingTaskIndex != -1) {
+            updatedPendingTasks[pendingTaskIndex] = task;
           } else {
-            final indexCompleted = currentState.completedTasks.indexWhere(
+            final completedTaskIndex = currentState.completedTasks.indexWhere(
               (element) => element.taskId == task.taskId,
             );
-            if (indexCompleted != -1) {
-              currentState.completedTasks[indexCompleted] = task;
+            if (completedTaskIndex != -1) {
+              updatedCompletedTasks[completedTaskIndex] = task;
             }
           }
           emit(
             IndexState.tasksLoaded(
-              pendingTasks: currentState.pendingTasks,
-              completedTasks: currentState.completedTasks,
+              pendingTasks: updatedPendingTasks,
+              completedTasks: updatedCompletedTasks,
               currentDayFilter: currentState.currentDayFilter,
               currentStatusFilter: currentState.currentStatusFilter,
             ),
           );
         case TaskTableEventType.deleted:
-          final updatedPendingTasks = currentState.pendingTasks;
-          final updatedCompletedTasks = currentState.completedTasks;
+          final updatedPendingTasks =
+              List<TaskModel>.from(currentState.pendingTasks);
+          final updatedCompletedTasks =
+              List<TaskModel>.from(currentState.completedTasks);
           if (!updatedPendingTasks.remove(task)) {
             updatedCompletedTasks.remove(task);
           }
@@ -136,7 +155,13 @@ class IndexBloc extends Bloc<IndexEvent, IndexState> {
     LoadRecentTasksEvent event,
     Emitter<IndexState> emit,
   ) async {
-    final allTask = await _getAllTaskByDateUseCase.execute(DateTime.now());
+    final allTask = await _getAllTaskByDateUseCase.execute(
+      DateTime(
+        DateTime.now().year,
+        DateTime.now().month,
+        DateTime.now().day,
+      ),
+    );
     emit(const IndexState.summaryFound());
     emit(
       IndexState.tasksLoaded(
@@ -156,14 +181,22 @@ class IndexBloc extends Bloc<IndexEvent, IndexState> {
     Emitter<IndexState> emit,
   ) async {
     emit(const IndexState.loading());
-    var date = DateTime.now();
+    var date = DateTime(
+      DateTime.now().year,
+      DateTime.now().month,
+      DateTime.now().day,
+    );
     switch (event.dayFilterType) {
       case DayFilterType.today:
-        date = DateTime.now();
+        date = DateTime(
+          DateTime.now().year,
+          DateTime.now().month,
+          DateTime.now().day,
+        );
       case DayFilterType.tomorrow:
-        date = DateTime.now().add(const Duration(days: 1));
+        date = date.add(const Duration(days: 1));
       case DayFilterType.yesterday:
-        date = DateTime.now().add(const Duration(days: -1));
+        date = date.add(const Duration(days: -1));
     }
     final allTask = await _getAllTaskByDateUseCase.execute(date);
     final currentState = state;

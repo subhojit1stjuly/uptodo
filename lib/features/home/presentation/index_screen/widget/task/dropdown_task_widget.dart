@@ -36,14 +36,16 @@ class _DropdownTaskWidgetState<T> extends State<DropdownTaskWidget<T>> {
   Widget build(BuildContext context) {
     return DropdownMenu<T>(
       width: 135,
-      inputDecorationTheme: const InputDecorationTheme(
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: Theme.of(context).shadowColor,
         isDense: true,
-        contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-        border: OutlineInputBorder(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
           borderSide: BorderSide(width: 0.5),
         ),
-        constraints: BoxConstraints(maxHeight: 40),
+        constraints: const BoxConstraints(maxHeight: 40),
       ),
       textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
             fontWeight: FontWeight.w500,

@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:uptodo/core/di/injector.dart';
 import 'package:uptodo/core/routing/route_constants.dart';
 import 'package:uptodo/features/authentication/presentation/bloc/authentication_bloc.dart';
+import 'package:uptodo/features/authentication/presentation/bloc/state/user_session_state.dart';
 import 'package:uptodo/features/authentication/presentation/bloc/user_session_bloc.dart';
 import 'package:uptodo/features/authentication/presentation/pages/login_page.dart';
 import 'package:uptodo/features/authentication/presentation/pages/register_page.dart';
@@ -146,11 +147,8 @@ abstract class AppRouter {
               final (taskModel, timeOfTheWeek) =
                   state.extra! as (TaskModel, String);
               return BlocProvider.value(
-                value: getIt<TaskBloc>(),
-                child: TaskDetailsPage(
-                  taskModel: taskModel,
-                  timeOfTheWeek: timeOfTheWeek,
-                ),
+                value: getIt<TaskBloc>(param1: taskModel),
+                child: const TaskDetailsPage(),
               );
             },
           ),
