@@ -10,6 +10,7 @@ import 'package:uptodo/features/home/presentation/index_screen/widget/task/dropd
 import 'package:uptodo/features/home/presentation/index_screen/widget/task/other_task_list_widget.dart';
 import 'package:uptodo/features/home/presentation/index_screen/widget/task/pending_task_list_widget.dart';
 import 'package:uptodo/shared/model/shred_enums.dart';
+import 'package:uptodo/shared/widgets/cards/chips_card.dart';
 import 'package:uptodo/shared/widgets/task/no_task_found_widget.dart';
 
 /// this widget is used to show index page
@@ -64,29 +65,43 @@ class _IndexPageState extends State<IndexPage> {
                     ),
 
                     /// pending task list
-                    DropdownTaskWidget<DayFilterType>(
-                      dropdownMenuEntries: [
-                        DropdownMenuEntry(
-                          value: DayFilterType.yesterday,
-                          label: DayFilterType.yesterday.value(context),
+                    Row(
+                      children: [
+                        const Expanded(
+                          child: Row(
+                            children: [
+                              ChipsCard(isSelected: true, text: 'Pending'),
+                              SizedBox(width: 10),
+                              ChipsCard(isSelected: false, text: 'Completed'),
+                            ],
+                          ),
                         ),
-                        DropdownMenuEntry(
-                          value: DayFilterType.today,
-                          label: DayFilterType.today.value(context),
-                        ),
-                        DropdownMenuEntry(
-                          value: DayFilterType.tomorrow,
-                          label: DayFilterType.tomorrow.value(context),
-                        ),
-                      ],
-                      initialSelection: DayFilterType.today,
-                      onSelected: (DayFilterType? type) {
-                        if (type != null) {
-                          context.read<IndexBloc>().add(
+
+                        DropdownTaskWidget<DayFilterType>(
+                          dropdownMenuEntries: [
+                            DropdownMenuEntry(
+                              value: DayFilterType.yesterday,
+                              label: DayFilterType.yesterday.value(context),
+                            ),
+                            DropdownMenuEntry(
+                              value: DayFilterType.today,
+                              label: DayFilterType.today.value(context),
+                            ),
+                            DropdownMenuEntry(
+                              value: DayFilterType.tomorrow,
+                              label: DayFilterType.tomorrow.value(context),
+                            ),
+                          ],
+                          initialSelection: DayFilterType.today,
+                          onSelected: (DayFilterType? type) {
+                            if (type != null) {
+                              context.read<IndexBloc>().add(
                                 IndexEvent.changeDaysFilter(type),
                               );
-                        }
-                      },
+                            }
+                          },
+                        ),
+                      ],
                     ),
                     const PendingTaskListWidget(),
 

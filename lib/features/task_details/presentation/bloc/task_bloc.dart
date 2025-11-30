@@ -102,7 +102,10 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   ) async {
     emit(
       state.copyWith(
-        taskModel: state.taskModel!.copyWith(category: event.category),
+        taskModel: state.taskModel!.copyWith(
+          category: event.category,
+          categoryId: event.category.id,
+        ),
       ),
     );
   }

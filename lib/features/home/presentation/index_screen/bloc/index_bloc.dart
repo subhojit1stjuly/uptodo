@@ -63,13 +63,13 @@ class IndexBloc extends Bloc<IndexEvent, IndexState> {
         case DayFilterType.yesterday:
           date = date.add(const Duration(days: -1));
       }
-      if (task.taskDate.day != date.day ||
-          task.taskDate.month != date.month ||
-          task.taskDate.year != date.year) {
-        return;
-      }
       switch (event.taskEvent.eventType) {
         case TaskTableEventType.created:
+          if (task.taskDate.day != date.day ||
+              task.taskDate.month != date.month ||
+              task.taskDate.year != date.year) {
+            return;
+          }
           final updatedState = currentState.copyWith(
             pendingTasks: [...currentState.pendingTasks, task],
             completedTasks: currentState.completedTasks,
