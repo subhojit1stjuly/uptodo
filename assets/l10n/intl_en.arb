@@ -363,5 +363,9 @@
   "import_from_google_calendar": "Import from Google calendar",
   "@import_from_google_calendar": {
     "description": "Text for import from Google calendar"
+  },
+  "pending": "Pending",
+  "@pending": {
+    "description": "Text for pending"
   }
 }

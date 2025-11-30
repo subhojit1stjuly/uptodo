@@ -56,64 +56,62 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
     localizationsService =
         AppLocalizationsService(AppLocalizations.of(context)!);
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
-        child: ColoredBox(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                skipAndLanguageWidget(context),
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              skipAndLanguageWidget(context),
 
-                /// pageView
-                Expanded(
-                  flex: 3,
-                  child: PageView.builder(
-                    onPageChanged: (pageNo) {
-                      widget.bloc.add(
-                        OnboardingEvent.change(pageNo),
-                      );
-                    },
-                    controller: _controller,
-                    itemCount: widget.data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return widget.data[index];
-                    },
+              /// pageView
+              Expanded(
+                flex: 3,
+                child: PageView.builder(
+                  onPageChanged: (pageNo) {
+                    widget.bloc.add(
+                      OnboardingEvent.change(pageNo),
+                    );
+                  },
+                  controller: _controller,
+                  itemCount: widget.data.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return widget.data[index];
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+
+              /// dots
+              Align(
+                child: SmoothPageIndicator(
+                  controller: _controller,
+                  count: widget.data.length,
+                  effect: ExpandingDotsEffect(
+                    expansionFactor: 4,
+                    // Factor for expanding dots
+                    dotWidth: 10,
+                    // Default size of the dots
+                    dotHeight: 10,
+                    radius: 5,
+                    // Corner radius for the dot
+                    dotColor: Theme.of(context).primaryColorLight,
+                    // Inactive dots color
+                    activeDotColor: Theme.of(context).primaryColorDark,
                   ),
                 ),
-                const SizedBox(
-                  height: 25,
-                ),
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              titleAndDescriptionWidget(context),
 
-                /// dots
-                Align(
-                  child: SmoothPageIndicator(
-                    controller: _controller,
-                    count: widget.data.length,
-                    effect: ExpandingDotsEffect(
-                      expansionFactor: 4,
-                      // Factor for expanding dots
-                      dotWidth: 10,
-                      // Default size of the dots
-                      dotHeight: 10,
-                      radius: 5,
-                      // Corner radius for the dot
-                      dotColor: Colors.white,
-                      // Inactive dots color
-                      activeDotColor: Theme.of(context).primaryColorDark,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                titleAndDescriptionWidget(context),
-
-                nextAndBackWidget(context),
-              ],
-            ),
+              nextAndBackWidget(context),
+            ],
           ),
         ),
       ),

@@ -8,7 +8,7 @@ const TextStyle globalDarkTextStyle = TextStyle(
 
 /// object for the dark themes
 final darkTheme = ThemeData(
-  primaryColorLight: const Color(0xFF8875FF),
+  primaryColorLight: const Color(0xFFC1B8FF),
   primaryColorDark: const Color(0xFF8875FF),
   fontFamily: 'Lato',
   splashColor: Colors.black87,

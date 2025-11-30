@@ -33,7 +33,7 @@ class CustomBottomNavBar extends StatelessWidget {
               height: 65,
               margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface,
+                color: Theme.of(context).shadowColor,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
@@ -53,6 +53,10 @@ class CustomBottomNavBar extends StatelessWidget {
                           icon: Assets.icons.home.svg(
                             height: 24,
                             width: 24,
+                            colorFilter: ColorFilter.mode(
+                              Theme.of(context).iconTheme.color!,
+                              BlendMode.srcIn,
+                            ),
                           ),
                           label: AppLocalizations.of(context)!.index,
                           isSelected: selectedIndex == 0,
@@ -62,6 +66,10 @@ class CustomBottomNavBar extends StatelessWidget {
                           icon: Assets.icons.calendar.svg(
                             height: 24,
                             width: 24,
+                            colorFilter: ColorFilter.mode(
+                              Theme.of(context).iconTheme.color!,
+                              BlendMode.srcIn,
+                            ),
                           ),
                           label: AppLocalizations.of(context)!.calendar,
                           isSelected: selectedIndex == 1,
@@ -79,6 +87,10 @@ class CustomBottomNavBar extends StatelessWidget {
                           icon: Assets.icons.clock.svg(
                             height: 24,
                             width: 24,
+                            colorFilter: ColorFilter.mode(
+                              Theme.of(context).iconTheme.color!,
+                              BlendMode.srcIn,
+                            ),
                           ),
                           label: AppLocalizations.of(context)!.focus,
                           isSelected: selectedIndex == 2,
@@ -88,6 +100,10 @@ class CustomBottomNavBar extends StatelessWidget {
                           icon: Assets.icons.user.svg(
                             height: 24,
                             width: 24,
+                            colorFilter: ColorFilter.mode(
+                              Theme.of(context).iconTheme.color!,
+                              BlendMode.srcIn,
+                            ),
                           ),
                           label: AppLocalizations.of(context)!.profile,
                           isSelected: selectedIndex == 3,
@@ -115,7 +131,7 @@ class CustomBottomNavBar extends StatelessWidget {
                 height: 55,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Theme.of(context).primaryColorLight,
+                  color: Theme.of(context).primaryColorDark,
                   boxShadow: [
                     BoxShadow(
                       color: Theme.of(context).colorScheme.primary.withAlpha(1),
@@ -161,7 +177,7 @@ class _NavBarItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
           color: isSelected
-              ? Theme.of(context).colorScheme.primaryContainer
+              ? Theme.of(context).primaryColorLight
               : Colors.transparent,
           borderRadius: BorderRadius.circular(16),
         ),
@@ -172,13 +188,9 @@ class _NavBarItem extends StatelessWidget {
             const SizedBox(height: 4),
             Text(
               label,
-              style: TextStyle(
-                color: isSelected
-                    ? Theme.of(context).colorScheme.primary
-                    : Colors.grey,
-                fontSize: 12,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-              ),
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
           ],
         ),

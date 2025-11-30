@@ -7,14 +7,14 @@ const TextStyle globalLightTextStyle = TextStyle(
 
 /// object for the light theme used in the main
 final lightTheme = ThemeData(
+  primaryColorLight: const Color(0xFFC1B8FF),
   primaryColorDark: const Color(0xFF8875FF),
-  primaryColorLight: const Color(0xFF8875FF),
   fontFamily: 'Lato',
   splashColor: Colors.white70,
   brightness: Brightness.light,
   useMaterial3: true,
   primaryColor: Colors.white70,
-  shadowColor: const Color(0xFC1B8FF),
+  shadowColor: const Color(0xFFE8E8E8),
   textTheme: TextTheme(
     titleLarge: globalLightTextStyle.copyWith(
       fontSize: 38,
@@ -110,12 +110,12 @@ final lightTheme = ThemeData(
       ),
     ),
   ),
-  scaffoldBackgroundColor: Colors.white,
+  scaffoldBackgroundColor: Colors.white.withAlpha(250),
   iconTheme: const IconThemeData(
     color: Colors.black87,
     size: 18,
   ),
-  appBarTheme: const AppBarTheme(
-    backgroundColor: Colors.white,
+  appBarTheme: AppBarTheme(
+    backgroundColor: Colors.white.withAlpha(250),
   ),
 );

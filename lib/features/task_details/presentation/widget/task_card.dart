@@ -33,14 +33,7 @@ class TaskListTileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Radio(
-        value: true,
-        groupValue: null,
-        onChanged: (value) {
-          // Handle radio button selection
-        },
-        activeColor: Colors.white,
-      ),
+      leading: Checkbox(value: false, onChanged: (value) {}),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 8,

@@ -8,9 +8,9 @@ import 'package:uptodo/features/task_details/presentation/widget/task_card.dart'
 import 'package:uptodo/shared/model/shred_enums.dart';
 
 /// TaskCard
-class PendingTaskWidget extends StatelessWidget {
+class TaskWidget extends StatelessWidget {
   /// TaskCard constructor
-  const PendingTaskWidget({
+  const TaskWidget({
     required this.taskModel,
     required this.dayFilterType,
     super.key,

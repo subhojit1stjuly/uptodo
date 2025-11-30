@@ -363,5 +363,9 @@
   "import_from_google_calendar": "Google ಕ್ಯಾಲೆಂಡರ್ ನಿಂದ ಆಮದು ಮಾಡಿ",
   "@import_from_google_calendar": {
     "description": "Google ಕ್ಯಾಲೆಂಡರ್ ನಿಂದ ಆಮದು ಮಾಡಲು ಪಠ್ಯ"
+  },
+  "pending": "ಬಾಕಿ ಇದೆ",
+  "@pending": {
+    "description": "ಬಾಕಿ ಇದೆ ಪಠ್ಯ"
   }
 }
