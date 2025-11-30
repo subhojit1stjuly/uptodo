@@ -55,34 +55,26 @@ class TaskListWidget extends StatelessWidget {
                     curve: Curves.easeOutQuad,
                   );
             }
-            return ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: currentStatusFilter == TaskStatus.completed
-                  ? completedTasks.length
-                  : pendingTasks.length,
-              itemBuilder: (context, index) {
-                return TaskWidget(
-                  taskModel: currentStatusFilter == TaskStatus.completed
-                      ? completedTasks[index]
-                      : pendingTasks[index],
-                  dayFilterType: currentDayFilter,
-                  onEditCompleted: () {},
-                )
-                    .animate(delay: Duration(milliseconds: 50 * index))
-                    .fadeIn(duration: 300.ms)
-                    .slideX(
-                      begin: 0.2,
-                      end: 0,
-                      duration: 400.ms,
-                      curve: Curves.easeIn,
-                    );
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return const SizedBox(
-                  height: 8,
-                );
-              },
+            return Expanded(
+              child: ListView.separated(
+                itemCount: currentStatusFilter == TaskStatus.completed
+                    ? completedTasks.length
+                    : pendingTasks.length,
+                itemBuilder: (context, index) {
+                  return TaskWidget(
+                    taskModel: currentStatusFilter == TaskStatus.completed
+                        ? completedTasks[index]
+                        : pendingTasks[index],
+                    dayFilterType: currentDayFilter,
+                    onEditCompleted: () {},
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(
+                    height: 8,
+                  );
+                },
+              ),
             );
           },
           orElse: () => const SizedBox.shrink(),

@@ -45,7 +45,7 @@ final darkTheme = ThemeData(
     // Reduced padding
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(
-        Radius.circular(16),
+        Radius.circular(20),
       ),
     ),
   ),
@@ -119,5 +119,15 @@ final darkTheme = ThemeData(
   ),
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.black87,
+  ),
+  checkboxTheme: CheckboxThemeData(
+    fillColor: WidgetStateProperty.resolveWith<Color>(
+      (Set<WidgetState> states) {
+        if (states.contains(WidgetState.selected)) {
+          return const Color(0xFF8875FF);
+        }
+        return Colors.black87;
+      },
+    ),
   ),
 );

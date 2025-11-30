@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uptodo/core/di/injector.dart';
 import 'package:uptodo/core/routing/route_constants.dart';
 import 'package:uptodo/core/utils/common_extainsions.dart';
 import 'package:uptodo/features/category/presentation/widget/categor_widget.dart';
+import 'package:uptodo/features/home/presentation/index_screen/bloc/event/home_event.dart';
+import 'package:uptodo/features/home/presentation/index_screen/bloc/home_bloc.dart';
 import 'package:uptodo/features/task_details/data/model/task_model/task_model.dart';
 import 'package:uptodo/shared/model/shred_enums.dart';
 import 'package:uptodo/shared/widgets/task/priority_widget.dart';
@@ -30,7 +33,18 @@ class TaskWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Checkbox(value: false, onChanged: (value) {}),
+      leading: Checkbox(
+        value: taskModel.status == TaskStatus.completed,
+        onChanged: taskModel.status == TaskStatus.completed
+            ? null
+            : (value) {
+                context.read<HomeBloc>().add(
+                      HomeEvent.markTaskAsCompleted(
+                        taskModel.copyWith(status: TaskStatus.completed),
+                      ),
+                    );
+              },
+      ),
       onTap: () {
         getIt<GoRouter>().pushNamed(
           RouteConstants.taskDetails,
@@ -43,13 +57,9 @@ class TaskWidget extends StatelessWidget {
         children: [
           Text(
             taskModel.title,
-            style: Theme
-                .of(context)
-                .textTheme
-                .bodyLarge
-                ?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
           ),
           const SizedBox.shrink(),
         ],
@@ -58,15 +68,10 @@ class TaskWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Text(
-            '${dayFilterType.value(context)} At ${taskModel.taskTime
-                .convertTimeOfDayToString()}',
-            style: Theme
-                .of(context)
-                .textTheme
-                .bodySmall
-                ?.copyWith(
-              fontWeight: FontWeight.w400,
-            ),
+            '${dayFilterType.value(context)} At ${taskModel.taskTime.convertTimeOfDayToString()}',
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  fontWeight: FontWeight.w400,
+                ),
           ),
           Expanded(
             child: Row(

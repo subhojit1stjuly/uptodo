@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:uptodo/features/task_details/data/model/task_model/task_model.dart';
 
 part 'home_event.freezed.dart';
 
@@ -13,4 +14,8 @@ class HomeEvent with _$HomeEvent {
 
   /// event to set navigation index
   const factory HomeEvent.setIndex(int index) = SetIndexEvent;
+
+  /// event to mark task as completed
+  const factory HomeEvent.markTaskAsCompleted(TaskModel task) =
+      MarkTaskAsCompletedEvent;
 }

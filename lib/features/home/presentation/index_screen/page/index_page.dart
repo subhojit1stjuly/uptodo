@@ -45,21 +45,24 @@ class IndexPage extends StatelessWidget {
             );
           },
           summaryFound: () {
-            return SingleChildScrollView(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-                child: Column(
-                  spacing: 12,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    /// searchbar
-                    SearchBarWidget(
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+              child: Column(
+                spacing: 12,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  /// searchbar
+                  ColoredBox(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    child: SearchBarWidget(
                       onSearch: (String value) {},
                     ),
+                  ),
 
-                    /// pending task list
-                    Row(
+                  /// pending task list
+                  ColoredBox(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    child: Row(
                       children: [
                         Expanded(
                           child: BlocBuilder<IndexBloc, IndexState>(
@@ -67,12 +70,10 @@ class IndexPage extends StatelessWidget {
                             buildWhen: (prev, cur) => cur is TasksLoadedState,
                             builder: (context, state) {
                               return state.maybeWhen(
-                                tasksLoaded: (
-                                  pendingTasks,
-                                  completedTasks,
-                                  currentDayFilter,
-                                  currentStatusFilter,
-                                ) {
+                                tasksLoaded: (pendingTasks,
+                                    completedTasks,
+                                    currentDayFilter,
+                                    currentStatusFilter,) {
                                   return Row(
                                     children: [
                                       ChipsCard(
@@ -138,9 +139,11 @@ class IndexPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const TaskListWidget(),
-                  ],
-                ),
+                  ),
+
+                  /// task list
+                  const TaskListWidget(),
+                ],
               ),
             );
           },

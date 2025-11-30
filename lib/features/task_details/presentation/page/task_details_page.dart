@@ -77,7 +77,6 @@ class TaskDetailsPage extends StatelessWidget {
                       onChanged: (value) {
                         // Handle radio button selection
                       },
-                      activeColor: Colors.white,
                     ),
                     title: BlocBuilder<TaskBloc, TaskState>(
                       buildWhen: (previous, current) =>

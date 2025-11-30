@@ -42,11 +42,14 @@ final lightTheme = ThemeData(
     buttonColor: Colors.transparent,
   ),
   listTileTheme: const ListTileThemeData(
-    tileColor: Color(0xFFC1B8FF),
-    contentPadding: EdgeInsets.all(16),
+    tileColor: Colors.white,
+    contentPadding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(
-        Radius.circular(8),
+        Radius.circular(20),
+      ),
+      side: BorderSide(
+        color: Color(0xFFC1B8FF),
       ),
     ),
   ),
@@ -117,5 +120,15 @@ final lightTheme = ThemeData(
   ),
   appBarTheme: AppBarTheme(
     backgroundColor: Colors.white.withAlpha(250),
+  ),
+  checkboxTheme: CheckboxThemeData(
+    fillColor: WidgetStateProperty.resolveWith<Color>(
+      (Set<WidgetState> states) {
+        if (states.contains(WidgetState.selected)) {
+          return const Color(0xFF8875FF);
+        }
+        return Colors.white;
+      },
+    ),
   ),
 );
