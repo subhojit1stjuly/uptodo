@@ -11,6 +11,7 @@ import 'package:uptodo/shared/model/shred_enums.dart';
 class TaskWidget extends StatelessWidget {
   /// TaskCard constructor
   const TaskWidget({
+    required this.onEditCompleted,
     required this.taskModel,
     required this.dayFilterType,
     super.key,
@@ -22,6 +23,9 @@ class TaskWidget extends StatelessWidget {
   /// DayFilterType
   final DayFilterType dayFilterType;
 
+  /// onEditCompleted callback
+  final VoidCallback onEditCompleted;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -29,7 +33,7 @@ class TaskWidget extends StatelessWidget {
         getIt<GoRouter>().pushNamed(
           RouteConstants.taskDetails,
           extra: (taskModel, dayFilterType.value(context)),
-        );
+        ).then((_) => onEditCompleted());
       },
       child: TaskListTileCard(
         taskTitle: taskModel.title,

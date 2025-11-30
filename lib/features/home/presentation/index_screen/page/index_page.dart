@@ -6,11 +6,11 @@ import 'package:uptodo/features/home/presentation/index_screen/bloc/event/index_
 import 'package:uptodo/features/home/presentation/index_screen/bloc/index_bloc.dart';
 import 'package:uptodo/features/home/presentation/index_screen/bloc/state/index_state.dart';
 import 'package:uptodo/features/home/presentation/index_screen/widget/dropdown_task_widget.dart';
+import 'package:uptodo/features/home/presentation/index_screen/widget/index_task_list_widget.dart';
 import 'package:uptodo/features/home/presentation/index_screen/widget/search_bar_widget.dart';
 import 'package:uptodo/shared/model/shred_enums.dart';
 import 'package:uptodo/shared/widgets/cards/chips_card.dart';
 import 'package:uptodo/shared/widgets/task/no_task_found_widget.dart';
-import 'package:uptodo/shared/widgets/task/task_list_widget.dart';
 
 /// this widget is used to show index page
 class IndexPage extends StatelessWidget {
@@ -78,7 +78,8 @@ class IndexPage extends StatelessWidget {
                                       ChipsCard(
                                         isSelected: currentStatusFilter ==
                                             TaskStatus.pending,
-                                        text: 'Pending',
+                                        text: AppLocalizations.of(context)!
+                                            .pending,
                                         onTap: () {
                                           bloc.add(
                                             const IndexEvent.changeStatusFilter(

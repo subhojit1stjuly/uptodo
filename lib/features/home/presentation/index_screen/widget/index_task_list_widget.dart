@@ -67,6 +67,7 @@ class TaskListWidget extends StatelessWidget {
                       ? completedTasks[index]
                       : pendingTasks[index],
                   dayFilterType: currentDayFilter,
+                  onEditCompleted: () {},
                 )
                     .animate(delay: Duration(milliseconds: 50 * index))
                     .fadeIn(duration: 300.ms)
