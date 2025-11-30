@@ -8,7 +8,7 @@ const TextStyle globalDarkTextStyle = TextStyle(
 
 /// object for the dark themes
 final darkTheme = ThemeData(
-  primaryColorLight: const Color(0xFF8875FF),
+  primaryColorLight: const Color(0xFFC1B8FF),
   primaryColorDark: const Color(0xFF8875FF),
   fontFamily: 'Lato',
   splashColor: Colors.black87,
@@ -45,7 +45,7 @@ final darkTheme = ThemeData(
     // Reduced padding
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(
-        Radius.circular(16),
+        Radius.circular(20),
       ),
     ),
   ),
@@ -119,5 +119,15 @@ final darkTheme = ThemeData(
   ),
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.black87,
+  ),
+  checkboxTheme: CheckboxThemeData(
+    fillColor: WidgetStateProperty.resolveWith<Color>(
+      (Set<WidgetState> states) {
+        if (states.contains(WidgetState.selected)) {
+          return const Color(0xFF8875FF);
+        }
+        return Colors.black87;
+      },
+    ),
   ),
 );

@@ -55,6 +55,10 @@ class PriorityDialog extends StatelessWidget {
                       Assets.icons.flag.svg(
                         height: 24,
                         width: 24,
+                        colorFilter: ColorFilter.mode(
+                          Theme.of(context).iconTheme.color!,
+                          BlendMode.srcIn,
+                        ),
                       ),
                       Text(
                         '${index + 1}',

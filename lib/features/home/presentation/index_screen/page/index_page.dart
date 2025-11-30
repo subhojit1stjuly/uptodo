@@ -5,23 +5,18 @@ import 'package:uptodo/core/localizations/app_localizations.dart';
 import 'package:uptodo/features/home/presentation/index_screen/bloc/event/index_event.dart';
 import 'package:uptodo/features/home/presentation/index_screen/bloc/index_bloc.dart';
 import 'package:uptodo/features/home/presentation/index_screen/bloc/state/index_state.dart';
+import 'package:uptodo/features/home/presentation/index_screen/widget/dropdown_task_widget.dart';
+import 'package:uptodo/features/home/presentation/index_screen/widget/index_task_list_widget.dart';
 import 'package:uptodo/features/home/presentation/index_screen/widget/search_bar_widget.dart';
-import 'package:uptodo/features/home/presentation/index_screen/widget/task/dropdown_task_widget.dart';
-import 'package:uptodo/features/home/presentation/index_screen/widget/task/other_task_list_widget.dart';
-import 'package:uptodo/features/home/presentation/index_screen/widget/task/pending_task_list_widget.dart';
 import 'package:uptodo/shared/model/shred_enums.dart';
+import 'package:uptodo/shared/widgets/cards/chips_card.dart';
 import 'package:uptodo/shared/widgets/task/no_task_found_widget.dart';
 
 /// this widget is used to show index page
-class IndexPage extends StatefulWidget {
+class IndexPage extends StatelessWidget {
   /// constructor for IndexPage
   const IndexPage({super.key});
 
-  @override
-  State<IndexPage> createState() => _IndexPageState();
-}
-
-class _IndexPageState extends State<IndexPage> {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<IndexBloc>();
@@ -50,50 +45,105 @@ class _IndexPageState extends State<IndexPage> {
             );
           },
           summaryFound: () {
-            return SingleChildScrollView(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-                child: Column(
-                  spacing: 12,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    /// searchbar
-                    SearchBarWidget(
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+              child: Column(
+                spacing: 12,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  /// searchbar
+                  ColoredBox(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    child: SearchBarWidget(
                       onSearch: (String value) {},
                     ),
+                  ),
 
-                    /// pending task list
-                    DropdownTaskWidget<DayFilterType>(
-                      dropdownMenuEntries: [
-                        DropdownMenuEntry(
-                          value: DayFilterType.yesterday,
-                          label: DayFilterType.yesterday.value(context),
+                  /// pending task list
+                  ColoredBox(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: BlocBuilder<IndexBloc, IndexState>(
+                            bloc: bloc,
+                            buildWhen: (prev, cur) => cur is TasksLoadedState,
+                            builder: (context, state) {
+                              return state.maybeWhen(
+                                tasksLoaded: (pendingTasks,
+                                    completedTasks,
+                                    currentDayFilter,
+                                    currentStatusFilter,) {
+                                  return Row(
+                                    children: [
+                                      ChipsCard(
+                                        isSelected: currentStatusFilter ==
+                                            TaskStatus.pending,
+                                        text: AppLocalizations.of(context)!
+                                            .pending,
+                                        onTap: () {
+                                          bloc.add(
+                                            const IndexEvent.changeStatusFilter(
+                                              TaskStatus.pending,
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                      const SizedBox(width: 10),
+                                      ChipsCard(
+                                        isSelected: currentStatusFilter ==
+                                            TaskStatus.completed,
+                                        text: AppLocalizations.of(context)!
+                                            .completed,
+                                        onTap: () {
+                                          bloc.add(
+                                            const IndexEvent.changeStatusFilter(
+                                              TaskStatus.completed,
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                                orElse: () {
+                                  return const SizedBox.shrink();
+                                },
+                              );
+                            },
+                          ),
                         ),
-                        DropdownMenuEntry(
-                          value: DayFilterType.today,
-                          label: DayFilterType.today.value(context),
-                        ),
-                        DropdownMenuEntry(
-                          value: DayFilterType.tomorrow,
-                          label: DayFilterType.tomorrow.value(context),
+                        DropdownTaskWidget<DayFilterType>(
+                          dropdownMenuEntries: [
+                            DropdownMenuEntry(
+                              value: DayFilterType.yesterday,
+                              label: DayFilterType.yesterday.value(context),
+                            ),
+                            DropdownMenuEntry(
+                              value: DayFilterType.today,
+                              label: DayFilterType.today.value(context),
+                            ),
+                            DropdownMenuEntry(
+                              value: DayFilterType.tomorrow,
+                              label: DayFilterType.tomorrow.value(context),
+                            ),
+                          ],
+                          initialSelection: DayFilterType.today,
+                          onSelected: (DayFilterType? type) {
+                            if (type != null) {
+                              context.read<IndexBloc>().add(
+                                    IndexEvent.changeDaysFilter(type),
+                                  );
+                            }
+                          },
                         ),
                       ],
-                      initialSelection: DayFilterType.today,
-                      onSelected: (DayFilterType? type) {
-                        if (type != null) {
-                          context.read<IndexBloc>().add(
-                                IndexEvent.changeDaysFilter(type),
-                              );
-                        }
-                      },
                     ),
-                    const PendingTaskListWidget(),
+                  ),
 
-                    /// completed task list
-                    const OtherTaskListWidget(),
-                  ],
-                ),
+                  /// task list
+                  const TaskListWidget(),
+                ],
               ),
             );
           },

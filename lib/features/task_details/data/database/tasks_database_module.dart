@@ -53,7 +53,8 @@ class TasksDatabaseModule extends DatabaseAccessor<AppDatabase>
         // First load or all tasks were previously deleted
         for (final taskWithCategory in currentTasksWithCategories) {
           controller.add(
-              TaskTableEvents(taskWithCategory, TaskTableEventType.created));
+            TaskTableEvents(taskWithCategory, TaskTableEventType.created),
+          );
         }
       } else {
         // Find created tasks (in current but not in previous)
@@ -136,17 +137,26 @@ class TasksDatabaseModule extends DatabaseAccessor<AppDatabase>
     /// we don't need to change this date to utc since, the database
     /// return the data in local format automatically
     /// Create a join query between tasks and categories
+    // Create start and end of day in local time
+    final startOfDay = DateTime(date.year, date.month, date.day);
+    final endOfDay = DateTime(date.year, date.month, date.day, 23, 59, 59, 999);
     final query = select(tasksEntity).join([
       innerJoin(
-          categoryEntity, categoryEntity.id.equalsExp(tasksEntity.categoryId)),
+        categoryEntity,
+        categoryEntity.id.equalsExp(tasksEntity.categoryId),
+      ),
     ])
-      // Apply the date filter
-      ..where(tasksEntity.taskTime.year.equals(date.year))
-      ..where(tasksEntity.taskTime.month.equals(date.month))
-      ..where(tasksEntity.taskTime.day.equals(date.day))
+      // Use range comparison
+      ..where(
+        tasksEntity.taskTime.isBiggerOrEqualValue(startOfDay) &
+            tasksEntity.taskTime.isSmallerOrEqualValue(endOfDay),
+      )
       // Apply ordering
       ..orderBy([
-        OrderingTerm(expression: tasksEntity.taskTime, mode: OrderingMode.desc),
+        OrderingTerm(
+          expression: tasksEntity.taskTime,
+          mode: OrderingMode.desc,
+        ),
       ])
       // Apply pagination
       ..limit(pageSize, offset: page * pageSize);
@@ -199,7 +209,14 @@ class TasksDatabaseModule extends DatabaseAccessor<AppDatabase>
       final startOfDay =
           DateTime(checkDate.year, checkDate.month, checkDate.day);
       final endOfDay = DateTime(
-          checkDate.year, checkDate.month, checkDate.day, 23, 59, 59, 999);
+        checkDate.year,
+        checkDate.month,
+        checkDate.day,
+        23,
+        59,
+        59,
+        999,
+      );
 
       // Count tasks on this date
       final count = await (select(tasksEntity)

@@ -48,7 +48,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
       decoration: InputDecoration(
         hintText: AppLocalizations.of(context)!.search_tasks,
         filled: true,
-        fillColor: Theme.of(context).colorScheme.surface,
+        fillColor: Theme.of(context).shadowColor,
         prefixIcon: const Icon(Icons.search),
         suffixIcon: _showClearButton
             ? IconButton(

@@ -8,6 +8,7 @@ import 'package:uptodo/features/home/domain/usecases/get_navigation_items.dart';
 import 'package:uptodo/features/home/domain/usecases/handle_logout.dart';
 import 'package:uptodo/features/home/presentation/index_screen/bloc/event/home_event.dart';
 import 'package:uptodo/features/home/presentation/index_screen/bloc/state/home_state.dart';
+import 'package:uptodo/features/task_details/domain/usecase/update_task_use_case.dart';
 
 /// HomeBloc
 @lazySingleton
@@ -17,15 +18,20 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     this._handleLogout,
     this._router,
     this._getNavigationItems,
+    this.updateTaskUseCase,
   ) : super(const HomeState.initial()) {
     on<OpenTaskCreateDialogEvent>(_onOpenTaskCreateDialog);
     on<SetIndexEvent>(_onChangeNavigationIndex);
     on<LogoutEvent>(_onLogout);
     _loadNavigationItems();
+    on<MarkTaskAsCompletedEvent>(_onMarkTaskAsCompleted);
   }
 
   /// Navigation items
   List<NavItem> _navigationItems = [];
+
+  /// UseCase for updating a task
+  final UpdateTaskUseCase updateTaskUseCase;
 
   /// Getter for navigation items
   List<NavItem> get navigationItems => _navigationItems;
@@ -63,5 +69,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(const HomeState.logout());
       _router.refresh();
     }
+  }
+
+  FutureOr<void> _onMarkTaskAsCompleted(
+    MarkTaskAsCompletedEvent event,
+    Emitter<HomeState> emit,
+  ) async {
+    await updateTaskUseCase.execute(
+      event.task,
+    );
+    emit(HomeState.taskMarkedAsCompleted(event.task));
   }
 }
