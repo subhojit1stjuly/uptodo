@@ -363,5 +363,9 @@
   "import_from_google_calendar": "গুগল ক্যালেন্ডার থেকে আমদানি করুন",
   "@import_from_google_calendar": {
     "description": "গুগল ক্যালেন্ডার থেকে আমদানি করার জন্য পাঠ্য"
+  },
+  "pending": "বিচারাধীন",
+  "@pending": {
+    "description": "বিচারাধীনের জন্য পাঠ্য"
   }
 }

@@ -117,6 +117,10 @@ class _TaskCreationBottomSheetState extends State<TaskCreationBottomSheet> {
                                 icon: Assets.icons.calendar.svg(
                                   height: 24,
                                   width: 24,
+                                  colorFilter: ColorFilter.mode(
+                                    Theme.of(context).iconTheme.color!,
+                                    BlendMode.srcIn,
+                                  ),
                                 ),
                                 formatter: (date) {
                                   if (date != null) {
@@ -152,6 +156,10 @@ class _TaskCreationBottomSheetState extends State<TaskCreationBottomSheet> {
                                 icon: Assets.icons.clock.svg(
                                   height: 24,
                                   width: 24,
+                                  colorFilter: ColorFilter.mode(
+                                    Theme.of(context).iconTheme.color!,
+                                    BlendMode.srcIn,
+                                  ),
                                 ),
                                 formatter: (time) {
                                   if (time != null) {
@@ -187,6 +195,10 @@ class _TaskCreationBottomSheetState extends State<TaskCreationBottomSheet> {
                                 icon: Assets.icons.tag.svg(
                                   height: 24,
                                   width: 24,
+                                  colorFilter: ColorFilter.mode(
+                                    Theme.of(context).iconTheme.color!,
+                                    BlendMode.srcIn,
+                                  ),
                                 ),
                                 formatter: (category) => '${category?.name}',
                                 onTap: () {
@@ -212,6 +224,10 @@ class _TaskCreationBottomSheetState extends State<TaskCreationBottomSheet> {
                                 icon: Assets.icons.flag.svg(
                                   height: 24,
                                   width: 24,
+                                  colorFilter: ColorFilter.mode(
+                                    Theme.of(context).iconTheme.color!,
+                                    BlendMode.srcIn,
+                                  ),
                                 ),
                                 formatter: (priority) => '$priority',
                                 onTap: () {

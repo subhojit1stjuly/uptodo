@@ -363,5 +363,9 @@
   "import_from_google_calendar": "गूगल कैलेंडर से आयात करें",
   "@import_from_google_calendar": {
     "description": "गूगल कैलेंडर से आयात के लिए पाठ"
+  },
+  "pending": "लंबित",
+  "@pending": {
+    "description": "लंबित के लिए पाठ"
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:uptodo/core/constants/assets.gen.dart';
 import 'package:uptodo/core/di/injector.dart';
 import 'package:uptodo/features/home/presentation/index_screen/bloc/event/home_event.dart';
 import 'package:uptodo/features/home/presentation/index_screen/bloc/home_bloc.dart';
@@ -47,6 +46,7 @@ class HomePage extends StatelessWidget {
           return ErrorWidget.withDetails(message: state.message);
         } else if (state is NavigationChangeState) {
           return Scaffold(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             appBar: _buildAppBar(
               context,
               context.read<HomeBloc>(),
@@ -68,7 +68,6 @@ class HomePage extends StatelessWidget {
     int index,
   ) {
     return AppBar(
-      leading: Assets.icons.dash.svg(height: 24, width: 24),
       centerTitle: true,
       title: Text(
         bloc.navigationItems[index].title,

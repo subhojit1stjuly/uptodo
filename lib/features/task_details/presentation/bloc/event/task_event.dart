@@ -25,6 +25,13 @@ class TaskEvent with _$TaskEvent {
   /// Event to update the task status
   const factory TaskEvent.updateStatus(TaskStatus status) = UpdateStatusEvent;
 
+  /// Event to update the task title
+  const factory TaskEvent.updateTitle(String title) = UpdateTitleEvent;
+
+  /// Event to update the task description
+  const factory TaskEvent.updateDescription(String desc) =
+      UpdateDescriptionEvent;
+
   /// Event to create a new task
   const factory TaskEvent.create({
     required String title,
@@ -32,10 +39,7 @@ class TaskEvent with _$TaskEvent {
   }) = CreateEvent;
 
   /// Event to update a task
-  const factory TaskEvent.update({
-    required String title,
-    required String desc,
-  }) = UpdateEvent;
+  const factory TaskEvent.update() = UpdateEvent;
 
   /// Event to delete a task
   const factory TaskEvent.delete() = DeleteEvent;

@@ -23,11 +23,15 @@ class PriorityWidget extends StatelessWidget {
           Assets.icons.flag.svg(
             height: 18,
             width: 18,
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).iconTheme.color!,
+              BlendMode.srcIn,
+            ),
           ),
           Text(
             priority,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Colors.white,
+                  color: Theme.of(context).iconTheme.color,
                 ),
           ),
         ],

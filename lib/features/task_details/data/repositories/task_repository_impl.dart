@@ -42,6 +42,7 @@ class TaskRepositoryImpl implements TaskCreateUpdateRepository {
   Future<bool> updateTask(TaskModel taskModel) async {
     return _databaseModule.updateTask(
       TasksEntityCompanion(
+        taskId: Value(int.parse(taskModel.taskId!)),
         title: Value(taskModel.title),
         description: Value(taskModel.description),
         subTaskId: Value(taskModel.subTaskId),

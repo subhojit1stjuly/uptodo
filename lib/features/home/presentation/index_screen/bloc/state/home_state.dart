@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:uptodo/features/task_details/data/model/task_model/task_model.dart';
 
 part 'home_state.freezed.dart';
 
@@ -19,4 +20,8 @@ class HomeState with _$HomeState {
 
   /// logout state
   const factory HomeState.logout() = LogoutState;
+
+  /// task marked as completed state
+  const factory HomeState.taskMarkedAsCompleted(TaskModel task) =
+      TaskMarkedAsCompletedState;
 }
